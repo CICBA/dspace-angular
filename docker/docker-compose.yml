@@ -10,11 +10,9 @@
 # Requires also running a REST API backend (either locally or remotely),
 # for example via 'docker-compose-rest.yml'
 version: '3.7'
-networks:
-  dspacenet:
 services:
   dspace-angular:
-    container_name: dspace-angular
+    container_name: dspace-angular_${PROJECT_NAME}
     environment:
       DSPACE_HOST: dspace-angular
       DSPACE_NAMESPACE: /
@@ -24,8 +22,6 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
-    networks:
-      dspacenet:
     ports:
     - published: 4000
       target: 4000
