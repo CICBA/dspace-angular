@@ -2,6 +2,7 @@
 # See https://dspace-labs.github.io/DSpace-Docker-Images/ for usage details
 
 FROM node:12-alpine
+
 WORKDIR /app
 ADD . /app/
 EXPOSE 4000
