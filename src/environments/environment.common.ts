@@ -163,24 +163,12 @@ export const environment: GlobalConfig = {
     label: 'English',
     active: true,
   }, {
-    code: 'de',
-    label: 'Deutsch',
-    active: false,
-  }, {
     code: 'cs',
     label: 'Čeština',
     active: false,
   }, {
-    code: 'nl',
-    label: 'Nederlands',
-    active: false,
-  },{
-    code: 'pt-BR',
-    label: 'Português do Brasil',
-    active: true,
-  },{
-    code: 'pt-PT',
-    label: 'Português',
+    code: 'de',
+    label: 'Deutsch',
     active: false,
   }, {
     code: 'fr',
@@ -190,13 +178,25 @@ export const environment: GlobalConfig = {
     code: 'lv',
     label: 'Latviešu',
     active: false,
+  }, {
+    code: 'hu',
+    label: 'Magyar',
+    active: false,
+  }, {
+    code: 'nl',
+    label: 'Nederlands',
+    active: false,
+  }, {
+    code: 'pt-PT',
+    label: 'Português',
+    active: false,
+  },{
+    code: 'pt-BR',
+    label: 'Português do Brasil',
+    active: true,
   },{
     code: 'fi',
     label: 'Suomi',
-    active: false,
-  },{
-    code: 'hu',
-    label: 'magyar',
     active: false,
   }],
   // Browse-By Pages
@@ -267,6 +267,19 @@ export const environment: GlobalConfig = {
     //   // ID, and all collections and/or items within it
     //   name: 'custom',
     //   uuid: '0958c910-2037-42a9-81c7-dca80e3892b4'
+    // },
+    // {
+    //   // The extends property specifies an ancestor theme (by name). Whenever a themed component is not found
+    //   // in the current theme, its ancestor theme(s) will be checked recursively before falling back to default.
+    //   name: 'custom-A',
+    //   extends: 'custom-B',
+    //   // Any of the matching properties above can be used
+    //   handle: '10673/34',
+    // },
+    // {
+    //   name: 'custom-B',
+    //   extends: 'custom',
+    //   handle: '10673/12',
     // },
     // {
     //   // A theme with only a name will match every route
