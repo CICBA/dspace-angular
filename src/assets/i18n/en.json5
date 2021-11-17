@@ -2384,7 +2384,7 @@
 
   "menu.section.browse_global": "All of DSpace",
 
-  "menu.section.browse_global_by_author": "By Author",
+  "menu.section.browse_global_by_author": "Authors",
 
   "menu.section.browse_global_by_dateissued": "By Issue Date",
 
@@ -2460,6 +2460,20 @@
 
   "menu.section.import_metadata": "Metadata",
 
+
+  "menu.section.navbar.contribute": "Contribute Material",
+
+  "menu.section.navbar.contact": "Contact",
+
+  "menu.section.navbar.how_to_contribute": "How to contribute?",
+
+  "menu.section.navbar.more_information": "More Information",
+
+  "menu.section.navbar.register": "Register",
+
+  "menu.section.navbar.repository_policy": "Repository policy",
+
+  "menu.section.navbar.what_is_cic_digital": "What is CIC Digital?",
 
 
   "menu.section.new": "New",

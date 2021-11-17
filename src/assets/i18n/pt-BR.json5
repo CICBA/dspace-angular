@@ -3433,7 +3433,7 @@
   "menu.section.browse_global": "Tudo no DSpace",
   
   // "menu.section.browse_global_by_author": "By Author",
-  "menu.section.browse_global_by_author": "Por Autor",
+  "menu.section.browse_global_by_author": "Autores",
   
   // "menu.section.browse_global_by_dateissued": "By Issue Date",
   "menu.section.browse_global_by_dateissued": "Por Data de Publicação",
@@ -3544,7 +3544,28 @@
   "menu.section.import_metadata": "Metadados",
   
   
-  
+  //"menu.section.navbar.contribute": "Contribute Material",
+  "menu.section.navbar.contribute": "Depositar Material",
+
+  //"menu.section.navbar.contact": "Contact",
+  "menu.section.navbar.contact": "Entre em contato",
+
+  //"menu.section.navbar.how_to_contribute": "How to contribute?",
+  "menu.section.navbar.how_to_contribute": "Como contribuir com material?",
+
+  //"menu.section.navbar.more_information": "More Information",
+  "menu.section.navbar.more_information": "Mais informação",
+
+  //"menu.section.navbar.register": "Register",
+  "menu.section.navbar.register": "Cadastro",
+
+  //"menu.section.navbar.repository_policy": "Repository policy",
+  "menu.section.navbar.repository_policy": "Políticas do Repositório",
+
+  //"menu.section.navbar.what_is_cic_digital": "What is CIC Digital?",
+  "menu.section.navbar.what_is_cic_digital": "O que é o CIC-Digital?",
+
+
   // "menu.section.new": "New",
   "menu.section.new": "Nova",
   

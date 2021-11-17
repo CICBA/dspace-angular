@@ -3254,6 +3254,27 @@
 	"menu.section.import_metadata": "Metadatos",
 
 
+	//"menu.section.navbar.contribute": "Contribute Material",
+	"menu.section.navbar.contribute": "Aportar Material",
+
+	//"menu.section.navbar.contact": "Contact",
+	"menu.section.navbar.contact": "Contacto",
+
+	//"menu.section.navbar.how_to_contribute": "How to contribute?",
+	"menu.section.navbar.how_to_contribute": "¿Cómo aportar material?",
+
+	//"menu.section.navbar.more_information": "More Information",
+	"menu.section.navbar.more_information": "Mas Información",
+
+	//"menu.section.navbar.register": "Register",
+	"menu.section.navbar.register": "Registrarse",
+
+	//"menu.section.navbar.repository_policy": "Repository policy",
+	"menu.section.navbar.repository_policy": "Políticas del repositorio",
+
+	//"menu.section.navbar.what_is_cic_digital": "What is CIC Digital?",
+	"menu.section.navbar.what_is_cic_digital": "¿Qué es CIC Digital?",
+
 
 	// "menu.section.new": "New",
 	"menu.section.new": "Nuevo",

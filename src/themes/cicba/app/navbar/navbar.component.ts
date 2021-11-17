@@ -50,80 +50,80 @@ export class NavbarComponent extends BaseComponent {
       },
       /* Aportar material */
       {
-        id: `browse_global_aportar_material`,
+        id: `navbar_menu_contribute_material`,
         active: false,
         visible: true,
         index: 2,
         model: {
           type: MenuItemType.LINK,
-          text: "Aportar Material",
+          text: `menu.section.navbar.contribute`,
           link: `/mydspace`
         } as LinkMenuItemModel
       },
       /* Más información */
       {
-        id: `browse_global_mas_informacion`,
+        id: `navbar_menu_more_information`,
         active: false,
         visible: true,
         index: 3,
         model: {
           type: MenuItemType.TEXT,
-          text: "Más información",
+          text: `menu.section.navbar.more_information`,
         } as TextMenuItemModel
       },
       /* Secciones de más información */
       {
-        id: `browse_global_contacto`,
-        parentID: 'browse_global_mas_informacion',
+        id: `navbar_menu_contact`,
+        parentID: 'navbar_menu_more_information',
         active: false,
         visible: true,
         model: {
           type: MenuItemType.LINK,
-          text: "Contacto",
+          text: `menu.section.navbar.contact`,
           link: `/#`
         } as LinkMenuItemModel
       },
       {
-        id: `browse_global_que_es_cic_digital`,
-        parentID: 'browse_global_mas_informacion',
+        id: `navbar_menu_what_is_cic_digital`,
+        parentID: 'navbar_menu_more_information',
         active: false,
         visible: true,
         model: {
           type: MenuItemType.LINK,
-          text: "¿Qué es CIC Digital?",
+          text: `menu.section.navbar.what_is_cic_digital`,
           link: `/#`
         } as LinkMenuItemModel
       },
       {
-        id: `browse_global_politicas_repositorio`,
-        parentID: 'browse_global_mas_informacion',
+        id: `navbar_menu_repository_policy`,
+        parentID: 'navbar_menu_more_information',
         active: false,
         visible: true,
         model: {
           type: MenuItemType.LINK,
-          text: "Políticas del repositorio",
+          text: `menu.section.navbar.repository_policy`,
           link: `/#`
         } as LinkMenuItemModel
       },
       {
-        id: `browse_global_como_aportar_material`,
-        parentID: 'browse_global_mas_informacion',
+        id: `navbar_menu_how_to_contribute`,
+        parentID: 'navbar_menu_more_information',
         active: false,
         visible: true,
         model: {
           type: MenuItemType.LINK,
-          text: "¿Cómo aportar material?",
+          text: `menu.section.navbar.how_to_contribute`,
           link: `/#`
         } as LinkMenuItemModel
       },
       {
-        id: `browse_global_registro`,
-        parentID: 'browse_global_mas_informacion',
+        id: `navbar_menu_register`,
+        parentID: 'navbar_menu_more_information',
         active: false,
         visible: true,
         model: {
           type: MenuItemType.LINK,
-          text: "Registrarse",
+          text: `menu.section.navbar.register`,
           link: `/register`
         } as LinkMenuItemModel
       }
