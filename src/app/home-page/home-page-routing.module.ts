@@ -15,19 +15,19 @@ import { ThemedHomePageComponent } from './themed-home-page.component';
         pathMatch: 'full',
         data: {
           title: 'home.title',
-          menu: {
-            public: [{
-              id: 'statistics_site',
-              active: true,
-              visible: true,
-              index: 2,
-              model: {
-                type: MenuItemType.LINK,
-                text: 'menu.section.statistics',
-                link: 'statistics',
-              } as LinkMenuItemModel,
-            }],
-          },
+          // menu: {
+          //   public: [{
+          //     id: 'statistics_site',
+          //     active: true,
+          //     visible: true,
+          //     index: 2,
+          //     model: {
+          //       type: MenuItemType.LINK,
+          //       text: 'menu.section.statistics',
+          //       link: 'statistics',
+          //     } as LinkMenuItemModel,
+          //   }],
+          // },
         },
         resolve: {
           site: HomePageResolver

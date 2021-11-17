@@ -3145,7 +3145,7 @@
 	"menu.section.browse_global": "Todo DSpace",
 
 	// "menu.section.browse_global_by_author": "By Author",
-	"menu.section.browse_global_by_author": "Por autor",
+	"menu.section.browse_global_by_author": "Autores",
 
 	// "menu.section.browse_global_by_dateissued": "By Issue Date",
 	"menu.section.browse_global_by_dateissued": "Por fecha de emisión",
@@ -3157,7 +3157,7 @@
 	"menu.section.browse_global_by_title": "Por titulo",
 
 	// "menu.section.browse_global_communities_and_collections": "Communities & Collections",
-	"menu.section.browse_global_communities_and_collections": "Comunidades",
+	"menu.section.browse_global_communities_and_collections": "Comunidades y colecciones",
 
 
 

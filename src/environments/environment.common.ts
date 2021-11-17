@@ -248,7 +248,9 @@ export const environment: GlobalConfig = {
     // Add additional themes here. In the case where multiple themes match a route, the first one
     // in this list will get priority. It is advisable to always have a theme that matches
     // every route as the last one
-
+    {
+      name: 'cicba'
+    },
     // {
     //   // A theme with a handle property will match the community, collection or item with the given
     //   // handle, and all collections and/or items within it
@@ -290,10 +292,10 @@ export const environment: GlobalConfig = {
     //   name: BASE_THEME_NAME
     // },
 
-    {
-      // The default dspace theme
-      name: 'dspace'
-    },
+    // {
+    //   // The default dspace theme
+    //   name: 'dspace'
+    // },
   ],
   // Whether to enable media viewer for image and/or video Bitstreams (i.e. Bitstreams whose MIME type starts with "image" or "video").
   // For images, this enables a gallery viewer where you can zoom or page through images.
