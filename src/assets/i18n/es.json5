@@ -2054,6 +2054,11 @@
 	"home.top-level-communities.help": "Seleccione una comunidad para explorar sus colecciones.",
 
 
+	// "info.cic-digital-info.breadcrumbs": "What is CIC Digital?",
+	"info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",
+
+	// "info.cic-digital-info.title": "What is CIC Digital?",
+	"info.cic-digital-info.title": "¿Qué es CIC Digital?",
 
 	// "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
 	"info.end-user-agreement.accept": "He leído y acepto el Acuerdo de usuario final.",
@@ -2079,6 +2084,12 @@
 	// "info.end-user-agreement.title": "End User Agreement",
 	"info.end-user-agreement.title": "Acuerdo de usuario final",
 
+	// "info.how-to-contribute.breadcrumbs": "How to contribute?"
+	"info.how-to-contribute.breadcrumbs": "¿Cómo aportar material?",
+
+	// "info.how-to-contribute.title": "How to contribute?"
+	"info.how-to-contribute.title": "¿Cómo aportar material?",
+
 	// "info.privacy.breadcrumbs": "Privacy Statement",
 	"info.privacy.breadcrumbs": "Declaracion de privacidad",
 
@@ -2088,6 +2099,11 @@
 	// "info.privacy.title": "Privacy Statement",
 	"info.privacy.title": "Declaracion de privacidad",
 
+	// "info.repository-policy.breadcrumbs": "Repository policy",
+	"info.repository-policy.breadcrumbs": "Políticas del repositorio",
+
+	// "info.repository-policy.title": "Repository policy",
+	"info.repository-policy.title": "Políticas del repositorio",
 
 
 	// "item.alerts.private": "This item is private",

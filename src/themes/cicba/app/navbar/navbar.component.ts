@@ -91,7 +91,7 @@ export class NavbarComponent extends BaseComponent {
         model: {
           type: MenuItemType.LINK,
           text: `menu.section.navbar.what_is_cic_digital`,
-          link: `/#`
+          link: `/info/what-is-cic-digital`
         } as LinkMenuItemModel
       },
       {
@@ -102,7 +102,7 @@ export class NavbarComponent extends BaseComponent {
         model: {
           type: MenuItemType.LINK,
           text: `menu.section.navbar.repository_policy`,
-          link: `/#`
+          link: `/info/repository-policy`
         } as LinkMenuItemModel
       },
       {
@@ -113,7 +113,7 @@ export class NavbarComponent extends BaseComponent {
         model: {
           type: MenuItemType.LINK,
           text: `menu.section.navbar.how_to_contribute`,
-          link: `/#`
+          link: `/info/how-to-contribute`
         } as LinkMenuItemModel
       },
       {

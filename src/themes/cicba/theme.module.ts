@@ -41,12 +41,10 @@ import { BrowseBySwitcherComponent } from './app/browse-by/browse-by-switcher/br
 import { CommunityListPageComponent } from './app/community-list-page/community-list-page.component';
 import { CommunityListPageModule } from '../../app/community-list-page/community-list-page.module';
 import { SearchPageComponent } from './app/search-page/search-page.component';
-import { InfoModule } from '../../app/info/info.module';
-import { EndUserAgreementComponent } from './app/info/end-user-agreement/end-user-agreement.component';
+import { InfoModule } from './app/info/info.module';
 import { PageNotFoundComponent } from './app/pagenotfound/pagenotfound.component';
 import { ObjectNotFoundComponent } from './app/lookup-by-id/objectnotfound/objectnotfound.component';
 import { ForbiddenComponent } from './app/forbidden/forbidden.component';
-import { PrivacyComponent } from './app/info/privacy/privacy.component';
 import { CollectionStatisticsPageComponent } from './app/statistics-page/collection-statistics-page/collection-statistics-page.component';
 import { CommunityStatisticsPageComponent } from './app/statistics-page/community-statistics-page/community-statistics-page.component';
 import { StatisticsPageModule } from '../../app/statistics-page/statistics-page.module';
@@ -80,6 +78,9 @@ import { FooterComponent } from './app/footer/footer.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
 import { FileSectionComponent} from './app/item-page/simple/field-components/file-section/file-section.component';
+import { CicDigitalInfoComponent } from './app/info/cic-digital-info/cic-digital-info.component';
+import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-contribute.component';
+import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -91,11 +92,9 @@ const DECLARATIONS = [
   CommunityListPageComponent,
   SearchPageComponent,
   ConfigurationSearchPageComponent,
-  EndUserAgreementComponent,
   PageNotFoundComponent,
   ObjectNotFoundComponent,
   ForbiddenComponent,
-  PrivacyComponent,
   CollectionStatisticsPageComponent,
   CommunityStatisticsPageComponent,
   ItemStatisticsPageComponent,
@@ -121,7 +120,10 @@ const DECLARATIONS = [
   HeaderComponent,
   NavbarComponent,
   HeaderNavbarWrapperComponent,
-  BreadcrumbsComponent
+  BreadcrumbsComponent,
+  CicDigitalInfoComponent,
+  HowToContributeComponent,
+  RepositoryPolicyComponent
 ];
 
 @NgModule({

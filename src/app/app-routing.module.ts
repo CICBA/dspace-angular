@@ -178,7 +178,7 @@ import { GroupAdministratorGuard } from './core/data/feature-authorization/featu
           },
           {
             path: INFO_MODULE_PATH,
-            loadChildren: () => import('./info/info.module').then((m) => m.InfoModule),
+            loadChildren: () => import('../themes/cicba/app/info/info.module').then((m) => m.InfoModule),
           },
           {
             path: REQUEST_COPY_MODULE_PATH,
