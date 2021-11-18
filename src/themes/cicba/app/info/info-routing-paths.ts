@@ -1,8 +1,8 @@
 import { getInfoModulePath } from '../../../../app/app-routing-paths';
 
-export const CIC_DIGITAL_INFO_PATH = 'what-is-cic-digital';
-export const REPOSITORY_POLICY_PATH = 'repository-policy';
-export const HOW_TO_CONTRIBUTE_PATH = 'how-to-contribute';
+export const CIC_DIGITAL_INFO_PATH = 'que-es-cic-digital_es';
+export const REPOSITORY_POLICY_PATH = 'politicas-del-repositorio_es';
+export const HOW_TO_CONTRIBUTE_PATH = 'como-aportar-material_es';
 
 export function getCicDigitalInfoPath() {
     return getSubPath(CIC_DIGITAL_INFO_PATH);

@@ -89,7 +89,7 @@ export function getPageNotFoundRoute() {
   return `/${PAGE_NOT_FOUND_PATH}`;
 }
 
-export const INFO_MODULE_PATH = 'info';
+export const INFO_MODULE_PATH = 'page';
 export function getInfoModulePath() {
   return `/${INFO_MODULE_PATH}`;
 }

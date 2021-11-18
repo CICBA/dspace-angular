@@ -2263,6 +2263,12 @@
   
   
   
+  // "info.cic-digital-info.breadcrumbs": "What is CIC Digital?",
+  "info.cic-digital-info.breadcrumbs": "O que é o CIC-Digital?",
+
+  // "info.cic-digital-info.title": "What is CIC Digital?",
+  "info.cic-digital-info.title": "O que é o CIC-Digital?",
+
   // "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
   // TODO New key - Add a translation
   "info.end-user-agreement.accept": "I have read and I agree to the End User Agreement",
@@ -2295,6 +2301,12 @@
   // TODO New key - Add a translation
   "info.end-user-agreement.title": "End User Agreement",
   
+  // "info.how-to-contribute.breadcrumbs": "How to contribute?"
+  "info.how-to-contribute.breadcrumbs": "Como contribuir com material?",
+
+  // "info.how-to-contribute.title": "How to contribute?"
+  "info.how-to-contribute.title": "Como contribuir com material?",
+
   // "info.privacy.breadcrumbs": "Privacy Statement",
   // TODO New key - Add a translation
   "info.privacy.breadcrumbs": "Privacy Statement",
@@ -2307,6 +2319,11 @@
   // TODO New key - Add a translation
   "info.privacy.title": "Privacy Statement",
   
+  // "info.repository-policy.breadcrumbs": "Repository policy",
+  "info.repository-policy.breadcrumbs": "Políticas do Repositório",
+
+  // "info.repository-policy.title": "Repository policy",
+  "info.repository-policy.title": "Políticas do Repositório",
   
   
   // "item.alerts.private": "This item is private",
