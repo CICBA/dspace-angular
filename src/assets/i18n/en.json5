@@ -2293,6 +2293,11 @@
   "iiif.page.description": "Description: ",
 
 
+  "last.accessioned.items.title": "Recently Added",
+
+  "last.accessioned.items.see-more": "See more",
+
+
   "loading.bitstream": "Loading bitstream...",
 
   "loading.bitstreams": "Loading bitstreams...",

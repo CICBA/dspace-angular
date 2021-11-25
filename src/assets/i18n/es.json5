@@ -3015,6 +3015,12 @@
 	"journalvolume.page.volume": "Volumen",
 
 
+	// "last.accessioned.items.title": "Recently Added",
+	"last.accessioned.items.title": "Añadido Recientemente",
+
+	// "last.accessioned.items.see-more": "See more",
+	"last.accessioned.items.see-more": "Ver más",
+
 
 	// "loading.bitstream": "Loading bitstream...",
 	"loading.bitstream": "Cargando archivo...",

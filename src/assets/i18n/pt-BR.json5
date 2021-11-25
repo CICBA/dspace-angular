@@ -3300,6 +3300,12 @@
   "journalvolume.page.volume": "Volume",
   
   
+  // "last.accessioned.items.title": "Recently Added",
+  "last.accessioned.items.title": "Submissões recentes",
+
+  // "last.accessioned.items.see-more": "See more",
+  "last.accessioned.items.see-more": "Ver mais",
+
   
   // "loading.bitstream": "Loading bitstream...",
   // TODO New key - Add a translation

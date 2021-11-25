@@ -1,0 +1,18 @@
+<ng-container *ngVar="(objects$ | async) as objects">
+  <h3>{{title | translate}}</h3>
+  <ul class="list-unstyled">
+    <li *ngFor="let object of objects?.payload?.page" class="mt-4 mb-4">
+      <ds-listable-object-component-loader [object]="object"></ds-listable-object-component-loader>
+    </li>
+  </ul>
+  <ds-loading *ngIf="!objects || objects?.isLoading" message="{{'loading.browse-by' | translate}}"></ds-loading>
+  <ds-error *ngIf="objects?.hasFailed" message="{{'error.browse-by' | translate}}"></ds-error>
+  <div *ngIf="!objects?.isLoading && objects?.payload?.page.length === 0" class="alert alert-info w-100" role="alert">
+    {{'browse.empty' | translate}}
+  </div>
+  <a [routerLink]="[searchLink]"
+    [tabIndex]="-1"
+    [queryParams]="addQueryParams"
+    queryParamsHandling="merge">
+    {{"last.accessioned.items.see-more" | translate}}</a>
+</ng-container>
