@@ -13,11 +13,9 @@ import { Item } from 'src/app/core/shared/item.model';
 import { getFirstSucceededRemoteData } from 'src/app/core/shared/operators';
 import { PaginatedSearchOptions } from 'src/app/shared/search/paginated-search-options.model';
 import { SearchConfigurationService } from 'src/app/core/shared/search/search-configuration.service';
-import { ListableObject } from 'src/app/shared/object-collection/shared/listable-object.model';
 import { SearchResult } from 'src/app/shared/search/search-result.model';
 import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
 import { hasValue } from 'src/app/shared/empty.util';
-import { currentPath } from 'src/app/shared/utils/route.utils';
 
 @Component({
   selector: 'ds-last-accessioned-items',
@@ -52,13 +50,13 @@ export class LastAccessionedItemsComponent implements OnInit {
   });
 
   /**
- * Subscription to unsubscribe from
- */
+   * Subscription to unsubscribe from
+   */
   subsc: Subscription;
 
   /**
- * Link to the search page
- */
+   * Link to the search page
+   */
   searchLink: string;
 
   /**
@@ -76,13 +74,14 @@ export class LastAccessionedItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchLink = this.getSearchLink();
-    const page = this.paginationService.getPageParam(this.searchConfigService.paginationID);
-    this.addQueryParams = {
-      "spc.sf": "dc.date.accessioned",
-      "spc.sd": "DESC",
-      page: 1
-    };
+    this.searchLastAccessionedItems();
+    this.setSearchRedirectConfig();
+  }
+
+  /**
+   * Search for last accessioned items in DESC order using searchService
+   */
+  private searchLastAccessionedItems() {
     this.sortOptions = new SortOptions('dc.date.accessioned', SortDirection.DESC);
     const searchOptions$: Observable<PaginatedSearchOptions> = this.searchConfigService.paginatedSearchOptions;
     this.subsc = searchOptions$.pipe(
@@ -106,8 +105,20 @@ export class LastAccessionedItemsComponent implements OnInit {
   }
 
   /**
-  * Unsubscribe from the subscription
- */
+   * Set searching config when redirecting to search page in "see more" anchor
+   */
+  private setSearchRedirectConfig(): void {
+    this.searchLink = this.getSearchLink();
+    this.paginationService.updateRoute(this.searchConfigService.paginationID, {
+      sortField: "dc.date.accessioned",
+      sortDirection: SortDirection.DESC,
+      page: 1
+    });
+  }
+
+  /**
+   * Unsubscribe from the subscription
+   */
   ngOnDestroy(): void {
     if (hasValue(this.subsc)) {
       this.subsc.unsubscribe();
