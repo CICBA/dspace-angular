@@ -1,0 +1,22 @@
+:host {
+
+    footer {
+        transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+        color: #444 !important;
+        background-color: #F2F2F2;
+        opacity: 1;
+        max-width: 100%;
+        padding: 25px 10px;
+        text-align: center;
+        margin: auto;
+    }
+
+    .cic-footer-section {
+        margin: auto;
+    }
+
+    img {
+        max-height: 50px;
+        max-width: 100%
+    }
+}
