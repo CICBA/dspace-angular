@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'ds-repository-policy',
@@ -9,4 +10,15 @@ import { Component } from '@angular/core';
 /**
  * Component displaying information about the repository policies
  */
-export class RepositoryPolicyComponent {}
+export class RepositoryPolicyComponent {
+
+  constructor(private viewportScroller: ViewportScroller) { }
+
+  public scrollTo(elementId: string): void {
+    document.getElementById(elementId).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
+  }
+}

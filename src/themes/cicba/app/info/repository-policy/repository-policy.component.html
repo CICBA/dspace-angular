@@ -25,31 +25,31 @@
             ellos:</p>
         <ul>
             <li>
-                <a href="#politica_de_contenidos">Política de Contenidos</a>
+                <a (click)="scrollTo('politica_de_contenidos')">Política de Contenidos</a>
             </li>
             <li>
-                <a href="#politica_acceso_datos">Política de Acceso a datos</a>
+                <a (click)="scrollTo('politica_acceso_datos')">Política de Acceso a datos</a>
             </li>
             <li>
-                <a href="#politica_deposito">Política de Depósito</a>
+                <a (click)="scrollTo('politica_deposito')">Política de Depósito</a>
             </li>
             <li>
-                <a href="#politica_preservacion">Política de Preservación Digital</a>
+                <a (click)="scrollTo('politica_preservacion')">Política de Preservación Digital</a>
             </li>
             <li>
-                <a href="#politica_metadatos">Política de Metadatos</a>
+                <a (click)="scrollTo('politica_metadatos')">Política de Metadatos</a>
             </li>
             <li>
-                <a href="#politica_digitalizacion">Políticas de Digitalización</a>
+                <a (click)="scrollTo('politica_digitalizacion')">Políticas de Digitalización</a>
             </li>
             <li>
-                <a href="#politica_servicios">Política de Servicios</a>
+                <a (click)="scrollTo('politica_servicios')">Política de Servicios</a>
             </li>
         </ul>
         <div id="policy_details">
             <!-- Politica de contenidos -->
             <h2 id="politica_de_contenidos">Política de contenidos</h2> <a
-                class="glyphicon glyphicon-arrow-up back-to-index" title="Back to index" href="#index"> </a>
+                class="back-to-index" title="Back to index" (click)="scrollTo('index')"> </a>
             <p>CIC-DIGITAL recibe la producción de toda la CICBA en sus actividades de investigación y extensión. Los
                 materiales a incorporar en el repositorio deben cumplir con al menos uno de los siguientes requisitos:
             </p>
@@ -68,7 +68,7 @@
                 relevantes.</p>
             <p>De acuerdo a lo precedente algunas de las tipologías aceptadas son: Informes de Investigador, Personal de
                 Apoyo y Becarios, tesis de grado y posgrado, artículos científicos en cualquiera de sus versiones (<a
-                    id="preprint_postprint_caller" class="footnote_reference" href="#preprint_postprint">preprint,
+                    id="preprint_postprint_caller" class="footnote_reference" (click)="scrollTo('preprint_postprint')">preprint,
                     postprint o versión del editor</a>), artículos de divulgación, libros y capítulos de libro,
                 presentaciones en congresos, producciones artísticas, imágenes, grabaciones audiovisuales, publicaciones
                 periódicas, mapas, patentes y reseñas (que hayan pasado por un proceso de evaluación). También se
@@ -83,7 +83,7 @@
 
             <!-- Política de acceso a datos -->
             <h2 id="politica_acceso_datos">Política de acceso a datos</h2> <a
-                class="glyphicon glyphicon-arrow-up back-to-index" title="Back to index" href="#index"> </a>
+                class="back-to-index" title="Back to index" (click)="scrollTo('index')"> </a>
             <p>Las obras alojadas en el repositorio pueden ser visualizadas y descargadas de forma libre y gratuita, sin
                 necesidad de registro o autorización previa, siempre respetando las condiciones expuestas en las
                 licencias de uso adosadas a las mismas. Los autores o titulares de la propiedad intelectual de cada obra
@@ -108,8 +108,8 @@
                 como <a href="http://www.sherpa.ac.uk/romeo/" target="_blank">SHERPA/RoMEO</a>.</p>
 
             <!-- Política de depósito -->
-            <h2 id="politica_deposito">Politica de depósito</h2> <a class="glyphicon glyphicon-arrow-up back-to-index"
-                title="Back to index" href="#index"> </a>
+            <h2 id="politica_deposito">Politica de depósito</h2> <a class="back-to-index"
+                title="Back to index" (click)="scrollTo('index')"> </a>
             <p>Debido a la naturaleza distribuida de los centros y los investigadores de CICBA, el repositorio se
                 sustenta en un modelo distribuido de trabajo mediante el cual pueden existir diferentes vías de
                 depósito:</p>
@@ -136,7 +136,7 @@
                 mínimas establecidas en las políticas de contenidos arriba mencionadas.</p>
             <p>Los trabajos pueden ser depositados en cualquier momento y hacerse públicos de manera inmediata o
                 diferida luego de la finalización de un período elegido por el autor denominado <a
-                    id="embargo_definition_caller" class="footnote_reference" href="#embargo_definition">período de
+                    id="embargo_definition_caller" class="footnote_reference" (click)="scrollTo('embargo_definition')">período de
                     embargo</a>. Dicha modalidad de publicación será utilizada solo en caso que las obras estuvieran
                 protegidas por derechos de propiedad industrial y/o acuerdos previos con terceros, los autores podrán
                 solicitar un período de embargo, plazo durante el cual sólo serán públicos los metadatos de la obra pero
@@ -152,7 +152,7 @@
 
             <!-- Política de preservación digital -->
             <h2 id="politica_preservacion">Política de preservación digital</h2> <a
-                class="glyphicon glyphicon-arrow-up back-to-index" title="Back to index" href="#index"> </a>
+                class="back-to-index" title="Back to index" (click)="scrollTo('index')"> </a>
             <p>Las Directrices para la preservación del patrimonio cultural de UNESCO plantean la salvaguarda del
                 patrimonio documental a partir de la garantía a largo plazo de preservación y acceso. En este sentido,
                 el primer paso en cuanto a preservación es tener un plan claro que determine qué materiales se
@@ -193,8 +193,8 @@
             <p>Los ítems retirados no son removidos del repositorio, pero sí de la vista pública.</p>
 
             <!-- Política de metadatos -->
-            <h2 id="politica_metadatos">Política de metadatos</h2> <a class="glyphicon glyphicon-arrow-up back-to-index"
-                title="Back to index" href="#index"> </a>
+            <h2 id="politica_metadatos">Política de metadatos</h2> <a class="back-to-index"
+                title="Back to index" (click)="scrollTo('index')"> </a>
             <p>Los metadatos son la información descriptiva que se aplica sobre un recurso para facilitar su
                 organización, recuperación, preservación e interoperabilidad. Para catalogar una obra, el repositorio
                 utiliza un perfil de aplicación dependiente de la tipología documental basado en <a
@@ -212,7 +212,7 @@
 
             <!-- Política de digitalización -->
             <h2 id="politica_digitalizacion">Política de digitalización</h2> <a
-                class="glyphicon glyphicon-arrow-up back-to-index" title="Back to index" href="#index"> </a>
+                class="back-to-index" title="Back to index" (click)="scrollTo('index')"> </a>
             <p>Como guía para el proceso de digitalización se utilizará las directrices definidas en el documento
                 <em>"Technical Guidelines for Digitizing Cultural Heritage Materials"</em> generado en 2010 por la
                 <em>Federal Agencies Digitization Guidelines Initiative</em> (FADGI). También se utilizarán como
@@ -236,7 +236,7 @@
             <ol type="a">
                 <li>imagen maestra resultante del escaneo, </li>
                 <li>documento maestro con imagen derivada de la anterior y el <a id="ocr_caller"
-                        class="footnote_reference" href="#ocr">OCR</a> generado sobre ella y </li>
+                        class="footnote_reference" (click)="scrollTo('ocr')">OCR</a> generado sobre ella y </li>
                 <li>otra(s) derivada(s) a los fines de uso y distribución en la web. </li>
             </ol>
             <p>La resolución de las imágenes maestras (a) estará determinada por el estado y el tipo del material a
@@ -277,7 +277,7 @@
 
         <!-- Politica de Servicios  -->
         <h2 id="politica_servicios">Politica de Servicios</h2>
-        <a class="glyphicon glyphicon-arrow-up back-to-index" title="Back to index" href="#index"> </a>
+        <a class="back-to-index" title="Back to index" (click)="scrollTo('index')"> </a>
         <p>
             <b>Servicios para usuarios:</b>
         </p>
@@ -312,19 +312,19 @@
                     que suelen incluir el logo del editor, cambios de formato y de maquetación. Mas información en <a
                         href="http://sherpa.ac.uk/romeo/definitions.php#prepostprints"
                         target="_blank">http://sherpa.ac.uk/romeo/definitions.php#prepostprints</a>. <a
-                        href="#preprint_postprint_caller" class="back_to_content_reference"
+                        (click)="scrollTo('preprint_postprint_caller')" class="back_to_content_reference"
                         title="Back to content">↩</a>
                 </li>
                 <li id="embargo_definition">
                     <span class="reference_head">Embargo</span>. Es un bloqueo temporal durante el cual el contenido de
-                    una obra se mantiene oculto e inaccesible. <a href="#embargo_definition_caller"
+                    una obra se mantiene oculto e inaccesible. <a (click)="scrollTo('embargo_definition_caller')"
                         class="back_to_content_reference" title="Back to content">↩</a>
                 </li>
                 <li id="ocr">
                     <span class="reference_head">Optical Character Recognition (OCR)</span>. Es un proceso dirigido a la
                     digitalización de textos, los cuales identifican automáticamente a partir de una imagen símbolos o
                     caracteres que pertenecen a un determinado alfabeto, para luego almacenarlos en forma de datos. <a
-                        href="#ocr_caller" class="back_to_content_reference" title="Back to content">↩</a>
+                    (click)="scrollTo('ocr_caller')" class="back_to_content_reference" title="Back to content">↩</a>
                 </li>
             </ol>
         </div>

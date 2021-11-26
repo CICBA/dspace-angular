@@ -1,0 +1,23 @@
+a:not([href]):not([tabindex]) {
+    color: #207698;
+    text-decoration: none;
+}
+
+a:not([href]):not([tabindex]):hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+h2 {
+    display: inline;
+}
+
+.back-to-index {
+    margin-left: 5px;
+    border: solid #207698;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
