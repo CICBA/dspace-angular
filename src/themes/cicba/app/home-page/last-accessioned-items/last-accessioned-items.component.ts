@@ -109,11 +109,14 @@ export class LastAccessionedItemsComponent implements OnInit {
    */
   private setSearchRedirectConfig(): void {
     this.searchLink = this.getSearchLink();
-    this.paginationService.updateRoute(this.searchConfigService.paginationID, {
-      sortField: "dc.date.accessioned",
-      sortDirection: SortDirection.DESC,
-      page: 1
-    });
+    const sortField =  this.searchConfigService.paginationID + '.sf';
+    const sortDirection =  this.searchConfigService.paginationID + '.sd';
+    const page =  this.searchConfigService.paginationID + '.page';
+    this.addQueryParams =  {
+      [sortField]: "dc.date.accessioned",
+      [sortDirection]: SortDirection.DESC,
+      [page]: 1
+    };
   }
 
   /**
