@@ -5,6 +5,8 @@ import { CIC_DIGITAL_INFO_PATH, HOW_TO_CONTRIBUTE_PATH, REPOSITORY_POLICY_PATH }
 import { CicDigitalInfoComponent } from './cic-digital-info/cic-digital-info.component';
 import { HowToContributeComponent } from './how-to-contribute/how-to-contribute.component';
 import { RepositoryPolicyComponent } from './repository-policy/repository-policy.component';
+import { END_USER_AGREEMENT_PATH } from 'src/app/info/info-routing-paths';
+import { ThemedEndUserAgreementComponent } from 'src/app/info/end-user-agreement/themed-end-user-agreement.component';
 
 @NgModule({
   imports: [
@@ -31,7 +33,15 @@ import { RepositoryPolicyComponent } from './repository-policy/repository-policy
         resolve: { breadcrumb: I18nBreadcrumbResolver },
         data: { title: 'info.repository-policy.title', breadcrumbKey: 'info.repository-policy' }
       }
-    ])
+    ]),
+    RouterModule.forChild([
+      {
+        path: END_USER_AGREEMENT_PATH,
+        component: ThemedEndUserAgreementComponent,
+        resolve: { breadcrumb: I18nBreadcrumbResolver },
+        data: { title: 'info.end-user-agreement.title', breadcrumbKey: 'info.end-user-agreement' }
+      }
+    ]),
   ]
 })
 /**
