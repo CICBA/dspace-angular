@@ -1,6 +1,11 @@
 {
     "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
 
+    "item.page.cic.institucionOrigen": "Centro CIC",
+
+    "item.page.cic.thesis.grantor": "Emisor del título",
+
+    "item.page.cic.dcterms.subject.materia": "Materia",
 
 	// "info.cic-digital-info.breadcrumbs": "What is CIC Digital?",
 	"info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",

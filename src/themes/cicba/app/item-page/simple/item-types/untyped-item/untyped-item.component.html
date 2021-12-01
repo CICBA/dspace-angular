@@ -1,4 +1,3 @@
-hola
 <div class="row" *ngIf="iiifEnabled">
   <div class="col-12">
     <ds-mirador-viewer id="iiif-viewer"
@@ -30,12 +29,23 @@ hola
       <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
     </ng-container>
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
-    <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
+<!--     <ds-item-page-date-field [item]="object"></ds-item-page-date-field> -->
+    <ds-generic-item-page-field [item]="object" 
+      [fields]="['dcterms.issued']" 
+      [label]="'item.page.date.issued'">
+    </ds-generic-item-page-field>
+
     <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
       [parentItem]="object"
       [itemType]="'Person'"
-      [metadataFields]="['dc.contributor.author', 'dc.creator']"
+      [metadataFields]="['dcterms.creator.author']"
       [label]="'relationships.isAuthorOf' | translate">
+    </ds-metadata-representation-list>
+    <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
+      [parentItem]="object"
+      [itemType]="'Person'"
+      [metadataFields]="['dcterms.contributor.director']"
+      [label]="'relationships.isDirectorOf' | translate">
     </ds-metadata-representation-list>
     <ds-generic-item-page-field [item]="object"
       [fields]="['journal.title']"
@@ -55,21 +65,41 @@ hola
     </ds-generic-item-page-field>
   </div>
   <div class="col-xs-12 col-md-6">
-    <ds-item-page-abstract-field [item]="object"></ds-item-page-abstract-field>
+    <!-- <ds-item-page-abstract-field [item]="object"></ds-item-page-abstract-field> -->
+    <ds-generic-item-page-field [item]="object" 
+      [fields]="['dcterms.abstract']" 
+      [label]="'item.page.abstract'">
+    </ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
-      [fields]="['dc.description']"
+      [fields]="['dcterms.description']"
       [label]="'item.page.description'">
     </ds-generic-item-page-field>
-
     <ds-generic-item-page-field [item]="object"
-      [fields]="['dc.subject']"
+      [fields]="['dcterms.subject']"
       [separator]="','"
       [label]="'item.page.subject'">
+    </ds-generic-item-page-field>
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dcterms.subject.materia']"
+      [separator]="','"
+      [label]="'item.page.dcterms.subject.materia	'">
     </ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.identifier.citation']"
       [label]="'item.page.citation'">
     </ds-generic-item-page-field>
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['cic.thesis.grantor']"
+      [label]="'item.page.cic.thesis.grantor'">
+    </ds-generic-item-page-field>  
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['cic.lugarDesarrollo']"
+      [label]="'item.page.cic.lugarDesarrollo'">
+    </ds-generic-item-page-field>  
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['cic.institucionOrigen']"
+      [label]="'item.page.cic.institucionOrigen'">
+    </ds-generic-item-page-field>  
     <ds-item-page-uri-field [item]="object"
       [fields]="['dc.identifier.uri']"
       [label]="'item.page.uri'">
