@@ -16,6 +16,7 @@ import { SearchConfigurationService } from 'src/app/core/shared/search/search-co
 import { SearchResult } from 'src/app/shared/search/search-result.model';
 import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
 import { hasValue } from 'src/app/shared/empty.util';
+import { ViewMode } from 'src/app/core/shared/view-mode.model';
 
 @Component({
   selector: 'ds-last-accessioned-items',
@@ -27,7 +28,7 @@ import { hasValue } from 'src/app/shared/empty.util';
   ]
 })
 /**
- * Component to display a browse-by page for any ListableObject
+ * Component to display a list of the first 5 items ordered by last accessioned date
  */
 export class LastAccessionedItemsComponent implements OnInit {
   /**
@@ -65,6 +66,11 @@ export class LastAccessionedItemsComponent implements OnInit {
   addQueryParams;
 
   sortOptions: SortOptions;
+
+  /**
+   * The view mode of the this component
+   */
+  viewMode = ViewMode.ListElement;
 
   public constructor(protected searchService: SearchService,
     protected searchConfigService: SearchConfigurationService,
@@ -109,10 +115,10 @@ export class LastAccessionedItemsComponent implements OnInit {
    */
   private setSearchRedirectConfig(): void {
     this.searchLink = this.getSearchLink();
-    const sortField =  this.searchConfigService.paginationID + '.sf';
-    const sortDirection =  this.searchConfigService.paginationID + '.sd';
-    const page =  this.searchConfigService.paginationID + '.page';
-    this.addQueryParams =  {
+    const sortField = this.searchConfigService.paginationID + '.sf';
+    const sortDirection = this.searchConfigService.paginationID + '.sd';
+    const page = this.searchConfigService.paginationID + '.page';
+    this.addQueryParams = {
       [sortField]: "dc.date.accessioned",
       [sortDirection]: SortDirection.DESC,
       [page]: 1

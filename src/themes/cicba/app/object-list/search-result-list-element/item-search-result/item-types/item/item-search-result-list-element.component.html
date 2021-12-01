@@ -1,0 +1,28 @@
+<ds-type-badge *ngIf="showLabel" [object]="dso"></ds-type-badge>
+
+<ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
+  <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
+    rel="noopener noreferrer" [routerLink]="[itemPageRoute]" class="lead item-list-title" [innerHTML]="dsoTitle"></a>
+  <span *ngIf="linkType == linkTypes.None" class="lead item-list-title" [innerHTML]="dsoTitle"></span>
+  <span class="text-muted">
+    <ds-truncatable-part [id]="dso.id" [minLines]="1">
+      <ng-container *ngIf="dso.firstMetadataValue('dcterms.publisher') || dso.firstMetadataValue('dcterms.issued')">
+        (<span *ngIf="dso.firstMetadataValue('dcterms.publisher')" class="item-list-publisher"
+          [innerHTML]="firstMetadataValue('dcterms.publisher') + ', '"></span>
+        <span *ngIf="dso.firstMetadataValue('dcterms.issued')" class="item-list-date"
+          [innerHTML]="firstMetadataValue('dcterms.issued')"></span>)
+      </ng-container>
+      <span *ngIf="dso.allMetadata(['dcterms.creator.author', 'dcterms.creator.*']).length > 0"
+        class="item-list-authors">
+        <span *ngFor="let author of allMetadataValues(['dcterms.creator.author', 'dcterms.creator.*']); let last=last;">
+          <span [innerHTML]="author"><span [innerHTML]="author"></span></span>
+          <span *ngIf="!last">; </span>
+        </span>
+      </span>
+    </ds-truncatable-part>
+  </span>
+  <div *ngIf="dso.firstMetadataValue('dcterms.abstract')" class="item-list-abstract">
+    <ds-truncatable-part [id]="dso.id" [minLines]="3"><span [innerHTML]="firstMetadataValue('dcterms.abstract')"></span>
+    </ds-truncatable-part>
+  </div>
+</ds-truncatable>

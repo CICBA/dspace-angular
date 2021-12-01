@@ -82,6 +82,7 @@ import { CicDigitalInfoComponent } from './app/info/cic-digital-info/cic-digital
 import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-contribute.component';
 import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
 import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
+import { ItemSearchResultListElementComponent } from './app/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -125,7 +126,8 @@ const DECLARATIONS = [
   CicDigitalInfoComponent,
   HowToContributeComponent,
   RepositoryPolicyComponent,
-  LastAccessionedItemsComponent
+  LastAccessionedItemsComponent,
+  ItemSearchResultListElementComponent
 ];
 
 @NgModule({
