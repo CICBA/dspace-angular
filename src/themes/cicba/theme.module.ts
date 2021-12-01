@@ -34,6 +34,7 @@ import { HomePageModule } from '../../app/home-page/home-page.module';
 import { RootComponent } from './app/root/root.component';
 import { AppModule } from '../../app/app.module';
 import { PublicationComponent } from './app/item-page/simple/item-types/publication/publication.component';
+import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { ItemPageModule } from '../../app/item-page/item-page.module';
 import { RouterModule } from '@angular/router';
 import { AccessControlModule } from '../../app/access-control/access-control.module';
@@ -55,7 +56,6 @@ import { CollectionPageComponent } from './app/collection-page/collection-page.c
 import { CommunityPageModule } from '../../app/community-page/community-page.module';
 import { CollectionPageModule } from '../../app/collection-page/collection-page.module';
 import { ConfigurationSearchPageComponent } from './app/search-page/configuration-search-page.component';
-import { ItemPageComponent } from './app/item-page/simple/item-page.component';
 import { FullItemPageComponent } from './app/item-page/full/full-item-page.component';
 import { LoginPageComponent } from './app/login-page/login-page.component';
 import { LogoutPageComponent } from './app/logout-page/logout-page.component';
@@ -89,6 +89,7 @@ const DECLARATIONS = [
   HomeNewsComponent,
   RootComponent,
   PublicationComponent,
+  UntypedItemComponent,
   BrowseBySwitcherComponent,
   CommunityListPageComponent,
   SearchPageComponent,
@@ -102,7 +103,6 @@ const DECLARATIONS = [
   SiteStatisticsPageComponent,
   CommunityPageComponent,
   CollectionPageComponent,
-  ItemPageComponent,
   FullItemPageComponent,
   LoginPageComponent,
   LogoutPageComponent,
