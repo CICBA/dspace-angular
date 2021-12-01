@@ -1,7 +1,23 @@
 {
-  // DSpace default: "All of DSpace"
-  "menu.section.browse_global": "Browse DSpace",
+  "menu.section.browse_global_by_author": "Authors",
 
-  // DSpace default: "DSpace Angular :: "
-  "repository.title.prefix": "DSpace :: ",
+  "menu.section.navbar.contribute": "Contribute Material",
+
+  "menu.section.navbar.contact": "Contact",
+
+  "menu.section.navbar.how_to_contribute": "How to contribute?",
+
+  "menu.section.navbar.more_information": "More Information",
+
+  "menu.section.navbar.register": "Register",
+
+  "menu.section.navbar.repository_policy": "Repository policy",
+
+  "menu.section.navbar.what_is_cic_digital": "What is CIC Digital?",
+
+  "last.accessioned.items.title": "Recently Added",
+
+  "last.accessioned.items.see-more": "See more",
+
+
 }

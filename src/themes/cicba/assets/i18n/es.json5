@@ -1,0 +1,49 @@
+{
+    "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
+
+
+	// "info.cic-digital-info.breadcrumbs": "What is CIC Digital?",
+	"info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",
+
+	// "info.cic-digital-info.title": "What is CIC Digital?",
+	"info.cic-digital-info.title": "¿Qué es CIC Digital?",
+
+    // "info.how-to-contribute.breadcrumbs": "How to contribute?"
+	"info.how-to-contribute.breadcrumbs": "¿Cómo aportar material?",
+
+	// "info.how-to-contribute.title": "How to contribute?"
+	"info.how-to-contribute.title": "¿Cómo aportar material?",
+
+	// "info.repository-policy.breadcrumbs": "Repository policy",
+	"info.repository-policy.breadcrumbs": "Políticas del repositorio",
+
+	// "info.repository-policy.title": "Repository policy",
+	"info.repository-policy.title": "Políticas del repositorio",
+    
+    //"menu.section.navbar.contribute": "Contribute Material",
+    "menu.section.navbar.contribute": "Aportar Material",
+
+    //"menu.section.navbar.contact": "Contact",
+    "menu.section.navbar.contact": "Contacto",
+
+    //"menu.section.navbar.how_to_contribute": "How to contribute?",
+    "menu.section.navbar.how_to_contribute": "¿Cómo aportar material?",
+
+    //"menu.section.navbar.more_information": "More Information",
+    "menu.section.navbar.more_information": "Mas Información",
+
+    //"menu.section.navbar.register": "Register",
+    "menu.section.navbar.register": "Registrarse",
+
+    //"menu.section.navbar.repository_policy": "Repository policy",
+    "menu.section.navbar.repository_policy": "Políticas del repositorio",
+
+    //"menu.section.navbar.what_is_cic_digital": "What is CIC Digital?",
+    "menu.section.navbar.what_is_cic_digital": "¿Qué es CIC Digital?",
+
+    	// "last.accessioned.items.title": "Recently Added",
+	"last.accessioned.items.title": "Añadido Recientemente",
+
+	// "last.accessioned.items.see-more": "See more",
+	"last.accessioned.items.see-more": "Ver más",
+}
