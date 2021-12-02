@@ -1,54 +1,91 @@
 {
+    "dso-selector.set-scope.community.button": "Buscar en todo el repositorio",
+
+    "dso-selector.set-scope.community.head": "Seleccione alcance de la búsqueda",
+    
+    "dso-selector.set-scope.community.input-header": "Buscar una comunidad o colección",
+    
+    "item.page.abstract": "Resumen",
+
     "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
 
     "item.page.cic.institucionOrigen": "Centro CIC",
 
     "item.page.cic.thesis.grantor": "Emisor del título",
 
-    "item.page.cic.dcterms.subject.materia": "Materia",
+    "item.page.dcterms.subject.materia": "Materia",
 
-	// "info.cic-digital-info.breadcrumbs": "What is CIC Digital?",
-	"info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",
+    "item.page.date.issued": "Fecha de publicación",
 
-	// "info.cic-digital-info.title": "What is CIC Digital?",
+    "home.breadcrumbs": "Home",
+
+    "home.title": "Home",
+
+    "login.form.or-divider": "o",
+
+    "mydspace.breadcrumbs": "Envíos",
+
+    "mydspace.title": "Envíos",
+	
+    "mydspace.search-form.placeholder": "Buscar en Envíos...",
+
+    "nav.mydspace": "Envíos",
+    
+    "submission.import-external.back-to-my-dspace": "Volver a envíos",
+    
+    "info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",
+
 	"info.cic-digital-info.title": "¿Qué es CIC Digital?",
 
-    // "info.how-to-contribute.breadcrumbs": "How to contribute?"
 	"info.how-to-contribute.breadcrumbs": "¿Cómo aportar material?",
 
-	// "info.how-to-contribute.title": "How to contribute?"
 	"info.how-to-contribute.title": "¿Cómo aportar material?",
 
-	// "info.repository-policy.breadcrumbs": "Repository policy",
 	"info.repository-policy.breadcrumbs": "Políticas del repositorio",
 
-	// "info.repository-policy.title": "Repository policy",
 	"info.repository-policy.title": "Políticas del repositorio",
     
-    //"menu.section.navbar.contribute": "Contribute Material",
-    "menu.section.navbar.contribute": "Aportar Material",
+    "menu.section.navbar.contribute": "Aportar material",
 
-    //"menu.section.navbar.contact": "Contact",
     "menu.section.navbar.contact": "Contacto",
 
-    //"menu.section.navbar.how_to_contribute": "How to contribute?",
     "menu.section.navbar.how_to_contribute": "¿Cómo aportar material?",
 
-    //"menu.section.navbar.more_information": "More Information",
-    "menu.section.navbar.more_information": "Mas Información",
+    "menu.section.navbar.more_information": "Mas información",
 
-    //"menu.section.navbar.register": "Register",
     "menu.section.navbar.register": "Registrarse",
 
-    //"menu.section.navbar.repository_policy": "Repository policy",
     "menu.section.navbar.repository_policy": "Políticas del repositorio",
 
-    //"menu.section.navbar.what_is_cic_digital": "What is CIC Digital?",
     "menu.section.navbar.what_is_cic_digital": "¿Qué es CIC Digital?",
 
-    	// "last.accessioned.items.title": "Recently Added",
+    "mydspace.messages.submitter-help": "Seleccione esta opción para enviar un mensaje al revisor.",
+
+    "mydspace.status.waiting-for-controller": "Esperando revisor",
+
 	"last.accessioned.items.title": "Añadido Recientemente",
 
-	// "last.accessioned.items.see-more": "See more",
 	"last.accessioned.items.see-more": "Ver más",
+
+    "search.filters.filter.dateIssued.head": "Fecha de publicación",
+
+    "search.filters.filter.keyword.head": "Materias",
+
+    "search.form.scope.all": "Todo el repositorio",
+
+    "search.filters.filter.itemtype.head": "Tipo de documento",
+
+    "search.filters.filter.itemtype.placeholder": "Tipo de documento",
+
+    "search.sidebar.settings.rpp": "Resultados por página",
+    
+    "sorting.dc.date.issued.ASC": "Fecha de emisión ascendente",
+
+    "sorting.dc.date.issued.DESC": "Fecha de emisión descendente",
+
+    "submission.sections.submit.progressbar.describe.step1": "Describir",
+
+    "submission.sections.submit.progressbar.describe.step2": "Describir",
+
+    "submission.sections.submit.progressbar.describe.step3": "Licencia CC",
 }

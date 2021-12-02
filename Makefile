@@ -18,7 +18,7 @@ update:
 
 build:
 	@echo "Building image from Dockerfile..."
-	@docker-compose -f docker/docker-compose.yml -f docker/docker-compose-rest.yml build
+	@docker-compose -f docker/docker-compose.yml build
 
 stop: down
 
@@ -26,11 +26,11 @@ start: up
 
 down:
 	@echo "Stopping containers for $(COMPOSE_PROJECT_NAME)..."
-	@docker-compose -f docker/docker-compose.yml -f docker/docker-compose-rest.yml stop
+	@docker-compose -f docker/docker-compose.yml stop
 
 prune:
 	@echo "Removing containers for $(COMPOSE_PROJECT_NAME)..."
-	@docker-compose -f docker/docker-compose.yml -f docker/docker-compose-rest.yml down -v
+	@docker-compose -f docker/docker-compose.yml down -v
 
 ps:
 	@docker ps --filter name='$(COMPOSE_PROJECT_NAME)*'
@@ -43,7 +43,11 @@ logs:
 
 cli:
 	@docker-compose -f docker/cli.yml run --rm dspace-cli $(filter-out $@,$(MAKECMDGOALS))
-	
+
+merge-18n:
+	@docker-compose -f docker/docker-compose.yml exec dspace-angular yarn --cwd scripts/ merge-i18n -s src/themes/cicba/assets/i18n
+
+
 # https://stackoverflow.com/a/6273809/1826109
 %:
 	@:
