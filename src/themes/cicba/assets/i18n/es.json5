@@ -1,17 +1,22 @@
 {
+
     "dso-selector.set-scope.community.button": "Buscar en todo el repositorio",
 
     "dso-selector.set-scope.community.head": "Seleccione alcance de la búsqueda",
     
     "dso-selector.set-scope.community.input-header": "Buscar una comunidad o colección",
     
-    "item.page.abstract": "Resumen",
+    "form.loading": "Cargando...",
 
     "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
 
     "item.page.cic.institucionOrigen": "Centro CIC",
 
     "item.page.cic.thesis.grantor": "Emisor del título",
+
+    "item.page.collections.loading": "Cargando...",
+
+    "item.page.abstract": "Resumen",
 
     "item.page.dcterms.subject.materia": "Materia",
 
@@ -20,6 +25,10 @@
     "home.breadcrumbs": "Home",
 
     "home.title": "Home",
+
+    "loading.default": "Cargando...",
+
+    "loading.objects": "Cargando...",
 
     "login.form.or-divider": "o",
 
@@ -33,6 +42,8 @@
     
     "submission.import-external.back-to-my-dspace": "Volver a envíos",
     
+    "submission.sections.describe.relationship-lookup.search-tab.loading": "Cargando...",
+
     "info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",
 
 	"info.cic-digital-info.title": "¿Qué es CIC Digital?",
