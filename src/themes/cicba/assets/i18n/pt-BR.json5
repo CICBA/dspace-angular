@@ -1,4 +1,10 @@
 {
+    "communityList.breadcrumbs": "Lista da comunidade",
+
+    "communityList.tabTitle": "Lista da comunidade",
+
+    "communityList.title": "Lista da comunidade",
+
     "menu.section.browse_global_by_author": "Autores",
 
     //"menu.section.navbar.contribute": "Contribute Material",
@@ -27,6 +33,10 @@
 
     // "last.accessioned.items.see-more": "See more",
     "last.accessioned.items.see-more": "Ver mais",
+
+    "repository.title.prefix": "CIC Digital - ",
+
+    "repository.title.prefixDSpace": "CIC Digital -",
 
     "sorting.dcterms.issued.ASC": "Data de publicação ascendente",
 

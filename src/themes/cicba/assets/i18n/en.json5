@@ -19,6 +19,10 @@
 
   "last.accessioned.items.see-more": "See more",
 
+  "repository.title.prefix": "CIC Digital - ",
+
+  "repository.title.prefixDSpace": "CIC Digital -",
+
   "sorting.dcterms.issued.ASC": "Publication date ascending",
 
   "sorting.dcterms.issued.DESC": "Publication date descending",

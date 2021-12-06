@@ -1,4 +1,9 @@
 {
+    "communityList.breadcrumbs": "Lista de comunidades",
+
+    "communityList.tabTitle": "Lista de comunidades",
+
+    "communityList.title": "Lista de comunidades",
 
     "dso-selector.set-scope.community.button": "Buscar en todo el repositorio",
 
@@ -79,6 +84,10 @@
 	"last.accessioned.items.title": "Añadido Recientemente",
 
 	"last.accessioned.items.see-more": "Ver más",
+
+    "repository.title.prefix": "CIC Digital - ",
+
+    "repository.title.prefixDSpace": "CIC Digital -",
 
     "search.filters.filter.dateIssued.head": "Fecha de publicación",
 
