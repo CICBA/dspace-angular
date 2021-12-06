@@ -119,4 +119,5 @@
 
     "submission.workflow.tasks.claimed.return_help": "Devolver a la cola de tareas",
 
+    "submission.workflow.tasks.pool.claim": "Asumir tarea",
 }
