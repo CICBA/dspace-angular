@@ -19,5 +19,8 @@
 
   "last.accessioned.items.see-more": "See more",
 
+  "sorting.dcterms.issued.ASC": "Publication date ascending",
+
+  "sorting.dcterms.issued.DESC": "Publication date descending",
 
 }

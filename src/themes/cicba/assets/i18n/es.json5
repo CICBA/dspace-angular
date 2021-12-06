@@ -96,6 +96,10 @@
 
     "sorting.dc.date.issued.DESC": "Fecha de emisión descendente",
 
+    "sorting.dcterms.issued.ASC": "Fecha de publicación ascendente",
+
+    "sorting.dcterms.issued.DESC": "Fecha de publicación descendente",
+
     "submission.sections.submit.progressbar.describe.step1": "Describir",
 
     "submission.sections.submit.progressbar.describe.step2": "Describir",

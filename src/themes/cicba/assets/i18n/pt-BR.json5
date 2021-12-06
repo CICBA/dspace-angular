@@ -28,4 +28,8 @@
     // "last.accessioned.items.see-more": "See more",
     "last.accessioned.items.see-more": "Ver mais",
 
+    "sorting.dcterms.issued.ASC": "Data de publicação ascendente",
+
+    "sorting.dcterms.issued.DESC": "Data de publicação decrescente",
+
 }
