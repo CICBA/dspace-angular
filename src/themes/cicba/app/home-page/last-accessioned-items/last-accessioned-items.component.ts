@@ -89,15 +89,15 @@ export class LastAccessionedItemsComponent implements OnInit {
    */
   private searchLastAccessionedItems() {
     this.sortOptions = new SortOptions('dc.date.accessioned', SortDirection.DESC);
-    const searchOptions$: Observable<PaginatedSearchOptions> = this.searchConfigService.paginatedSearchOptions;
-    this.subsc = searchOptions$.pipe(
-      switchMap((options) => {
-        options.pagination = this.paginationConfig;
-        options.sort = this.sortOptions;
-        return this.searchService.search(
-          options, undefined, true, true, followLink<Item>('thumbnail', { isOptional: true })
-        ).pipe(getFirstSucceededRemoteData(), startWith(undefined))
-      })
+    const searchOptions = new PaginatedSearchOptions(
+      {
+        pagination: this.paginationConfig,
+        sort: this.sortOptions
+      }
+    );
+    this.subsc = this.searchService.search(
+      searchOptions, undefined, true, true, followLink<Item>('thumbnail', { isOptional: true })
+    ).pipe(getFirstSucceededRemoteData(), startWith(undefined)
     ).subscribe((results) => {
       this.objects$.next(results);
     });
