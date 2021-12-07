@@ -222,7 +222,7 @@ export const environment: GlobalConfig = {
       {
         id: 'dateissued',
         type: BrowseByType.Date,
-        metadataField: 'dc.date.issued'
+        metadataField: 'dcterms.issued'
       },
       {
         id: 'author',
