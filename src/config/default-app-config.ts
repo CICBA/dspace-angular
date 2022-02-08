@@ -174,23 +174,23 @@ export class DefaultAppConfig implements AppConfig {
   };
 
   // Default Language in which the UI will be rendered if the user's browser language is not an active language
-  defaultLanguage = 'es';
+  defaultLanguage = 'en';
 
   // Languages. DSpace Angular holds a message catalog for each of the following languages.
   // When set to active, users will be able to switch to the use of this language in the user interface.
   languages: LangConfig[] = [
     { code: 'en', label: 'English', active: true },
-    { code: 'cs', label: 'Čeština', active: false },
-    { code: 'de', label: 'Deutsch', active: false },
+    { code: 'cs', label: 'Čeština', active: true },
+    { code: 'de', label: 'Deutsch', active: true },
     { code: 'es', label: 'Español', active: true },
-    { code: 'fr', label: 'Français', active: false },
-    { code: 'gd', label: 'Gàidhlig', active: false },
-    { code: 'lv', label: 'Latviešu', active: false },
-    { code: 'hu', label: 'Magyar', active: false },
-    { code: 'nl', label: 'Nederlands', active: false },
-    { code: 'pt-PT', label: 'Português', active: false },
+    { code: 'fr', label: 'Français', active: true },
+    { code: 'gd', label: 'Gàidhlig', active: true },
+    { code: 'lv', label: 'Latviešu', active: true },
+    { code: 'hu', label: 'Magyar', active: true },
+    { code: 'nl', label: 'Nederlands', active: true },
+    { code: 'pt-PT', label: 'Português', active: true },
     { code: 'pt-BR', label: 'Português do Brasil', active: true },
-    { code: 'fi', label: 'Suomi', active: false }
+    { code: 'fi', label: 'Suomi', active: true }
   ];
 
   // Browse-By Pages
@@ -222,9 +222,7 @@ export class DefaultAppConfig implements AppConfig {
     // Add additional themes here. In the case where multiple themes match a route, the first one
     // in this list will get priority. It is advisable to always have a theme that matches
     // every route as the last one
-    {
-      name: 'cicba'
-    },
+
     // {
     //   // A theme with a handle property will match the community, collection or item with the given
     //   // handle, and all collections and/or items within it
@@ -266,48 +264,48 @@ export class DefaultAppConfig implements AppConfig {
     //   name: BASE_THEME_NAME
     // },
 
-    // {
+    {
       // The default dspace theme
-      // name: 'dspace',
+      name: 'dspace',
       // Whenever this theme is active, the following tags will be injected into the <head> of the page.
       // Example use case: set the favicon based on the active theme.
-      // headTags: [
-      //   {
+      headTags: [
+        {
           // Insert <link rel="icon" href="assets/dspace/images/favicons/favicon.ico" sizes="any"/> into the <head> of the page.
-        //   tagName: 'link',
-        //   attributes: {
-        //     'rel': 'icon',
-        //     'href': 'assets/dspace/images/favicons/favicon.ico',
-        //     'sizes': 'any',
-        //   }
-        // },
-        // {
+          tagName: 'link',
+          attributes: {
+            'rel': 'icon',
+            'href': 'assets/dspace/images/favicons/favicon.ico',
+            'sizes': 'any',
+          }
+        },
+        {
           // Insert <link rel="icon" href="assets/dspace/images/favicons/favicon.svg" type="image/svg+xml"/> into the <head> of the page.
-        //   tagName: 'link',
-        //   attributes: {
-        //     'rel': 'icon',
-        //     'href': 'assets/dspace/images/favicons/favicon.svg',
-        //     'type': 'image/svg+xml',
-        //   }
-        // },
-        // {
+          tagName: 'link',
+          attributes: {
+            'rel': 'icon',
+            'href': 'assets/dspace/images/favicons/favicon.svg',
+            'type': 'image/svg+xml',
+          }
+        },
+        {
           // Insert <link rel="apple-touch-icon" href="assets/dspace/images/favicons/apple-touch-icon.png"/> into the <head> of the page.
-        //   tagName: 'link',
-        //   attributes: {
-        //     'rel': 'apple-touch-icon',
-        //     'href': 'assets/dspace/images/favicons/apple-touch-icon.png',
-        //   }
-        // },
-        // {
+          tagName: 'link',
+          attributes: {
+            'rel': 'apple-touch-icon',
+            'href': 'assets/dspace/images/favicons/apple-touch-icon.png',
+          }
+        },
+        {
           // Insert <link rel="manifest" href="assets/dspace/images/favicons/manifest.webmanifest"/> into the <head> of the page.
-        //   tagName: 'link',
-        //   attributes: {
-        //     'rel': 'manifest',
-        //     'href': 'assets/dspace/images/favicons/manifest.webmanifest',
-        //   }
-        // },
-    //   ]
-    // },
+          tagName: 'link',
+          attributes: {
+            'rel': 'manifest',
+            'href': 'assets/dspace/images/favicons/manifest.webmanifest',
+          }
+        },
+      ]
+    },
   ];
   // Whether to enable media viewer for image and/or video Bitstreams (i.e. Bitstreams whose MIME type starts with "image" or "video").
   // For images, this enables a gallery viewer where you can zoom or page through images.

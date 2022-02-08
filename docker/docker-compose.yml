@@ -34,6 +34,5 @@ services:
     stdin_open: true
     tty: true
     volumes:
-    - ./environment.dev.ts:/app/src/environments/environment.dev.ts
     -  /app/node_modules
     - ..:/app/

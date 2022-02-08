@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { PaginatedList } from 'src/app/core/data/paginated-list.model';
+import { RemoteData } from 'src/app/core/data/remote-data';
+import { BrowseDefinition } from 'src/app/core/shared/browse-definition.model';
+import { getFirstCompletedRemoteData } from 'src/app/core/shared/operators';
 import { MenuItemType } from 'src/app/shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from 'src/app/shared/menu/menu-item/models/link.model';
 import { TextMenuItemModel } from 'src/app/shared/menu/menu-item/models/text.model';
@@ -21,8 +25,6 @@ export class NavbarComponent extends BaseComponent {
    * Initialize all menu sections and items for this menu
    */
   createMenu() {
-    // Search for author Browse-By type from config to add it to the browse menu
-    const authorType = environment.browseBy.types.find(elem => elem.id == 'author');
     const menuList: any[] = [
       /* Communities & Collections tree */
       {
@@ -34,18 +36,6 @@ export class NavbarComponent extends BaseComponent {
           type: MenuItemType.LINK,
           text: `menu.section.browse_global_communities_and_collections`,
           link: `/community-list`
-        } as LinkMenuItemModel
-      },
-      /* Authors */
-      {
-        id: `browse_global_by_${authorType.id}`,
-        active: false,
-        visible: true,
-        index: 1,
-        model: {
-          type: MenuItemType.LINK,
-          text: `menu.section.browse_global_by_${authorType.id}`,
-          link: `/browse/${authorType.id}`
         } as LinkMenuItemModel
       },
       /* Aportar material */
@@ -128,6 +118,32 @@ export class NavbarComponent extends BaseComponent {
         } as LinkMenuItemModel
       }
     ];
+
+    // Search for author Browse-By type from config to add it to the browse menu
+    this.browseService.getBrowseDefinitions()
+      .pipe(getFirstCompletedRemoteData<PaginatedList<BrowseDefinition>>())
+      .subscribe((browseDefListRD: RemoteData<PaginatedList<BrowseDefinition>>) => {
+        if (browseDefListRD.hasSucceeded) {
+          const authorBrowseConfig = browseDefListRD.payload.page.filter((browseDef: BrowseDefinition) =>
+            browseDef.id == 'author')
+          if (authorBrowseConfig) {
+            /* Authors */
+            let authorType = authorBrowseConfig[0];
+            menuList.push({
+              id: `browse_global_by_${authorType.id}`,
+              active: false,
+              visible: true,
+              index: 1,
+              model: {
+                type: MenuItemType.LINK,
+                text: `menu.section.browse_global_by_${authorType.id}`,
+                link: `/browse/${authorType.id}`
+              } as LinkMenuItemModel
+            })
+          }
+        }
+      });
+
     menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
       shouldPersistOnRouteChange: true
     })));

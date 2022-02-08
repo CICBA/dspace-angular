@@ -11,12 +11,12 @@ import { SearchService } from 'src/app/core/shared/search/search.service';
 import { followLink } from 'src/app/shared/utils/follow-link-config.model';
 import { Item } from 'src/app/core/shared/item.model';
 import { getFirstSucceededRemoteData } from 'src/app/core/shared/operators';
-import { PaginatedSearchOptions } from 'src/app/shared/search/paginated-search-options.model';
 import { SearchConfigurationService } from 'src/app/core/shared/search/search-configuration.service';
-import { SearchResult } from 'src/app/shared/search/search-result.model';
 import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
 import { hasValue } from 'src/app/shared/empty.util';
 import { ViewMode } from 'src/app/core/shared/view-mode.model';
+import { SearchResult } from 'src/app/shared/search/models/search-result.model';
+import { PaginatedSearchOptions } from 'src/app/shared/search/models/paginated-search-options.model';
 
 @Component({
   selector: 'ds-last-accessioned-items',
