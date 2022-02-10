@@ -6,7 +6,6 @@ import { getFirstCompletedRemoteData } from 'src/app/core/shared/operators';
 import { MenuItemType } from 'src/app/shared/menu/initial-menus-state';
 import { LinkMenuItemModel } from 'src/app/shared/menu/menu-item/models/link.model';
 import { TextMenuItemModel } from 'src/app/shared/menu/menu-item/models/text.model';
-import { environment } from 'src/environments/environment';
 import { NavbarComponent as BaseComponent } from '../../../../app/navbar/navbar.component';
 import { slideMobileNav } from '../../../../app/shared/animations/slide';
 
@@ -142,11 +141,11 @@ export class NavbarComponent extends BaseComponent {
             })
           }
         }
+        menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
+          shouldPersistOnRouteChange: true
+        })));
       });
 
-    menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
-      shouldPersistOnRouteChange: true
-    })));
 
   }
 }
