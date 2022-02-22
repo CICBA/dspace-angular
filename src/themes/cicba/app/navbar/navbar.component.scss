@@ -10,7 +10,7 @@ nav.navbar {
     .navbar {
       width: 100%;
       background-color: var(--bs-white);
-      position: absolute;
+      position: relative;
       overflow: hidden;
       height: 0;
       &.open {

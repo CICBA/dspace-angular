@@ -1,17 +1,17 @@
-<div class="background-image">
+<div class="background">
   <div class="container">
     <div class="jumbotron jumbotron-fluid">
-      <div class="d-flex flex-wrap">
-        <div>
-          <p class="lead">
-            CIC-Digital es el Repositorio Institucional de la Comisión de Investigaciones Científicas de la Provincia de
-            Buenos Aires, creado con el fin de preservar y dejar accesible en abierto toda la producción
-            científico-tecnológica generada en el ámbito de las instituciones CIC.
-          </p>
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <ds-search-form [inPlaceSearch]="false" [searchPlaceholder]="'home.search-form.placeholder' | translate">
+          </ds-search-form>
         </div>
       </div>
-      <ds-search-form [inPlaceSearch]="false" [searchPlaceholder]="'home.search-form.placeholder' | translate">
-      </ds-search-form>
+      <ul class="menu list-inline">
+        <li class="list-inline-item"><a href="#publicaciones">Publicaciones</a></li>
+        <li class="list-inline-item"><a href="#centros"><i class="fa fa-landmark"></i> Centros</a></li>
+        <li class="list-inline-item"><a href="#autores"><i class="fa fa-male"></i> Autores</a></li>
+      </ul>
     </div>
   </div>
 </div>
