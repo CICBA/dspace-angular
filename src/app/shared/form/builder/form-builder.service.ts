@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import {
   DYNAMIC_FORM_CONTROL_TYPE_ARRAY,
@@ -7,6 +7,7 @@ import {
   DYNAMIC_FORM_CONTROL_TYPE_GROUP,
   DYNAMIC_FORM_CONTROL_TYPE_INPUT,
   DYNAMIC_FORM_CONTROL_TYPE_RADIO_GROUP,
+  DynamicFormArrayGroupModel,
   DynamicFormArrayModel,
   DynamicFormComponentService,
   DynamicFormControlEvent,
@@ -19,7 +20,7 @@ import {
 } from '@ng-dynamic-forms/core';
 import { isObject, isString, mergeWith } from 'lodash';
 
-import { hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined, isNull } from '../../empty.util';
+import { hasValue, isEmpty, isNotEmpty, isNotNull, isNotUndefined, isNull, isObjectEmpty } from '../../empty.util';
 import { DynamicQualdropModel } from './ds-dynamic-form-ui/models/ds-dynamic-qualdrop.model';
 import { SubmissionFormsModel } from '../../../core/config/models/config-submission-forms.model';
 import { DYNAMIC_FORM_CONTROL_TYPE_TAG } from './ds-dynamic-form-ui/models/tag/dynamic-tag.model';
@@ -32,9 +33,27 @@ import { dateToString, isNgbDateStruct } from '../../date.util';
 import { DYNAMIC_FORM_CONTROL_TYPE_RELATION_GROUP } from './ds-dynamic-form-ui/ds-dynamic-form-constants';
 import { CONCAT_GROUP_SUFFIX, DynamicConcatModel } from './ds-dynamic-form-ui/models/ds-dynamic-concat.model';
 import { VIRTUAL_METADATA_PREFIX } from '../../../core/shared/metadata.models';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class FormBuilderService extends DynamicFormService {
+
+  private typeBindModel: DynamicFormControlModel;
+
+  /**
+   * This map contains the active forms model
+   */
+  private formModels: Map<string, DynamicFormControlModel[]>;
+
+  /**
+   * This map contains the active forms control groups
+   */
+  private formGroups: Map<string, FormGroup>;
+
+  /**
+   * This is the field to use for type binding
+   */
+  private typeField: string;
 
   constructor(
     componentService: DynamicFormComponentService,
@@ -42,6 +61,27 @@ export class FormBuilderService extends DynamicFormService {
     protected rowParser: RowParser
   ) {
     super(componentService, validationService);
+    this.formModels = new Map();
+    this.formGroups = new Map();
+    // Replace . with _ in configured type field here, to make configuration more simple and user-friendly
+    this.typeField = environment.submission.typeBind.field.replace('\.', '_');
+  }
+
+  createDynamicFormControlEvent(control: FormControl, group: FormGroup, model: DynamicFormControlModel, type: string): DynamicFormControlEvent {
+    const $event = {
+      value: (model as any).value,
+      autoSave: false
+    };
+    const context: DynamicFormArrayGroupModel = (model?.parent instanceof DynamicFormArrayGroupModel) ? model?.parent : null;
+    return {$event, context, control: control, group: group, model: model, type};
+  }
+
+  getTypeBindModel() {
+    return this.typeBindModel;
+  }
+
+  setTypeBindModel(model: DynamicFormControlModel) {
+    this.typeBindModel = model;
   }
 
   findById(id: string, groupModel: DynamicFormControlModel[], arrayIndex = null): DynamicFormControlModel | null {
@@ -223,10 +263,11 @@ export class FormBuilderService extends DynamicFormService {
     return result;
   }
 
-  modelFromConfiguration(submissionId: string, json: string | SubmissionFormsModel, scopeUUID: string, sectionData: any = {}, submissionScope?: string, readOnly = false): DynamicFormControlModel[] | never {
-    let rows: DynamicFormControlModel[] = [];
-    const rawData = typeof json === 'string' ? JSON.parse(json, parseReviver) : json;
-
+  modelFromConfiguration(submissionId: string, json: string | SubmissionFormsModel, scopeUUID: string, sectionData: any = {},
+                         submissionScope?: string, readOnly = false, typeBindModel = null,
+                         isInnerForm = false, securityConfig: any = null): DynamicFormControlModel[] | never {
+     let rows: DynamicFormControlModel[] = [];
+     const rawData = typeof json === 'string' ? JSON.parse(json, parseReviver) : json;
     if (rawData.rows && !isEmpty(rawData.rows)) {
       rawData.rows.forEach((currentRow) => {
         const rowParsed = this.rowParser.parse(submissionId, currentRow, scopeUUID, sectionData, submissionScope, readOnly);
@@ -240,6 +281,13 @@ export class FormBuilderService extends DynamicFormService {
       });
     }
 
+    if (isNull(typeBindModel)) {
+      typeBindModel = this.findById(this.typeField, rows);
+    }
+
+    if (typeBindModel !== null) {
+      this.setTypeBindModel(typeBindModel);
+    }
     return rows;
   }
 
@@ -309,6 +357,10 @@ export class FormBuilderService extends DynamicFormService {
     return isNotEmpty(fieldModel) ? formGroup.get(this.getPath(fieldModel)) : null;
   }
 
+  getFormControlByModel(formGroup: FormGroup, fieldModel: DynamicFormControlModel): AbstractControl {
+    return isNotEmpty(fieldModel) ? formGroup.get(this.getPath(fieldModel)) : null;
+  }
+
   /**
    * Note (discovered while debugging) this is not the ID as used in the form,
    * but the first part of the path needed in a patch operation:
@@ -326,6 +378,82 @@ export class FormBuilderService extends DynamicFormService {
     }
 
     return (tempModel.id !== tempModel.name) ? tempModel.name : tempModel.id;
+  }
+
+  /**
+   * Add new form model to formModels map
+   * @param id id of model
+   * @param model model
+   */
+  addFormModel(id: string, model: DynamicFormControlModel[]): void {
+    this.formModels.set(id, model);
+  }
+
+  /**
+   * If present, remove form model from formModels map
+   * @param id id of model
+   */
+  removeFormModel(id: string): void {
+    if (this.formModels.has(id)) {
+      this.formModels.delete(id);
+    }
+  }
+
+  /**
+   * Add new form model to formModels map
+   * @param id id of model
+   * @param formGroup FormGroup
+   */
+  addFormGroups(id: string, formGroup: FormGroup): void {
+    this.formGroups.set(id, formGroup);
+  }
+
+  /**
+   * If present, remove form model from formModels map
+   * @param id id of model
+   */
+  removeFormGroup(id: string): void {
+    if (this.formGroups.has(id)) {
+      this.formGroups.delete(id);
+    }
+  }
+
+  /**
+   * This method searches a field in all forms instantiated
+   * by form.component and, if found, it updates its value
+   *
+   * @param fieldId id of field to update
+   * @param value new value to set
+   * @return the model updated if found
+   */
+  updateModelValue(fieldId: string, value: FormFieldMetadataValueObject): DynamicFormControlModel {
+    let returnModel = null;
+    this.formModels.forEach((models, formId) => {
+      const fieldModel: any = this.findById(fieldId, models);
+      if (hasValue(fieldModel)) {
+        if (isNotEmpty(value)) {
+          if (fieldModel.repeatable && isNotEmpty(fieldModel.value)) {
+            // if model is repeatable and has already a value add a new field instead of replacing it
+            const formGroup = this.formGroups.get(formId);
+            const arrayContext = fieldModel.parent?.context;
+            if (isNotEmpty(formGroup) && isNotEmpty(arrayContext)) {
+              const formArrayControl = this.getFormControlByModel(formGroup, arrayContext) as FormArray;
+              const index = arrayContext?.groups?.length;
+              this.insertFormArrayGroup(index, formArrayControl, arrayContext);
+              const newAddedModel: any = this.findById(fieldId, models, index);
+              this.detectChanges();
+              newAddedModel.value = value;
+              returnModel = newAddedModel;
+            }
+          } else {
+            fieldModel.value = value;
+            returnModel = fieldModel;
+          }
+        }
+        return;
+      }
+    });
+    return returnModel;
   }
 
   /**
@@ -399,5 +527,30 @@ export class FormBuilderService extends DynamicFormService {
 
     return Object.keys(result);
   }
+
+  /**
+   * Add new formbuilder in forma array by copying current formBuilder index
+   * @param index index of formBuilder selected to be copied
+   * @param formArray formArray of the inline group forms
+   * @param formArrayModel formArrayModel model of forms that will be created
+   */
+  copyFormArrayGroup(index: number, formArray: FormArray, formArrayModel: DynamicFormArrayModel) {
+
+      const groupModel = formArrayModel.insertGroup(index);
+      const previousGroup = formArray.controls[index] as FormGroup;
+      const newGroup = this.createFormGroup(groupModel.group, null, groupModel);
+      const previousKey = Object.keys(previousGroup.getRawValue())[0];
+      const newKey = Object.keys(newGroup.getRawValue())[0];
+
+      if (!isObjectEmpty(previousGroup.getRawValue()[previousKey])) {
+        newGroup.get(newKey).setValue(previousGroup.getRawValue()[previousKey]);
+      }
+
+      formArray.insert(index, newGroup);
+
+      return newGroup;
+  }
+
+
 
 }
