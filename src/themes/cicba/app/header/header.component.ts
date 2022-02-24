@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MenuService } from 'src/app/shared/menu/menu.service';
 import { HeaderComponent as BaseComponent } from '../../../../app/header/header.component';
 
 /**
@@ -10,4 +12,10 @@ import { HeaderComponent as BaseComponent } from '../../../../app/header/header.
   templateUrl: 'header.component.html',
 })
 export class HeaderComponent extends BaseComponent {
+
+  router: string;
+  constructor(private _router: Router, menuService: MenuService){
+    super(menuService);
+    this.router = _router.url;
+  }
 }
