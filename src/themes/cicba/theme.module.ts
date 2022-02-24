@@ -73,6 +73,7 @@ import { WorkflowItemDeleteComponent } from './app/workflowitems-edit-page/workf
 import { SubmissionModule } from '../../app/submission/submission.module';
 import { MyDSpacePageModule } from '../../app/my-dspace-page/my-dspace-page.module';
 import { NavbarComponent } from './app/navbar/navbar.component';
+import { SearchExpandedNavbarComponent } from './app/search-navbar/search-expanded-navbar.component';
 import { HeaderComponent } from './app/header/header.component';
 import { FooterComponent } from './app/footer/footer.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
@@ -130,7 +131,8 @@ const DECLARATIONS = [
   HowToContributeComponent,
   RepositoryPolicyComponent,
   LastAccessionedItemsComponent,
-  ItemSearchResultListElementComponent
+  ItemSearchResultListElementComponent,
+  SearchExpandedNavbarComponent
 ];
 
 @NgModule({
