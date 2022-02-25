@@ -39,28 +39,27 @@ export class NavbarComponent extends BaseComponent {
     var menuList: any[] = [];
     if (this.router != '/home') {
       menuList = [
-        /* Communities & Collections tree */
+        /* Explorar */
         {
-          id: `browse_global_communities_and_collections`,
+          id: `navbar_explore`,
           active: false,
           visible: true,
           index: 0,
           model: {
+            type: MenuItemType.TEXT,
+            text: `menu.section.navbar.explore`,
+          } as TextMenuItemModel
+        },
+        /* Communities & Collections tree */
+        {
+          id: `browse_global_communities_and_collections`,
+          parentID: 'navbar_explore',
+          active: false,
+          visible: true,
+          model: {
             type: MenuItemType.LINK,
             text: `menu.section.browse_global_communities_and_collections`,
             link: `/community-list`
-          } as LinkMenuItemModel
-        },
-        /* Aportar material */
-        {
-          id: `navbar_menu_contribute_material`,
-          active: false,
-          visible: true,
-          index: 2,
-          model: {
-            type: MenuItemType.LINK,
-            text: `menu.section.navbar.contribute`,
-            link: `/mydspace`
           } as LinkMenuItemModel
         },
         /* Más información */
@@ -68,7 +67,7 @@ export class NavbarComponent extends BaseComponent {
           id: `navbar_menu_more_information`,
           active: false,
           visible: true,
-          index: 3,
+          index: 1,
           model: {
             type: MenuItemType.TEXT,
             text: `menu.section.navbar.more_information`,
@@ -129,7 +128,19 @@ export class NavbarComponent extends BaseComponent {
             text: `menu.section.navbar.register`,
             link: `/register`
           } as LinkMenuItemModel
-        }
+        },
+        /* Aportar material */
+        {
+          id: `navbar_menu_contribute_material`,
+          active: false,
+          visible: true,
+          index: 2,
+          model: {
+            type: MenuItemType.LINK,
+            text: `menu.section.navbar.contribute`,
+            link: `/mydspace`
+          } as LinkMenuItemModel
+        },
       ];
 
       // Search for author Browse-By type from config to add it to the browse menu
@@ -144,9 +155,9 @@ export class NavbarComponent extends BaseComponent {
               let authorType = authorBrowseConfig[0];
               menuList.push({
                 id: `browse_global_by_${authorType.id}`,
+                parentID: 'navbar_explore',
                 active: false,
                 visible: true,
-                index: 1,
                 model: {
                   type: MenuItemType.LINK,
                   text: `menu.section.browse_global_by_${authorType.id}`,

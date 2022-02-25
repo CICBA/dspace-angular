@@ -1,8 +1,13 @@
 <div id="search-navbar-container" [title]="'nav.search' | translate">
-    <form [formGroup]="searchForm" class="d-flex ml-auto justify-content-end align-items-center" (ngSubmit)="onSubmit(searchForm.value)" autocomplete="on">
-      <input #searchInput [@toggleAnimation]="isExpanded" [attr.aria-label]="('nav.search' | translate)" name="query"
-             formControlName="query" type="text" placeholder="{{('nav.search' | translate)}}"
-             class="d-inline-block bg-transparent form-control dropdown-menu-right p-1">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)"
+          class="d-flex ml-auto justify-content-end align-items-center"
+          autocomplete="on">
+      <input #searchInput [attr.aria-label]="('nav.search' | translate)"
+            name="query"
+            formControlName="query"
+            type="text"
+            placeholder="{{('nav.search' | translate)}}"
+            class="d-inline-block bg-transparent form-control dropdown-menu-right p-1">
       <a class="submit-icon" [routerLink]="" (click)="onSubmit(searchForm.value)">
         <em class="fas fa-search fa-lg fa-fw"></em>
       </a>

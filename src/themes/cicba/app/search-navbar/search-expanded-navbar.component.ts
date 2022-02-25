@@ -8,7 +8,7 @@ import { expandSearchInput } from '../../../../app/shared/animations/slide';
 @Component({
   selector: 'ds-search-expanded-navbar',
   templateUrl: './search-expanded-navbar.component.html',
-  styleUrls: ['../../../../app/search-navbar/search-navbar.component.scss'],
+  styleUrls: ['./search-expanded-navbar.component.scss'],
   animations: [expandSearchInput]
 })
 export class SearchExpandedNavbarComponent extends BaseComponent {
