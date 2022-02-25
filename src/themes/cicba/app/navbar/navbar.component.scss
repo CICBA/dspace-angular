@@ -3,6 +3,7 @@ nav.navbar {
     border-bottom: 5px var(--ds-cic-blue) solid;
     align-items: baseline;
     color: var(--ds-header-icon-color);
+    font-size: var(--bs-font-size-sm);
   }
 
   /** Mobile menu styling **/
@@ -48,10 +49,16 @@ nav.navbar {
   }
 
   .navbar-nav {
+    display: flex;
+    justify-content: right;
     ::ng-deep a.nav-link {
       color: var(--ds-navbar-link-color);
     }
     ::ng-deep a.nav-link:hover {
       color: var(--ds-navbar-link-color-hover);
     }
+  }
+
+  .navbar-actions {
+    margin-left: 1rem;
   }
