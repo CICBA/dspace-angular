@@ -46,6 +46,9 @@ nav.navbar {
 
   a.navbar-brand img {
     max-height: var(--ds-header-logo-height-xs);
+    @media screen and (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) {
+      max-height: var(--ds-header-logo-height-xxs);
+    }
   }
 
   .navbar-nav {
