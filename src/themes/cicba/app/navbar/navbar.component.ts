@@ -82,7 +82,7 @@ export class NavbarComponent extends BaseComponent {
           model: {
             type: MenuItemType.LINK,
             text: `menu.section.navbar.contact`,
-            link: `/#`
+            link: `/page/feedback`
           } as LinkMenuItemModel
         },
         {

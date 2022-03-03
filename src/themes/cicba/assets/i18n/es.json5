@@ -53,6 +53,32 @@
 
 	"info.cic-digital-info.title": "¿Qué es CIC Digital?",
 
+    "info.feedback.breadcrumbs": "Contacto",
+
+    "info.feedback.head": "Contacto",
+
+    "info.feedback.title": "Contacto",
+
+    "info.feedback.info": "Gracias por compartir sus comentarios sobre CIC-Digital. Los mismos serán tenidos en cuenta por los administradores del sitio. Este es el Repositorio Institucional de la Comisión de Investigaciones Científicas (CIC). Por consulta de materiales o estudios, por favor diríjase al centro correspondiente en https://www.gba.gob.ar/cic/informacion_de_centros.",
+
+    "info.feedback.email_help": "Esta dirección será utilizada para seguimiento de su comentario.",
+
+    "info.feedback.send": "Envíe su comentario",
+
+    "info.feedback.comments": "Comentarios:",
+
+    "info.feedback.email-label": "Su correo electrónico:",
+
+    "info.feedback.create.success": "Su comentario ha sido recibido",
+
+    "info.feedback.error.email.required": "No se ha ingresado ningún email",
+
+    "info.feedback.error.message.required": "No se ha ingresado ningún comentario",
+
+    "info.feedback.page-label": "Página",
+
+    "info.feedback.page_help": "La página relacionada con su comentario",
+
 	"info.how-to-contribute.breadcrumbs": "¿Cómo aportar material?",
 
 	"info.how-to-contribute.title": "¿Cómo aportar material?",
