@@ -45,15 +45,11 @@ nav.navbar {
   }
 
   a.navbar-brand img {
-    max-height: var(--ds-header-logo-height-xs);
-    @media screen and (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) {
-      max-height: var(--ds-header-logo-height-xxs);
-    }
+    max-height: var(--ds-header-logo-height);
   }
 
   .navbar-nav {
     display: flex;
-    justify-content: right;
     ::ng-deep a.nav-link {
       color: var(--ds-navbar-link-color);
     }

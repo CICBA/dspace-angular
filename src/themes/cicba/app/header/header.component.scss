@@ -9,11 +9,18 @@
 
 .navbar-brand img {
   @media screen and (max-width: map-get($grid-breakpoints, md)) {
-    height: var(--ds-header-logo-height-xs);
+    height: var(--ds-header-logo-height);
   }
 }
 .navbar-toggler .navbar-toggler-icon {
   background-image: none !important;
   line-height: 1.5;
   color: var(--bs-link-color);
+}
+
+@media screen and (min-width: map-get($grid-breakpoints, xs)) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
 }
