@@ -3,26 +3,26 @@
   <ng-container *ngIf="(site$ | async) as site">
     <ds-view-tracker [object]="site"></ds-view-tracker>
   </ng-container>
-  <div class="row">
-    <div class="col-8">
+  <div class="row align-items-baseline">
+    <div class="col-md-8 col-sm-12">
       <div>
         <p>CIC-Digital es el Repositorio Institucional de la Comisión de Investigaciones Científicas de la Provincia de Buenos Aires, creado con el fin de preservar y dejar accesible en abierto toda la producción científico-tecnológica generada en el ámbito de las instituciones CIC.</p>
       </div>
       <ds-last-accessioned-items></ds-last-accessioned-items>
     </div>
-    <div class="col-4">
-      <div>
-        <h2>Subir Material</h2>
-        <p>Si participas o sos parte de CIC podes hacer público material</p>
-      </div>
-      <div class="aside">
-        <h4>Por que usar CIC-DIGITAL?</h4>
+    <div class="col-md-4 col-sm-12">
+      <aside class="aside">
+        <div>
+          <h3>Subir Material</h3>
+          <p>Si participas o sos parte de CIC podes hacer público material</p>
+        </div>
+        <h5>Por que usar CIC-DIGITAL?</h5>
         <ul>
           <li><strong>Seguro</strong> - Su investigación se almacena de forma segura para el futuro en el CIC-DIGITAL mientras éste exista.</li>
           <li><strong>Citable</strong> - A cada carga se le asigna un Identificador de Objeto Digital (DOI), para que sean citables y rastreables.</li>
           <li><strong>Estadísticas de uso</strong> - Todas las cargas muestran estadísticas de uso conformes a las normas</li>
         </ul>
-      </div>
+      </aside>
     </div>
   </div>
 </div>
