@@ -31,6 +31,8 @@
 
     "info.feedback.page_help": "A página relacionada ao seu comentário",
 
+    "item.page.dcterms.subject.materia": "Temas",
+
     "menu.section.browse_global_by_author": "Autores",
 
     //"menu.section.navbar.contribute": "Contribute Material",
@@ -70,5 +72,9 @@
     "sorting.dcterms.issued.ASC": "Data de publicação ascendente",
 
     "sorting.dcterms.issued.DESC": "Data de publicação decrescente",
+
+    "workspace.search.results.head": "Seus envios arquivados",
+
+    "workflow.search.results.head": "Submissões na fila de tarefas",
 
 }

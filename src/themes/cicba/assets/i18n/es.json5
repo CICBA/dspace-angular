@@ -89,6 +89,8 @@
     
     "item.listelement.badge": "Publicación",
 
+    "item.page.dcterms.subject.materia": "Materias",
+
     "menu.section.navbar.contribute": "Aportar material",
 
     "menu.section.navbar.contact": "Contacto",
@@ -148,4 +150,8 @@
     "submission.workflow.tasks.claimed.return_help": "Devolver a la cola de tareas",
 
     "submission.workflow.tasks.pool.claim": "Asumir tarea",
+
+    "workspace.search.results.head": "Sus envíos archivados",
+
+    "workflow.search.results.head": "Envíos en la cola de tareas",
 }
