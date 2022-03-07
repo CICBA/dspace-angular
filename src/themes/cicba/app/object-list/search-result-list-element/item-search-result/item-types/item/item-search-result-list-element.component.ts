@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { listableObjectComponent } from '../../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ViewMode } from '../../../../../../../../app/core/shared/view-mode.model';
 import { ItemSearchResult } from '../../../../../../../../app/shared/object-collection/shared/item-search-result.model';
@@ -6,6 +7,8 @@ import { SearchResultListElementComponent } from '../../../../../../../../app/sh
 import { Item } from '../../../../../../../../app/core/shared/item.model';
 import { getItemPageRoute } from '../../../../../../../../app/item-page/item-page-routing-paths';
 import { Context } from 'src/app/core/shared/context.model';
+import { TruncatableService } from 'src/app/shared/truncatable/truncatable.service';
+import { DSONameService } from 'src/app/core/breadcrumbs/dso-name.service';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.Any, 'cicba')
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement, Context.Any, 'cicba')
@@ -22,6 +25,17 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Route to the item's page
    */
   itemPageRoute: string;
+
+  router: string;
+
+  public constructor(
+    truncatableService: TruncatableService,
+    dsoNameService: DSONameService,
+    private _router: Router,
+  ) {
+    super(truncatableService, dsoNameService);
+    this.router = _router.url;
+  }
 
   ngOnInit(): void {
     super.ngOnInit();

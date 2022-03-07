@@ -3,14 +3,13 @@
   <ng-container *ngIf="(site$ | async) as site">
     <ds-view-tracker [object]="site"></ds-view-tracker>
   </ng-container>
-  <div class="row align-items-baseline">
-    <div class="col-md-8 col-sm-12">
+  <div class="home-main">
+    <div class="repository-info">
       <div>
         <p>CIC-Digital es el Repositorio Institucional de la Comisión de Investigaciones Científicas de la Provincia de Buenos Aires, creado con el fin de preservar y dejar accesible en abierto toda la producción científico-tecnológica generada en el ámbito de las instituciones CIC.</p>
       </div>
-      <ds-last-accessioned-items></ds-last-accessioned-items>
     </div>
-    <div class="col-md-4 col-sm-12">
+    <div class="upload-info">
       <aside class="aside">
         <div>
           <h3>Subir Material</h3>
@@ -23,6 +22,9 @@
           <li><strong>Estadísticas de uso</strong> - Todas las cargas muestran estadísticas de uso conformes a las normas</li>
         </ul>
       </aside>
+    </div>
+    <div class="last-items-section">
+      <ds-last-accessioned-items></ds-last-accessioned-items>
     </div>
   </div>
 </div>

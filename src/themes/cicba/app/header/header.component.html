@@ -5,6 +5,7 @@
     </a>
     <div class="d-flex flex-grow-1 justify-content-end align-items-center">
       <ds-auth-nav-menu></ds-auth-nav-menu>
+      <ds-lang-switch></ds-lang-switch>
       <ds-impersonate-navbar></ds-impersonate-navbar>
       <div class="pl-2" *ngIf="router != '/home'">
         <button class="navbar-toggler" type="button" (click)="toggleNavbar()"
@@ -13,7 +14,6 @@
           <span class="navbar-toggler-icon fas fa-bars fa-fw" aria-hidden="true"></span>
         </button>
       </div>
-      <ds-lang-switch></ds-lang-switch>
     </div>
   </nav>
   <ds-themed-navbar></ds-themed-navbar>
