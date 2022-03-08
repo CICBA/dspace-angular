@@ -27,6 +27,10 @@
         }
     }
 
+    .repository-info p {
+        margin-bottom: 0;
+    }
+
     .upload-info {
         grid-column: 3;
         grid-row: 1 / 5;
