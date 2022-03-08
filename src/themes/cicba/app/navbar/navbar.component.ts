@@ -118,17 +118,6 @@ export class NavbarComponent extends BaseComponent {
             link: `/page/como-aportar-material_es`
           } as LinkMenuItemModel
         },
-        {
-          id: `navbar_menu_register`,
-          parentID: 'navbar_menu_more_information',
-          active: false,
-          visible: true,
-          model: {
-            type: MenuItemType.LINK,
-            text: `menu.section.navbar.register`,
-            link: `/register`
-          } as LinkMenuItemModel
-        },
         /* Aportar material */
         {
           id: `navbar_menu_contribute_material`,
