@@ -42,6 +42,8 @@ import { BrowseBySwitcherComponent } from './app/browse-by/browse-by-switcher/br
 import { CommunityListPageComponent } from './app/community-list-page/community-list-page.component';
 import { CommunityListPageModule } from '../../app/community-list-page/community-list-page.module';
 import { SearchPageComponent } from './app/search-page/search-page.component';
+import { ThemedSearchComponent } from './app/search/themed-search.component';
+import { ThemedSearchSidebarComponent } from './app/search-sidebar/themed-search-sidebar.component';
 import { InfoModule } from './app/info/info.module';
 import { PageNotFoundComponent } from './app/pagenotfound/pagenotfound.component';
 import { ObjectNotFoundComponent } from './app/lookup-by-id/objectnotfound/objectnotfound.component';
@@ -132,7 +134,9 @@ const DECLARATIONS = [
   RepositoryPolicyComponent,
   LastAccessionedItemsComponent,
   ItemSearchResultListElementComponent,
-  SearchExpandedNavbarComponent
+  SearchExpandedNavbarComponent,
+  ThemedSearchComponent,
+  ThemedSearchSidebarComponent
 ];
 
 @NgModule({
