@@ -7,10 +7,11 @@
     </ds-mirador-viewer>
   </div>
 </div>
-<div class="d-flex flex-row">
-  <h2 class="item-page-title-field mr-auto">
+<div class="d-flex flex-column">
+  <ds-type-badge [object]="object"></ds-type-badge>
+  <h4 class="item-page-title-field mr-auto">
     <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
-  </h2>
+  </h4>
   <div class="pl-2">
     <ds-dso-page-version-button (newVersionEvent)="onCreateNewVersion()" [dso]="object"
                                 [tooltipMsgCreate]="'item.page.version.create'"
@@ -19,7 +20,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12 col-md-4">
+  <div class="col-xs-12 col-md-3">
     <ng-container *ngIf="!mediaViewer.image">
       <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
         <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
@@ -30,85 +31,94 @@
     </ng-container>
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
 <!--     <ds-item-page-date-field [item]="object"></ds-item-page-date-field> -->
-    <ds-generic-item-page-field [item]="object" 
-      [fields]="['dcterms.issued']" 
-      [label]="'item.page.date.issued'">
-    </ds-generic-item-page-field>
-
-    <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['journal.title'])"
+      [label]="'item.page.journal-title'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
+      [label]="'item.page.journal-issn'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['journalvolume.identifier.name'])"
+      [label]="'item.page.volume-title'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dc.publisher'])"
+      [label]="'item.page.publisher'">
+    </ds-cic-metadata-values>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <ds-cic-metadata-representation-list class="ds-item-page-mixed-author-field"
       [parentItem]="object"
       [itemType]="'Person'"
       [metadataFields]="['dcterms.creator.author']"
       [label]="'relationships.isAuthorOf' | translate">
-    </ds-metadata-representation-list>
-    <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
+    </ds-cic-metadata-representation-list>
+    <ds-cic-metadata-representation-list class="ds-item-page-mixed-author-field"
       [parentItem]="object"
       [itemType]="'Person'"
       [metadataFields]="['dcterms.contributor.director']"
       [label]="'relationships.isDirectorOf' | translate">
-    </ds-metadata-representation-list>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['journal.title']"
-      [label]="'item.page.journal-title'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['journal.identifier.issn']"
-      [label]="'item.page.journal-issn'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['journalvolume.identifier.name']"
-      [label]="'item.page.volume-title'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['dc.publisher']"
-      [label]="'item.page.publisher'">
-    </ds-generic-item-page-field>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <!-- <ds-item-page-abstract-field [item]="object"></ds-item-page-abstract-field> -->
-    <ds-generic-item-page-field [item]="object" 
-      [fields]="['dcterms.abstract']" 
+    </ds-cic-metadata-representation-list>
+    <ds-cic-metadata-representation-list class="ds-item-page-mixed-author-field"
+      [parentItem]="object"
+      [itemType]="'Person'"
+      [metadataFields]="['dcterms.creator.compilator']"
+      [label]="'relationships.isDirectorOf' | translate">
+    </ds-cic-metadata-representation-list>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.issued'])"
+      [label]="'item.page.date.issued'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values [inlineLabel]="false"
+      [mdValues]="object?.allMetadata(['dcterms.abstract'])"
       [label]="'item.page.abstract'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['dcterms.description']"
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.description'])"
       [label]="'item.page.description'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['dcterms.subject']"
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.subject'])"
       [separator]="','"
       [label]="'item.page.subject'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['dcterms.subject.materia']"
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.subject.materia'])"
       [separator]="','"
       [label]="'item.page.dcterms.subject.materia'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['dc.identifier.citation']"
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dc.identifier.citation'])"
       [label]="'item.page.citation'">
-    </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['cic.thesis.grantor']"
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['cic.thesis.grantor'])"
       [label]="'item.page.cic.thesis.grantor'">
-    </ds-generic-item-page-field>  
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['cic.lugarDesarrollo']"
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['cic.lugarDesarrollo'])"
       [label]="'item.page.cic.lugarDesarrollo'">
-    </ds-generic-item-page-field>  
-    <ds-generic-item-page-field [item]="object"
-      [fields]="['cic.institucionOrigen']"
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['cic.institucionOrigen'])"
       [label]="'item.page.cic.institucionOrigen'">
-    </ds-generic-item-page-field>  
+    </ds-cic-metadata-values>
     <ds-item-page-uri-field [item]="object"
       [fields]="['dc.identifier.uri']"
       [label]="'item.page.uri'">
     </ds-item-page-uri-field>
-    <ds-item-page-collections [item]="object"></ds-item-page-collections>
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button">
         <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
       </a>
     </div>
+  </div>
+  <div class="col-xs-12 col-md-3">
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
+      [label]="'isbn'">
+    </ds-cic-metadata-values>
   </div>
 </div>

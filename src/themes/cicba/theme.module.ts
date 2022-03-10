@@ -89,6 +89,9 @@ import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-co
 import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
 import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
 import { ItemSearchResultListElementComponent } from './app/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
+import { CicMetadataValuesComponent } from './app/item-page/simple/field-components/metadata-values/cic-metadata-values.component';
+import { CicMetadataFieldWrapperComponent } from './app/item-page/simple/field-components/metadata-field-wrapper/cic-metadata-field-wrapper.component';
+import { CicMetadataRepresentationListComponent } from './app/item-page/simple/field-components/metadata-representation-list/cic-metadata-representation-list.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -136,7 +139,10 @@ const DECLARATIONS = [
   ItemSearchResultListElementComponent,
   SearchExpandedNavbarComponent,
   ThemedSearchComponent,
-  ThemedSearchSidebarComponent
+  ThemedSearchSidebarComponent,
+  CicMetadataValuesComponent,
+  CicMetadataFieldWrapperComponent,
+  CicMetadataRepresentationListComponent,
 ];
 
 @NgModule({
