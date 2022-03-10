@@ -92,6 +92,7 @@ import { ItemSearchResultListElementComponent } from './app/object-list/search-r
 import { CicMetadataValuesComponent } from './app/item-page/simple/field-components/metadata-values/cic-metadata-values.component';
 import { CicMetadataFieldWrapperComponent } from './app/item-page/simple/field-components/metadata-field-wrapper/cic-metadata-field-wrapper.component';
 import { CicMetadataRepresentationListComponent } from './app/item-page/simple/field-components/metadata-representation-list/cic-metadata-representation-list.component';
+import { BadgeMetadataValuesComponent } from './app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -143,6 +144,7 @@ const DECLARATIONS = [
   CicMetadataValuesComponent,
   CicMetadataFieldWrapperComponent,
   CicMetadataRepresentationListComponent,
+  BadgeMetadataValuesComponent,
 ];
 
 @NgModule({

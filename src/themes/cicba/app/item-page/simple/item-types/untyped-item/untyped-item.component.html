@@ -9,6 +9,10 @@
 </div>
 <div class="d-flex flex-column">
   <ds-type-badge [object]="object"></ds-type-badge>
+  <ds-badge-metadata-values
+    [mdValues]="object?.allMetadata(['dc.type'])"
+    [badgeType]="'badge-info'">
+  </ds-badge-metadata-values>
   <h4 class="item-page-title-field mr-auto">
     <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
   </h4>
@@ -80,11 +84,6 @@
       [label]="'item.page.description'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.subject'])"
-      [separator]="','"
-      [label]="'item.page.subject'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.subject.materia'])"
       [separator]="','"
       [label]="'item.page.dcterms.subject.materia'">
@@ -105,10 +104,10 @@
       [mdValues]="object?.allMetadata(['cic.institucionOrigen'])"
       [label]="'item.page.cic.institucionOrigen'">
     </ds-cic-metadata-values>
-    <ds-item-page-uri-field [item]="object"
-      [fields]="['dc.identifier.uri']"
-      [label]="'item.page.uri'">
-    </ds-item-page-uri-field>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.subject'])"
+      [badgeType]="'badge-secondary'">
+    </ds-badge-metadata-values>
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button">
         <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
@@ -116,6 +115,10 @@
     </div>
   </div>
   <div class="col-xs-12 col-md-3">
+    <ds-item-page-uri-field [item]="object"
+      [fields]="['dc.identifier.uri']"
+      [label]="'item.page.uri'">
+    </ds-item-page-uri-field>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
       [label]="'isbn'">
