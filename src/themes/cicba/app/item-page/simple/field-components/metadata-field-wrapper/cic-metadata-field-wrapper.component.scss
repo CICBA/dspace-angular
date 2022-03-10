@@ -17,4 +17,10 @@
     gap: 0px;
   }
 
+  .simple-view-element-body {
+    display: flex;
+    gap: 0.3em;
+    flex-wrap: wrap;
+  }
+
 }

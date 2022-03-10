@@ -1,9 +1,11 @@
 <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="label">
   <ng-container *ngFor="let objectPage of objects; let i = index">
     <ng-container *ngVar="(objectPage | async) as representations">
-      <ds-metadata-representation-loader *ngFor="let rep of representations"
-                                         [mdRepresentation]="rep">
-      </ds-metadata-representation-loader>
+      <ng-container *ngFor="let rep of representations; let last = last">
+        <ds-metadata-representation-loader class="metadata-element" [mdRepresentation]="rep">
+        </ds-metadata-representation-loader>
+        <span *ngIf="!last">{{separator}}</span>
+      </ng-container>
       <ds-loading *ngIf="(i + 1) === objects.length && (i > 0) && (!representations || representations?.length === 0)" message="{{'loading.default' | translate}}"></ds-loading>
       <div class="d-inline-block w-100 mt-2" *ngIf="(i + 1) === objects.length && representations?.length > 0">
         <div *ngIf="(objects.length * incrementBy) < total" class="float-left">

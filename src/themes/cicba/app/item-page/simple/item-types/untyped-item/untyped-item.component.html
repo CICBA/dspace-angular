@@ -34,7 +34,6 @@
       <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
     </ng-container>
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
-<!--     <ds-item-page-date-field [item]="object"></ds-item-page-date-field> -->
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['journal.title'])"
       [label]="'item.page.journal-title'">
@@ -53,23 +52,26 @@
     </ds-cic-metadata-values>
   </div>
   <div class="col-xs-12 col-md-6">
-    <ds-cic-metadata-representation-list class="ds-item-page-mixed-author-field"
+    <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
       [metadataFields]="['dcterms.creator.author']"
-      [label]="'relationships.isAuthorOf' | translate">
+      [label]="'relationships.isAuthorOf' | translate"
+      [separator]="'|'">
     </ds-cic-metadata-representation-list>
-    <ds-cic-metadata-representation-list class="ds-item-page-mixed-author-field"
+    <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
       [metadataFields]="['dcterms.contributor.director']"
-      [label]="'relationships.isDirectorOf' | translate">
+      [label]="'relationships.isDirectorOf' | translate"
+      [separator]="'|'">
     </ds-cic-metadata-representation-list>
-    <ds-cic-metadata-representation-list class="ds-item-page-mixed-author-field"
+    <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
       [metadataFields]="['dcterms.creator.compilator']"
-      [label]="'relationships.isDirectorOf' | translate">
+      [label]="'relationships.isDirectorOf' | translate"
+      [separator]="'|'">
     </ds-cic-metadata-representation-list>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.issued'])"
