@@ -34,22 +34,6 @@
       <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
     </ng-container>
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['journal.title'])"
-      [label]="'item.page.journal-title'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
-      [label]="'item.page.journal-issn'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['journalvolume.identifier.name'])"
-      [label]="'item.page.volume-title'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dc.publisher'])"
-      [label]="'item.page.publisher'">
-    </ds-cic-metadata-values>
   </div>
   <div class="col-xs-12 col-md-6">
     <ds-cic-metadata-representation-list
@@ -105,6 +89,22 @@
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['cic.institucionOrigen'])"
       [label]="'item.page.cic.institucionOrigen'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['journal.title'])"
+      [label]="'item.page.journal-title'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
+      [label]="'item.page.journal-issn'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['journalvolume.identifier.name'])"
+      [label]="'item.page.volume-title'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dc.publisher'])"
+      [label]="'item.page.publisher'">
     </ds-cic-metadata-values>
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.subject'])"

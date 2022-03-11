@@ -1,0 +1,12 @@
+::ng-deep .file-section {
+    a {
+        color: inherit !important;
+        text-decoration: none;
+        i {
+            color: var(--ds-home-news-link-color);
+        }
+    }
+    :hover a :not(i) {
+        filter: brightness(0.1);
+    }
+}
