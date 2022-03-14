@@ -1,25 +1,25 @@
-<div class="item-page-statistics">
-    <hr/>
-    <ng-container *ngVar="reports$ | async as reports">
-        <ng-container *ngIf="!reports">
-            <ds-loading></ds-loading>
-        </ng-container>
-        <ng-container *ngIf="reports">
-            <div class="statistic-report" *ngFor="let report of reports">
-                <ng-container *ngIf="report.points.length > 0">
+<hr/>
+<ng-container *ngVar="reports$ | async as reports">
+    <ng-container *ngIf="!reports">
+        <ds-loading></ds-loading>
+    </ng-container>
+    <ng-container *ngIf="reports">
+        <div class="item-page-statistics">
+            <ng-container *ngFor="let report of reports">
+                <div class="statistic-report" *ngIf="report.points.length > 0">
                     <ng-container *ngFor="let point of report.points">
                         <h5>{{point.values.views}}</h5>
                     </ng-container>
                     <p class="m-1">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        <i [ngClass]="statIcons[report.reportType]" aria-hidden="true"></i>
                         {{ 'item.page.statistics.label.' + report.reportType | translate }}
                     </p>
-                </ng-container>
-            </div>
-        </ng-container>
+                </div>
+            </ng-container>
+        </div>
     </ng-container>
-    <div *ngIf="!(hasData$ | async)">
-        {{ 'statistics.page.no-data' | translate }}
-    </div>
-    <hr />
+</ng-container>
+<div *ngIf="!(hasData$ | async)">
+    {{ 'statistics.page.no-data' | translate }}
 </div>
+<hr/>

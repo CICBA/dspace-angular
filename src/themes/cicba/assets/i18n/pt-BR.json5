@@ -33,6 +33,8 @@
 
     "item.page.dcterms.subject.materia": "Temas",
 
+    "item.page.statistics.label.TotalDownloads": "Downloads",
+
     "item.page.statistics.label.TotalVisits": "Vistas",
 
     "menu.section.browse_global_by_author": "Autores",

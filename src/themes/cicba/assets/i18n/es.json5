@@ -27,6 +27,8 @@
 
     "item.page.date.issued": "Fecha de publicación",
 
+    "item.page.statistics.label.TotalDownloads": "Descargas",
+
     "item.page.statistics.label.TotalVisits": "Vistas",
 
     "home.breadcrumbs": "Home",

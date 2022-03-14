@@ -1,6 +1,8 @@
 {
   "item.page.dcterms.subject.materia": "Subject",
 
+  "item.page.statistics.label.TotalDownloads": "Downloads",
+
   "item.page.statistics.label.TotalVisits": "Views",
 
   "menu.section.browse_global_by_author": "Authors",
