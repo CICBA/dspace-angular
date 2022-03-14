@@ -1,0 +1,13 @@
+.setting-option {
+  border: 1px solid var(--bs-light);
+}
+
+#order-result-by select {
+  width: auto;
+}
+
+#order-result-by {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}

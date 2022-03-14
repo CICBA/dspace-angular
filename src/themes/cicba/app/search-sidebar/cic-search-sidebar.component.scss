@@ -1,0 +1,40 @@
+:host {
+    .results {
+        line-height: var(--ds-button-height);
+    }
+    ds-view-mode-switch {
+        margin-bottom: var(--bs-spacer);
+        color: var(--ds-cic-skyblue);
+    }
+    .sidebar-content > *:not(:last-child):not(ds-search-switch-configuration) {
+        margin-bottom: calc(4 * var(--bs-spacer));
+        display: block;
+    }
+    ds-search-switch-configuration {
+      margin-bottom: calc(2 * var(--bs-spacer));
+      display: block;
+    }
+
+}
+
+::ng-deep .sidebar-content h3 {
+    // preguntar esto
+    color: var(--ds-cic-skyblue); 
+}
+
+#search-sidebar{
+    background-color: red;
+}
+::ng-deep #search-sidebar .facet-filter{
+    border: 1px solid var(--bs-gray) ; 
+    line-height: 0;
+}
+
+::ng-deep #search-page-sidebar-content #search-sidebar .facet-filter{
+    border: 1px solid var(--ds-cic-gray);
+    border-radius: 10px;
+}
+  
+::ng-deep #search-page-sidebar-content #search-sidebar .facet-filter h5{
+    color: var(--ds-cic-gray);
+}

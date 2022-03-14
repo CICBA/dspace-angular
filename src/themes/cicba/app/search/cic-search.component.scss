@@ -1,0 +1,27 @@
+@include media-breakpoint-down(md) {
+    .container {
+      width: 100%;
+      max-width: none;
+    }
+  }
+  
+  ::ng-deep .search-controls {
+      margin-bottom: var(--bs-spacer);
+  }
+  
+  .search-config{
+      display: flex;
+      justify-content: space-between;
+  }
+
+::ng-deep #search-content h2 {
+  color: var(--ds-cic-skyblue);
+}
+
+::ng-deep #search-form .scope-button button {
+  max-width: inherit;
+}
+
+::ng-deep #search-form button {
+  max-width: inherit;
+}

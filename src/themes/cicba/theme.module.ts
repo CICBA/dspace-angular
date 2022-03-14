@@ -42,8 +42,6 @@ import { BrowseBySwitcherComponent } from './app/browse-by/browse-by-switcher/br
 import { CommunityListPageComponent } from './app/community-list-page/community-list-page.component';
 import { CommunityListPageModule } from '../../app/community-list-page/community-list-page.module';
 import { SearchPageComponent } from './app/search-page/search-page.component';
-import { ThemedSearchComponent } from './app/search/themed-search.component';
-import { ThemedSearchSidebarComponent } from './app/search-sidebar/themed-search-sidebar.component';
 import { InfoModule } from './app/info/info.module';
 import { PageNotFoundComponent } from './app/pagenotfound/pagenotfound.component';
 import { ObjectNotFoundComponent } from './app/lookup-by-id/objectnotfound/objectnotfound.component';
@@ -93,6 +91,10 @@ import { CicMetadataValuesComponent } from './app/item-page/simple/field-compone
 import { CicMetadataFieldWrapperComponent } from './app/item-page/simple/field-components/metadata-field-wrapper/cic-metadata-field-wrapper.component';
 import { CicMetadataRepresentationListComponent } from './app/item-page/simple/field-components/metadata-representation-list/cic-metadata-representation-list.component';
 import { BadgeMetadataValuesComponent } from './app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
+import { CicSearchComponent } from './app/search/cic-search.component';
+import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
+import { CicSearchSettingsComponent } from './app/search-settings/cic-search-settings.component';
+import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -139,12 +141,14 @@ const DECLARATIONS = [
   LastAccessionedItemsComponent,
   ItemSearchResultListElementComponent,
   SearchExpandedNavbarComponent,
-  ThemedSearchComponent,
-  ThemedSearchSidebarComponent,
   CicMetadataValuesComponent,
   CicMetadataFieldWrapperComponent,
   CicMetadataRepresentationListComponent,
   BadgeMetadataValuesComponent,
+  CicSearchComponent,
+  CicSearchSidebarComponent,
+  CicSearchSettingsComponent,
+  CicSidebarDropdownComponent
 ];
 
 @NgModule({

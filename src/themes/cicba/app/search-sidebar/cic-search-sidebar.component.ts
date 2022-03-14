@@ -6,11 +6,11 @@ import { expandSearchInput } from '../../../../app/shared/animations/slide';
  * The search box in the header that expands on focus and collapses on focus out
  */
 @Component({
-  selector: 'ds-themed-search-sidebar',
-  templateUrl: 'themed-search-sidebar.component.html',
-  styleUrls: ['../../../../app/shared/search/search.component.scss'],
+  selector: 'ds-cic-search-sidebar',
+  templateUrl: 'cic-search-sidebar.component.html',
+  styleUrls: ['./cic-search-sidebar.component.scss'],
   animations: [expandSearchInput]
 })
-export class ThemedSearchSidebarComponent extends BaseComponent {
+export class CicSearchSidebarComponent extends BaseComponent {
 
 }
