@@ -35,7 +35,35 @@
     </ng-container>
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
   </div>
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-3 order-md-3">
+    <ds-item-page-statistics [item]="object">
+    </ds-item-page-statistics>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dc.identifier.uri'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'URI'">
+    </ds-badge-metadata-values>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.identifier.other'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="''">
+    </ds-badge-metadata-values>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'ISSN'">
+    </ds-badge-metadata-values>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'ISBN'">
+    </ds-badge-metadata-values>
+  </div>
+  <div class="col-xs-12 col-md-6 order-md-2">
     <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
@@ -107,37 +135,9 @@
       [badgeType]="'badge-secondary'">
     </ds-badge-metadata-values>
     <div>
-      <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button">
+      <a [routerLink]="[itemPageRoute + '/full']" role="button">
         <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
       </a>
     </div>
-  </div>
-  <div class="col-xs-12 col-md-3">
-    <ds-item-page-statistics [item]="object">
-    </ds-item-page-statistics>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dc.identifier.uri'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'URI'">
-    </ds-badge-metadata-values>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.identifier.other'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="''">
-    </ds-badge-metadata-values>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'ISSN'">
-    </ds-badge-metadata-values>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'ISBN'">
-    </ds-badge-metadata-values>
   </div>
 </div>
