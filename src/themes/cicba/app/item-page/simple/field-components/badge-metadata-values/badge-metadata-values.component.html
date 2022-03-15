@@ -1,5 +1,10 @@
 <ds-cic-metadata-field-wrapper>
-    <span class="badge mr-1" [ngClass]="badgeType" *ngFor="let mdValue of mdValues; let last=last;">
-        {{mdValue.value}}
-    </span>
+    <div class="d-flex" *ngFor="let mdValue of mdValues">
+        <span class="badge badge-label" [ngClass]="badgeLabelType" *ngIf="badgeLabel">
+            {{badgeLabel}}
+        </span>
+        <span class="badge mr-1 {{badgeType}}" [ngClass]="{'badge-content': badgeLabel}">
+            {{mdValue.value}}
+        </span>
+    </div>
 </ds-cic-metadata-field-wrapper>

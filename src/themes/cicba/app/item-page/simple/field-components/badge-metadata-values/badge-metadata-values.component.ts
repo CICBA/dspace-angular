@@ -7,8 +7,11 @@ import { MetadataValuesComponent } from 'src/app/item-page/field-components/meta
  */
 @Component({
   selector: 'ds-badge-metadata-values',
-  templateUrl: './badge-metadata-values.component.html'
+  templateUrl: './badge-metadata-values.component.html',
+  styleUrls: ['./badge-metadata-values.component.scss'],
 })
 export class BadgeMetadataValuesComponent extends MetadataValuesComponent {
   @Input() badgeType: string;
+  @Input() badgeLabel: string;
+  @Input() badgeLabelType: string;
 }

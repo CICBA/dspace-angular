@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="d-flex flex-column">
-  <ds-type-badge [object]="object"></ds-type-badge>
+  <!-- <ds-type-badge [object]="object"></ds-type-badge> -->
   <ds-badge-metadata-values
     [mdValues]="object?.allMetadata(['dc.type'])"
     [badgeType]="'badge-info'">
@@ -95,10 +95,6 @@
       [label]="'item.page.journal-title'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
-      [label]="'item.page.journal-issn'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['journalvolume.identifier.name'])"
       [label]="'item.page.volume-title'">
     </ds-cic-metadata-values>
@@ -119,13 +115,29 @@
   <div class="col-xs-12 col-md-3">
     <ds-item-page-statistics [item]="object">
     </ds-item-page-statistics>
-    <ds-item-page-uri-field [item]="object"
-      [fields]="['dc.identifier.uri']"
-      [label]="'item.page.uri'">
-    </ds-item-page-uri-field>
-    <ds-cic-metadata-values
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dc.identifier.uri'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'URI'">
+    </ds-badge-metadata-values>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.identifier.other'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="''">
+    </ds-badge-metadata-values>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'ISSN'">
+    </ds-badge-metadata-values>
+    <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
-      [label]="'isbn'">
-    </ds-cic-metadata-values>
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'ISBN'">
+    </ds-badge-metadata-values>
   </div>
 </div>
