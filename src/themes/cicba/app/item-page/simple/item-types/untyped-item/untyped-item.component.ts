@@ -33,7 +33,7 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
         var charIndex = -1;
         var label = "";
         if (!mdValue.value.startsWith("http")) {
-          var splitChar = mdValue.value.includes(" ") ? " " : ":";
+          var splitChar = mdValue.value.includes(":") ? ":" : " ";
           charIndex = mdValue.value.indexOf(splitChar);
           label = mdValue.value.substring(0, charIndex).toUpperCase();
         } else {
