@@ -44,12 +44,14 @@
       [badgeLabelType]="'badge-dark'"
       [badgeLabel]="'URI'">
     </ds-badge-metadata-values>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.identifier.other'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="''">
-    </ds-badge-metadata-values>
+    <ng-container *ngFor="let idValue of identifierOtherValues">
+      <ds-badge-metadata-values
+        [mdValues]="[idValue.mdValue]"
+        [badgeType]="'badge-info'"
+        [badgeLabelType]="'badge-dark'"
+        [badgeLabel]="idValue.label">
+      </ds-badge-metadata-values>
+    </ng-container>
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
       [badgeType]="'badge-info'"
