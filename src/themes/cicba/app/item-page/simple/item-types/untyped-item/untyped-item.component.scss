@@ -1,1 +1,13 @@
 @import '../../../../../../../styles/variables.scss';
+
+.item-cc-license {
+    @media screen and (min-width: map-get($grid-breakpoints, md)) {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        p {
+            margin: 0;
+        }
+    }
+    margin-top: 1em;
+}

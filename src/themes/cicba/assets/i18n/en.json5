@@ -1,4 +1,8 @@
 {
+  "item.page.dcterms.license.text": "This work is published under license Creative Commons ",
+
+  "item.page.dcterms.subject": "Keywords",
+
   "item.page.dcterms.subject.materia": "Subject",
 
   "item.page.statistics.label.TotalDownloads": "Downloads",

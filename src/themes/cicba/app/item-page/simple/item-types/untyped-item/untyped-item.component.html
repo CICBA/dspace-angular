@@ -134,8 +134,21 @@
     </ds-cic-metadata-values>
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.subject'])"
-      [badgeType]="'badge-secondary'">
+      [badgeType]="'badge-secondary'"
+      [label]="'item.page.dcterms.subject'">
     </ds-badge-metadata-values>
+    <ds-cic-metadata-field-wrapper *ngFor="let mdValue of object?.allMetadata(['dcterms.license'])">
+      <div class="item-cc-license">
+        <a href="{{mdValue.authority}}">
+          <img src="https://licensebuttons.net/l/{{mdValue.authority.substring(36)}}/88x31.png" alt="{{mdValue.authority}}">
+        </a>
+        <p>{{"item.page.dcterms.license.text" | translate}}{{mdValue.value}}</p>
+      </div>
+    </ds-cic-metadata-field-wrapper>
+    <ds-cic-metadata-values
+      [mdValues]=""
+      [label]="'item.page.license'">
+    </ds-cic-metadata-values>
     <div>
       <a [routerLink]="[itemPageRoute + '/full']" role="button">
         <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}

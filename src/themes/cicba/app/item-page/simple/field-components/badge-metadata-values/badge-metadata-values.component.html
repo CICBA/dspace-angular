@@ -1,4 +1,4 @@
-<ds-cic-metadata-field-wrapper>
+<ds-cic-metadata-field-wrapper [label]="label | translate" [inlineLabel]="false">
     <div class="d-flex" *ngFor="let mdValue of mdValues">
         <span class="badge badge-label" [ngClass]="badgeLabelType" *ngIf="badgeLabel">
             {{badgeLabel}}

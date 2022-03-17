@@ -31,6 +31,10 @@
 
     "info.feedback.page_help": "A página relacionada ao seu comentário",
 
+    "item.page.dcterms.license.text": "Este trabalho é publicado sob a licença Creative Commons ",
+
+    "item.page.dcterms.subject": "Palavras-chave",
+
     "item.page.dcterms.subject.materia": "Temas",
 
     "item.page.statistics.label.TotalDownloads": "Downloads",

@@ -23,6 +23,10 @@
 
     "item.page.abstract": "Resumen",
 
+    "item.page.dcterms.license.text": "Esta obra se publica con la licencia Creative Commons ",
+
+    "item.page.dcterms.subject": "Palabras clave",
+
     "item.page.dcterms.subject.materia": "Materia",
 
     "item.page.date.issued": "Fecha de publicación",
@@ -92,8 +96,6 @@
 	"info.repository-policy.title": "Políticas del repositorio",
     
     "item.listelement.badge": "Publicación",
-
-    "item.page.dcterms.subject.materia": "Materias",
 
     "menu.section.navbar.contribute": "Aportar material",
 
