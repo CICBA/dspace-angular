@@ -3,7 +3,7 @@
         <span class="badge badge-label" [ngClass]="badgeLabelType" *ngIf="badgeLabel">
             {{badgeLabel}}
         </span>
-        <span class="badge mr-1 {{badgeType}}" [ngClass]="{'badge-content': badgeLabel}">
+        <span class="badge {{badgeType}}" [ngClass]="{'badge-content': badgeLabel}">
             {{mdValue.value}}
         </span>
     </div>

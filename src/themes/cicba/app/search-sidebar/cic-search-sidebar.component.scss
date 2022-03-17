@@ -22,16 +22,13 @@
     color: var(--ds-cic-skyblue); 
 }
 
-#search-sidebar{
-    background-color: red;
-}
 ::ng-deep #search-sidebar .facet-filter{
     border: 1px solid var(--bs-gray) ; 
     line-height: 0;
 }
 
 ::ng-deep #search-page-sidebar-content #search-sidebar .facet-filter{
-    border: 1px solid var(--ds-cic-gray);
+    border: 1px solid var(--ds-cic-gray-400);
     border-radius: 10px;
 }
   

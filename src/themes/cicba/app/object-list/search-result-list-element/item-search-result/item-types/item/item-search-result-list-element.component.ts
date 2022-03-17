@@ -10,8 +10,9 @@ import { Context } from 'src/app/core/shared/context.model';
 import { TruncatableService } from 'src/app/shared/truncatable/truncatable.service';
 import { DSONameService } from 'src/app/core/breadcrumbs/dso-name.service';
 
-@listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.Any, 'cicba')
-@listableObjectComponent(ItemSearchResult, ViewMode.ListElement, Context.Any, 'cicba')
+@listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
+@listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
+
 @Component({
   selector: 'ds-item-search-result-list-element',
   styleUrls: ['./item-search-result-list-element.component.scss'],
