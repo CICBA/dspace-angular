@@ -24,20 +24,9 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12 col-md-3">
-    <ng-container *ngIf="!mediaViewer.image">
-      <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
-        <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
-      </ds-metadata-field-wrapper>
-    </ng-container>
-    <ng-container *ngIf="mediaViewer.image">
-      <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
-    </ng-container>
-    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
-  </div>
   <div class="col-xs-12 col-md-3 order-md-3">
-    <ds-item-page-statistics [item]="object">
-    </ds-item-page-statistics>
+    <!-- <ds-item-page-statistics [item]="object">
+    </ds-item-page-statistics> -->
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dc.identifier.uri'])"
       [badgeType]="'badge-info'"
@@ -154,5 +143,16 @@
         <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
       </a>
     </div>
+  </div>
+  <div class="col-xs-12 col-md-3 order-md-1">
+    <ng-container *ngIf="!mediaViewer.image">
+      <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+        <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+      </ds-metadata-field-wrapper>
+    </ng-container>
+    <ng-container *ngIf="mediaViewer.image">
+      <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
+    </ng-container>
+    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
   </div>
 </div>

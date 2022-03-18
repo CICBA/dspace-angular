@@ -1,26 +1,30 @@
-:host {
-  .simple-view-element {
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    align-items: baseline;
+.simple-view-element {
+  margin-bottom: 15px;
+  h6 {
+    display: inline;
+    margin-right: 0.5em;
   }
-
-  .simple-view-element-header {
-    font-weight: bold;
-    flex-shrink: 0;
+  div {
+    display: inline;
   }
+}
 
-  .inline-label {
-    flex-direction: column;
-    gap: 0px;
+.simple-view-element-header {
+  font-weight: bold;
+}
+
+.not-inline-label {
+  h6 {
+    display: block;
+    margin-right: 0;
   }
-
-  .simple-view-element-body {
-    display: flex;
-    gap: 0.3em;
-    flex-wrap: wrap;
+  div {
+    display: block;
   }
+}
 
+.simple-view-element-body {
+  display: flex;
+  gap: 0.3em;
+  flex-wrap: wrap;
 }

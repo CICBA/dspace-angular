@@ -1,9 +1,8 @@
 <ds-cic-metadata-field-wrapper [label]="label | translate" [inlineLabel]="false">
-    <div class="d-flex" *ngFor="let mdValue of mdValues">
+    <div class="bagde-group" [ngClass]="{'group-inline-block': badgeLabel}" *ngFor="let mdValue of mdValues">
         <span class="badge badge-label" [ngClass]="badgeLabelType" *ngIf="badgeLabel">
             {{badgeLabel}}
-        </span>
-        <span class="badge {{badgeType}}" [ngClass]="{'badge-content': badgeLabel}">
+        </span><span class="badge {{badgeType}}" [ngClass]="{'badge-content': badgeLabel}">
             {{mdValue.value}}
         </span>
     </div>
