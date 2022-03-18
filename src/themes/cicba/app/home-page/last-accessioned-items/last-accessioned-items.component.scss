@@ -6,3 +6,7 @@
     padding-left: 20px;
   }
 }
+
+::ng-deep .list-unstyled li {
+  margin-bottom:  3rem !important;
+}
