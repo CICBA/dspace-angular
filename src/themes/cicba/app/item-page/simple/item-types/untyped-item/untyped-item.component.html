@@ -138,15 +138,10 @@
       [mdValues]=""
       [label]="'item.page.license'">
     </ds-cic-metadata-values>
-    <div>
-      <a [routerLink]="[itemPageRoute + '/full']" role="button">
-        <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
-      </a>
-    </div>
   </div>
   <div class="col-xs-12 col-md-3 order-md-1">
     <ng-container *ngIf="!mediaViewer.image">
-      <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+      <ds-metadata-field-wrapper class="d-none d-md-block" [hideIfNoTextContent]="false">
         <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
       </ds-metadata-field-wrapper>
     </ng-container>
@@ -155,4 +150,9 @@
     </ng-container>
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
   </div>
+</div>
+<div class="text-center">
+  <a [routerLink]="[itemPageRoute + '/full']" role="button">
+    <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
+  </a>
 </div>
