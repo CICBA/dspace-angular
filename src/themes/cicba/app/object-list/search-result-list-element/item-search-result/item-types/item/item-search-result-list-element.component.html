@@ -1,11 +1,11 @@
 <div class="badges-search">
-  <ds-badge-metadata-values *ngIf="dso.type === 'item'"
+  <ds-badge-metadata-values *ngIf="getDsoType(dso) == 'item'"
     [mdValues]="dso.allMetadata(['dc.type'])"
     [badgeType]="'badge-info'"
     [badgeLabelType]="'badge-dark'"
     >
   </ds-badge-metadata-values>
-  <ds-type-badge *ngIf="showLabel && dso.type !== 'item'" [object]="dso"></ds-type-badge>
+  <ds-type-badge *ngIf="showLabel && getDsoType(dso) != 'item'" [object]="dso"></ds-type-badge>
   <ds-badge-metadata-values
     [mdValues]="dso.allMetadata(['dcterms.issued'])"
     [badgeType]="'badge-info'"

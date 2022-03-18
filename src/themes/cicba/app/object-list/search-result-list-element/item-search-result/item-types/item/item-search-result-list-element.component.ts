@@ -9,6 +9,9 @@ import { getItemPageRoute } from '../../../../../../../../app/item-page/item-pag
 import { Context } from 'src/app/core/shared/context.model';
 import { TruncatableService } from 'src/app/shared/truncatable/truncatable.service';
 import { DSONameService } from 'src/app/core/breadcrumbs/dso-name.service';
+import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
+import { ResourceType } from 'src/app/core/shared/resource-type';
+import { getResourceTypeValueFor } from 'src/app/core/cache/object-cache.reducer';
 
 @listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
@@ -42,4 +45,9 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
   }
+
+  getDsoType(object: DSpaceObject): any {
+    return object.type;
+  }
+
 }
