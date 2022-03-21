@@ -1,11 +1,15 @@
 <ng-container *ngVar="(bitstreams$ | async) as bitstreams">
   <ds-cic-metadata-field-wrapper *ngIf="bitstreams?.length > 0" [inlineLabel]="false">
     <div class="file-section">
+      <h6 class="d-md-none">
+        <strong>{{'item.page.statistics.label.TotalDownloads' | translate}}</strong>
+      </h6>
       <ds-file-download-link *ngFor="let file of bitstreams; let last=last;" [bitstream]="file" [item]="item">
         <span>
           {{file?.name}} ({{(file?.sizeBytes) | dsFileSize }})
         </span>
-        <i class="fa fa-download" aria-hidden="true"></i>
+        <i class="fa fa-download d-none d-md-inline-block" aria-hidden="true"></i>
+        <button class="btn download-btn d-md-none"><i class="fa fa-download"></i> {{'item.page.download' | translate}}</button>
         <span *ngIf="!last" innerHTML="{{separator}}"></span>
       </ds-file-download-link>
       <ds-loading *ngIf="isLoading" message="{{'loading.default' | translate}}" [showMessage]="false"></ds-loading>

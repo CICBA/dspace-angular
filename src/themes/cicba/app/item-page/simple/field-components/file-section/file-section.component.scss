@@ -2,11 +2,27 @@
     a {
         color: inherit !important;
         text-decoration: none;
+        display: block;
+        margin-bottom: 1em;
         i {
-            color: var(--ds-home-news-link-color);
+            color: var(--ds-cic-blue);
         }
     }
-    :hover a :not(i) {
+    :hover span {
         filter: brightness(0.1);
+    }
+
+    .download-btn {
+        background-color: var(--ds-cic-blue);
+        border: none;
+        color: white;
+        padding: 0.3em;
+        cursor: pointer;
+        i {
+            color: white;
+        }
+    }
+    .download-btn:hover {
+        filter: brightness(0.9);
     }
 }
