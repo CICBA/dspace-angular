@@ -1,17 +1,20 @@
 <div class="background">
   <div class="container">
     <div class="jumbotron jumbotron-fluid">
-      <div class="row">
+      <div class="row justify-content-between align-items-center">
         <div class="col-lg-6 col-sm-12">
           <ds-search-form [inPlaceSearch]="false" [searchPlaceholder]="'home.search-form.placeholder' | translate">
           </ds-search-form>
+          <ul class="menu list-inline">
+            <li class="list-inline-item"><a href="/search?spc.sf=dc.date.accessioned&spc.sd=DESC&spc.page=1"><i class="fa fa-book"></i> Publicaciones</a></li>
+            <li class="list-inline-item"><a href="/handle/11746/3"><i class="fa fa-landmark"></i> Centros</a></li>
+            <li class="list-inline-item"><a href="/browse/author"><i class="fa fa-male"></i> Autores</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 d-none d-lg-block">
+          <img src="assets/cicba/images/home_image.png" [attr.alt]="'menu.home.image.logo' | translate"/>
         </div>
       </div>
-      <ul class="menu list-inline">
-        <li class="list-inline-item"><a href="/search?spc.sf=dc.date.accessioned&spc.sd=DESC&spc.page=1"><i class="fa fa-book"></i> Publicaciones</a></li>
-        <li class="list-inline-item"><a href="/handle/11746/3"><i class="fa fa-landmark"></i> Centros</a></li>
-        <li class="list-inline-item"><a href="/browse/author"><i class="fa fa-male"></i> Autores</a></li>
-      </ul>
     </div>
   </div>
 </div>

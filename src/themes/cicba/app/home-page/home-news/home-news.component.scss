@@ -22,6 +22,16 @@
 
     .jumbotron {
       background-color: transparent;
+      @media screen and (min-width: map-get($grid-breakpoints, lg)) {
+        height: 250px;
+        padding-top: 0;
+      }
+    }
+
+    .jumbotron img {
+      width: 100%;
+      object-fit: cover;
+      height: 250px;
     }
 
     a {
@@ -35,9 +45,10 @@
     .menu {
       display: flex;
       flex-flow: row;
-      justify-content: flex-start;
+      justify-content: space-around;
       list-style: none;
       margin: 0;
+      font-size: 1.2em;
     }
 
     .menu a {
@@ -46,6 +57,9 @@
       display: block;
       padding: 1em;
       color: white;
+      i {
+        font-size: 1.2em;
+      }
     }
 
   }
