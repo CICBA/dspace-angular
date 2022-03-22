@@ -80,10 +80,15 @@
       [mdValues]="object?.allMetadata(['dcterms.issued'])"
       [label]="'item.page.date.issued'">
     </ds-cic-metadata-values>
-    <ds-cic-metadata-values [inlineLabel]="false"
-      [mdValues]="object?.allMetadata(['dcterms.abstract'])"
-      [label]="'item.page.abstract'">
-    </ds-cic-metadata-values>
+    <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
+      <ds-truncatable [initialExpand]="!(windowService.isXsOrSm() | async)" [id]="object?.id">
+        <ds-truncatable-part *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
+          [id]="object?.id"
+          [minLines]="3">
+          <p [innerHTML]="mdValue.value"></p>
+        </ds-truncatable-part>
+      </ds-truncatable>
+    </ds-cic-metadata-field-wrapper>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.description'])"
       [label]="'item.page.description'">
