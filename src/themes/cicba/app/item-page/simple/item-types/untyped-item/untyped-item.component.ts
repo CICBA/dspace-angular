@@ -23,6 +23,7 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
   identifierOtherValues: { mdValue: MetadataValue, label: string }[];
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.setIdentifierOtherValues();
   }
 
