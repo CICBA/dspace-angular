@@ -131,11 +131,23 @@
 
     "search.filters.filter.keyword.head": "Materias",
 
+    "search.filters.filter.keyword.label": "Buscar materia",
+
+    "search.filters.filter.keyword.placeholder": "Materia",
+
     "search.form.scope.all": "Todo el repositorio",
 
     "search.filters.filter.itemtype.head": "Tipo de documento",
 
     "search.filters.filter.itemtype.placeholder": "Tipo de documento",
+    
+    "search.filters.filter.lugarDesarrollo.head": "Lugar de desarrollo",
+  
+    "search.filters.filter.lugarDesarrollo.label": "Buscar por lugar de desarrollo",
+
+    "search.filters.filter.lugarDesarrollo.placeholder": "Lugar de desarrollo",
+
+
 
     "search.sidebar.settings.rpp": "Resultados por página",
     
