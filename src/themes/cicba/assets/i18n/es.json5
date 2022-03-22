@@ -133,6 +133,8 @@
 
     "repository.title.prefixDSpace": "CIC Digital -",
 
+    "search.filters.applied.f.itemtype": "Tipo de documento",
+
     "search.filters.filter.dateIssued.head": "Fecha de publicación",
 
     "search.filters.filter.keyword.head": "Materias",
