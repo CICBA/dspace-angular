@@ -17,6 +17,8 @@
     
     "dso-selector.set-scope.community.input-header": "Buscar una comunidad o colección",
     
+    "error.invalid-search-query": "La consulta de búsqueda no es válida.",
+
     "form.loading": "Cargando...",
 
     "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
