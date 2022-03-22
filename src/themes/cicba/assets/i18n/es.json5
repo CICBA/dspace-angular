@@ -135,6 +135,10 @@
 
     "search.filters.applied.f.itemtype": "Tipo de documento",
 
+    "search.filters.applied.f.lugarDesarrollo": "Lugar de desarrollo",
+
+    "search.filters.applied.f.keyword": "Materia",
+
     "search.filters.filter.dateIssued.head": "Fecha de publicación",
 
     "search.filters.filter.keyword.head": "Materias",
