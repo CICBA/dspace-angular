@@ -1,4 +1,10 @@
 {
+    "500.help": "El servidor no puede atender temporalmente su solicitud debido a problemas de mantenimiento o de capacidad. Por favor, inténtelo de nuevo más tarde.",
+    
+    "500.link.home-page": "Volver a la página de inicio",
+    
+    "500.page-internal-server-error": "Servicio no disponible",
+
     "communityList.breadcrumbs": "Lista de comunidades",
 
     "communityList.tabTitle": "Lista de comunidades",
