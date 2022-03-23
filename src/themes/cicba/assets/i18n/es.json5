@@ -21,6 +21,8 @@
 
     "form.loading": "Cargando...",
 
+    "item.page.abstract": "Resumen",
+
     "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
 
     "item.page.cic.institucionOrigen": "Centro CIC",
@@ -28,8 +30,6 @@
     "item.page.cic.thesis.grantor": "Emisor del título",
 
     "item.page.collections.loading": "Cargando...",
-
-    "item.page.abstract": "Resumen",
 
     "item.page.dcterms.license.text": "Esta obra se publica con la licencia Creative Commons ",
 
@@ -40,6 +40,12 @@
     "item.page.date.issued": "Fecha de publicación",
 
     "item.page.download": "Descargar",
+
+    "item.page.relationships.isCompilatorOf": "Compiladores",
+
+    "item.page.relationships.isDirectorOf": "Directores",
+
+    "item.page.relationships.isEditorOf": "Editores",
 
     "item.page.statistics.label.TotalDownloads": "Descargas",
 

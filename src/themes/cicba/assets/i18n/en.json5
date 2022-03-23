@@ -7,6 +7,12 @@
 
   "item.page.download": "Download",
 
+  "item.page.relationships.isCompilatorOf": "Compilators",
+
+  "item.page.relationships.isDirectorOf": "Directors",
+
+  "item.page.relationships.isEditorOf": "Editors",
+
   "item.page.statistics.label.TotalDownloads": "Downloads",
 
   "item.page.statistics.label.TotalVisits": "Views",

@@ -58,7 +58,7 @@
     <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
-      [metadataFields]="['dcterms.creator.author']"
+      [metadataFields]="['dcterms.creator.author', 'dcterms.creator.corporate']"
       [label]="'relationships.isAuthorOf' | translate"
       [separator]="'|'">
     </ds-cic-metadata-representation-list>
@@ -66,14 +66,21 @@
       [parentItem]="object"
       [itemType]="'Person'"
       [metadataFields]="['dcterms.contributor.director']"
-      [label]="'relationships.isDirectorOf' | translate"
+      [label]="'item.page.relationships.isDirectorOf' | translate"
       [separator]="'|'">
     </ds-cic-metadata-representation-list>
     <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
       [metadataFields]="['dcterms.creator.compilator']"
-      [label]="'relationships.isDirectorOf' | translate"
+      [label]="'item.page.relationships.isCompilatorOf' | translate"
+      [separator]="'|'">
+    </ds-cic-metadata-representation-list>
+    <ds-cic-metadata-representation-list
+      [parentItem]="object"
+      [itemType]="'Person'"
+      [metadataFields]="['dcterms.creator.editor']"
+      [label]="'item.page.relationships.isEditorOf' | translate"
       [separator]="'|'">
     </ds-cic-metadata-representation-list>
     <ds-cic-metadata-values
