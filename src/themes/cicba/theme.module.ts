@@ -95,6 +95,7 @@ import { CicSearchComponent } from './app/search/cic-search.component';
 import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
 import { CicSearchSettingsComponent } from './app/search-settings/cic-search-settings.component';
 import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
+import { CicCommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
 import { ItemPageComponent } from './app/item-page/simple/item-page.component';
 import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
 
@@ -153,6 +154,7 @@ const DECLARATIONS = [
   CicSidebarDropdownComponent,
   ItemPageComponent,
   ItemPageStatisticsComponent,
+  CicCommunityPageSubCommunityListComponent,
 ];
 
 @NgModule({
