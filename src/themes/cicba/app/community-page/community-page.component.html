@@ -26,7 +26,7 @@
         </div>
         <section class="comcol-page-browse-section">
           <!-- Browse-By Links -->
-          <ds-comcol-page-browse-by [id]="communityPayload.id" [contentType]="communityPayload.type">
+          <ds-comcol-page-browse-by *ngIf="communityPayload.name !== 'Centros'" [id]="communityPayload.id" [contentType]="communityPayload.type">
           </ds-comcol-page-browse-by>
 
           <cic-ds-community-page-sub-community-list [community]="communityPayload"></cic-ds-community-page-sub-community-list>
