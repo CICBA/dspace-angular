@@ -31,15 +31,31 @@
 
     "item.page.collections.loading": "Cargando...",
 
+    "item.page.dcterms.extent": "Extensión",
+
+    "item.page.dcterms.isPartOf.item": "Libro/Informe",
+
+    "item.page.dcterms.language": "Idioma",
+
     "item.page.dcterms.license.text": "Esta obra se publica con la licencia Creative Commons ",
 
+    "item.page.dcterms.relation": "Recursos relacionados",
+
+    "item.page.dcterms.spatial": "Cobertura Espacial",
+
     "item.page.dcterms.subject": "Palabras clave",
+
+    "item.page.dcterms.subject.ford": "Clasificación FORD",
 
     "item.page.dcterms.subject.materia": "Materia",
 
     "item.page.date.issued": "Fecha de publicación",
 
     "item.page.download": "Descargar",
+
+    "item.page.publisher": "Editorial",
+
+    "item.page.related-items.view-less": "Ocultar los últimos {{ amount }}",
 
     "item.page.relationships.isCompilatorOf": "Compiladores",
 

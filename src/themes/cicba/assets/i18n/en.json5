@@ -1,11 +1,25 @@
 {
+  "item.page.dcterms.extent": "Extension",
+
+  "item.page.dcterms.isPartOf.item": "Book/Report",
+
+  "item.page.dcterms.language": "Language",
+
   "item.page.dcterms.license.text": "This work is published under license Creative Commons ",
 
+  "item.page.dcterms.relation": "Recursos relacionados",
+
+  "item.page.dcterms.spatial": "Spatial coverage",
+
   "item.page.dcterms.subject": "Keywords",
+
+  "item.page.dcterms.subject.ford": "FORD classification",
 
   "item.page.dcterms.subject.materia": "Subject",
 
   "item.page.download": "Download",
+
+  "item.page.publisher": "Publisher",
 
   "item.page.relationships.isCompilatorOf": "Compilators",
 

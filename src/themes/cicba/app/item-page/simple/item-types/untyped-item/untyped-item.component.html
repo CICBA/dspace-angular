@@ -22,6 +22,9 @@
   <h4 class="item-page-title-field mr-auto">
     <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
   </h4>
+  <h6 class="mr-auto">
+    <ds-metadata-values [mdValues]="object?.allMetadata(['dcterms.title.subtitle'])"></ds-metadata-values>
+  </h6>
 </div>
 <div class="row item-metadata">
   <div class="col-xs-12 col-md-3 order-md-3">
@@ -88,26 +91,20 @@
       [label]="'item.page.date.issued'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
-      <ds-truncatable [initialExpand]="!(windowService.isXsOrSm() | async)" [id]="object?.id">
+      <ds-truncatable *ngIf="(windowService.isXsOrSm() | async)" [id]="object?.id">
         <ds-truncatable-part *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
           [id]="object?.id"
-          [minLines]="3">
+          [minLines]="5">
           <p [innerHTML]="mdValue.value"></p>
         </ds-truncatable-part>
       </ds-truncatable>
+      <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
+        <p *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
+      </ng-container>
     </ds-cic-metadata-field-wrapper>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.description'])"
       [label]="'item.page.description'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.subject.materia'])"
-      [separator]="','"
-      [label]="'item.page.dcterms.subject.materia'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dc.identifier.citation'])"
-      [label]="'item.page.citation'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['cic.thesis.grantor'])"
@@ -122,16 +119,39 @@
       [label]="'item.page.cic.institucionOrigen'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['journal.title'])"
-      [label]="'item.page.journal-title'">
+      [mdValues]="object?.allMetadata(['dcterms.isPartOf.item'])"
+      [label]="'item.page.dcterms.isPartOf.item'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['journalvolume.identifier.name'])"
-      [label]="'item.page.volume-title'">
+      [mdValues]="object?.allMetadata(['dcterms.relation'])"
+      [separator]="','"
+      [label]="'item.page.dcterms.relation'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dc.publisher'])"
+      [mdValues]="object?.allMetadata(['dcterms.publisher'])"
       [label]="'item.page.publisher'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.language'])"
+      [label]="'item.page.dcterms.language'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.subject.materia'])"
+      [separator]="','"
+      [label]="'item.page.dcterms.subject.materia'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.subject.ford'])"
+      [separator]="','"
+      [label]="'item.page.dcterms.subject.ford'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.spatial'])"
+      [label]="'item.page.dcterms.spatial'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.extent'])"
+      [label]="'item.page.dcterms.extent'">
     </ds-cic-metadata-values>
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.subject'])"
