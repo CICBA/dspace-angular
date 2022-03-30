@@ -4,6 +4,9 @@
   }
   .header {
     background-color: var(--ds-header-bg);
+    border-bottom: 5px var(--ds-cic-blue) solid;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
   }
 }
 
