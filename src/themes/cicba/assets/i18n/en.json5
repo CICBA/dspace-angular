@@ -1,4 +1,12 @@
 {
+  "home.navigation.publications": "Publications",
+
+  "home.navigation.cicOrganizations": "Centers",
+
+  "home.navigation.authors": "Authors",
+
+  "home.navigation.communities": "Communities",
+
   "item.page.dcterms.extent": "Extension",
 
   "item.page.dcterms.isPartOf.item": "Book/Report",

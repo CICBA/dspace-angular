@@ -6,9 +6,10 @@
           <ds-search-form [inPlaceSearch]="false" [searchPlaceholder]="'home.search-form.placeholder' | translate">
           </ds-search-form>
           <ul class="menu list-inline">
-            <li class="list-inline-item"><a href="/search?spc.sf=dc.date.accessioned&spc.sd=DESC&spc.page=1"><i class="fa fa-book"></i> Publicaciones</a></li>
-            <li class="list-inline-item"><a href="/handle/11746/3"><i class="fa fa-landmark"></i> Centros</a></li>
-            <li class="list-inline-item"><a href="/browse/author"><i class="fa fa-male"></i> Autores</a></li>
+            <li class="list-navigation-item"><a href="/search?spc.sf=dc.date.accessioned&spc.sd=DESC&spc.page=1"><i class="fa fa-book"></i> {{'home.navigation.publications' | translate}}</a></li>
+            <li class="list-navigation-item"><a href="/handle/11746/3"><i class="fa fa-landmark"></i> {{'home.navigation.cicOrganizations' | translate}}</a></li>
+            <li class="list-navigation-item"><a href="/community-list"><i class="fa fa-sitemap"></i> {{'home.navigation.communities' | translate}}</a></li>
+            <li class="list-navigation-item"><a href="/browse/author"><i class="fa fa-male"></i> {{'home.navigation.authors' | translate}}</a></li>
           </ul>
         </div>
         <div class="col-lg-4 d-none d-lg-block p-0">

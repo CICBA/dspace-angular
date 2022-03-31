@@ -44,11 +44,21 @@
 
     .menu {
       display: flex;
-      flex-flow: row;
       justify-content: space-around;
-      list-style: none;
       margin: 0;
       font-size: 1.2em;
+      @media only screen and (max-width: map-get($grid-breakpoints, sm)){
+        flex-wrap: wrap;
+      }
+    }
+
+    .list-navigation-item {
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: 20%;
+      @media only screen and (min-width: map-get($grid-breakpoints, sm)){
+        flex-basis: auto;
+      }
     }
 
     .menu a {
@@ -58,7 +68,7 @@
       padding: 1em;
       color: white;
       i {
-        font-size: 1.2em;
+        font-size: 1.5em;
       }
     }
 
