@@ -12,10 +12,33 @@
     margin-top: 1em;
 }
 
-::ng-deep .item-metadata .simple-view-element {
-    margin-bottom: 1em;
-}
+::ng-deep {
+    .item-metadata .simple-view-element {
+        margin-bottom: 1em;
+    }
 
-::ng-deep .item-page-title-field .simple-view-element {
-    margin-bottom: 0 !important;
+    .item-page-title-field .simple-view-element {
+        margin-bottom: 0 !important;
+    }
+
+    .truncatable-abstract .content {
+        &:after{
+        content: "Leer más";
+        text-align: right;
+        width: 80%;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 20%);
+        pointer-events: auto;
+        cursor: pointer;
+        color: var(--bs-cyan);
+        }
+    }
+
+    .truncatable-abstract .clamp-default-none .content {
+        p {
+            margin-bottom: 0;
+        }
+        &:after {
+            content: "Leer menos";
+        }
+    }
 }
