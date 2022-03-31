@@ -16,24 +16,16 @@
     }
     #powered-by {
         display: flex;
-
-        /* Then we define the flow direction 
-           and if we allow the items to wrap 
-         * Remember this is the same as:
-         * flex-direction: row;
-         * flex-wrap: wrap;
-         */
-        flex-flow: row wrap;
-      
-        justify-content: flex-start;
-        column-gap: 50px;
+        justify-content: space-around;
         margin-top: 30px;
-
-    }
-
-    .row {
-        display: flex;
-        align-items: flex-start;
+        @media only screen and (max-width: map-get($grid-breakpoints, sm)){
+            flex-wrap: wrap;
+            :first-child {
+                flex-basis: 100%;
+                margin-bottom: 1em;
+                text-align: center
+            }
+        }
     }
 
 }
