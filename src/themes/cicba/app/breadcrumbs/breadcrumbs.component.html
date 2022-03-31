@@ -2,9 +2,11 @@
     <nav *ngIf="(showBreadcrumbs$ | async)" aria-label="breadcrumb" class="nav-breadcrumb">
         <ol class="container breadcrumb">
             <ng-container
-                    *ngTemplateOutlet="breadcrumbs?.length > 0 ? breadcrumb : activeBreadcrumb; context: {text: 'home.breadcrumbs', url: '/'}"></ng-container>
+                    *ngTemplateOutlet="breadcrumbs?.length > 0 ? breadcrumb : activeBreadcrumb; context: {text: 'home.breadcrumbs', url: '/community-list'}"></ng-container>
             <ng-container *ngFor="let bc of breadcrumbs; let last = last;">
-                <ng-container *ngTemplateOutlet="!last ? breadcrumb : activeBreadcrumb; context: bc"></ng-container>
+                <ng-container *ngIf="!last">
+                    <ng-container *ngTemplateOutlet="breadcrumb; context: bc"></ng-container>
+                </ng-container>
             </ng-container>
         </ol>
     </nav>

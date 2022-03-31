@@ -21,6 +21,18 @@
 
     "form.loading": "Cargando...",
 
+    "home.breadcrumbs": "CIC-Digital",
+
+    "home.navigation.publications": "Publicaciones",
+
+    "home.navigation.cicOrganizations": "Centros",
+
+    "home.navigation.authors": "Autores",
+
+    "home.navigation.communities": "Comunidades",
+
+    "home.title": "Home",
+
     "item.page.abstract": "Resumen",
 
     "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
@@ -66,18 +78,6 @@
     "item.page.statistics.label.TotalDownloads": "Descargas",
 
     "item.page.statistics.label.TotalVisits": "Vistas",
-
-    "home.breadcrumbs": "Home",
-
-    "home.navigation.publications": "Publicaciones",
-
-    "home.navigation.cicOrganizations": "Centros",
-
-    "home.navigation.authors": "Autores",
-
-    "home.navigation.communities": "Comunidades",
-
-    "home.title": "Home",
 
     "loading.default": "Cargando...",
 
