@@ -4,12 +4,13 @@
         <ds-view-tracker [object]="communityPayload"></ds-view-tracker>
         <div class="d-flex flex-row border-bottom mb-4 pb-4">
           <header class="comcol-header mr-auto">
-            <ds-type-badge [object]="communityPayload"></ds-type-badge>
-            <!-- Community name -->
-            <ds-comcol-page-header [name]="communityPayload.name"></ds-comcol-page-header>
-            <!-- Community logo -->
-            <ds-comcol-page-logo *ngIf="logoRD$" [logo]="(logoRD$ | async)?.payload" [alternateText]="'Community Logo'">
-            </ds-comcol-page-logo>
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Community name -->
+              <ds-comcol-page-header [name]="communityPayload.name"></ds-comcol-page-header>
+              <!-- Community logo -->
+              <ds-comcol-page-logo id="com-logo" *ngIf="logoRD$" [logo]="(logoRD$ | async)?.payload" [alternateText]="'Community Logo'">
+              </ds-comcol-page-logo>              
+            </div> 
             <!-- Handle -->
             <ds-badge-metadata-values
                 [mdValues]="communityPayload.allMetadata(['dc.identifier.uri'])"
