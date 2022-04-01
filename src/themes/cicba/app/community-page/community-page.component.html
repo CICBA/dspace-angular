@@ -3,7 +3,7 @@
       <div *ngIf="communityRD?.payload; let communityPayload">
         <ds-view-tracker [object]="communityPayload"></ds-view-tracker>
         <div class="d-flex flex-row border-bottom mb-4 pb-4">
-          <header class="comcol-header mr-auto">
+          <header class="comcol-header w-100 mr-auto">
             <div class="d-flex justify-content-between align-items-center">
               <!-- Community name -->
               <ds-comcol-page-header [name]="communityPayload.name"></ds-comcol-page-header>
