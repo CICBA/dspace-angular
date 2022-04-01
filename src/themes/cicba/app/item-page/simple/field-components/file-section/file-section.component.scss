@@ -10,18 +10,28 @@ hr {
     a {
         color: inherit !important;
         text-decoration: none;
-        display: block;
+        display: flex;
         margin-bottom: 1em;
-        i {
-            color: var(--ds-cic-blue);
-        }
+        gap: 1em;
     }
-    :hover span {
+    :hover .file-name {
         filter: brightness(0.1);
     }
 
+    .download-button {
+        border-radius: 100%;
+        background-color: var(--ds-home-news-link-color);
+        color: white;
+        padding: 0.1em 0.4em;
+        font-size: 1.2em;
+        max-width: 100%
+    }
+    :hover .download-button {
+        background-color: var(--ds-home-news-link-hover-color);
+    }
+
     .download-btn {
-        background-color: var(--ds-cic-blue);
+        background-color: var(--ds-home-news-link-color);
         border: none;
         color: white;
         padding: 0.3em;
@@ -31,6 +41,6 @@ hr {
         }
     }
     .download-btn:hover {
-        filter: brightness(0.9);
+        background-color: var(--ds-home-news-link-hover-color);
     }
 }
