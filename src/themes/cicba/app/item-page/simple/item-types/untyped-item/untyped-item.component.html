@@ -7,7 +7,7 @@
     </ds-mirador-viewer>
   </div>
 </div>
-<div class="d-flex flex-column">
+<div class="mb-3">
   <!-- <ds-type-badge [object]="object"></ds-type-badge> -->
   <div class="pl-2">
     <ds-dso-page-version-button (newVersionEvent)="onCreateNewVersion()" [dso]="object"
@@ -26,38 +26,8 @@
     <ds-metadata-values [mdValues]="object?.allMetadata(['dcterms.title.subtitle'])"></ds-metadata-values>
   </h6>
 </div>
-<div class="row item-metadata">
-  <div class="col-xs-12 col-md-3 order-md-3">
-    <!-- <ds-item-page-statistics [item]="object">
-    </ds-item-page-statistics> -->
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dc.identifier.uri'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'URI'">
-    </ds-badge-metadata-values>
-    <ng-container *ngFor="let idValue of identifierOtherValues">
-      <ds-badge-metadata-values
-        [mdValues]="[idValue.mdValue]"
-        [badgeType]="'badge-info'"
-        [badgeLabelType]="'badge-dark'"
-        [badgeLabel]="idValue.label">
-      </ds-badge-metadata-values>
-    </ng-container>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'ISSN'">
-    </ds-badge-metadata-values>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'ISBN'">
-    </ds-badge-metadata-values>
-  </div>
-  <div class="col-xs-12 col-md-6 order-md-2">
+<div class="item-content">
+  <div class="metadata-section">
     <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
@@ -90,18 +60,6 @@
       [mdValues]="object?.allMetadata(['dcterms.issued'])"
       [label]="'item.page.date.issued'">
     </ds-cic-metadata-values>
-    <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
-      <ds-truncatable *ngIf="(windowService.isXsOrSm() | async)" [id]="object?.id">
-        <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
-          [id]="object?.id"
-          [minLines]="5">
-          <p [innerHTML]="mdValue.value"></p>
-        </ds-truncatable-part>
-      </ds-truncatable>
-      <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
-        <p *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
-      </ng-container>
-    </ds-cic-metadata-field-wrapper>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.description'])"
       [label]="'item.page.description'">
@@ -154,6 +112,50 @@
       [label]="'item.page.dcterms.extent'">
     </ds-cic-metadata-values>
     <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dc.identifier.uri'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'URI'">
+    </ds-badge-metadata-values>
+    <ng-container *ngFor="let idValue of identifierOtherValues">
+      <ds-badge-metadata-values
+        [mdValues]="[idValue.mdValue]"
+        [badgeType]="'badge-info'"
+        [badgeLabelType]="'badge-dark'"
+        [badgeLabel]="idValue.label">
+      </ds-badge-metadata-values>
+    </ng-container>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'ISSN'">
+    </ds-badge-metadata-values>
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
+      [badgeType]="'badge-info'"
+      [badgeLabelType]="'badge-dark'"
+      [badgeLabel]="'ISBN'">
+    </ds-badge-metadata-values>
+  </div>
+  <div class="download-section">
+    <!-- <ds-item-page-statistics [item]="object"></ds-item-page-statistics> -->
+    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
+  </div>
+  <div class="abstract-section">
+    <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
+      <ds-truncatable *ngIf="(windowService.isXsOrSm() | async)" [id]="object?.id">
+        <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
+          [id]="object?.id"
+          [minLines]="5">
+          <p [innerHTML]="mdValue.value"></p>
+        </ds-truncatable-part>
+      </ds-truncatable>
+      <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
+        <p *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
+      </ng-container>
+    </ds-cic-metadata-field-wrapper>
+    <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.subject'])"
       [badgeType]="'badge-secondary'"
       [label]="'item.page.dcterms.subject'">
@@ -171,7 +173,7 @@
       [label]="'item.page.license'">
     </ds-cic-metadata-values>
   </div>
-  <div class="col-xs-12 col-md-3 order-md-1">
+  <div class="file-section">
     <ng-container *ngIf="!mediaViewer.image">
       <ds-metadata-field-wrapper class="d-none d-md-block" [hideIfNoTextContent]="false">
         <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
@@ -180,7 +182,6 @@
     <ng-container *ngIf="mediaViewer.image">
       <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
     </ng-container>
-    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
   </div>
 </div>
 <div class="text-center">
