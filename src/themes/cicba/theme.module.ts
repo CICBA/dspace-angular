@@ -98,6 +98,7 @@ import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-d
 import { CicCommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
 import { ItemPageComponent } from './app/item-page/simple/item-page.component';
 import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
+import { ItemListElementComponent } from './app/object-list/item-list-element/item-types/item/item-list-element.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -155,6 +156,7 @@ const DECLARATIONS = [
   ItemPageComponent,
   ItemPageStatisticsComponent,
   CicCommunityPageSubCommunityListComponent,
+  ItemListElementComponent
 ];
 
 @NgModule({
