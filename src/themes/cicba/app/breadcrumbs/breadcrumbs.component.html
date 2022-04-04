@@ -1,10 +1,11 @@
 <ng-container *ngVar="(breadcrumbs$ | async) as breadcrumbs">
     <nav *ngIf="(showBreadcrumbs$ | async)" aria-label="breadcrumb" class="nav-breadcrumb">
         <ol class="container breadcrumb">
-            <ng-container
-                    *ngTemplateOutlet="breadcrumbs?.length > 0 ? breadcrumb : activeBreadcrumb; context: {text: 'home.breadcrumbs', url: '/community-list'}"></ng-container>
-            <ng-container *ngFor="let bc of breadcrumbs; let last = last;">
-                <ng-container *ngIf="!last">
+            <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
+                <ng-container *ngTemplateOutlet="breadcrumbs?.length > 0 ? breadcrumb : activeBreadcrumb; context: {text: 'home.breadcrumbs', url: '/community-list'}"></ng-container>
+            </ng-container>
+            <ng-container *ngFor="let bc of breadcrumbs; let i = index; let last = last;">
+                <ng-container *ngIf="!last && !((windowService.isXsOrSm() | async) && breadcrumbs.length - 2 != i)">
                     <ng-container *ngTemplateOutlet="breadcrumb; context: bc"></ng-container>
                 </ng-container>
             </ng-container>
