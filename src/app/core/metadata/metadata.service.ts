@@ -152,8 +152,9 @@ export class MetadataService {
       this.setCitationDissertationNameTag();
     }
 
+    this.setIsPartOfTag();
     // this.setCitationJournalTitleTag();
-    // this.setCitationVolumeTag();
+    this.setCitationVolumeTag();
     // this.setCitationIssueTag();
     // this.setCitationFirstPageTag();
     // this.setCitationLastPageTag();
@@ -276,6 +277,22 @@ export class MetadataService {
       }
       this.addMetaTag('citation_abstract_html_url', url);
     }
+  }
+
+  /**
+   * Add <meta name="citation_volume" ... >  to the <head>
+   */
+  setCitationVolumeTag() {
+    const value = this.getMetaTagValuesAndCombine('dcterms.isPartOf.issue');
+    this.addMetaTag('citation_volume', value);
+  }
+
+  /**
+   * Add <meta name="DC.relation.ispartof" ... >  to the <head>
+   */
+  setIsPartOfTag() {
+    const value = this.getMetaTagValuesAndCombine('dcterms.isPartOf.series');
+    this.addMetaTag('DC.relation.ispartof', value);
   }
 
   /**
