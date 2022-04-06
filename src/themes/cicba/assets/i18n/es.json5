@@ -5,11 +5,15 @@
     
     "500.page-internal-server-error": "Servicio no disponible",
 
+    "browse.comcol.by.dateissued": "Por fecha de publicación",
+
     "communityList.breadcrumbs": "Lista de comunidades",
 
     "communityList.tabTitle": "Lista de comunidades",
 
     "communityList.title": "Lista de comunidades",
+
+    "community.sub-community-list.head": "Subcomunidades de esta comunidad",
 
     "dso-selector.set-scope.community.button": "Buscar en todo el repositorio",
 
@@ -18,6 +22,14 @@
     "dso-selector.set-scope.community.input-header": "Buscar una comunidad o colección",
     
     "error.invalid-search-query": "La consulta de búsqueda no es válida.",
+
+    "forgot-email.form.header": "¿Olvidó la contraseña?",
+
+    "forgot-email.form.info": "Introduzca la dirección de correo electrónico que proporcionó cuando se registró en CIC-Digital. Se le enviará un mensaje a esa dirección con las instrucciones de recuperación.",
+
+    "forgot-email.form.email.hint": "Introduzca la misma dirección con la que se registró.",
+
+    "forgot-email.form.submit": "Enviar",
 
     "form.loading": "Cargando...",
 
@@ -137,6 +149,12 @@
     
     "item.listelement.badge": "Publicación",
 
+    "login.form.header": "Inicie sesión en CIC-Digital",
+
+    "menu.section.browse_community_by_issue_date": "Por fecha de publicación",
+
+    "menu.section.browse_global_by_dateissued": "Por fecha de publicación",
+
     "menu.section.navbar.contribute": "Aportar material",
 
     "menu.section.navbar.contact": "Contacto",
@@ -160,6 +178,8 @@
 	"last.accessioned.items.title": "Añadido Recientemente",
 
 	"last.accessioned.items.see-more": "Ver más",
+
+    "register-page.registration.info": "Registre una cuenta para suscribirse a colecciones para recibir actualizaciones por correo electrónico y enviar nuevos artículos a CIC-Digital.",
 
     "repository.title.prefix": "CIC Digital - ",
 
@@ -195,9 +215,9 @@
 
     "search.sidebar.settings.rpp": "Resultados por página",
     
-    "sorting.dc.date.issued.ASC": "Fecha de emisión ascendente",
+    "sorting.dc.date.issued.ASC": "Fecha de publicación ascendente",
 
-    "sorting.dc.date.issued.DESC": "Fecha de emisión descendente",
+    "sorting.dc.date.issued.DESC": "Fecha de publicación descendente",
 
     "sorting.dcterms.issued.ASC": "Fecha de publicación ascendente",
 

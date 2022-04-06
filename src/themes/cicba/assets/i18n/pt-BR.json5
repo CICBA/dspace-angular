@@ -1,9 +1,19 @@
 {
+    "community.sub-community-list.head": "Subcomunidades desta Comunidade",
+
     "communityList.breadcrumbs": "Lista da comunidade",
 
     "communityList.tabTitle": "Lista da comunidade",
 
     "communityList.title": "Lista da comunidade",
+
+    "forgot-email.form.header": "Esqueceu a senha?",
+
+    "forgot-email.form.info": "Digite o endereço de e-mail que você utilizou para se cadastrar no CIC-Digital. Um e-mail será enviado ao endereço com instruções.",
+
+    "forgot-email.form.email.hint": "Digite o mesmo endereço de e-mail utilizado durante o cadastro.",
+
+    "forgot-email.form.submit": "Enviar",
 
     "home.breadcrumbs": "CIC-Digital",
 
@@ -73,6 +83,12 @@
 
     "item.page.statistics.label.TotalVisits": "Vistas",
 
+    "last.accessioned.items.title": "Submissões recentes",
+
+    "last.accessioned.items.see-more": "Ver mais",
+
+    "login.form.header": "Por favor entre no CIC-Digital",
+
     "menu.section.browse_global_by_author": "Autores",
 
     //"menu.section.navbar.contribute": "Contribute Material",
@@ -98,12 +114,8 @@
 
     //"menu.section.navbar.what_is_cic_digital": "What is CIC Digital?",
     "menu.section.navbar.what_is_cic_digital": "O que é o CIC-Digital?",
-    
-    // "last.accessioned.items.title": "Recently Added",
-    "last.accessioned.items.title": "Submissões recentes",
 
-    // "last.accessioned.items.see-more": "See more",
-    "last.accessioned.items.see-more": "Ver mais",
+    "register-page.registration.info": "Registre uma conta para se inscrever em coleções para atualizações por e-mail, e enviar novos itens para o CIC-Digital.",
 
     "repository.title.prefix": "CIC Digital - ",
 
