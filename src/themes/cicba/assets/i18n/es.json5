@@ -55,6 +55,8 @@
 
     "item.page.collections.loading": "Cargando...",
 
+    "item.page.dcterms.alternative": "Título alternativo",
+
     "item.page.dcterms.extent": "Extensión",
 
     "item.page.dcterms.isPartOf.item": "Libro/Informe",

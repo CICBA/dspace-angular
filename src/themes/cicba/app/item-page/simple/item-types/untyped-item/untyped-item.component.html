@@ -28,6 +28,11 @@
 </div>
 <div class="item-content">
   <div class="metadata-section">
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.alternative'])"
+      [label]="'item.page.dcterms.alternative'"
+      [inlineLabel]="false">
+    </ds-cic-metadata-values>
     <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"

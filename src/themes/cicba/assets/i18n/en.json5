@@ -19,6 +19,8 @@
 
   "home.navigation.communities": "Communities",
 
+  "item.page.dcterms.alternative": "Alternative title",
+
   "item.page.dcterms.extent": "Extension",
 
   "item.page.dcterms.isPartOf.item": "Book/Report",
