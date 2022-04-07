@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ViewMode } from 'src/app/core/shared/view-mode.model';
-import { ItemSearchResult } from 'src/app/shared/object-collection/shared/item-search-result.model';
 import { listableObjectComponent } from 'src/app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ItemListElementComponent as BaseComponent  } from '../../../../../../../app/shared/object-list/item-list-element/item-types/item/item-list-element.component'
 import { Item } from '../../../../../../../app/core/shared/item.model';
