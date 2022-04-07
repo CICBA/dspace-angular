@@ -1,7 +1,7 @@
 <ng-container *ngVar="(objects$ | async) as objects">
   <h4>{{title | translate}}</h4>
   <ul class="list-unstyled">
-    <li *ngFor="let object of objects?.payload?.page" class="mt-4 mb-4">
+    <li *ngFor="let object of objects?.payload?.page" class="mt-5 mb-5">
       <ds-listable-object-component-loader [object]="object" [viewMode]="viewMode">
       </ds-listable-object-component-loader>
     </li>
