@@ -1,4 +1,4 @@
-<ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="label">
+<ds-cic-metadata-field-wrapper [label]="label">
   <ng-container *ngFor="let objectPage of objects; let i = index">
     <ng-container *ngVar="(objectPage | async) as representations">
       <ng-container *ngFor="let rep of representations; let last = last">
