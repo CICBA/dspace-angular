@@ -120,20 +120,20 @@
       <ng-container *ngFor="let idValue of itemIdentifiers">
         <ds-badge-metadata-values
           [mdValues]="[idValue.mdValue]"
-          [badgeType]="'badge-warning'"
+          [badgeType]="'badge-identifier'"
           [badgeLabelType]="'badge-dark'"
           [badgeLabel]="idValue.label">
         </ds-badge-metadata-values>
       </ng-container>
       <ds-badge-metadata-values
         [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
-        [badgeType]="'badge-warning'"
+        [badgeType]="'badge-identifier'"
         [badgeLabelType]="'badge-dark'"
         [badgeLabel]="'ISSN'">
       </ds-badge-metadata-values>
       <ds-badge-metadata-values
         [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
-        [badgeType]="'badge-warning'"
+        [badgeType]="'badge-identifier'"
         [badgeLabelType]="'badge-dark'"
         [badgeLabel]="'ISBN'">
       </ds-badge-metadata-values>
