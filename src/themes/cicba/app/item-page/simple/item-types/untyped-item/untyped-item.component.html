@@ -116,32 +116,28 @@
       [mdValues]="object?.allMetadata(['dcterms.extent'])"
       [label]="'item.page.dcterms.extent'">
     </ds-cic-metadata-values>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dc.identifier.uri'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'URI'">
-    </ds-badge-metadata-values>
-    <ng-container *ngFor="let idValue of identifierOtherValues">
+    <div class="item-identifiers">
+      <ng-container *ngFor="let idValue of itemIdentifiers">
+        <ds-badge-metadata-values
+          [mdValues]="[idValue.mdValue]"
+          [badgeType]="'badge-warning'"
+          [badgeLabelType]="'badge-dark'"
+          [badgeLabel]="idValue.label">
+        </ds-badge-metadata-values>
+      </ng-container>
       <ds-badge-metadata-values
-        [mdValues]="[idValue.mdValue]"
-        [badgeType]="'badge-info'"
+        [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
+        [badgeType]="'badge-warning'"
         [badgeLabelType]="'badge-dark'"
-        [badgeLabel]="idValue.label">
+        [badgeLabel]="'ISSN'">
       </ds-badge-metadata-values>
-    </ng-container>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'ISSN'">
-    </ds-badge-metadata-values>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
-      [badgeType]="'badge-info'"
-      [badgeLabelType]="'badge-dark'"
-      [badgeLabel]="'ISBN'">
-    </ds-badge-metadata-values>
+      <ds-badge-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
+        [badgeType]="'badge-warning'"
+        [badgeLabelType]="'badge-dark'"
+        [badgeLabel]="'ISBN'">
+      </ds-badge-metadata-values>
+    </div>
   </div>
   <div class="download-section">
     <!-- <ds-item-page-statistics [item]="object"></ds-item-page-statistics> -->

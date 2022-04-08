@@ -31,7 +31,7 @@ import { HostWindowService } from 'src/app/shared/host-window.service';
 export class UntypedItemComponent extends VersionedItemComponent implements OnInit {
 
   identifierOtherMetadataName: string = 'dcterms.identifier.other';
-  identifierOtherValues: { mdValue: MetadataValue, label: string }[];
+  itemIdentifiers: { mdValue: MetadataValue, label: string }[];
 
   constructor(modalService: NgbModal, versionHistoryService: VersionHistoryDataService, translateService: TranslateService, versionService: VersionDataService, itemVersionShared: ItemVersionsSharedService, router: Router, workspaceItemDataService: WorkspaceitemDataService, searchService: SearchService, itemService: ItemDataService, routeService: RouteService, public windowService: HostWindowService) {
     super(modalService, versionHistoryService, translateService, versionService, itemVersionShared, router, workspaceItemDataService, searchService, itemService, routeService);
@@ -43,7 +43,12 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
   }
 
   setIdentifierOtherValues(): void {
-    this.identifierOtherValues = [];
+    this.itemIdentifiers = [];
+    var length = this.itemIdentifiers.push({
+      mdValue: new MetadataValue(),
+      label: 'HDL'
+    });
+    this.itemIdentifiers[length - 1].mdValue.value = this.object?.handle;
     this.object.allMetadata([this.identifierOtherMetadataName]).forEach(
       (mdValue, index) => {
         var charIndex = -1;
@@ -56,11 +61,11 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
           label = "URL";
         }
         var value = mdValue.value.substring(charIndex + 1).trim();
-        this.identifierOtherValues[index] = {
+        var length = this.itemIdentifiers.push({
           mdValue: new MetadataValue(),
           label: label
-        }
-        this.identifierOtherValues[index].mdValue.value = value;
+        });
+        this.itemIdentifiers[length - 1].mdValue.value = value;
       }
     );
   }
