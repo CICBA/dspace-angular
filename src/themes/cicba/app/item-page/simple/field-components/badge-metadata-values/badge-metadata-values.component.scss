@@ -18,3 +18,8 @@
 .group-inline-block {
     display: inline-block;
 }
+
+::ng-deep .bagde-group span {
+    padding: 0.4em;
+    padding-right: 0.5em;
+}
