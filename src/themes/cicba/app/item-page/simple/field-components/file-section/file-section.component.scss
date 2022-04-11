@@ -13,34 +13,30 @@ hr {
         display: flex;
         margin-bottom: 1em;
         gap: 1em;
+        align-items: center;
     }
-    :hover .file-name {
+    :hover .file-full-name {
         filter: brightness(0.1);
+    }
+
+    :hover .download-button {
+        filter: brightness(0.9);
     }
 
     .download-button {
         border-radius: 100%;
-        background-color: var(--ds-home-news-link-color);
+        background-color: var(--ds-cic-download-button);
         color: white;
-        padding: 0.1em 0.4em;
+        padding: 0.2em 0.5em;
         font-size: 1.2em;
         max-width: 100%
     }
-    :hover .download-button {
-        background-color: var(--ds-home-news-link-hover-color);
+
+    .file-full-name span {
+        display: block;
     }
 
-    .download-btn {
-        background-color: var(--ds-home-news-link-color);
-        border: none;
-        color: white;
-        padding: 0.3em;
-        cursor: pointer;
-        i {
-            color: white;
-        }
-    }
-    .download-btn:hover {
-        background-color: var(--ds-home-news-link-hover-color);
+    .file-name {
+        font-weight: bold;
     }
 }
