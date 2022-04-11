@@ -91,6 +91,14 @@
       [label]="'item.page.dcterms.relation'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
+      [label]="'item.page.dcterms.isPartOf.series'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
+      [label]="'item.page.dcterms.isPartOf.issue'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.publisher'])"
       [label]="'item.page.publisher'">
     </ds-cic-metadata-values>

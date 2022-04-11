@@ -23,7 +23,11 @@
 
   "item.page.dcterms.extent": "Extension",
 
+  "item.page.dcterms.isPartOf.issue": "Journal volume/Event name",
+
   "item.page.dcterms.isPartOf.item": "Book/Report",
+
+  "item.page.dcterms.isPartOf.series": "Journal or event",
 
   "item.page.dcterms.language": "Language",
 
