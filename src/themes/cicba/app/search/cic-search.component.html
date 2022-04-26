@@ -22,7 +22,7 @@
         </div>
         <div id="search-content" class="col-12">
             <div class="search-config">
-                <ds-view-mode-switch [viewModeList]="viewModeList" [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch>
+                <!-- <ds-view-mode-switch [viewModeList]="viewModeList" [inPlaceSearch]="inPlaceSearch"></ds-view-mode-switch> -->
                 <ds-cic-search-settings [currentSortOption]="(currentScope$ | async)" [sortOptionsList]="(sortOptionsList$ | async)"></ds-cic-search-settings>            
                 <div class="d-block d-md-none search-controls clearfix">
                     <button (click)="openSidebar()" aria-controls="#search-body"
