@@ -17,7 +17,7 @@
         (<span *ngIf="dso.firstMetadataValue('dcterms.publisher')" class="item-list-publisher"
           [innerHTML]="firstMetadataValue('dcterms.publisher') + ', '"></span>
         <span *ngIf="dso.firstMetadataValue('dcterms.issued')" class="item-list-date"
-          [innerHTML]="firstMetadataValue('dcterms.issued')"></span>)
+          [innerHTML]="firstMetadataValue('dcterms.issued').slice(0,4)"></span>)
       </ng-container>
       <span *ngIf="dso.allMetadata(['dcterms.creator.author', 'dcterms.creator.*']).length > 0"
         class="item-list-authors">
