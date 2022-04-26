@@ -6,12 +6,6 @@
     >
   </ds-badge-metadata-values>
   <ds-type-badge *ngIf="showLabel && getDsoType(dso) != 'item'" [object]="dso"></ds-type-badge>
-  <ds-badge-metadata-values
-    [mdValues]="dso.allMetadata(['dcterms.issued'])"
-    [badgeType]="'badge-info'"
-    [badgeLabelType]="'badge-dark'"
-    >
-  </ds-badge-metadata-values>
 </div>
 <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
   <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"
