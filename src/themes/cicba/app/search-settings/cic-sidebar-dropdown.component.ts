@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SidebarDropdownComponent as BaseComponent } from '../../../../app/shared/sidebar/sidebar-dropdown.component'
+import { SidebarDropdownComponent as BaseComponent } from '../../../../app/shared/sidebar/sidebar-dropdown.component';
 
 @Component({
   selector: 'ds-cic-sidebar-dropdown',

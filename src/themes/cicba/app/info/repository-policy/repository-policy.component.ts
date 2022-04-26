@@ -16,9 +16,9 @@ export class RepositoryPolicyComponent {
 
   public scrollTo(elementId: string): void {
     document.getElementById(elementId).scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'
     });
   }
 }

@@ -33,17 +33,14 @@ export class ItemPageStatisticsComponent extends StatisticsPageComponent<Item> {
   /**
    * The report icons to show depending on the statistic type.
    */
-  statIcons = {
-    'TotalVisits': "fa fa-eye",
-    'TotalDownloads': "fa fa-download",
-  };
+  statIcons = { 'TotalVisits': "fa fa-eye", 'TotalDownloads': "fa fa-download" };
 
   /**
    * Get the scope dso for this statistics page, as an Observable.
    */
   protected getScope$(): Observable<DSpaceObject> {
     return new Observable((observer) => {
-      observer.next(this.item);})
+      observer.next(this.item);});
   }
 
 }

@@ -14,7 +14,7 @@ import { HeaderComponent as BaseComponent } from '../../../../app/header/header.
 export class HeaderComponent extends BaseComponent {
 
   router: string;
-  constructor(private _router: Router, menuService: MenuService){
+  constructor(private _router: Router, menuService: MenuService) {
     super(menuService);
     this.router = _router.url;
   }

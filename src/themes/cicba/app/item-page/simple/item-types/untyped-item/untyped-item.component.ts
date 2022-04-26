@@ -30,7 +30,7 @@ import { HostWindowService } from 'src/app/shared/host-window.service';
 })
 export class UntypedItemComponent extends VersionedItemComponent implements OnInit {
 
-  identifierOtherMetadataName: string = 'dcterms.identifier.other';
+  identifierOtherMetadataName = 'dcterms.identifier.other';
   itemIdentifiers: { mdValue: MetadataValue, label: string }[];
 
   constructor(modalService: NgbModal, versionHistoryService: VersionHistoryDataService, translateService: TranslateService, versionService: VersionDataService, itemVersionShared: ItemVersionsSharedService, router: Router, workspaceItemDataService: WorkspaceitemDataService, searchService: SearchService, itemService: ItemDataService, routeService: RouteService, public windowService: HostWindowService) {
@@ -44,24 +44,24 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
 
   setIdentifierOtherValues(): void {
     this.itemIdentifiers = [];
-    var length = this.itemIdentifiers.push({
+    const length = this.itemIdentifiers.push({
       mdValue: new MetadataValue(),
       label: 'HDL'
     });
     this.itemIdentifiers[length - 1].mdValue.value = this.object?.handle;
     this.object.allMetadata([this.identifierOtherMetadataName]).forEach(
       (mdValue, index) => {
-        var charIndex = -1;
-        var label = "";
-        if (!mdValue.value.startsWith("http")) {
-          var splitChar = mdValue.value.includes(":") ? ":" : " ";
+        let charIndex = -1;
+        let label = '';
+        if (!mdValue.value.startsWith('http')) {
+          const splitChar = mdValue.value.includes(':') ? ':' : ' ';
           charIndex = mdValue.value.indexOf(splitChar);
           label = mdValue.value.substring(0, charIndex).toUpperCase();
         } else {
-          label = "URL";
+          label = 'URL';
         }
-        var value = mdValue.value.substring(charIndex + 1).trim();
-        var length = this.itemIdentifiers.push({
+        const value = mdValue.value.substring(charIndex + 1).trim();
+        const length = this.itemIdentifiers.push({
           mdValue: new MetadataValue(),
           label: label
         });

@@ -14,7 +14,7 @@ export class CicMetadataFieldWrapperComponent extends MetadataFieldWrapperCompon
   @Input() inlineLabel: boolean;
 
   ngOnInit() {
-    if (this.inlineLabel == undefined) {
+    if (this.inlineLabel === undefined) {
       this.inlineLabel = true;
     }
   }

@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from '@angular/core';
-import { SearchSettingsComponent as BaseComponent } from '../../../../app/shared/search/search-settings/search-settings.component'
+import { SearchSettingsComponent as BaseComponent } from '../../../../app/shared/search/search-settings/search-settings.component';
 @Component({
   selector: 'ds-cic-search-settings',
   styleUrls: ['./cic-search-settings.component.scss'],

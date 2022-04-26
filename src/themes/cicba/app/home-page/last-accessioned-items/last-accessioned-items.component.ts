@@ -34,7 +34,7 @@ export class LastAccessionedItemsComponent implements OnInit {
   /**
    * The i18n message to display as title
    */
-  title: string = "last.accessioned.items.title";
+  title = 'last.accessioned.items.title';
 
   /**
    * The list of objects to display
@@ -119,7 +119,7 @@ export class LastAccessionedItemsComponent implements OnInit {
     const sortDirection = this.searchConfigService.paginationID + '.sd';
     const page = this.searchConfigService.paginationID + '.page';
     this.addQueryParams = {
-      [sortField]: "dc.date.accessioned",
+      [sortField]: 'dc.date.accessioned',
       [sortDirection]: SortDirection.DESC,
       [page]: 1
     };

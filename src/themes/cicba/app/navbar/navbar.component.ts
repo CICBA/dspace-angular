@@ -27,7 +27,7 @@ export class NavbarComponent extends BaseComponent {
 
   router: string;
 
-  constructor(private _router: Router, menuService: MenuService, injector: Injector, windowService: HostWindowService, browseService: BrowseService, authorizationService: AuthorizationDataService, route: ActivatedRoute){
+  constructor(private _router: Router, menuService: MenuService, injector: Injector, windowService: HostWindowService, browseService: BrowseService, authorizationService: AuthorizationDataService, route: ActivatedRoute) {
     super(menuService, injector, windowService, browseService, authorizationService, route);
     this.router = _router.url;
   }
@@ -36,8 +36,8 @@ export class NavbarComponent extends BaseComponent {
    * Initialize all menu sections and items for this menu
    */
   createMenu() {
-    var menuList: any[] = [];
-    if (this.router != '/home') {
+    let menuList: any[] = [];
+    if (this.router !== '/home') {
       menuList = [
         /* Explorar */
         {
@@ -138,10 +138,10 @@ export class NavbarComponent extends BaseComponent {
         .subscribe((browseDefListRD: RemoteData<PaginatedList<BrowseDefinition>>) => {
           if (browseDefListRD.hasSucceeded) {
             const authorBrowseConfig = browseDefListRD.payload.page.filter((browseDef: BrowseDefinition) =>
-              browseDef.id == 'author')
+              browseDef.id === 'author');
             if (authorBrowseConfig) {
               /* Authors */
-              let authorType = authorBrowseConfig[0];
+              const authorType = authorBrowseConfig[0];
               menuList.push({
                 id: `browse_global_by_${authorType.id}`,
                 parentID: 'navbar_explore',
@@ -152,7 +152,7 @@ export class NavbarComponent extends BaseComponent {
                   text: `menu.section.browse_global_by_${authorType.id}`,
                   link: `/browse/${authorType.id}`
                 } as LinkMenuItemModel
-              })
+              });
             }
           }
           menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
