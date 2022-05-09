@@ -15,8 +15,8 @@ export class CicDateMetadataValuesComponent extends MetadataValuesComponent impl
 
   ngOnInit(): void {
       const date = this.mdValues[0].value;
-      if (date.length === 10){
-        this.dateString = new Date(date).toLocaleDateString('es-AR',{ year: 'numeric', month: 'long', day: 'numeric' })
+      if (date.length === 10) {
+        this.dateString = new Date(date).toLocaleDateString('es-AR',{ year: 'numeric', month: 'long', day: 'numeric' });
       } else if (date.length === 7) {
         this.dateString = new Date(date).toLocaleDateString('es-AR',{ year: 'numeric', month: 'long' });
       } else {
