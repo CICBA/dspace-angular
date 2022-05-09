@@ -99,6 +99,7 @@ import { CicCommunityPageSubCommunityListComponent } from './app/community-page/
 import { ItemPageComponent } from './app/item-page/simple/item-page.component';
 import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
 import { ItemListElementComponent } from './app/object-list/item-list-element/item-types/item/item-list-element.component';
+import { CicDateMetadataValuesComponent } from './app/item-page/simple/field-components/date-metadata-values/cic-date-metadata-values.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -156,7 +157,8 @@ const DECLARATIONS = [
   ItemPageComponent,
   ItemPageStatisticsComponent,
   CicCommunityPageSubCommunityListComponent,
-  ItemListElementComponent
+  ItemListElementComponent,
+  CicDateMetadataValuesComponent
 ];
 
 @NgModule({

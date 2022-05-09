@@ -63,7 +63,9 @@
 
     "item.page.dcterms.isPartOf.item": "Libro/Informe",
 
-    "item.page.dcterms.isPartOf.series": "Revista o evento",
+    "item.page.dcterms.isPartOf.series": "Serie",
+
+    "item.page.dcterms.isPartOf.series.event": "Evento",
 
     "item.page.dcterms.language": "Idioma",
 

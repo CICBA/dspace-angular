@@ -19,12 +19,19 @@
     [mdValues]="object?.allMetadata(['dc.type'])"
     [badgeType]="'badge-info type-badge'">
   </ds-badge-metadata-values>
-  <h4 class="item-page-title-field mr-auto">
+  <h4 class="item-page-title-field mr-auto font-weight-bold">
     <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
   </h4>
-  <h6 class="mr-auto">
+  <h5 class="mr-auto">
     <ds-metadata-values [mdValues]="object?.allMetadata(['dcterms.title.subtitle'])"></ds-metadata-values>
-  </h6>
+  </h5>
+  <ds-cic-metadata-representation-list
+    class="font-italic"
+    [parentItem]="object"
+    [itemType]="'Person'"
+    [metadataFields]="['dcterms.creator.author', 'dcterms.creator.corporate']"
+   [separator]="'|'">
+  </ds-cic-metadata-representation-list>
 </div>
 <div class="item-content">
   <div class="metadata-section">
@@ -33,13 +40,6 @@
       [label]="'item.page.dcterms.alternative'"
       [inlineLabel]="false">
     </ds-cic-metadata-values>
-    <ds-cic-metadata-representation-list
-      [parentItem]="object"
-      [itemType]="'Person'"
-      [metadataFields]="['dcterms.creator.author', 'dcterms.creator.corporate']"
-      [label]="'relationships.isAuthorOf' | translate"
-      [separator]="'|'">
-    </ds-cic-metadata-representation-list>
     <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
@@ -65,10 +65,10 @@
       [mdValues]="object?.allMetadata(['dcterms.publisher'])"
       [label]="'item.page.publisher'">
     </ds-cic-metadata-values>
-    <ds-cic-metadata-values
+    <ds-cic-date-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.issued'])"
       [label]="'item.page.date.issued'">
-    </ds-cic-metadata-values>
+    </ds-cic-date-metadata-values>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.description'])"
       [label]="'item.page.description'">
@@ -94,14 +94,18 @@
       [separator]="','"
       [label]="'item.page.dcterms.relation'">
     </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
-      [label]="'item.page.dcterms.isPartOf.series'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
-      [label]="'item.page.dcterms.isPartOf.issue'">
-    </ds-cic-metadata-values>
+    <div>
+      <ds-cic-metadata-values
+        class="d-inline"
+        [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
+        [label]="'item.page.dcterms.isPartOf.series'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        class="d-inline"
+        [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
+        [label]="'item.page.dcterms.isPartOf.issue'">
+      </ds-cic-metadata-values>
+    </div>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.language'])"
       [label]="'item.page.dcterms.language'">

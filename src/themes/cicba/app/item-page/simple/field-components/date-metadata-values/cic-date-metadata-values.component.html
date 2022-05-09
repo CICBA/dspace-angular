@@ -1,0 +1,6 @@
+<ds-cic-metadata-field-wrapper [inlineLabel]="inlineLabel" [label]="label | translate">
+    <span class="dont-break-out">
+        {{ dateString }}
+    </span>
+    <span *ngIf="!last" [innerHTML]="separator"></span>
+</ds-cic-metadata-field-wrapper>
