@@ -17,7 +17,7 @@ import { getResourceTypeValueFor } from 'src/app/core/cache/object-cache.reducer
 @listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
 
 @Component({
-  selector: 'cic-ds-item-search-result-list-element',
+  selector: 'ds-cic-item-search-result-list-element',
   styleUrls: ['./item-search-result-list-element.component.scss'],
   templateUrl: './item-search-result-list-element.component.html'
 })

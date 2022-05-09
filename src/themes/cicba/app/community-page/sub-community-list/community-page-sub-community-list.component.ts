@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommunityPageSubCommunityListComponent as BaseComponent} from '../../../../../app/community-page/sub-community-list/community-page-sub-community-list.component';
 
 @Component({
-  selector: 'cic-ds-community-page-sub-community-list',
+  selector: 'ds-cic-community-page-sub-community-list',
   styleUrls: ['../../../../../app/community-page/sub-community-list/community-page-sub-community-list.component.scss'],
   templateUrl: '../../../../../app/community-page/sub-community-list/community-page-sub-community-list.component.html'
 })

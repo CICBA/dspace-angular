@@ -36,7 +36,7 @@
           <ds-comcol-page-browse-by *ngIf="communityPayload.name !== 'Centros'" [id]="communityPayload.id" [contentType]="communityPayload.type">
           </ds-comcol-page-browse-by>
 
-          <cic-ds-community-page-sub-community-list [community]="communityPayload"></cic-ds-community-page-sub-community-list>
+          <ds-cic-community-page-sub-community-list [community]="communityPayload"></ds-cic-community-page-sub-community-list>
           <ds-community-page-sub-collection-list [community]="communityPayload"></ds-community-page-sub-collection-list>
         </section>
         <footer  *ngIf="communityPayload.copyrightText"  class="border-top my-5 pt-4">

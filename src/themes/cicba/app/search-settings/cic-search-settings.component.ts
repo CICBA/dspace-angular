@@ -9,6 +9,6 @@ import { SearchSettingsComponent as BaseComponent } from '../../../../app/shared
 /**
  * This component represents the part of the search sidebar that contains the general search settings.
  */
-export class CicSearchSettingsComponent extends BaseComponent{
+export class CicSearchSettingsComponent extends BaseComponent {
 
 }

@@ -61,11 +61,11 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
           label = 'URL';
         }
         const value = mdValue.value.substring(charIndex + 1).trim();
-        const length = this.itemIdentifiers.push({
+        const identifierListLength = this.itemIdentifiers.push({
           mdValue: new MetadataValue(),
           label: label
         });
-        this.itemIdentifiers[length - 1].mdValue.value = value;
+        this.itemIdentifiers[identifierListLength - 1].mdValue.value = value;
       }
     );
   }

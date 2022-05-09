@@ -13,17 +13,14 @@ export class CicDateMetadataValuesComponent extends MetadataValuesComponent impl
   @Input() inlineLabel: boolean;
   dateString: string;
 
-  // comitear 
-
   ngOnInit(): void {
-      let date = this.mdValues[0].value;
-      if (date.length == 10){
+      const date = this.mdValues[0].value;
+      if (date.length === 10){
         this.dateString = new Date(date).toLocaleDateString('es-AR',{ year: 'numeric', month: 'long', day: 'numeric' })
-      } else if (date.length == 7){
-        this.dateString = new Date(date).toLocaleDateString('es-AR',{ year: 'numeric', month: 'long' })
+      } else if (date.length === 7) {
+        this.dateString = new Date(date).toLocaleDateString('es-AR',{ year: 'numeric', month: 'long' });
       } else {
         this.dateString = date;
       }
   }
-
 }
