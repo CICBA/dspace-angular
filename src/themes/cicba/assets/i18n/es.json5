@@ -59,7 +59,9 @@
 
     "item.page.dcterms.extent": "Extensión",
 
-    "item.page.dcterms.isPartOf.issue": "Volumen de la revista/Nombre del evento",
+    "item.page.dcterms.isPartOf.issue": "Volumen de la revista",
+
+    "item.page.dcterms.isPartOf.issue.event": "Nombre del evento",
 
     "item.page.dcterms.isPartOf.item": "Libro/Informe",
 

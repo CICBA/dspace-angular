@@ -96,14 +96,12 @@
     </ds-cic-metadata-values>
     <div>
       <ds-cic-metadata-values
-        class="d-inline"
         [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
-        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value)">
+        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'series')">
       </ds-cic-metadata-values>
       <ds-cic-metadata-values
-        class="d-inline"
         [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
-        [label]="'item.page.dcterms.isPartOf.issue'">
+        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'issue')">
       </ds-cic-metadata-values>
     </div>
     <ds-cic-metadata-values
