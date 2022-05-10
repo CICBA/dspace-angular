@@ -98,7 +98,7 @@
       <ds-cic-metadata-values
         class="d-inline"
         [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
-        [label]="'item.page.dcterms.isPartOf.series'">
+        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value)">
       </ds-cic-metadata-values>
       <ds-cic-metadata-values
         class="d-inline"

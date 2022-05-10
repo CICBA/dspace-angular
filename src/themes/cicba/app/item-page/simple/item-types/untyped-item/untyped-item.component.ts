@@ -69,4 +69,8 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
       }
     );
   }
+
+  getLabelByDcType(type): string {
+    return ( type === 'Documento de conferencia' )? 'item.page.dcterms.isPartOf.series.event': 'item.page.dcterms.isPartOf.series';
+  }
 }
