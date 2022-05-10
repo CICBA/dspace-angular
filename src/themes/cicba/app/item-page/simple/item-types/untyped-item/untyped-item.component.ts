@@ -71,6 +71,6 @@ export class UntypedItemComponent extends VersionedItemComponent implements OnIn
   }
 
   getLabelByDcType(type, qualifier): string {
-    return ( type === 'Documento de conferencia' ) ? `item.page.dcterms.isPartOf.${qualifier}.event`: `item.page.dcterms.isPartOf.${qualifier}`;
+    return ( type === 'Documento de conferencia' ) ? `item.page.dcterms.isPartOf.${qualifier}.event` : `item.page.dcterms.isPartOf.${qualifier}`;
   }
 }
