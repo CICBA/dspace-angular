@@ -94,16 +94,14 @@
       [separator]="','"
       [label]="'item.page.dcterms.relation'">
     </ds-cic-metadata-values>
-    <div>
-      <ds-cic-metadata-values
-        [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
-        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'series')">
-      </ds-cic-metadata-values>
-      <ds-cic-metadata-values
-        [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
-        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'issue')">
-      </ds-cic-metadata-values>
-    </div>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
+      [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'series')">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
+      [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'issue')">
+    </ds-cic-metadata-values>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.language'])"
       [label]="'item.page.dcterms.language'">
