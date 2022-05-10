@@ -15,8 +15,8 @@ import { isNotEmpty } from 'src/app/shared/empty.util';
 export class EndUserAgreementComponent extends BaseComponent implements OnInit {
 
   /**
-  * Accept user agreement without waiting for user input, CIC Digital doesn't have user agreement
-  */
+   * Accept user agreement without waiting for user input, CIC Digital doesn't have user agreement
+   */
   ngOnInit(): void {
     this.accepted = true;
     this.submit();
@@ -37,4 +37,3 @@ export class EndUserAgreementComponent extends BaseComponent implements OnInit {
     });
   }
 }
-
