@@ -1,0 +1,56 @@
+<div class="container">
+    <h2>{{ 'info.end-user-agreement.head' | translate }}</h2>
+    <h3>Políticas del repositorio</h3>
+    <p>
+        CIC-DIGITAL es el Repositorio Institucional de la Comisión de Investigaciones Científicas de la Provincia de Buenos Aires creado en el año 2014 por la <a href="http://digital.cic.gba.gob.ar/handle/123456789/64">resolución 1146</a> para constituirse como el portal de acceso central que reúna toda la producción científico-tecnológica y académica generada en el ámbito de la CICBA y para dar a sus creaciones una mayor visibilidad, aumentar su uso e impacto y asegurar su acceso y preservación a largo plazo. El repositorio CIC-DIGITAL adhiere a la Iniciativa de Acceso Abierto que sustenta el principio de la libre disposición de la información.
+    </p>
+    <p>
+        El repositorio funciona en consonancia con la <a href="http://repositorios.mincyt.gob.ar/recursos.php">Ley número 26.899</a> de “Creación de Repositorios Digitales Institucionales de Acceso Abierto, propios o compartidos” plantea que: “los organismos e instituciones públicas que componen el Sistema Nacional de Ciencia, Tecnología e Innovación (SNCTI), y que reciben financiamiento del Estado nacional, deberán desarrollar repositorios digitales institucionales de acceso abierto, propios o compartidos, en los que se depositará la producción científico-­tecnológica resultante del trabajo, formación y/o proyectos, financiados total o parcialmente con fondos públicos, de sus investigadores, tecnólogos, docentes, becarios de posdoctorado y estudiantes de maestría y doctorado”.
+    </p>
+    <p>
+        CIC-Digital está regido por distintas políticas institucionales creadas para, entre otras cosas, definir el tipo y características del contenido alojado en el repositorio, los derechos inherentes a los autores del contenido, los usos del contenido de acuerdo a la voluntad de los autores, las acciones a definirse para la preservación del contenido, y las distintas estrategias llevadas a cabo para aumentar la visibilidad de toda la producción de CICBA.
+    </p>
+    <p>
+        Las políticas son sometidas regularmente a revisión y se dividen en distintos aspectos, entre ellos:
+    </p>
+    <ul>
+        <li>Política de Contenidos</li>
+        <li>Política de Acceso a datos</li>
+        <li>Política de Depósito</li>
+        <li>Política de Preservación Digital</li>
+        <li>Política de Metadatos</li>
+        <li>Políticas de Digitalización</li>
+        <li>Política de Servicios</li>
+    </ul>
+
+    <h3>Política de contenidos</h3>
+    <p>CIC-DIGITAL recibe la producción de toda la CICBA en sus actividades de investigación y extensión. Los materiales a incorporar en el repositorio deben cumplir con al menos uno de los siguientes requisitos:</p>
+    <ul>
+        <li>ser editados y publicados en el ámbito de la institución,</li>
+        <li>ser generados por docentes y/o investigadores, personal de apoyo, becarios y cualquier otro dependiente de la CICBA o centros asociados,</li>
+        <li>provenir de la CICBA, ya sea su dependencia central o centros,</li>
+        <li>que constituyan documentación relevante en cuanto al funcionamiento a fin de transparentar los procesos y el uso de recursos destinados a Ciencia y Tecnología en la Provincia de Buenos Aires.</li>
+    </ul>
+    <p>Excepcionalmente podrá también albergar materiales que, aunque no estén producidos en la institución, su preservación revista una importancia singular en razón de su valor histórico-cultural . Las obras depositadas pueden estar en cualquier idioma, siendo español, portugués e inglés los más relevantes.</p>
+    <p>De acuerdo a lo precedente algunas de las tipologías aceptadas son: Informes de Investigador, Personal de Apoyo y Becarios, tesis de grado y posgrado, artículos científicos en cualquiera de sus versiones (preprint, postprint o versión del editor), artículos de divulgación, libros y capítulos de libro, presentaciones en congresos, producciones artísticas, imágenes, grabaciones audiovisuales, publicaciones periódicas, mapas, patentes y reseñas (que hayan pasado por un proceso de evaluación). También se incorporarán al repositorio, otros tipos de documentos como, informes técnicos, proyectos de investigación, legislación institucional: ordenanzas y reglamentos, convocatorias, actas de directorio, resoluciones, acuerdos/convenios, planes anuales de Actividades, entre otros.</p>
+    <p>El repositorio acepta los formatos de archivo más comúnmente utilizados como PDF, Word y Powerpoint, aunque por razones de accesibilidad y preservación digital recomienda el uso de formatos abiertos como ODT, RTF, TIFF y JPEG frente a formatos propietarios (Word, GIF, etc) y realiza actividades de transformación a formatos reconocidos como óptimos para la tarea de preservación como es el caso de PDF-A.</p>
+
+    <h3>Política de acceso a datos </h3>
+    <p>Las obras alojadas en el repositorio pueden ser visualizadas y descargadas de forma libre y gratuita, sin necesidad de registro o autorización previa, siempre respetando las condiciones expuestas en las licencias de uso adosadas a las mismas. Los autores o titulares de la propiedad intelectual de cada obra definen en el momento de depósito una licencia de uso, que explicita los usos permitidos para los usuarios y para el repositorio. Los usos que se pueden definir son:</p>
+
+    <li>si se permite uso comercial o no,</li>
+    <li>si se permiten obras derivadas, es decir, derivadas aquellas obras creadas a partir de la licenciada, como por ejemplo: las traducciones y adaptaciones; las revisiones, actualizaciones y anotaciones; los compendios, resúmenes y extractos; los arreglos musicales y, en general, cualesquiera transformaciones de una obra literaria, artística o científica,</li>
+    <li>si, en caso de permitir obras derivadas, las mismas deben mantener idéntica licencia que la obra original.</li>
+    <p>Las licencias de uso permitidas en el repositorio pertenecen a la familia Creative Commons que habilitan la descarga, el uso y compartición de los contenidos siempre que se mencione la obra y al autor original. En el caso particular de CIC-Digital y para las obras existentes en el ámbito de la CICBA, estén estas en formato papel o en digital, son publicadas con una licencia "Creative Commons BY 2.5" o más novedosas. Para el caso de artículos ya publicados por los autores en revistas que tienen condiciones de contrato que contemplan embargos o similares, el personal del repositorio revisa en bases de datos tales como SHERPA/RoMEO.</p>
+    
+    <form class="form-user-agreement-accept mt-4" (ngSubmit)="submit()" novalidate>
+      <input class="ml-1 mr-2" type="checkbox" id="user-agreement-accept" [(ngModel)]="accepted" [ngModelOptions]="{standalone: true}">
+      <label class="col-form-label-lg" for="user-agreement-accept">{{ 'info.end-user-agreement.accept' | translate }}</label>
+  
+      <div class="d-flex mt-4">
+        <button id="button-cancel" type="button" (click)="cancel()" class="btn btn-outline-secondary mr-auto">{{ 'info.end-user-agreement.buttons.cancel' | translate }}</button>
+        <button id="button-save" type="submit" class="btn btn-primary" [disabled]="!accepted">{{ 'info.end-user-agreement.buttons.save' | translate }}</button>
+      </div>
+    </form>
+  </div>
+  
