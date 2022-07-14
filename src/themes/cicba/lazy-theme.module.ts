@@ -43,6 +43,7 @@ import { SearchModule } from 'src/app/shared/search/search.module';
 import { ResourcePoliciesModule } from 'src/app/shared/resource-policies/resource-policies.module';
 import { ComcolModule } from 'src/app/shared/comcol/comcol.module';
 import { RootModule } from 'src/app/root.module';
+import { EagerThemeModule } from './eager-theme.module';
 import { FileSectionComponent } from './app/item-page/simple/field-components/file-section/file-section.component';
 import { HomePageComponent } from './app/home-page/home-page.component';
 import { RootComponent } from './app/root/root.component';
@@ -76,13 +77,8 @@ import { SubmissionSubmitComponent } from './app/submission/submit/submission-su
 import { WorkflowItemDeleteComponent } from './app/workflowitems-edit-page/workflow-item-delete/workflow-item-delete.component';
 import { WorkflowItemSendBackComponent } from './app/workflowitems-edit-page/workflow-item-send-back/workflow-item-send-back.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
-import { BadgeMetadataValuesComponent } from './app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
 import { CicCommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
-import { CicDateMetadataValuesComponent } from './app/item-page/simple/field-components/date-metadata-values/cic-date-metadata-values.component';
 import { CicDigitalInfoComponent } from './app/info/cic-digital-info/cic-digital-info.component';
-import { CicMetadataFieldWrapperComponent } from './app/item-page/simple/field-components/metadata-field-wrapper/cic-metadata-field-wrapper.component';
-import { CicMetadataRepresentationListComponent } from './app/item-page/simple/field-components/metadata-representation-list/cic-metadata-representation-list.component';
-import { CicMetadataValuesComponent } from './app/item-page/simple/field-components/metadata-values/cic-metadata-values.component';
 import { CicSearchComponent } from './app/search/cic-search.component';
 import { CicSearchSettingsComponent } from './app/search-settings/cic-search-settings.component';
 import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
@@ -127,13 +123,8 @@ const DECLARATIONS = [
   WorkflowItemDeleteComponent,
   WorkflowItemSendBackComponent,
   BreadcrumbsComponent,
-  BadgeMetadataValuesComponent,
   CicCommunityPageSubCommunityListComponent,
-  CicDateMetadataValuesComponent,
   CicDigitalInfoComponent,
-  CicMetadataFieldWrapperComponent,
-  CicMetadataRepresentationListComponent,
-  CicMetadataValuesComponent,
   CicSearchComponent,
   CicSearchSettingsComponent,
   CicSearchSidebarComponent,
@@ -193,6 +184,7 @@ const DECLARATIONS = [
     FormsModule,
     ResourcePoliciesModule,
     ComcolModule,
+    EagerThemeModule
   ],
   declarations: DECLARATIONS,
 })

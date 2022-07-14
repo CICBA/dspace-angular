@@ -2,19 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../app/shared/shared.module';
+import { SearchModule } from '../../app/shared/search/search.module';
+import { RootModule } from '../../app/root.module';
+import { NavbarModule } from '../../app/navbar/navbar.module';
+import { ItemPageModule } from '../../app/item-page/item-page.module';
 import { HomeNewsComponent } from './app/home-page/home-news/home-news.component';
 import { NavbarComponent } from './app/navbar/navbar.component';
 import { HeaderComponent } from './app/header/header.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
-import { SearchModule } from '../../app/shared/search/search.module';
-import { RootModule } from '../../app/root.module';
-import { NavbarModule } from '../../app/navbar/navbar.module';
 import { PublicationComponent } from './app/item-page/simple/item-types/publication/publication.component';
-import { ItemPageModule } from '../../app/item-page/item-page.module';
 import { FooterComponent } from './app/footer/footer.component';
 import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { ItemSearchResultListElementComponent } from './app/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 import { ItemListElementComponent } from './app/object-list/item-list-element/item-types/item/item-list-element.component';
+import { BadgeMetadataValuesComponent } from './app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
+import { CicMetadataFieldWrapperComponent } from './app/item-page/simple/field-components/metadata-field-wrapper/cic-metadata-field-wrapper.component';
+import { CicMetadataRepresentationListComponent } from './app/item-page/simple/field-components/metadata-representation-list/cic-metadata-representation-list.component';
+import { CicMetadataValuesComponent } from './app/item-page/simple/field-components/metadata-values/cic-metadata-values.component';
+import { CicDateMetadataValuesComponent } from './app/item-page/simple/field-components/date-metadata-values/cic-date-metadata-values.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -34,6 +39,19 @@ const DECLARATIONS = [
   HeaderNavbarWrapperComponent,
   NavbarComponent,
   FooterComponent,
+  BadgeMetadataValuesComponent,
+  CicMetadataFieldWrapperComponent,
+  CicMetadataRepresentationListComponent,
+  CicMetadataValuesComponent,
+  CicDateMetadataValuesComponent,
+];
+
+const EXPORTS = [
+  BadgeMetadataValuesComponent,
+  CicMetadataFieldWrapperComponent,
+  CicMetadataRepresentationListComponent,
+  CicMetadataValuesComponent,
+  CicDateMetadataValuesComponent,
 ];
 
 @NgModule({
@@ -50,6 +68,9 @@ const DECLARATIONS = [
   providers: [
     ...ENTRY_COMPONENTS.map((component) => ({ provide: component }))
   ],
+  exports: [
+    ...EXPORTS,
+  ]
 })
 /**
  * This module is included in the main bundle that gets downloaded at first page load. So it should
