@@ -29,7 +29,7 @@
           <button
             class="submit-button list-group-item list-group-item-action border-0 list-entry"
             [ngClass]="{'bg-primary': listEntry.indexableObject.id === currentDSOId}"
-            title="{{ listEntry.indexableObject.name }}"
+            title="{{ getName(listEntry) }}"
             dsHoverClass="ds-hover"
             (click)="onSelect.emit(listEntry.indexableObject)" #listEntryElement>
             Enviar

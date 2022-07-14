@@ -7,7 +7,7 @@ import { RemoteData } from 'src/app/core/data/remote-data';
 import { BrowseDefinition } from 'src/app/core/shared/browse-definition.model';
 import { getFirstCompletedRemoteData } from 'src/app/core/shared/operators';
 import { HostWindowService } from 'src/app/shared/host-window.service';
-import { MenuItemType } from 'src/app/shared/menu/initial-menus-state';
+import { MenuItemType } from 'src/app/shared/menu/menu-item-type.model';
 import { LinkMenuItemModel } from 'src/app/shared/menu/menu-item/models/link.model';
 import { TextMenuItemModel } from 'src/app/shared/menu/menu-item/models/text.model';
 import { MenuService } from 'src/app/shared/menu/menu.service';
