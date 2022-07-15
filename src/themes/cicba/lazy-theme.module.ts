@@ -79,13 +79,8 @@ import { WorkflowItemSendBackComponent } from './app/workflowitems-edit-page/wor
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { CicCommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
 import { CicDigitalInfoComponent } from './app/info/cic-digital-info/cic-digital-info.component';
-import { CicSearchComponent } from './app/search/cic-search.component';
-import { CicSearchSettingsComponent } from './app/search-settings/cic-search-settings.component';
-import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
-import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
 import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-contribute.component';
 import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
-import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
 import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
 import { SearchExpandedNavbarComponent } from './app/search-navbar/search-expanded-navbar.component';
 
@@ -125,13 +120,8 @@ const DECLARATIONS = [
   BreadcrumbsComponent,
   CicCommunityPageSubCommunityListComponent,
   CicDigitalInfoComponent,
-  CicSearchComponent,
-  CicSearchSettingsComponent,
-  CicSearchSidebarComponent,
-  CicSidebarDropdownComponent,
   HowToContributeComponent,
   ItemPageStatisticsComponent,
-  LastAccessionedItemsComponent,
   RepositoryPolicyComponent,
   SearchExpandedNavbarComponent,
 ];

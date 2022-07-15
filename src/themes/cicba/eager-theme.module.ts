@@ -1,25 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../../app/shared/shared.module';
-import { SearchModule } from '../../app/shared/search/search.module';
-import { RootModule } from '../../app/root.module';
-import { NavbarModule } from '../../app/navbar/navbar.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { ItemPageModule } from '../../app/item-page/item-page.module';
+import { NavbarModule } from '../../app/navbar/navbar.module';
+import { RootModule } from '../../app/root.module';
+import { SearchModule } from '../../app/shared/search/search.module';
+import { SharedModule } from '../../app/shared/shared.module';
+import { FooterComponent } from './app/footer/footer.component';
 import { HomeNewsComponent } from './app/home-page/home-news/home-news.component';
-import { NavbarComponent } from './app/navbar/navbar.component';
 import { HeaderComponent } from './app/header/header.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
-import { PublicationComponent } from './app/item-page/simple/item-types/publication/publication.component';
-import { FooterComponent } from './app/footer/footer.component';
-import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { ItemSearchResultListElementComponent } from './app/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 import { ItemListElementComponent } from './app/object-list/item-list-element/item-types/item/item-list-element.component';
+import { NavbarComponent } from './app/navbar/navbar.component';
+import { PublicationComponent } from './app/item-page/simple/item-types/publication/publication.component';
+import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { BadgeMetadataValuesComponent } from './app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
+import { CicDateMetadataValuesComponent } from './app/item-page/simple/field-components/date-metadata-values/cic-date-metadata-values.component';
 import { CicMetadataFieldWrapperComponent } from './app/item-page/simple/field-components/metadata-field-wrapper/cic-metadata-field-wrapper.component';
 import { CicMetadataRepresentationListComponent } from './app/item-page/simple/field-components/metadata-representation-list/cic-metadata-representation-list.component';
 import { CicMetadataValuesComponent } from './app/item-page/simple/field-components/metadata-values/cic-metadata-values.component';
-import { CicDateMetadataValuesComponent } from './app/item-page/simple/field-components/date-metadata-values/cic-date-metadata-values.component';
+import { CicSearchComponent } from './app/search/cic-search.component';
+import { CicSearchSettingsComponent } from './app/search-settings/cic-search-settings.component';
+import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
+import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
+import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -40,18 +46,28 @@ const DECLARATIONS = [
   NavbarComponent,
   FooterComponent,
   BadgeMetadataValuesComponent,
+  CicDateMetadataValuesComponent,
   CicMetadataFieldWrapperComponent,
   CicMetadataRepresentationListComponent,
   CicMetadataValuesComponent,
-  CicDateMetadataValuesComponent,
+  CicSearchComponent,
+  CicSearchSettingsComponent,
+  CicSearchSidebarComponent,
+  CicSidebarDropdownComponent,
+  LastAccessionedItemsComponent,
 ];
 
 const EXPORTS = [
   BadgeMetadataValuesComponent,
+  CicDateMetadataValuesComponent,
   CicMetadataFieldWrapperComponent,
   CicMetadataRepresentationListComponent,
   CicMetadataValuesComponent,
-  CicDateMetadataValuesComponent,
+  CicSearchComponent,
+  CicSearchSettingsComponent,
+  CicSearchSidebarComponent,
+  CicSidebarDropdownComponent,
+  LastAccessionedItemsComponent,
 ];
 
 @NgModule({
@@ -63,6 +79,7 @@ const EXPORTS = [
     RootModule,
     NavbarModule,
     ItemPageModule,
+    TranslateModule,
   ],
   declarations: DECLARATIONS,
   providers: [
