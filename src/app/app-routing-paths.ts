@@ -107,7 +107,8 @@ export function getPageInternalServerErrorRoute() {
   return `/${INTERNAL_SERVER_ERROR}`;
 }
 
-export const INFO_MODULE_PATH = 'info';
+export const INFO_MODULE_PATH = 'page';
+
 export const ERROR_PAGE = 'error';
 
 export function getInfoModulePath() {
