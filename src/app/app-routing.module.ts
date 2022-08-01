@@ -38,6 +38,8 @@ import {
   ThemedPageInternalServerErrorComponent
 } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
+// Utilizo un menu resolver propio para personalizar el menu del navbar
+import { CICBAMenuResolver } from './cicba-menu.resolver';
 import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 
@@ -50,7 +52,8 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
         path: '',
         canActivate: [AuthBlockingGuard],
         canActivateChild: [ServerCheckGuard],
-        resolve: [MenuResolver],
+        // Utilizo un menu resolver propio para personalizar el menu del navbar
+        resolve: [CICBAMenuResolver],
         children: [
           { path: '', redirectTo: '/home', pathMatch: 'full' },
           {
