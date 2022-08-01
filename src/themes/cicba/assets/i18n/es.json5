@@ -101,6 +101,10 @@
 
     "item.page.statistics.label.TotalVisits": "Vistas",
 
+    "item.truncatable-part.show-less": "Ver menos",
+
+    "item.truncatable-part.show-more": "Ver más",
+
     "loading.default": "Cargando...",
 
     "loading.objects": "Cargando...",
