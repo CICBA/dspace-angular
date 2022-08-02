@@ -4,7 +4,7 @@
       <ng-container *ngFor="let rep of representations; let last = last">
         <ds-metadata-representation-loader class="metadata-element" [mdRepresentation]="rep">
         </ds-metadata-representation-loader>
-        <span *ngIf="!last">{{separator}}</span>
+        <span *ngIf="!last" class="separator">{{separator}}</span>
       </ng-container>
       <ds-loading *ngIf="(i + 1) === objects.length && (i > 0) && (!representations || representations?.length === 0)" message="{{'loading.default' | translate}}"></ds-loading>
       <div class="w-100 mt-2" *ngIf="(i + 1) === objects.length && representations?.length > 0">
