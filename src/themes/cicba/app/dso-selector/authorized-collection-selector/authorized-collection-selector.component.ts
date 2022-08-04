@@ -15,5 +15,4 @@ export class AuthorizedCollectionSelectorComponent extends BaseComponent {
         super.ngOnInit();
         this.defaultPagination.pageSize = 50;
       }
-    
 }

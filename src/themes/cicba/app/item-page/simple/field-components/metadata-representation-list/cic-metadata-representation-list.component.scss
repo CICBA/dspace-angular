@@ -1,3 +1,10 @@
-::ng-deep .metadata-element div {
-    display: inline-block;
+::ng-deep {
+    .metadata-element div {
+        display: inline-block;
+    }
+
+    .separator::after, .separator::before {
+        white-space: pre;
+        content: " ";
+    }
 }

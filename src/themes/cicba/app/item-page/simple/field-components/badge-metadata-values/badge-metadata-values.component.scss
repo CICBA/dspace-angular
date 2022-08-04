@@ -11,8 +11,12 @@
 }
 
 .bagde-group {
-    display: inline;
-    width: max-content;
+    display: inline-block;
+}
+
+.bagde-group::after {
+    white-space: pre;
+    content: " ";
 }
 
 .group-inline-block {

@@ -154,7 +154,8 @@
   <div class="abstract-section">
     <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
       <ds-truncatable *ngIf="(windowService.isXsOrSm() | async)" [id]="object?.id">
-        <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
+        <!-- <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" -->
+        <ds-truncatable-part *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
           [id]="object?.id"
           [minLines]="5">
           <p [innerHTML]="mdValue.value"></p>

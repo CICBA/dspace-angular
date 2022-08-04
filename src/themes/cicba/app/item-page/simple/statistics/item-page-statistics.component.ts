@@ -40,7 +40,8 @@ export class ItemPageStatisticsComponent extends StatisticsPageComponent<Item> {
    */
   protected getScope$(): Observable<DSpaceObject> {
     return new Observable((observer) => {
-      observer.next(this.item);});
+      observer.next(this.item);
+    });
   }
 
 }

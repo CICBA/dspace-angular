@@ -7,7 +7,7 @@ import {
   serializable
 } from '@ng-dynamic-forms/core';
 import {BehaviorSubject, Subject} from 'rxjs';
-import {isEmpty, isNotEmpty, isNotUndefined} from '../../../../../empty.util';
+import {isEmpty, isNotUndefined} from '../../../../../empty.util';
 import {MetadataValue} from '../../../../../../core/shared/metadata.models';
 
 export const DYNAMIC_FORM_CONTROL_TYPE_DSDATEPICKER = 'DATE';
@@ -15,9 +15,6 @@ export const DYNAMIC_FORM_CONTROL_TYPE_DSDATEPICKER = 'DATE';
 export interface DynamicDsDateControlModelConfig extends DynamicDatePickerModelConfig {
   legend?: string;
   typeBindRelations?: DynamicFormControlRelation[];
-  securityLevel?: number;
-  securityConfigLevel?: number[];
-  toggleSecurityVisibility?: boolean;
 }
 
 /**
@@ -28,9 +25,6 @@ export class DynamicDsDatePickerModel extends DynamicDateControlModel {
   @serializable() typeBindRelations: DynamicFormControlRelation[];
   @serializable() readonly type: string = DYNAMIC_FORM_CONTROL_TYPE_DSDATEPICKER;
   @serializable() metadataValue: MetadataValue;
-  @serializable() securityLevel?: number;
-  @serializable() securityConfigLevel?: number[];
-  @serializable() toggleSecurityVisibility = true;
   malformedDate: boolean;
   legend: string;
   hasLanguages = false;
@@ -43,13 +37,12 @@ export class DynamicDsDatePickerModel extends DynamicDateControlModel {
     this.metadataValue = (config as any).metadataValue;
     this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
     this.hiddenUpdates = new BehaviorSubject<boolean>(this.hidden);
-    this.hiddenUpdates.subscribe((hidden: boolean) => {
-      this.hidden = hidden;
-      const parentModel = this.getRootParent(this);
-      if (parentModel && isNotUndefined(parentModel.hidden)) {
-        parentModel.hidden = hidden;
-      }
-    });
+
+    // This was a subscription, then an async setTimeout, but it seems unnecessary
+    const parentModel = this.getRootParent(this);
+    if (parentModel && isNotUndefined(parentModel.hidden)) {
+      parentModel.hidden = this.hidden;
+    }
   }
 
   private getRootParent(model: any): DynamicFormControlModel {
@@ -58,10 +51,6 @@ export class DynamicDsDatePickerModel extends DynamicDateControlModel {
     } else {
       return this.getRootParent(model.parent);
     }
-  }
-
-  get hasSecurityLevel(): boolean {
-    return isNotEmpty(this.securityLevel);
   }
 
 }

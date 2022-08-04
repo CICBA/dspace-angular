@@ -1,4 +1,4 @@
-import { Inject, InjectionToken } from '@angular/core';
+import {Inject, InjectionToken} from '@angular/core';
 
 import { uniqueId } from 'lodash';
 import {DynamicFormControlLayout, DynamicFormControlRelation, MATCH_VISIBLE, OR_OPERATOR} from '@ng-dynamic-forms/core';
@@ -17,7 +17,6 @@ import { RelationshipOptions } from '../models/relationship-options.model';
 import { VocabularyOptions } from '../../../../core/submission/vocabularies/models/vocabulary-options.model';
 import { ParserType } from './parser-type';
 import { isNgbDateStruct } from '../../../date.util';
-import { environment } from '../../../../../environments/environment';
 
 export const SUBMISSION_ID: InjectionToken<string> = new InjectionToken<string>('submissionId');
 export const CONFIG_DATA: InjectionToken<FormFieldModel> = new InjectionToken<FormFieldModel>('configData');
@@ -39,8 +38,6 @@ export abstract class FieldParser {
     @Inject(INIT_FORM_VALUES) protected initFormValues: any,
     @Inject(PARSER_OPTIONS) protected parserOptions: ParserOptions
   ) {
-    // Replace . with _ in configured type field here, to make configuration more simple and user-friendly
-    this.typeField = environment.submission.typeBind.field.replace('\.', '_');
   }
 
   public abstract modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any;
@@ -75,7 +72,8 @@ export abstract class FieldParser {
         metadataFields: this.getAllFieldIds(),
         hasSelectableMetadata: isNotEmpty(this.configData.selectableMetadata),
         isDraggable,
-        typeBindRelations: isNotEmpty(this.configData.typeBind) ? this.getTypeBindRelations(this.configData.typeBind) : null,
+        typeBindRelations: isNotEmpty(this.configData.typeBind) ? this.getTypeBindRelations(this.configData.typeBind,
+          this.parserOptions.typeField) : null,
         groupFactory: () => {
           let model;
           if ((arrayCounter === 0)) {
@@ -303,7 +301,8 @@ export abstract class FieldParser {
 
     // If typeBind is configured
     if (isNotEmpty(this.configData.typeBind)) {
-      (controlModel as DsDynamicInputModel).typeBindRelations = this.getTypeBindRelations(this.configData.typeBind);
+      (controlModel as DsDynamicInputModel).typeBindRelations = this.getTypeBindRelations(this.configData.typeBind,
+        this.parserOptions.typeField);
     }
 
     return controlModel;
@@ -319,11 +318,11 @@ export abstract class FieldParser {
    * @private
    * @return DynamicFormControlRelation[] array with one relation in it, for type bind matching to show a field
    */
-  private getTypeBindRelations(configuredTypeBindValues: string[]): DynamicFormControlRelation[] {
+  private getTypeBindRelations(configuredTypeBindValues: string[], typeField: string): DynamicFormControlRelation[] {
     const bindValues = [];
     configuredTypeBindValues.forEach((value) => {
       bindValues.push({
-        id: this.typeField,
+        id: typeField,
         value: value
       });
     });
