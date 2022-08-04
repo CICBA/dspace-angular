@@ -88,13 +88,6 @@ function getMockDsDynamicTypeBindRelationService(): DsDynamicTypeBindRelationSer
   });
 }
 
-function getMockDsDynamicTypeBindRelationService(): DsDynamicTypeBindRelationService {
-  return jasmine.createSpyObj('DsDynamicTypeBindRelationService', {
-    getRelatedFormModel: jasmine.createSpy('getRelatedFormModel'),
-    isFormControlToBeHidden: jasmine.createSpy('isFormControlToBeHidden')
-  });
-}
-
 describe('DsDynamicFormControlContainerComponent test suite', () => {
 
   const vocabularyOptions: VocabularyOptions = {
