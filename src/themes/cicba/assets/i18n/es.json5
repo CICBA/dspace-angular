@@ -33,6 +33,42 @@
 
     "form.loading": "Cargando...",
 
+    "health.breadcrumbs": "Salud",
+
+    "health-page.heading": "Salud",
+
+    "health-page.info-tab": "Info",
+
+    "health-page.status-tab": "Estado",
+
+    "health-page.error.msg": "El servicio de chequeo de saludo no esta disponible temporalmente",
+
+    "health-page.section.db.title": "Base de datos",
+
+    "health-page.section.solrAuthorityCore.title": "Solr: authority core",
+
+    "health-page.section.solrOaiCore.title": "Solr: oai core",
+
+    "health-page.section.solrSearchCore.title": "Solr: search core",
+
+    "health-page.section.solrStatisticsCore.title": "Solr: statistics core",
+
+    "health-page.section-info.app.title": "Application Backend",
+
+    "health-page.section-info.java.title": "Java",
+
+    "health-page.status": "Estado",
+
+    "health-page.status.ok.info": "Operativo",
+
+    "health-page.status.error.info": "Problemas detectados",
+
+    "health-page.status.warning.info": "Posible problemas detectados",
+
+    "health-page.title": "Salud",
+
+    "health-page.section.no-issues": "No hay problemas detectados",
+
     "home.breadcrumbs": "CIC-Digital",
 
     "home.navigation.publications": "Publicaciones",
@@ -173,6 +209,8 @@
 
     "menu.section.browse_global_by_dateissued": "Por fecha de publicación",
 
+    "menu.section.health": "Salud",
+    
     "menu.section.navbar.contribute": "Aportar material",
 
     "menu.section.navbar.contact": "Contacto",
