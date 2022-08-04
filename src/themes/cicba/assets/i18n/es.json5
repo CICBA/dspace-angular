@@ -123,6 +123,10 @@
     
     "submission.sections.describe.relationship-lookup.search-tab.loading": "Cargando...",
 
+    "submission.workspace.generic.view": "Vista",
+
+    "submission.workspace.generic.view-help": "Seleccione esta opción para ver el estado actual de los metadatos del recurso",
+
     "info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",
 
 	"info.cic-digital-info.title": "¿Qué es CIC Digital?",
