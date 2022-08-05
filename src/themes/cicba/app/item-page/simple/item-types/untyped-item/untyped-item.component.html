@@ -40,6 +40,11 @@
       [label]="'item.page.dcterms.alternative'"
       [inlineLabel]="false">
     </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.title.investigacion'])"
+      [label]="'item.page.dcterms.title.investigacion'"
+      [inlineLabel]="false">
+    </ds-cic-metadata-values>
     <ds-cic-metadata-representation-list
       [parentItem]="object"
       [itemType]="'Person'"
@@ -110,6 +115,11 @@
       [mdValues]="object?.allMetadata(['dcterms.subject.materia'])"
       [separator]="','"
       [label]="'item.page.dcterms.subject.materia'">
+    </ds-cic-metadata-values>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.subject.area'])"
+      [separator]="','"
+      [label]="'item.page.dcterms.subject.area'">
     </ds-cic-metadata-values>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.subject.ford'])"

@@ -115,9 +115,13 @@
 
     "item.page.dcterms.subject": "Palabras clave",
 
+    "item.page.dcterms.subject.area": "Area temática",
+
     "item.page.dcterms.subject.ford": "Clasificación FORD",
 
     "item.page.dcterms.subject.materia": "Materia",
+
+    "item.page.dcterms.title.investigacion": "Título de investigación",
 
     "item.page.date.issued": "Fecha de publicación",
 
