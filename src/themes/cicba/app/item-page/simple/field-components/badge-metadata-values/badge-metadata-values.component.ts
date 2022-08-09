@@ -12,6 +12,7 @@ import { MetadataValuesComponent } from 'src/app/item-page/field-components/meta
 })
 export class BadgeMetadataValuesComponent extends MetadataValuesComponent {
   @Input() badgeType: string;
+  @Input() badgeUrl: string;
   @Input() badgeLabel: string;
   @Input() badgeLabelType: string;
 }

@@ -1,4 +1,10 @@
 <ds-cic-metadata-field-wrapper [label]="label | translate" [inlineLabel]="false">
+    <a href="{{ badgeUrl }}" target="_blank" *ngIf="badgeUrl else badge">
+        <ng-container *ngTemplateOutlet="badge"></ng-container>
+    </a>
+</ds-cic-metadata-field-wrapper>
+
+<ng-template #badge>
     <div class="bagde-group" [ngClass]="{'group-inline-block': badgeLabel}" *ngFor="let mdValue of mdValues">
         <span class="badge badge-label" [ngClass]="badgeLabelType" *ngIf="badgeLabel">
             {{badgeLabel}}
@@ -6,4 +12,4 @@
             {{mdValue.value}}
         </span>
     </div>
-</ds-cic-metadata-field-wrapper>
+</ng-template>
