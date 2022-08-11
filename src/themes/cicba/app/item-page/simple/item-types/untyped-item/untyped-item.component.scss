@@ -30,6 +30,7 @@
 }
 
 .abstract-section {
+    white-space: pre-wrap;
     grid-column: 1/8;
     grid-row: 2;
     @media screen and (max-width: map-get($grid-breakpoints, md)) {
