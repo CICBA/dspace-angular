@@ -25,13 +25,14 @@
       @media screen and (min-width: map-get($grid-breakpoints, lg)) {
         height: 250px;
         padding-top: 0;
+        margin-bottom: 3em;
       }
     }
 
     .jumbotron img {
-      width: 100%;
+      width: 110%;
       object-fit: cover;
-      height: 280px;
+      height: 290px;
     }
 
     a {
