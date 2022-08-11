@@ -11,12 +11,9 @@
     -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
 }
 
-.aside a {
-    color: inherit !important;
-    text-decoration: none;
-    i {
-        color: var(--ds-cic-blue);
-    }
+.aside a img {
+    max-width: 100%;
+    margin-bottom: 1em;
 }
 
 .home-main {
