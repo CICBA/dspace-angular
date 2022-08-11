@@ -28,12 +28,8 @@
     padding-right: 0.5em;
 }
 
-#copyButton {
+.copyButton {
     color: #fff;
     cursor: pointer;
+    margin-left: 5px;
 }
-
-#copied {
-    display: none;
-    bottom: 55px;
-  }

@@ -13,19 +13,9 @@
             {{mdValue.value}}
             <ng-container *ngIf="copyToClipboardButton">
                 <span class="d-none" #elementContentToCopy>{{mdValue.value}}</span>
-                <i id="copyButton" class="fa fa-copy" aria-hidden="true" (click)='copyToClipboard(elementContentToCopy)'></i>
+                <i id="copyButton-{{badgeLabel}}" class="copyButton fa fa-copy" aria-hidden="true" (click)="copyToClipboard(elementContentToCopy, 'copyButton-' + badgeLabel )"></i>
             </ng-container>
         </span>
-        <span id="copied" *ngIf="copyToClipboardButton">Copiado !</span>
-        <!-- <ng-container *ngIf="copyToClipboardButton">
-            <div class="d-none" #elementContentToCopy>
-                {{mdValue.value}}
-            </div>
-            <button id="copyButton" class="input-group-addon btn" title="Click to copy">
-                <i class="fa fa-copy" aria-hidden="true" (click)='copyToClipboard(elementContentToCopy)'></i>
-            </button>
-        </ng-container> -->
-
     </div>
 </ng-template>
 

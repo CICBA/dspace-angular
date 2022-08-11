@@ -17,17 +17,16 @@ export class BadgeMetadataValuesComponent extends MetadataValuesComponent {
   @Input() badgeLabelType: string;
   @Input() copyToClipboardButton: boolean = false;
 
-  copyToClipboard(el: HTMLDivElement) {
+  copyToClipboard(el: HTMLDivElement, id: string) {
 
     if (navigator.clipboard) {
       navigator.clipboard.writeText(el.innerText).then(() => {
-        //
-        // TODO mostrar leyenda de "copiado" al usuario, cuando hace click en el boton de copiar
-        // 
-        // document.getElementById("copied").style.display = "inline";
-        // setTimeout( function() {
-        //     document.getElementById("copied").style.display = "none";
-        // }, 1000);
+        document.getElementById(id).classList.remove('fa-copy');
+        document.getElementById(id).classList.add('fa-check');
+        setTimeout( function() {
+          document.getElementById(id).classList.remove('fa-check');
+          document.getElementById(id).classList.add('fa-copy');
+          }, 1000);
       }, (error) => {
         console.log(error)
       });
