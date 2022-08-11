@@ -5,7 +5,33 @@
     
     "500.page-internal-server-error": "Servicio no disponible",
 
+    "admin.registries.schema.form.element": "Ítem",
+
+    "bitstream.edit.form.embargo.hint": "El primer día a partir del cual se permite el acceso. <b>Esta fecha no se puede modificar en este formulario.</b> Para establecer una fecha de embargo para un archivo, vaya a la pestaña <i> Estado del ítem </i>, haga clic en <i> Autorizaciones... </ i >, cree o edite la política <i> READ </i> del archivo y configure la <i> Fecha de inicio </i> como desee.",
+
     "browse.comcol.by.dateissued": "Por fecha de publicación",
+
+    "browse.empty": "No hay ítems para mostrar.",
+
+    "collection.edit.tabs.mapper.head": "Asignador de ítems",
+
+    "collection.edit.tabs.item-mapper.title": "Edición de colección: mapeador de ítems",
+
+    "collection.edit.item-mapper.confirm": "Asignar ítems seleccionados",
+
+    "collection.edit.item-mapper.description": "Esta es la herramienta de asignación de ítems que permite a los administradores de colecciones asignar ítems de otras colecciones a esta colección. Puede buscar ítems de otras colecciones y mapearlos, o explorar la lista de ítems mapeados actualmente.",
+
+    "collection.edit.item-mapper.head": "Asignador de ítems: asigna ítems de otras colecciones",
+
+    "collection.edit.item-mapper.notifications.map.success.content": "{{ amount }} ítems asignados correctamente.",
+
+    "collection.edit.item-mapper.remove": "Eliminar asignaciones de ítems seleccionados",
+
+    "collection.edit.item-mapper.search-form.placeholder": "Buscar ítems...",
+
+    "collection.edit.item-mapper.tabs.browse": "Examinar ítems mapeados",
+
+    "collection.edit.item-mapper.tabs.map": "Asignar nuevos ítems",
 
     "communityList.breadcrumbs": "Lista de comunidades",
 
@@ -15,12 +41,18 @@
 
     "community.sub-community-list.head": "Subcomunidades de esta comunidad",
 
+    "dso-selector.create.item.head": "Nuevo ítem",
+
+    "dso-selector.create.item.sub-level": "Crea un nuevo ítem en",
+
+    "dso-selector.edit.item.head": "Editar ítem",
+
     "dso-selector.set-scope.community.button": "Buscar en todo el repositorio",
 
     "dso-selector.set-scope.community.head": "Seleccione alcance de la búsqueda",
     
     "dso-selector.set-scope.community.input-header": "Buscar una comunidad o colección",
-    
+
     "error.invalid-search-query": "La consulta de búsqueda no es válida.",
 
     "forgot-email.form.header": "¿Olvidó la contraseña?",
@@ -81,6 +113,54 @@
 
     "home.title": "Home",
 
+    "item.bitstreams.upload.item": "Ítem:",
+
+    "item.bitstreams.upload.bundle": "Bundle",
+
+    "item.edit.bitstreams.empty": "Este ítem no contiene ningún archivo. Haga clic en el botón de carga para crear uno.",
+
+    "item.edit.bitstreams.headers.bundle": "Ítem",
+
+    "item.edit.bitstreams.notifications.remove.saved.content": "Se han guardado los cambios de eliminación de los archivos de este ítem.",
+
+    "item.edit.delete.description": "¿Estás seguro de que este ítem debería eliminarse por completo? Precaución: en la actualidad, no se dejaría ninguna lápida.",
+
+    "item.edit.delete.error": "Se produjo un error al eliminar el ítem.",
+
+    "item.edit.delete.header": "Eliminar ítem: {{ id }}",
+
+    "item.edit.delete.success": "El ítem ha sido eliminado",
+
+    "item.edit.head": "Editar ítem",
+
+    "item.edit.breadcrumbs": "Editar ítem",
+
+    "item.edit.move.description": "Seleccione la colección a la que desea mover este ítem. Para reducir la lista de colecciones mostradas, puede ingresar una consulta de búsqueda en el cuadro.",
+
+    "item.edit.move.error": "Se produjo un error al intentar mover el ítem.",
+
+    "item.edit.move.head": "Mover ítem: {{ id }}",
+
+    "item.edit.move.success": "El ítem se ha movido correctamente.",
+
+    "item.edit.move.title": "Mover ítem",
+
+    "item.edit.private.description": "¿Estás seguro de que este ítem debe ser privado en el archivo?",
+
+    "item.edit.private.error": "Se produjo un error al convertir el ítem en privado.",
+
+    "item.edit.private.header": "Hacer que el ítem sea privado: {{ id }}",
+
+    "item.edit.private.success": "El ítem ahora es privado",
+
+    "item.edit.public.description": "¿Estás seguro de que este ítem debe hacerse público en el archivo?",
+
+    "item.edit.public.error": "Se produjo un error al hacer público el ítem.",
+
+    "item.edit.public.header": "Hacer público el ítem: {{ id }}",
+
+    "item.edit.public.success": "El ítem ahora es público",
+
     "item.page.abstract": "Resumen",
 
     "item.page.cic.lugarDesarrollo": "Lugar de desarrollo",
@@ -127,6 +207,16 @@
 
     "item.page.download": "Descargar",
 
+    "item.page.edit": "Editar este ítem",
+
+    "item.page.journal.search.title": "Ítem de esta revista",
+
+    "item.page.link.full": "Página completa del ítem",
+
+    "item.page.link.simple": "Página de ítem simple",
+
+    "item.page.person.search.title": "Ítem de este autor",
+
     "item.page.publisher": "Editorial",
 
     "item.page.related-items.view-less": "Ocultar los últimos {{ amount }}",
@@ -141,15 +231,43 @@
 
     "item.page.statistics.label.TotalVisits": "Vistas",
 
+    "item.page.titleprefix": "Ítem:",
+
+    "item.search.results.head": "Resultados de la búsqueda de ítem",
+
+    "item.search.title": "Búsqueda de ítem",
+
     "item.truncatable-part.show-less": "Ver menos",
 
     "item.truncatable-part.show-more": "Ver más",
 
+    "loading.browse-by": "Cargando ítems...",
+
     "loading.default": "Cargando...",
+
+    "loading.item": "Cargando ítem...",
+
+    "loading.items": "Cargando ítems...",
+
+    "loading.mydspace-results": "Cargando ítems...",
 
     "loading.objects": "Cargando...",
 
     "login.form.or-divider": "o",
+
+    "menu.section.edit_item": "Ítem",
+
+    "menu.section.export_item": "Ítem",
+
+    "mydspace.status.archived": "Publicado",
+
+    "mydspace.status.validation": "Revisión",
+
+    "mydspace.status.waiting-for-controller": "Esperando revisor",
+
+    "mydspace.status.workflow": "En revisión",
+
+    "mydspace.status.workspace": "Espacio de trabajo",
 
     "mydspace.breadcrumbs": "Envíos",
 
@@ -158,14 +276,6 @@
     "mydspace.search-form.placeholder": "Buscar en Envíos...",
 
     "nav.mydspace": "Envíos",
-    
-    "submission.import-external.back-to-my-dspace": "Volver a envíos",
-    
-    "submission.sections.describe.relationship-lookup.search-tab.loading": "Cargando...",
-
-    "submission.workspace.generic.view": "Vista",
-
-    "submission.workspace.generic.view-help": "Seleccione esta opción para ver el estado actual de los metadatos del recurso",
 
     "info.cic-digital-info.breadcrumbs": "¿Qué es CIC Digital?",
 
@@ -271,7 +381,15 @@
 
     "search.filters.filter.lugarDesarrollo.placeholder": "Lugar de desarrollo",
 
+    "search.filters.namedresourcetype.Archived": "Publicado",
 
+    "search.filters.namedresourcetype.Validation": "En revisión",
+
+    "search.filters.namedresourcetype.Waiting for Controller": "Esperando revisor",
+
+    "search.filters.namedresourcetype.Workflow": "En revisión",
+
+    "search.filters.namedresourcetype.Workspace": "Espacio de trabajo",
 
     "search.sidebar.settings.rpp": "Resultados por página",
     
@@ -282,6 +400,20 @@
     "sorting.dcterms.issued.ASC": "Fecha de publicación ascendente",
 
     "sorting.dcterms.issued.DESC": "Fecha de publicación descendente",
+
+    "submission.import-external.back-to-my-dspace": "Volver a envíos",
+
+    "submission.sections.describe.relationship-lookup.search-tab.loading": "Cargando...",
+
+    "submission.sections.general.deposit_error_notice": "Hubo un problema al enviar el ítem. Vuelve a intentarlo más tarde.",
+
+    "submission.sections.general.discard_error_notice": "Hubo un problema al descartar el ítem. Vuelve a intentarlo más tarde.",
+
+    "submission.workflow.generic.view": "Vista previa",
+
+    "submission.workspace.generic.view": "Vista previa",
+
+    "submission.workspace.generic.view-help": "Seleccione esta opción para ver el estado actual de los metadatos del recurso",
 
     "submission.sections.submit.progressbar.describe.step1": "Describir",
 
@@ -295,7 +427,41 @@
 
     "submission.workflow.tasks.pool.claim": "Asumir tarea",
 
-    "workspace.search.results.head": "Sus envíos archivados",
+    "submission.workflow.generic.delete-help": "Si desea descartar este ítem, seleccione \"Eliminar\". Luego se le pedirá que lo confirme.",
+
+    "submission.workflow.generic.edit-help": "Seleccione esta opción para cambiar los metadatos del ítem.",
+
+    "submission.workflow.generic.view-help": "Seleccione esta opción para ver los metadatos del ítem.",
+
+    "submission.workflow.tasks.claimed.approve_help": "Si ha revisado el ítem y es adecuado para su inclusión en la colección, seleccione \"Aprobar \".",
+
+    "submission.workflow.tasks.claimed.edit_help": "Seleccione esta opción para cambiar los metadatos del ítem.",
+
+    "virtual-metadata.delete-relationship.modal-head": "Seleccione los ítems para los que desea guardar los metadatos virtuales como metadatos reales",
 
     "workflow.search.results.head": "Envíos en la cola de tareas",
+
+    "workflow-item.edit.breadcrumbs": "Editar ítem de flujo de trabajo",
+
+    "workflow-item.edit.title": "Editar ítem de flujo de trabajo",
+
+    "workflow-item.delete.notification.success.content": "Este ítem de flujo de trabajo se eliminó correctamente",
+
+    "workflow-item.delete.notification.error.content": "No se pudo eliminar el ítem del flujo de trabajo",
+
+    "workflow-item.delete.title": "Eliminar ítem de flujo de trabajo",
+
+    "workflow-item.delete.header": "Eliminar ítem de flujo de trabajo",
+
+    "workflow-item.send-back.notification.success.content": "Este ítem de flujo de trabajo se envió correctamente al remitente.",
+
+    "workflow-item.send-back.notification.error.content": "El ítem del flujo de trabajo no se pudo devolver al remitente.",
+
+    "workflow-item.send-back.title": "Enviar el ítem del flujo de trabajo al remitente",
+
+    "workflow-item.send-back.header": "Enviar el ítem del flujo de trabajo al remitente",
+
+    "workflowAdmin.search.results.head": "Administrar flujo de trabajo",
+
+    "workspace.search.results.head": "Sus envíos archivados",
 }
