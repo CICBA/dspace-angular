@@ -27,3 +27,13 @@
     padding: 0.4em;
     padding-right: 0.5em;
 }
+
+#copyButton {
+    color: #fff;
+    cursor: pointer;
+}
+
+#copied {
+    display: none;
+    bottom: 55px;
+  }

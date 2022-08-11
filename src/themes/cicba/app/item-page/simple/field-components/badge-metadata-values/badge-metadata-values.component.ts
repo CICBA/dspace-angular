@@ -15,4 +15,25 @@ export class BadgeMetadataValuesComponent extends MetadataValuesComponent {
   @Input() badgeUrl: string;
   @Input() badgeLabel: string;
   @Input() badgeLabelType: string;
+  @Input() copyToClipboardButton: boolean = false;
+
+  copyToClipboard(el: HTMLDivElement) {
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(el.innerText).then(() => {
+        //
+        // TODO mostrar leyenda de "copiado" al usuario, cuando hace click en el boton de copiar
+        // 
+        // document.getElementById("copied").style.display = "inline";
+        // setTimeout( function() {
+        //     document.getElementById("copied").style.display = "none";
+        // }, 1000);
+      }, (error) => {
+        console.log(error)
+      });
+    } else {
+      console.log('Browser do not support Clipboard API')
+    }
+
+  }
 }
