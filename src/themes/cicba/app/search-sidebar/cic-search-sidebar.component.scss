@@ -17,21 +17,35 @@
 
 }
 
-::ng-deep .sidebar-content h3 {
-    // preguntar esto
-    color: var(--ds-cic-skyblue); 
-}
+::ng-deep {
+    .sidebar-content h3 {
+        // preguntar esto
+        color: var(--ds-cic-skyblue);
+    }
 
-::ng-deep #search-sidebar .facet-filter{
-    border: 1px solid var(--bs-gray) ; 
-    line-height: 0;
-}
+    #search-sidebar .facet-filter{
+        border: 1px solid var(--bs-gray);
+        line-height: 0;
+    }
 
-::ng-deep #search-page-sidebar-content #search-sidebar .facet-filter{
-    border: 1px solid var(--ds-cic-gray-400);
-    border-radius: 10px;
-}
-  
-::ng-deep #search-page-sidebar-content #search-sidebar .facet-filter h5{
-    color: var(--ds-cic-gray);
+    #search-page-sidebar-content #search-sidebar .facet-filter{
+        border: 1px solid var(--ds-cic-gray-400);
+        border-radius: 10px;
+    }
+
+    #search-page-sidebar-content #search-sidebar .facet-filter h5{
+        color: var(--ds-cic-gray);
+    }
+
+    ds-filter-input-suggestions {
+        display: none;
+    }
+
+    .fa-plus::before{
+        content: "\f078"
+    }
+
+    .fa-minus::before{
+        content: "\f077"
+    }
 }
