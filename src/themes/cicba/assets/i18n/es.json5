@@ -175,6 +175,8 @@
 
     "item.page.dcterms.extent": "Extensión",
 
+    "item.page.dcterms.identifier.url": "Enlace externo",
+
     "item.page.dcterms.isPartOf.issue": "Volumen de la revista",
 
     "item.page.dcterms.isPartOf.issue.event": "Nombre del evento",

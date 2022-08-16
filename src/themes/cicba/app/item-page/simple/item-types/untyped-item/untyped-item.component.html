@@ -161,6 +161,12 @@
   <div class="download-section">
     <!-- <ds-item-page-statistics [item]="object"></ds-item-page-statistics> -->
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
+    <ds-cic-metadata-values
+      [mdValues]="object?.allMetadata(['dcterms.identifier.url'])"
+      [label]="'item.page.dcterms.identifier.url'"
+      [inlineLabel]="true"
+      [authorityUrl]="true">
+    </ds-cic-metadata-values>
   </div>
   <div class="abstract-section">
     <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">

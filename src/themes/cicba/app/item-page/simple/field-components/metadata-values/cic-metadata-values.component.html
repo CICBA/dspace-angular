@@ -1,5 +1,14 @@
 <ds-cic-metadata-field-wrapper [inlineLabel]="inlineLabel" [label]="label | translate">
-    <span class="dont-break-out" *ngFor="let mdValue of mdValues; let last=last;">
-        {{mdValue.value}}<span *ngIf="!last" [innerHTML]="separator"></span>
-    </span>
+    <ng-container *ngFor="let mdValue of mdValues; let last=last;">
+        <ng-container *ngIf="authorityUrl">
+            <a href="{{ mdValue.authority }}" target="_blank" class="dont-break-out">
+                {{mdValue.value}}<span *ngIf="!last" [innerHTML]="separator"></span>
+            </a>
+        </ng-container>
+        <ng-container *ngIf="!authorityUrl">
+            <span class="dont-break-out">
+                {{mdValue.value}}<span *ngIf="!last" [innerHTML]="separator"></span>
+            </span>
+        </ng-container>
+    </ng-container>
 </ds-cic-metadata-field-wrapper>

@@ -11,5 +11,6 @@ import { MetadataValuesComponent } from 'src/app/item-page/field-components/meta
 })
 export class CicMetadataValuesComponent extends MetadataValuesComponent {
   @Input() inlineLabel: boolean;
+  @Input() authorityUrl: boolean;
 
 }
