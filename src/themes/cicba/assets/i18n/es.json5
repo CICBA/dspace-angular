@@ -429,6 +429,8 @@
 
     "submission.workspace.generic.view-help": "Seleccione esta opción para ver el estado actual de los metadatos del recurso",
 
+    "submission.sections.general.cannot_deposit": "No se pudo completar el envío debido a errores en el formulario.<br>Por favor complete todos los campos obligatorios para poder finalizar el envío.",
+
     "submission.sections.submit.progressbar.describe.step1": "Describir",
 
     "submission.sections.submit.progressbar.describe.step2": "Describir",

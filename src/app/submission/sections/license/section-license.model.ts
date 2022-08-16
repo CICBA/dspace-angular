@@ -13,15 +13,18 @@ export const SECTION_LICENSE_FORM_LAYOUT = {
 export const SECTION_LICENSE_FORM_MODEL = [
   {
     id: 'granted',
-    label: 'I confirm the license above',
+    // label: 'I confirm the license above',
+    label: 'Acepto los términos y condiciones de la licencia',
     required: true,
     value: false,
     validators: {
       required: null
     },
     errorMessages: {
-      required: 'You must accept the license',
-      notgranted: 'You must accept the license'
+      //required: 'You must accept the license',
+      // notgranted: 'You must accept the license'
+      required: 'Debe aceptar la licencia',
+      notgranted: 'Debe aceptar la licencia'
     },
     type: 'CHECKBOX',
   }
