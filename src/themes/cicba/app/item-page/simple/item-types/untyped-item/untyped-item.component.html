@@ -175,11 +175,11 @@
         <ds-truncatable-part *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
           [id]="object?.id"
           [minLines]="5">
-          <p [innerHTML]="mdValue.value"></p>
+          <p class="abstract-text" [innerHTML]="mdValue.value"></p>
         </ds-truncatable-part>
       </ds-truncatable>
       <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
-        <p *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
+        <p class="abstract-text" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
       </ng-container>
     </ds-cic-metadata-field-wrapper>
     <ds-badge-metadata-values

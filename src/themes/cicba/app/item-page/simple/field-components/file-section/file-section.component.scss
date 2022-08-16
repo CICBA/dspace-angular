@@ -13,7 +13,9 @@ hr {
         display: flex;
         margin-bottom: 1em;
         gap: 1em;
-        align-items: center;
+        > span:first-of-type {
+            padding-top: 0.2em;
+        }
     }
     :hover .file-full-name {
         filter: brightness(0.1);
