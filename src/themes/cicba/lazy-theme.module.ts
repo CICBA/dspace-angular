@@ -59,7 +59,6 @@ import { CollectionStatisticsPageComponent } from './app/statistics-page/collect
 import { CommunityStatisticsPageComponent } from './app/statistics-page/community-statistics-page/community-statistics-page.component';
 import { ItemStatisticsPageComponent } from './app/statistics-page/item-statistics-page/item-statistics-page.component';
 import { SiteStatisticsPageComponent } from './app/statistics-page/site-statistics-page/site-statistics-page.component';
-import { CommunityPageComponent } from './app/community-page/community-page.component';
 import { CollectionPageComponent } from './app/collection-page/collection-page.component';
 import { ItemPageComponent } from './app/item-page/simple/item-page.component';
 import { FullItemPageComponent } from './app/item-page/full/full-item-page.component';
@@ -77,7 +76,6 @@ import { SubmissionSubmitComponent } from './app/submission/submit/submission-su
 import { WorkflowItemDeleteComponent } from './app/workflowitems-edit-page/workflow-item-delete/workflow-item-delete.component';
 import { WorkflowItemSendBackComponent } from './app/workflowitems-edit-page/workflow-item-send-back/workflow-item-send-back.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
-import { CicCommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
 import { CicDigitalInfoComponent } from './app/info/cic-digital-info/cic-digital-info.component';
 import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-contribute.component';
 import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
@@ -100,7 +98,6 @@ const DECLARATIONS = [
   CommunityStatisticsPageComponent,
   ItemStatisticsPageComponent,
   SiteStatisticsPageComponent,
-  CommunityPageComponent,
   CollectionPageComponent,
   ItemPageComponent,
   FullItemPageComponent,
@@ -118,7 +115,6 @@ const DECLARATIONS = [
   WorkflowItemDeleteComponent,
   WorkflowItemSendBackComponent,
   BreadcrumbsComponent,
-  CicCommunityPageSubCommunityListComponent,
   CicDigitalInfoComponent,
   HowToContributeComponent,
   ItemPageStatisticsComponent,

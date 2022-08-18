@@ -28,7 +28,7 @@ import { map } from 'rxjs/operators';
  * A metadata definition (a.k.a. browse id) is a short term used to describe one or multiple metadata fields.
  * An example would be 'author' for 'dc.contributor.*'
  */
-@rendersBrowseBy(BrowseByDataType.Metadata)
+// @rendersBrowseBy(BrowseByDataType.Metadata)
 export class BrowseByMetadataPageComponent implements OnInit {
 
   /**
