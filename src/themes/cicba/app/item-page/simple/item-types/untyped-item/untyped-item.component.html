@@ -15,10 +15,14 @@
                                 [tooltipMsgHasDraft]="'item.page.version.hasDraft'"></ds-dso-page-version-button>
     <ds-dso-page-edit-button [pageRoute]="itemPageRoute" [dso]="object" [tooltipMsg]="'item.page.edit'"></ds-dso-page-edit-button>
   </div>
-  <ds-badge-metadata-values
-    [mdValues]="object?.allMetadata(['dc.type'])"
-    [badgeType]="'badge-info type-badge'">
-  </ds-badge-metadata-values>
+  <div class="badges-section">
+    <ds-badge-metadata-values
+      [mdValues]="object?.allMetadata(['dc.type'])"
+      [badgeType]="'badge-info type-badge'">
+    </ds-badge-metadata-values>
+    <ds-access-status-badge class="badge-group" [item]="object"></ds-access-status-badge>
+  </div>
+
   <h4 class="item-page-title-field mr-auto font-weight-bold">
     <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
   </h4>

@@ -1,4 +1,4 @@
-<div class="badges-search">
+<div class="badges-section">
   <ds-badge-metadata-values *ngIf="getDsoType(dso) == 'item'"
     [mdValues]="dso.allMetadata(['dc.type'])"
     [badgeType]="'badge-info'"
@@ -6,6 +6,7 @@
     >
   </ds-badge-metadata-values>
   <ds-type-badge *ngIf="showLabel && getDsoType(dso) != 'item'" [object]="dso"></ds-type-badge>
+  <ds-access-status-badge class="badge-group" [item]="dso"></ds-access-status-badge>
 </div>
 <ds-truncatable [id]="dso.id" *ngIf="object !== undefined && object !== null">
   <a *ngIf="linkType != linkTypes.None" [target]="(linkType == linkTypes.ExternalLink) ? '_blank' : '_self'"

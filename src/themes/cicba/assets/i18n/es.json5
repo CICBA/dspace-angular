@@ -5,6 +5,16 @@
     
     "500.page-internal-server-error": "Servicio no disponible",
 
+    "access-status.embargo.listelement.badge": "Embargado",
+
+    "access-status.metadata.only.listelement.badge": "Solo metadatos",
+
+    "access-status.open.access.listelement.badge": "Acceso Abierto",
+
+    "access-status.restricted.listelement.badge": "Restringido",
+
+    "access-status.unknown.listelement.badge": "Desconocido",
+
     "admin.registries.schema.form.element": "Ítem",
 
     "bitstream.edit.form.embargo.hint": "El primer día a partir del cual se permite el acceso. <b>Esta fecha no se puede modificar en este formulario.</b> Para establecer una fecha de embargo para un archivo, vaya a la pestaña <i> Estado del ítem </i>, haga clic en <i> Autorizaciones... </ i >, cree o edite la política <i> READ </i> del archivo y configure la <i> Fecha de inicio </i> como desee.",

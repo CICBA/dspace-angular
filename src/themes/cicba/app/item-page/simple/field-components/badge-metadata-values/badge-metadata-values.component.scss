@@ -10,11 +10,11 @@
     display: inline-block;
 }
 
-.bagde-group {
+.badge-group {
     display: inline-block;
 }
 
-.bagde-group::after {
+.badge-group::after {
     white-space: pre;
     content: " ";
 }
@@ -29,7 +29,7 @@
     display: inline-block;
 }
 
-::ng-deep .bagde-group span {
+::ng-deep .badge-group span {
     padding: 0.4em;
     padding-right: 0.5em;
 }

@@ -3,3 +3,10 @@ rest:
   host: api7.dspace.org
   port: 443
   nameSpace: /server
+
+# Item Config
+item:
+  edit:
+    undoTimeout: 10000 # 10 seconds
+  # Show the item access status label in items lists
+  showAccessStatuses: true
