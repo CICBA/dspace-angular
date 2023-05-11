@@ -10,9 +10,11 @@
 # Requires also running a REST API backend (either locally or remotely),
 # for example via 'docker-compose-rest.yml'
 version: '3.7'
+networks:
+  dspacenet:
 services:
   dspace-angular:
-    container_name: dspace-angular_cic
+    container_name: dspace-angular_${COMPOSE_PROJECT_NAME}
     environment:
       DSPACE_UI_SSL: 'false'
       DSPACE_UI_HOST: dspace-angular
@@ -22,10 +24,13 @@ services:
       DSPACE_REST_HOST: localhost
       DSPACE_REST_PORT: 8080
       DSPACE_REST_NAMESPACE: /server
-    image: dspace/dspace-angular:dspace-7_x
+      NODE_ENV: development
+    image: dspace:dspace-angular_${COMPOSE_PROJECT_NAME}_latest
     build:
       context: ..
       dockerfile: Dockerfile
+    networks:
+      dspacenet:
     ports:
     - published: 4000
       target: 4000
@@ -34,5 +39,8 @@ services:
     stdin_open: true
     tty: true
     volumes:
-    -  /app/node_modules
-    - ..:/app/
+      - ../:/app/
+      - node_modules:/app/node_modules
+ 
+volumes:
+  node_modules:
