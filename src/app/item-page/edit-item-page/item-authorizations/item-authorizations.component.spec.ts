@@ -14,8 +14,6 @@ import { LinkService } from '../../../core/cache/builders/link.service';
 import { getMockLinkService } from '../../../shared/mocks/link-service.mock';
 import { createSuccessfulRemoteDataObject, createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
 import { createPaginatedList, createTestComponent } from '../../../shared/testing/utils.test';
-import { PaginatedList, buildPaginatedList } from '../../../core/data/paginated-list.model';
-import { PageInfo } from '../../../core/shared/page-info.model';
 
 describe('ItemAuthorizationsComponent test suite', () => {
   let comp: ItemAuthorizationsComponent;
