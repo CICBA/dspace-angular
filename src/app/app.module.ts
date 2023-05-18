@@ -55,7 +55,6 @@ const IMPORTS = [
   ScrollToModule.forRoot(),
   NgbModule,
   TranslateModule.forRoot(),
-  NgxMaskModule.forRoot(),
   EffectsModule.forRoot(appEffects),
   StoreModule.forRoot(appReducers, storeModuleConfig),
   StoreRouterConnectingModule.forRoot(),
