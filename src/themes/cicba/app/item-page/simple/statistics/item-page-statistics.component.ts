@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Item } from 'src/app/core/shared/item.model';
-import { UsageReportService } from 'src/app/core/statistics/usage-report-data.service';
+import { UsageReportDataService } from 'src/app/core/statistics/usage-report-data.service';
 import { StatisticsPageComponent } from 'src/app/statistics-page/statistics-page/statistics-page.component';
 import { Observable } from 'rxjs';
 import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
@@ -14,7 +14,7 @@ import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
   selector: 'ds-item-page-statistics',
   styleUrls: ['./item-page-statistics.component.scss'],
   templateUrl: './item-page-statistics.component.html',
-  providers: [UsageReportService],
+  providers: [UsageReportDataService],
 })
 export class ItemPageStatisticsComponent extends StatisticsPageComponent<Item> {
   /**

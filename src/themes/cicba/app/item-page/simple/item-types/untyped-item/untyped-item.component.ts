@@ -10,7 +10,7 @@ import { Context } from 'src/app/core/shared/context.model';
 import { MetadataValue } from 'src/app/core/shared/metadata.models';
 import { VersionHistoryDataService } from 'src/app/core/data/version-history-data.service';
 import { VersionDataService } from 'src/app/core/data/version-data.service';
-import { ItemVersionsSharedService } from 'src/app/shared/item/item-versions/item-versions-shared.service';
+import { ItemVersionsSharedService } from 'src/app/item-page/versions/item-versions-shared.service';
 import { WorkspaceitemDataService } from 'src/app/core/submission/workspaceitem-data.service';
 import { SearchService } from 'src/app/core/shared/search/search.service';
 import { RouteService } from 'src/app/core/services/route.service';

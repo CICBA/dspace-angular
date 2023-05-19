@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MetadataFieldWrapperComponent } from 'src/app/item-page/field-components/metadata-field-wrapper/metadata-field-wrapper.component';
+import { MetadataFieldWrapperComponent } from 'src/app/shared/metadata-field-wrapper/metadata-field-wrapper.component';
 
 /**
  * This component renders any content inside this wrapper.
