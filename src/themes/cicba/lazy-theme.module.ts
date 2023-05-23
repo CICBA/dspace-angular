@@ -112,6 +112,7 @@ import { BrowseByMetadataPageComponent } from './app/browse-by/browse-by-metadat
 import { BrowseByDatePageComponent } from './app/browse-by/browse-by-date-page/browse-by-date-page.component';
 import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.component';
 import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
+import { ItemSharedModule } from '../../app/item-page/item-shared.module';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -225,6 +226,7 @@ const DECLARATIONS = [
     ResultsBackButtonModule,
     DsoSharedModule,
     DsoPageModule,
+    ItemSharedModule,
   ],
   declarations: DECLARATIONS,
   exports: [

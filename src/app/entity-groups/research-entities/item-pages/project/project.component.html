@@ -18,7 +18,7 @@
       <!--[fields]="['project.identifier.status']"-->
       <!--[label]="'project.page.status'">-->
     <!--</ds-generic-item-page-field>-->
-    <!--<ds-metadata-representation-list
+    <ds-metadata-representation-list
       [parentItem]="object"
       [itemType]="'OrgUnit'"
       [metadataFields]="['project.contributor.other']"
@@ -32,7 +32,7 @@
       [fields]="['dc.identifier']"
       [label]="'project.page.id'">
     </ds-generic-item-page-field>
-    <ds-generic-item-page-field [item]="object"-->
+    <!--<ds-generic-item-page-field [item]="object"-->
       <!--[fields]="['project.identifier.expectedcompletion']"-->
       <!--[label]="'project.page.expectedcompletion'">-->
     <!--</ds-generic-item-page-field>-->
@@ -52,7 +52,7 @@
       [parentItem]="object"
       [relationType]="'isOrgUnitOfProject'"
       [label]="'relationships.isOrgUnitOf' | translate">
-    </ds-related-items>
+    </ds-related-items>-->
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.description']"
       [label]="'project.page.description'">
@@ -60,7 +60,7 @@
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.subject']"
       [label]="'project.page.keyword'">
-    </ds-generic-item-page-field>-->
+    </ds-generic-item-page-field>
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']">
         {{"item.page.link.full" | translate}}
