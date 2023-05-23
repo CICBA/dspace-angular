@@ -26,6 +26,28 @@ import { CicSearchSettingsComponent } from './app/search-settings/cic-search-set
 import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
 import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
 import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
+import { FileDownloadLinkComponent } from './app/shared/file-download-link/file-download-link.component';
+import {
+  CreateCollectionParentSelectorComponent
+} from './app/shared/dso-selector/modal-wrappers/create-collection-parent-selector/create-collection-parent-selector.component';
+import {
+  CreateCommunityParentSelectorComponent
+} from './app/shared/dso-selector/modal-wrappers/create-community-parent-selector/create-community-parent-selector.component';
+import {
+  CreateItemParentSelectorComponent
+} from './app/shared/dso-selector/modal-wrappers/create-item-parent-selector/create-item-parent-selector.component';
+import {
+  EditCollectionSelectorComponent
+} from './app/shared/dso-selector/modal-wrappers/edit-collection-selector/edit-collection-selector.component';
+import {
+  EditCommunitySelectorComponent
+} from './app/shared/dso-selector/modal-wrappers/edit-community-selector/edit-community-selector.component';
+import {
+  EditItemSelectorComponent
+} from './app/shared/dso-selector/modal-wrappers/edit-item-selector/edit-item-selector.component';
+import { CollectionDropdownComponent } from './app/shared/collection-dropdown/collection-dropdown.component';
+import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
+
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -35,7 +57,9 @@ const ENTRY_COMPONENTS = [
   PublicationComponent,
   UntypedItemComponent,
   ItemSearchResultListElementComponent,
-  ItemListElementComponent
+  ItemListElementComponent,
+  FileDownloadLinkComponent,
+  CollectionDropdownComponent
 ];
 
 const DECLARATIONS = [
@@ -55,6 +79,13 @@ const DECLARATIONS = [
   CicSearchSidebarComponent,
   CicSidebarDropdownComponent,
   LastAccessionedItemsComponent,
+  CreateCollectionParentSelectorComponent,
+  CreateCommunityParentSelectorComponent,
+  CreateItemParentSelectorComponent,
+  EditCollectionSelectorComponent,
+  EditCommunitySelectorComponent,
+  EditItemSelectorComponent,
+  SearchNavbarComponent,
 ];
 
 const EXPORTS = [

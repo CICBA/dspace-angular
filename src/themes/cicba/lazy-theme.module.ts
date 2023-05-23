@@ -83,6 +83,34 @@ import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-co
 import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
 import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
 import { SearchExpandedNavbarComponent } from './app/search-navbar/search-expanded-navbar.component';
+import { SearchSettingsComponent } from './app/shared/search/search-settings/search-settings.component';
+import { SearchResultsComponent } from './app/shared/search/search-results/search-results.component';
+import { ResultsBackButtonComponent } from './app/shared/results-back-button/results-back-button.component';
+import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
+import { ObjectListComponent } from './app/shared/object-list/object-list.component';
+import { LoadingComponent } from './app/shared/loading/loading.component';
+import {
+  ExternalSourceEntryImportModalComponent
+} from './app/shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/external-source-entry-import-modal.component';
+import { ComcolPageBrowseByComponent } from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
+import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
+import {
+  ExpandableNavbarSectionComponent
+} from './app/navbar/expandable-navbar-section/expandable-navbar-section.component';
+import { FeedbackComponent } from './app/info/feedback/feedback.component';
+import { DsoEditMetadataComponent } from './app/dso-shared/dso-edit-metadata/dso-edit-metadata.component';
+import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
+import {
+  CommunityPageSubCollectionListComponent
+} from './app/community-page/sub-collection-list/community-page-sub-collection-list.component';
+import { CommunityListComponent } from './app/community-list-page/community-list/community-list.component';
+import {
+  EditItemTemplatePageComponent
+} from './app/collection-page/edit-item-template-page/edit-item-template-page.component';
+import { BrowseByTitlePageComponent } from './app/browse-by/browse-by-title-page/browse-by-title-page.component';
+import { BrowseByMetadataPageComponent } from './app/browse-by/browse-by-metadata-page/browse-by-metadata-page.component';
+import { BrowseByDatePageComponent } from './app/browse-by/browse-by-date-page/browse-by-date-page.component';
+import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.component';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -124,6 +152,24 @@ const DECLARATIONS = [
   ItemPageStatisticsComponent,
   RepositoryPolicyComponent,
   SearchExpandedNavbarComponent,
+  SearchSettingsComponent,
+  SearchResultsComponent,
+  ResultsBackButtonComponent,
+  ObjectListComponent,
+  LoadingComponent,
+  ExternalSourceEntryImportModalComponent,
+  ComcolPageBrowseByComponent,
+  AuthNavMenuComponent,
+  ExpandableNavbarSectionComponent,
+  FeedbackComponent,
+  DsoEditMetadataComponent,
+  CommunityPageSubCollectionListComponent,
+  CommunityListComponent,
+  EditItemTemplatePageComponent,
+  BrowseByTitlePageComponent,
+  BrowseByMetadataPageComponent,
+  BrowseByDatePageComponent,
+  AdminSidebarComponent,
 ];
 
 @NgModule({
@@ -174,9 +220,14 @@ const DECLARATIONS = [
     FormsModule,
     ResourcePoliciesModule,
     ComcolModule,
-    EagerThemeModule
+    EagerThemeModule,
+    ResultsBackButtonModule,
+    DsoSharedModule,
   ],
   declarations: DECLARATIONS,
+  exports: [
+    CommunityPageSubCollectionListComponent
+  ]
 })
 
   /**
