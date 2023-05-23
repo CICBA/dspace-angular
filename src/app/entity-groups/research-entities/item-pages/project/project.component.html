@@ -1,8 +1,8 @@
-<ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
-<div class="d-flex flex-row">
+<!--<ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
+--><div class="d-flex flex-row">
   <ds-item-page-title-field [item]="object" class="mr-auto">
   </ds-item-page-title-field>
-  <ds-dso-edit-menu></ds-dso-edit-menu>
+  <!--<ds-dso-edit-menu></ds-dso-edit-menu>-->
 </div>
 <div class="row">
   <div class="col-xs-12 col-md-4">
@@ -18,7 +18,7 @@
       <!--[fields]="['project.identifier.status']"-->
       <!--[label]="'project.page.status'">-->
     <!--</ds-generic-item-page-field>-->
-    <ds-metadata-representation-list
+    <!--<ds-metadata-representation-list
       [parentItem]="object"
       [itemType]="'OrgUnit'"
       [metadataFields]="['project.contributor.other']"
@@ -32,13 +32,13 @@
       [fields]="['dc.identifier']"
       [label]="'project.page.id'">
     </ds-generic-item-page-field>
-    <!--<ds-generic-item-page-field [item]="object"-->
+    <ds-generic-item-page-field [item]="object"-->
       <!--[fields]="['project.identifier.expectedcompletion']"-->
       <!--[label]="'project.page.expectedcompletion'">-->
     <!--</ds-generic-item-page-field>-->
   </div>
   <div class="col-xs-12 col-md-7">
-    <ds-related-items
+    <!--<ds-related-items
       [parentItem]="object"
       [relationType]="'isPersonOfProject'"
       [label]="'relationships.isPersonOf' | translate">
@@ -60,7 +60,7 @@
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.subject']"
       [label]="'project.page.keyword'">
-    </ds-generic-item-page-field>
+    </ds-generic-item-page-field>-->
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']">
         {{"item.page.link.full" | translate}}

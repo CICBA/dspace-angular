@@ -10,11 +10,11 @@
 <div class="mb-3">
   <!-- <ds-type-badge [object]="object"></ds-type-badge> -->
   <div class="pl-2">
-    <ds-dso-page-version-button (newVersionEvent)="onCreateNewVersion()" [dso]="object"
+    <!--<ds-dso-page-version-button (newVersionEvent)="onCreateNewVersion()" [dso]="object"
                                 [tooltipMsgCreate]="'item.page.version.create'"
-                                [tooltipMsgHasDraft]="'item.page.version.hasDraft'"></ds-dso-page-version-button>
-    <ds-dso-page-edit-button [pageRoute]="itemPageRoute" [dso]="object" [tooltipMsg]="'item.page.edit'"></ds-dso-page-edit-button>
-  </div>
+                                [tooltipMsgHasDraft]="'item.page.version.hasDraft'"></ds-dso-page-version-button> -->
+    <!--<ds-dso-page-edit-button [pageRoute]="itemPageRoute" [dso]="object" [tooltipMsg]="'item.page.edit'"></ds-dso-page-edit-button>
+    --></div>
   <div class="badges-section">
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dc.type'])"
@@ -24,11 +24,11 @@
   </div>
 
   <h4 class="item-page-title-field mr-auto font-weight-bold">
-    <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
-  </h4>
+    <!--<ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
+    --></h4>
   <h5 class="mr-auto">
-    <ds-metadata-values [mdValues]="object?.allMetadata(['dcterms.title.subtitle'])"></ds-metadata-values>
-  </h5>
+    <!--<ds-metadata-values [mdValues]="object?.allMetadata(['dcterms.title.subtitle'])"></ds-metadata-values>
+    --></h5>
   <ds-cic-metadata-representation-list
     class="font-italic"
     [parentItem]="object"

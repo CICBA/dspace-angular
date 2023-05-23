@@ -1,8 +1,8 @@
-<ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
-<div class="d-flex flex-row">
+<!--<ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
+--><div class="d-flex flex-row">
   <ds-item-page-title-field class="mr-auto" [item]="object">
   </ds-item-page-title-field>
-  <ds-dso-edit-menu></ds-dso-edit-menu>
+  <!--<ds-dso-edit-menu></ds-dso-edit-menu>-->
 </div>
 <div class="row">
   <div class="col-xs-12 col-md-4">
@@ -13,17 +13,17 @@
                     [placeholder]="'thumbnail.person.placeholder'">
       </ds-thumbnail>
     </ds-metadata-field-wrapper>
-    <ds-generic-item-page-field [item]="object"
+    <!--<ds-generic-item-page-field [item]="object"
       [fields]="['person.email']"
       [label]="'person.page.email'">
     </ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
       [fields]="['person.birthDate']"
       [label]="'person.page.birthdate'">
-    </ds-generic-item-page-field>
+    </ds-generic-item-page-field>-->
   </div>
   <div class="col-xs-12 col-md-7">
-    <ds-related-items
+    <!--<ds-related-items
       [parentItem]="object"
       [relationType]="'isProjectOfPerson'"
       [label]="'relationships.isProjectOf' | translate">
@@ -33,7 +33,7 @@
       [relationType]="'isOrgUnitOfPerson'"
       [label]="'relationships.isOrgUnitOf' | translate">
     </ds-related-items>
-    <ds-generic-item-page-field [item]="object"
+     <ds-generic-item-page-field [item]="object"
       [fields]="['person.jobTitle']"
       [label]="'person.page.jobtitle'">
     </ds-generic-item-page-field>
@@ -48,7 +48,7 @@
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.title']"
       [label]="'person.page.name'">
-    </ds-generic-item-page-field>
+    </ds-generic-item-page-field>-->
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']">
         {{"item.page.link.full" | translate}}
