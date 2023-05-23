@@ -47,7 +47,7 @@ import {
 } from './app/shared/dso-selector/modal-wrappers/edit-item-selector/edit-item-selector.component';
 import { CollectionDropdownComponent } from './app/shared/collection-dropdown/collection-dropdown.component';
 import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
-
+import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -111,6 +111,7 @@ const EXPORTS = [
     NavbarModule,
     ItemPageModule,
     TranslateModule,
+    DsoPageModule,
   ],
   declarations: DECLARATIONS,
   providers: [

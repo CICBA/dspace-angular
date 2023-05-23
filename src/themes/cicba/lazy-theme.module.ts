@@ -111,6 +111,7 @@ import { BrowseByTitlePageComponent } from './app/browse-by/browse-by-title-page
 import { BrowseByMetadataPageComponent } from './app/browse-by/browse-by-metadata-page/browse-by-metadata-page.component';
 import { BrowseByDatePageComponent } from './app/browse-by/browse-by-date-page/browse-by-date-page.component';
 import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.component';
+import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -223,6 +224,7 @@ const DECLARATIONS = [
     EagerThemeModule,
     ResultsBackButtonModule,
     DsoSharedModule,
+    DsoPageModule,
   ],
   declarations: DECLARATIONS,
   exports: [
