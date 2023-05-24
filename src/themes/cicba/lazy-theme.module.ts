@@ -114,6 +114,7 @@ import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.c
 import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 import { ItemSharedModule } from '../../app/item-page/item-shared.module';
 import { ItemVersionsModule } from '../../app/item-page/versions/item-versions.module';
+import { SystemWideAlertModule } from '../../app/system-wide-alert/system-wide-alert.module';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -229,6 +230,7 @@ const DECLARATIONS = [
     DsoPageModule,
     ItemSharedModule,
     ItemVersionsModule,
+    SystemWideAlertModule,
   ],
   declarations: DECLARATIONS,
   exports: [
