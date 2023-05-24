@@ -113,6 +113,7 @@ import { BrowseByDatePageComponent } from './app/browse-by/browse-by-date-page/b
 import { AdminSidebarComponent } from './app/admin/admin-sidebar/admin-sidebar.component';
 import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 import { ItemSharedModule } from '../../app/item-page/item-shared.module';
+import { ItemVersionsModule } from '../../app/item-page/versions/item-versions.module';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -227,6 +228,7 @@ const DECLARATIONS = [
     DsoSharedModule,
     DsoPageModule,
     ItemSharedModule,
+    ItemVersionsModule,
   ],
   declarations: DECLARATIONS,
   exports: [
