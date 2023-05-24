@@ -38,7 +38,7 @@
     <!--</ds-generic-item-page-field>-->
   </div>
   <div class="col-xs-12 col-md-7">
-    <!--<ds-related-items
+    <ds-related-items
       [parentItem]="object"
       [relationType]="'isPersonOfProject'"
       [label]="'relationships.isPersonOf' | translate">
@@ -52,7 +52,7 @@
       [parentItem]="object"
       [relationType]="'isOrgUnitOfProject'"
       [label]="'relationships.isOrgUnitOf' | translate">
-    </ds-related-items>-->
+    </ds-related-items>
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.description']"
       [label]="'project.page.description'">
