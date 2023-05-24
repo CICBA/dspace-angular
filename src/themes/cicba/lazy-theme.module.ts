@@ -33,7 +33,7 @@ import { AppModule } from '../../app/app.module';
 import { ItemPageModule } from '../../app/item-page/item-page.module';
 import { RouterModule } from '@angular/router';
 import { CommunityListPageModule } from '../../app/community-list-page/community-list-page.module';
-import { InfoModule } from './app/info/info.module';
+import { InfoModule } from '../../app/info/info.module';
 import { StatisticsPageModule } from '../../app/statistics-page/statistics-page.module';
 import { CommunityPageModule } from '../../app/community-page/community-page.module';
 import { CollectionPageModule } from '../../app/collection-page/collection-page.module';
@@ -115,6 +115,7 @@ import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 import { ItemSharedModule } from '../../app/item-page/item-shared.module';
 import { ItemVersionsModule } from '../../app/item-page/versions/item-versions.module';
 import { SystemWideAlertModule } from '../../app/system-wide-alert/system-wide-alert.module';
+import { SharedBrowseByModule } from '../../app/shared/browse-by/shared-browse-by.module';
 
 const DECLARATIONS = [
   FileSectionComponent,
@@ -231,6 +232,7 @@ const DECLARATIONS = [
     ItemSharedModule,
     ItemVersionsModule,
     SystemWideAlertModule,
+    SharedBrowseByModule,
   ],
   declarations: DECLARATIONS,
   exports: [

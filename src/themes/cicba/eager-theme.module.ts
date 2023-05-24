@@ -50,6 +50,7 @@ import { SearchNavbarComponent } from './app/search-navbar/search-navbar.compone
 import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 import { ItemSharedModule } from '../../app/item-page/item-shared.module';
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
+import { SharedBrowseByModule } from '../../app/shared/browse-by/shared-browse-by.module';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -116,6 +117,7 @@ const EXPORTS = [
     DsoPageModule,
     ItemSharedModule,
     ResultsBackButtonModule,
+    SharedBrowseByModule,
   ],
   declarations: DECLARATIONS,
   providers: [
