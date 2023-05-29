@@ -13,8 +13,10 @@
     <!--<ds-dso-page-version-button (newVersionEvent)="onCreateNewVersion()" [dso]="object"
                                 [tooltipMsgCreate]="'item.page.version.create'"
                                 [tooltipMsgHasDraft]="'item.page.version.hasDraft'"></ds-dso-page-version-button> -->
+    <ds-dso-edit-menu></ds-dso-edit-menu>
     <!--<ds-dso-page-edit-button [pageRoute]="itemPageRoute" [dso]="object" [tooltipMsg]="'item.page.edit'"></ds-dso-page-edit-button>
-    --></div>
+    -->
+  </div>
   <div class="badges-section">
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dc.type'])"
