@@ -39,8 +39,8 @@ import {
 } from './page-internal-server-error/themed-page-internal-server-error.component';
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 // Utilizo un menu resolver propio para personalizar el menu del navbar
-// import { CICBAMenuResolver } from './cicba-menu.resolver';
-import { MenuResolver } from './menu.resolver';
+import { CICBAMenuResolver } from './cicba-menu.resolver';
+// import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 
 @NgModule({
@@ -53,8 +53,8 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
         canActivate: [AuthBlockingGuard],
         canActivateChild: [ServerCheckGuard],
         // Utilizo un menu resolver propio para personalizar el menu del navbar
-        // resolve: [CICBAMenuResolver],
-        resolve: [MenuResolver],
+        resolve: [CICBAMenuResolver],
+        // resolve: [MenuResolver],
         children: [
           { path: '', redirectTo: '/home', pathMatch: 'full' },
           {
