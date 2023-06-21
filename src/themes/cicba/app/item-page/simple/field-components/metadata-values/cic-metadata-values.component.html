@@ -6,9 +6,14 @@
             </a>
         </ng-container>
         <ng-container *ngIf="!authorityUrl">
-            <span class="dont-break-out">
-                {{mdValue.value}}<span *ngIf="!last" [innerHTML]="separator"></span>
-            </span>
+            <ng-container *ngIf="!mdValue.value.startsWith('http')">
+                {{mdValue.value}}
+                <span *ngIf="!last" [innerHTML]="separator"></span>
+              </ng-container>
+              <a *ngIf="mdValue.value.startsWith('http')" [href]="mdValue.value">
+                {{mdValue.value}}
+                <span *ngIf="!last" [innerHTML]="separator"></span>
+              </a>
         </ng-container>
     </ng-container>
 </ds-cic-metadata-field-wrapper>
