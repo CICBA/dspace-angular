@@ -7266,7 +7266,7 @@
     "subscriptions.frequency.M" : "Mensualmente",
 
   // "subscriptions.modal.delete-info" : "Para eliminar esta suscripción, visite la página "Suscripciones" en su perfil de usuario",
-    "subscriptions.modal.delete-info" : "Para eliminar esta suscripción, visite la página "Suscripciones" en su perfil de usuario",
+    "subscriptions.modal.delete-info" : "Para eliminar esta suscripción, visite la página 'Suscripciones' en su perfil de usuario",
 
   // "item.edit.identifiers.doi.status.PENDING" : "Pendiente (no registrado)",
     "item.edit.identifiers.doi.status.PENDING" : "Pendiente (no registrado)",
@@ -7380,13 +7380,13 @@
     "admin.workflow.item.policies" : "Políticas",
 
   // "item.edit.metadata.edit.buttons.virtual" : "Este es un valor de metadatos virtual, es decir, un valor heredado de una entidad relacionada. No se puede modificar directamente. Agregue o elimine la relación correspondiente en la pestaña "Relaciones"",
-    "item.edit.metadata.edit.buttons.virtual" : "Este es un valor de metadatos virtual, es decir, un valor heredado de una entidad relacionada. No se puede modificar directamente. Agregue o elimine la relación correspondiente en la pestaña "Relaciones"",
+    "item.edit.metadata.edit.buttons.virtual" : "Este es un valor de metadatos virtual, es decir, un valor heredado de una entidad relacionada. No se puede modificar directamente. Agregue o elimine la relación correspondiente en la pestaña 'Relaciones'",
 
   // "subscriptions.table.subscription_type" : "Tipo de suscripción",
     "subscriptions.table.subscription_type" : "Tipo de suscripción",
 
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.addMember" : "Error al agregar miembro: "{{name}}"",
-    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.addMember" : "Error al agregar miembro: "{{name}}"",
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.addMember": "Failed to add member: \"{{name}}\"",
+  "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.addMember" : "Error al agregar miembro: \"{{name}}\"",
 
   // "itemtemplate.edit.metadata.notifications.outdated.title" : "Cambiado desactualizado",
     "itemtemplate.edit.metadata.notifications.outdated.title" : "Cambiado desactualizado",
@@ -7403,8 +7403,8 @@
   // "item.edit.identifiers.doi.status.TO_BE_DELETED" : "En cola para su eliminación",
     "item.edit.identifiers.doi.status.TO_BE_DELETED" : "En cola para su eliminación",
 
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.deleteMember" : "Error al eliminar al miembro: "{{name}}"",
-    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.deleteMember" : "Error al eliminar al miembro: "{{name}}"",
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.deleteMember" : "Error al eliminar al miembro: \"{{name}}\"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.deleteMember" : "Error al eliminar al miembro: \"{{name}}\"",
 
   // "item.page.download" : "Descargar",
     "item.page.download" : "Descargar",
@@ -7448,8 +7448,8 @@
   // "supervision-group-selector.button.cancel" : "Cancelar",
     "supervision-group-selector.button.cancel" : "Cancelar",
 
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.addMember" : "Miembro agregado correctamente: "{{name}}"",
-    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.addMember" : "Miembro agregado correctamente: "{{name}}"",
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.addMember" : "Miembro agregado correctamente: \"{{name}}\"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.addMember" : "Miembro agregado correctamente: \"{{name}}\"",
 
   // "submission.sections.identifiers.no_handle" : "No se han acuñado manejadores para este elemento.",
     "submission.sections.identifiers.no_handle" : "No se han acuñado manejadores para este elemento.",
@@ -7502,8 +7502,8 @@
   // "item.page.dcterms.spatial" : "Cobertura Espacial",
     "item.page.dcterms.spatial" : "Cobertura Espacial",
 
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.add" : "Añadir miembro con el nombre "{{name}}"",
-    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.add" : "Añadir miembro con el nombre "{{name}}"",
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.add" : "Añadir miembro con el nombre \"{{name}}\"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.add" : "Añadir miembro con el nombre \"{{name}}\"",
 
   // "item.page.dcterms.relation" : "Recursos relacionados",
     "item.page.dcterms.relation" : "Recursos relacionados",
@@ -7679,8 +7679,8 @@
   // "submission.sections.submit.progressbar.identifiers" : "Identificadores",
     "submission.sections.submit.progressbar.identifiers" : "Identificadores",
 
-  // "workflow-item.search.result.notification.deleted.failure" : "Error al eliminar la orden de supervisión "{{name}}"",
-    "workflow-item.search.result.notification.deleted.failure" : "Error al eliminar la orden de supervisión "{{name}}"",
+  // "workflow-item.search.result.notification.deleted.failure" : "Error al eliminar la orden de supervisión \"{{name}}\"",
+    "workflow-item.search.result.notification.deleted.failure" : "Error al eliminar la orden de supervisión \"{{name}}\"",
 
   // "search.browse.item-back" : "Volver a los resultados",
     "search.browse.item-back" : "Volver a los resultados",
@@ -7871,8 +7871,8 @@
   // "itemtemplate.edit.metadata.headers.language" : "Idioma",
     "itemtemplate.edit.metadata.headers.language" : "Idioma",
 
-  // "workflow-item.search.result.notification.deleted.success" : "Pedido de supervisión "{{name}}" eliminado correctamente",
-    "workflow-item.search.result.notification.deleted.success" : "Pedido de supervisión "{{name}}" eliminado correctamente",
+  // "workflow-item.search.result.notification.deleted.success" : "Pedido de supervisión \"{{name}}\" eliminado correctamente",
+    "workflow-item.search.result.notification.deleted.success" : "Pedido de supervisión \"{{name}}\" eliminado correctamente",
 
   // "advanced-workflow-action.rating.description-requiredDescription" : "Por favor seleccione una calificación a continuación y también agregue una reseña",
     "advanced-workflow-action.rating.description-requiredDescription" : "Por favor seleccione una calificación a continuación y también agregue una reseña",
@@ -7889,8 +7889,8 @@
   // "admin.access-control.groups.form.tooltip.editGroup.addSubgroups" : "Para agregar o eliminar un Subgrupo de este grupo, haga clic en el botón 'Explorar todo' o use la barra de búsqueda a continuación para buscar usuarios. Luego haga clic en el icono de más para cada usuario que desee agregar en la lista a continuación, o el icono de la papelera para cada usuario que desee eliminar. La lista a continuación puede tener varias páginas: use los controles de página a continuación de la lista para navegar a las siguientes páginas. Una vez que esté listo, guarde sus cambios haciendo clic en el botón 'Guardar' en la sección superior.",
     "admin.access-control.groups.form.tooltip.editGroup.addSubgroups" : "Para agregar o eliminar un Subgrupo de este grupo, haga clic en el botón 'Explorar todo' o use la barra de búsqueda a continuación para buscar usuarios. Luego haga clic en el icono de más para cada usuario que desee agregar en la lista a continuación, o el icono de la papelera para cada usuario que desee eliminar. La lista a continuación puede tener varias páginas: use los controles de página a continuación de la lista para navegar a las siguientes páginas. Una vez que esté listo, guarde sus cambios haciendo clic en el botón 'Guardar' en la sección superior.",
 
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.remove" : "Eliminar miembro con nombre "{{name}}"",
-    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.remove" : "Eliminar miembro con nombre "{{name}}"",
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.remove" : "Eliminar miembro con nombre \"{{name}}\"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.remove" : "Eliminar miembro con nombre \"{{name}}\"",
 
   // "itemtemplate.edit.metadata.notifications.invalid.content" : "Sus cambios no fueron guardados. Asegúrese de que todos los campos sean válidos antes de guardar.",
     "itemtemplate.edit.metadata.notifications.invalid.content" : "Sus cambios no fueron guardados. Asegúrese de que todos los campos sean válidos antes de guardar.",
@@ -7910,8 +7910,8 @@
   // "item.page.dcterms.title.investigacion" : "Título de investigación",
     "item.page.dcterms.title.investigacion" : "Título de investigación",
 
-  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.deleteMember" : "Miembro eliminado con éxito: "{{name}}"",
-    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.deleteMember" : "Miembro eliminado con éxito: "{{name}}"",
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.deleteMember" : "Miembro eliminado con éxito: \"{{name}}\"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.deleteMember" : "Miembro eliminado con éxito: \"{{name}}\"",
 
   // "workflow-item.scorereviewaction.notification.success.title" : "Revisión de calificación",
     "workflow-item.scorereviewaction.notification.success.title" : "Revisión de calificación",
@@ -7937,8 +7937,8 @@
   // "search.filters.filter.keyword.label" : "Buscar materia",
     "search.filters.filter.keyword.label" : "Buscar materia",
 
-  // "confirmation-modal.delete-subscription.info" : "¿Estás seguro de que deseas eliminar la suscripción para "{{ dsoName }}"?",
-    "confirmation-modal.delete-subscription.info" : "¿Estás seguro de que deseas eliminar la suscripción para "{{ dsoName }}"?",
+  // "confirmation-modal.delete-subscription.info" : "¿Estás seguro de que deseas eliminar la suscripción para \"{{ dsoName }}\"?",
+    "confirmation-modal.delete-subscription.info" : "¿Estás seguro de que deseas eliminar la suscripción para \"{{ dsoName }}\"?",
 
   // "confirmation-modal.delete-subscription.cancel" : "Cancelar",
     "confirmation-modal.delete-subscription.cancel" : "Cancelar",
