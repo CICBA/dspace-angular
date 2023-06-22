@@ -24,10 +24,10 @@
   "500.page-internal-server-error": "Servicio no disponible",
 
   // "500.help": "The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.",
-  "500.help": "No se puede atender su petición debido a problemas de capacidad o mantenimientos programados del servidor. Inténtelo más tarde, por favor.",
+  "500.help": "El servidor no puede atender temporalmente su solicitud debido a problemas de mantenimiento o de capacidad. Por favor, inténtelo de nuevo más tarde.",
 
   // "500.link.home-page": "Take me to the home page",
-  "500.link.home-page": "Llévame a la página de inicio",
+  "500.link.home-page": "Volver a la página de inicio",
 
 
   // "404.help": "We can't find the page you're looking for. The page may have been moved or deleted. You can use the button below to get back to the home page. ",
@@ -55,10 +55,10 @@
   "error-page.orcid.generic-error": "Hubo un error en el login via ORCID. Asegúrese que ha compartido el correo electrónico de su cuenta ORCID con Dspace. Si continuase el error, contacte con el administrador",
 
   // "access-status.embargo.listelement.badge": "Embargo",
-  "access-status.embargo.listelement.badge": "Embargo",
+  "access-status.embargo.listelement.badge": "Embargado",
 
   // "access-status.metadata.only.listelement.badge": "Metadata only",
-  "access-status.metadata.only.listelement.badge": "Solo Metadatos",
+  "access-status.metadata.only.listelement.badge": "Solo metadatos",
 
   // "access-status.open.access.listelement.badge": "Open Access",
   "access-status.open.access.listelement.badge": "Acceso Abierto",
@@ -288,7 +288,9 @@
   "admin.registries.schema.form.edit": "Editar campo de metadatos",
 
   // "admin.registries.schema.form.element": "Element",
-  "admin.registries.schema.form.element": "Elemento",
+
+  // "admin.registries.schema.form.element": "Elemento",
+  "admin.registries.schema.form.element": "Ítem",
 
   // "admin.registries.schema.form.qualifier": "Qualifier",
   "admin.registries.schema.form.qualifier": "Cualificador",
@@ -904,7 +906,7 @@
   "bitstream.edit.form.description.label": "Descripción",
 
   // "bitstream.edit.form.embargo.hint": "The first day from which access is allowed. <b>This date cannot be modified on this form.</b> To set an embargo date for a bitstream, go to the <i>Item Status</i> tab, click <i>Authorizations...</i>, create or edit the bitstream's <i>READ</i> policy, and set the <i>Start Date</i> as desired.",
-  "bitstream.edit.form.embargo.hint": "El primer día a partir del cual se permite el acceso. <b>Esta fecha no se puede modificar en este formulario.</b> Para establecer una fecha de embargo para un archivo, vaya a la pestaña <i>Estado del ítem</i>, haga clic en <i>Autorizaciones...</i>, cree o edite la política <i>READ</i> del archivo y configure la <i>Fecha de inicio</i> como desee.",
+  "bitstream.edit.form.embargo.hint": "El primer día a partir del cual se permite el acceso. <b>Esta fecha no se puede modificar en este formulario.</b> Para establecer una fecha de embargo para un archivo, vaya a la pestaña <i> Estado del ítem </i>, haga clic en <i> Autorizaciones... </ i >, cree o edite la política <i> READ </i> del archivo y configure la <i> Fecha de inicio </i> como desee.",
 
   // "bitstream.edit.form.embargo.label": "Embargo until specific date",
   "bitstream.edit.form.embargo.label": "Embargo hasta fecha concreta",
@@ -1210,7 +1212,7 @@
 
 
   // "collection.edit.tabs.mapper.head": "Item Mapper",
-  "collection.edit.tabs.mapper.head": "Mapeo de ítems",
+  "collection.edit.tabs.mapper.head": "Asignador de ítems",
 
   // "collection.edit.tabs.item-mapper.title": "Collection Edit - Item Mapper",
   "collection.edit.tabs.item-mapper.title": "Editar colección: mapeo de ítems",
@@ -1222,10 +1224,10 @@
   "collection.edit.item-mapper.collection": "Colección: \"<b>{{ name }}</b>\"",
 
   // "collection.edit.item-mapper.confirm": "Map selected items",
-  "collection.edit.item-mapper.confirm": "Mapear ítems seleccionados",
+  "collection.edit.item-mapper.confirm": "Asignar ítems seleccionados",
 
   // "collection.edit.item-mapper.description": "This is the item mapper tool that allows collection administrators to map items from other collections into this collection. You can search for items from other collections and map them, or browse the list of currently mapped items.",
-  "collection.edit.item-mapper.description": "Esta es la herramienta de mapeo de ítems que permite a los administradores de colecciones asignar ítems de otras colecciones a esta colección. Puede buscar ítems de otras colecciones y mapearlos, o explorar la lista de ítems mapeados actualmente.",
+  "collection.edit.item-mapper.description": "Esta es la herramienta de asignación de ítems que permite a los administradores de colecciones asignar ítems de otras colecciones a esta colección. Puede buscar ítems de otras colecciones y mapearlos, o explorar la lista de ítems mapeados actualmente.",
 
   // "collection.edit.item-mapper.head": "Item Mapper - Map Items from Other Collections",
   "collection.edit.item-mapper.head": "Mapeo de ítems: mapea ítems de otras colecciones",
@@ -1240,7 +1242,7 @@
   "collection.edit.item-mapper.notifications.map.error.head": "Errores de mapeo",
 
   // "collection.edit.item-mapper.notifications.map.success.content": "Successfully mapped {{amount}} items.",
-  "collection.edit.item-mapper.notifications.map.success.content": "{{ amount }} ítems mapeados correctamente.",
+  "collection.edit.item-mapper.notifications.map.success.content": "{{ amount }} ítems asignados correctamente.",
 
   // "collection.edit.item-mapper.notifications.map.success.head": "Mapping completed",
   "collection.edit.item-mapper.notifications.map.success.head": "Mapeo completado",
@@ -1258,7 +1260,7 @@
   "collection.edit.item-mapper.notifications.unmap.success.head": "Finalizada la eliminación del mapeo",
 
   // "collection.edit.item-mapper.remove": "Remove selected item mappings",
-  "collection.edit.item-mapper.remove": "Eliminar los mapeos de ítems seleccionados",
+  "collection.edit.item-mapper.remove": "Eliminar asignaciones de ítems seleccionados",
 
   // "collection.edit.item-mapper.search-form.placeholder": "Search items...",
   "collection.edit.item-mapper.search-form.placeholder": "Buscar ítems...",
@@ -1555,13 +1557,19 @@
 
 
   // "communityList.breadcrumbs": "Community List",
+
+  // "communityList.breadcrumbs": "Lista de comunidades",
   "communityList.breadcrumbs": "Lista de comunidades",
 
   // "communityList.tabTitle": "Community List",
+
+  // "communityList.tabTitle": "Lista de comunidades",
   "communityList.tabTitle": "Lista de comunidades",
 
   // "communityList.title": "List of Communities",
-  "communityList.title": "Lista de Comunidades",
+
+  // "communityList.title": "Lista de Comunidades",
+  "communityList.title": "Lista de comunidades",
 
   // "communityList.showMore": "Show More",
   "communityList.showMore": "Mostrar más",
@@ -1804,7 +1812,7 @@
   "community.sub-collection-list.head": "Colecciones de esta comunidad",
 
   // "community.sub-community-list.head": "Communities of this Community",
-  "community.sub-community-list.head": "Comunidades de esta comunidad",
+  "community.sub-community-list.head": "Subcomunidades de esta comunidad",
 
 
 
@@ -2068,16 +2076,16 @@
   "dso-selector.select.collection.head": "Seleccione una colección",
 
   // "dso-selector.set-scope.community.head": "Select a search scope",
-  "dso-selector.set-scope.community.head": "Seleccione un ámbito de búsqueda",
+  "dso-selector.set-scope.community.head": "Seleccione alcance de la búsqueda",
 
   // "dso-selector.set-scope.community.button": "Search all of DSpace",
-  "dso-selector.set-scope.community.button": "Buscar en todo DSpace",
+  "dso-selector.set-scope.community.button": "Buscar en todo el repositorio",
 
   // "dso-selector.set-scope.community.or-divider": "or",
   "dso-selector.set-scope.community.or-divider": "o",
 
   // "dso-selector.set-scope.community.input-header": "Search for a community or collection",
-  "dso-selector.set-scope.community.input-header": "Busque una comunidad o colección",
+  "dso-selector.set-scope.community.input-header": "Buscar una comunidad o colección",
 
   // "dso-selector.claim.item.head": "Profile tips",
   "dso-selector.claim.item.head": "Sugerencias de perfil",
@@ -2249,10 +2257,10 @@
 
 
   // "forgot-email.form.header": "Forgot Password",
-  "forgot-email.form.header": "Olvido de contraseña",
+  "forgot-email.form.header": "¿Olvidó la contraseña?",
 
   // "forgot-email.form.info": "Enter the email address associated with the account.",
-  "forgot-email.form.info": "Introduzca la dirección de correo electrónico que proporcionó cuando se registró.",
+  "forgot-email.form.info": "Introduzca la dirección de correo electrónico que proporcionó cuando se registró en CIC-Digital. Se le enviará un mensaje a esa dirección con las instrucciones de recuperación.",
 
   // "forgot-email.form.email": "Email Address *",
   "forgot-email.form.email": "Dirección de correo electrónico *",
@@ -2264,10 +2272,10 @@
   "forgot-email.form.email.error.pattern": "Por favor introduzca una dirección de correo electrónico válida",
 
   // "forgot-email.form.email.hint": "An email will be sent to this address with a further instructions.",
-  "forgot-email.form.email.hint": "Se le enviará un mensaje a esa dirección con las instrucciones pertinentes.",
+  "forgot-email.form.email.hint": "Introduzca la misma dirección con la que se registró.",
 
   // "forgot-email.form.submit": "Reset password",
-  "forgot-email.form.submit": "Restablecer contraseña",
+  "forgot-email.form.submit": "Enviar",
 
   // "forgot-email.form.success.head": "Password reset email sent",
   "forgot-email.form.success.head": "Se ha enviado el mensaje de restablecemieto de contraseña",
@@ -2479,7 +2487,7 @@
 
 
   // "health.breadcrumbs": "Health",
-  "health.breadcrumbs": "Chequeos",
+  "health.breadcrumbs": "Salud",
 
   // "health-page.heading" : "Health",
   "health-page.heading" : "Chequeos",
@@ -2491,13 +2499,13 @@
   "health-page.status-tab" : "Estado",
 
   // "health-page.error.msg": "The health check service is temporarily unavailable",
-  "health-page.error.msg": "El servicio de comprobación no se encuentra temporalmente disponible",
+  "health-page.error.msg": "El servicio de chequeo de saludo no esta disponible temporalmente",
 
   // "health-page.property.status": "Status code",
   "health-page.property.status": "Código de estado",
 
   // "health-page.section.db.title": "Database",
-  "health-page.section.db.title": "Database",
+  "health-page.section.db.title": "Base de datos",
 
   // "health-page.section.geoIp.title": "GeoIp",
   "health-page.section.geoIp.title": "GeoIp",
@@ -2515,7 +2523,7 @@
   "health-page.section.solrStatisticsCore.title": "Solr: statistics core",
 
   // "health-page.section-info.app.title": "Application Backend",
-  "health-page.section-info.app.title": "Backend de la aplicación",
+  "health-page.section-info.app.title": "Application Backend",
 
   // "health-page.section-info.java.title": "Java",
   "health-page.section-info.java.title": "Java",
@@ -2530,26 +2538,26 @@
   "health-page.status.error.info": "Problemas detectados",
 
   // "health-page.status.warning.info": "Possible issues detected",
-  "health-page.status.warning.info": "Detectados problemas potenciales",
+  "health-page.status.warning.info": "Posible problemas detectados",
 
   // "health-page.title": "Health",
-  "health-page.title": "Chequeos",
+  "health-page.title": "Salud",
 
   // "health-page.section.no-issues": "No issues detected",
-  "health-page.section.no-issues": "No se detectaron problemas",
+  "health-page.section.no-issues": "No hay problemas detectados",
 
 
   // "home.description": "",
   "home.description": "",
 
   // "home.breadcrumbs": "Home",
-  "home.breadcrumbs": "Inicio",
+  "home.breadcrumbs": "CIC-Digital",
 
   // "home.search-form.placeholder": "Search the repository ...",
   "home.search-form.placeholder": "Buscar en el repositorio ...",
 
   // "home.title": "Home",
-  "home.title": "Inicio",
+  "home.title": "Home",
 
   // "home.top-level-communities.head": "Communities in DSpace",
   "home.top-level-communities.head": "Comunidades en DSpace",
@@ -2593,28 +2601,28 @@
   "info.privacy.title": "Declaracion de privacidad",
 
   // "info.feedback.breadcrumbs": "Feedback",
-  "info.feedback.breadcrumbs": "Sugerencias",
+  "info.feedback.breadcrumbs": "Contacto",
 
   // "info.feedback.head": "Feedback",
-  "info.feedback.head": "Sugerencias",
+  "info.feedback.head": "Contacto",
 
   // "info.feedback.title": "Feedback",
-  "info.feedback.title": "Sugerencias",
+  "info.feedback.title": "Contacto",
 
   // "info.feedback.info": "Thanks for sharing your feedback about the DSpace system. Your comments are appreciated!",
-  "info.feedback.info": "Gracias por compartir sus sugerencias sobre el repositorio. ¡Tendremos en cuenta sus comentarios!",
+  "info.feedback.info": "A continuación puede compartir sus comentarios y consultas sobre el repositorio y/o su contenido. Recuerde que por consultas generales sobre la CIC debe hacerlo desde la web https://www.cic.gba.gob.ar/. Por consulta de materiales o estudios, por favor diríjase al centro correspondiente en https://www.gba.gob.ar/cic/informacion_de_centros. Muchas gracias",
 
   // "info.feedback.email_help": "This address will be used to follow up on your feedback.",
-  "info.feedback.email_help": "Esta dirección se usará para el seguimiento de su sugerencia.",
+  "info.feedback.email_help": "Esta dirección será utilizada para seguimiento de su comentario.",
 
   // "info.feedback.send": "Send Feedback",
-  "info.feedback.send": "Envíar sugerencia",
+  "info.feedback.send": "Envíe su comentario",
 
   // "info.feedback.comments": "Comments",
-  "info.feedback.comments": "Comentarios",
+  "info.feedback.comments": "Comentarios:",
 
   // "info.feedback.email-label": "Your Email",
-  "info.feedback.email-label": "Su correo electrónico",
+  "info.feedback.email-label": "Su correo electrónico:",
 
   // "info.feedback.create.success" : "Feedback Sent Successfully!",
   "info.feedback.create.success" : "Envío exitoso de sugerencia",
@@ -2658,7 +2666,7 @@
 
 
   // "item.bitstreams.upload.bundle": "Bundle",
-  "item.bitstreams.upload.bundle": "Bloque",
+  "item.bitstreams.upload.bundle": "Bundle",
 
   // "item.bitstreams.upload.bundle.placeholder": "Select a bundle or input new bundle name",
   "item.bitstreams.upload.bundle.placeholder": "Seleccione un bloque o introduzca un nuevo nombre de bloque",
@@ -2676,7 +2684,7 @@
   "item.bitstreams.upload.drop-message": "Suelta un archivo para subir",
 
   // "item.bitstreams.upload.item": "Item: ",
-  "item.bitstreams.upload.item": "Ítem: ",
+  "item.bitstreams.upload.item": "Ítem:",
 
   // "item.bitstreams.upload.notifications.bundle.created.content": "Successfully created new bundle.",
   "item.bitstreams.upload.notifications.bundle.created.content": "Nuevo bloque creado con éxito.",
@@ -2732,7 +2740,7 @@
   "item.edit.bitstreams.headers.actions": "Acciones",
 
   // "item.edit.bitstreams.headers.bundle": "Bundle",
-  "item.edit.bitstreams.headers.bundle": "Bloque",
+  "item.edit.bitstreams.headers.bundle": "Ítem",
 
   // "item.edit.bitstreams.headers.description": "Description",
   "item.edit.bitstreams.headers.description": "Descripción",
@@ -2791,7 +2799,7 @@
   "item.edit.delete.confirm": "Borrar",
 
   // "item.edit.delete.description": "Are you sure this item should be completely deleted? Caution: At present, no tombstone would be left.",
-  "item.edit.delete.description": "¿Estás seguro de que este ítem debería eliminarse por completo? Precaución: en la actualidad, no se dejaría ningun rastro.",
+  "item.edit.delete.description": "¿Estás seguro de que este ítem debería eliminarse por completo? Precaución: en la actualidad, no se dejaría ninguna lápida.",
 
   // "item.edit.delete.error": "An error occurred while deleting the item",
   "item.edit.delete.error": "Se produjo un error al eliminar el ítem.",
@@ -2966,7 +2974,7 @@
   "item.edit.move.discard-button": "Descartar",
 
   // "item.edit.move.description": "Select the collection you wish to move this item to. To narrow down the list of displayed collections, you can enter a search query in the box.",
-  "item.edit.move.description": "Seleccione la colección a la que desea mover este ítem. Para reducir la lista de colecciones mostradas, puede introducir una búsqueda en el cuadro.",
+  "item.edit.move.description": "Seleccione la colección a la que desea mover este ítem. Para reducir la lista de colecciones mostradas, puede ingresar una consulta de búsqueda en el cuadro.",
 
   // "item.edit.move.error": "An error occurred when attempting to move the item",
   "item.edit.move.error": "Se produjo un error al intentar mover el ítem.",
@@ -3004,7 +3012,7 @@
   "item.edit.private.confirm": "Convertirlo en privado",
 
   // "item.edit.private.description": "Are you sure this item should be made non-discoverable in the archive?",
-  "item.edit.private.description": "¿Está seguro de que este ítem debe convertirse en privado?",
+  "item.edit.private.description": "¿Estás seguro de que este ítem debe ser privado en el archivo?",
 
   // "item.edit.private.error": "An error occurred while making the item non-discoverable",
   "item.edit.private.error": "Se produjo un error al convertir el ítem en privado.",
@@ -3024,10 +3032,10 @@
   "item.edit.public.confirm": "Convertirlo en público",
 
   // "item.edit.public.description": "Are you sure this item should be made discoverable in the archive?",
-  "item.edit.public.description": "¿Está seguro de que este ítem debe convertirse en público?",
+  "item.edit.public.description": "¿Estás seguro de que este ítem debe hacerse público en el archivo?",
 
   // "item.edit.public.error": "An error occurred while making the item discoverable",
-  "item.edit.public.error": "Se produjo un error al convertir el ítem en público.",
+  "item.edit.public.error": "Se produjo un error al hacer público el ítem.",
 
   // "item.edit.public.header": "Make item discoverable: {{ id }}",
   "item.edit.public.header": "Convertir el ítem en público: {{ id }}",
@@ -3243,7 +3251,7 @@
 
 
   // "item.listelement.badge": "Item",
-  "item.listelement.badge": "Ítem",
+  "item.listelement.badge": "Publicación",
 
   // "item.page.description": "Description",
   "item.page.description": "Descripción",
@@ -3255,25 +3263,25 @@
   "item.page.journal-title": "Título de la revista",
 
   // "item.page.publisher": "Publisher",
-  "item.page.publisher": "Editor",
+  "item.page.publisher": "Editorial",
 
   // "item.page.titleprefix": "Item: ",
-  "item.page.titleprefix": "Ítem: ",
+  "item.page.titleprefix": "Ítem:",
 
   // "item.page.volume-title": "Volume Title",
   "item.page.volume-title": "Título del volumen",
 
   // "item.search.results.head": "Item Search Results",
-  "item.search.results.head": "Resultados de la búsqueda de ítems",
+  "item.search.results.head": "Resultados de la búsqueda de ítem",
 
   // "item.search.title": "Item Search",
-  "item.search.title": "Búsqueda de ítems",
+  "item.search.title": "Búsqueda de ítem",
 
   // "item.truncatable-part.show-more": "Show more",
-  "item.truncatable-part.show-more": "Más...",
+  "item.truncatable-part.show-more": "Ver más",
 
   // "item.truncatable-part.show-less": "Collapse",
-  "item.truncatable-part.show-less": "Contraer",
+  "item.truncatable-part.show-less": "Ver menos",
 
 
 
@@ -3320,13 +3328,13 @@
   "item.page.filesection.size": "Tamaño:",
 
   // "item.page.journal.search.title": "Articles in this journal",
-  "item.page.journal.search.title": "Ítems de esta revista",
+  "item.page.journal.search.title": "Ítem de esta revista",
 
   // "item.page.link.full": "Full item page",
   "item.page.link.full": "Página completa del ítem",
 
   // "item.page.link.simple": "Simple item page",
-  "item.page.link.simple": "Vista sencilla de ítem",
+  "item.page.link.simple": "Página de ítem simple",
 
   // "item.page.orcid.title": "ORCID",
   "item.page.orcid.title": "ORCID",
@@ -3335,13 +3343,13 @@
   "item.page.orcid.tooltip": "Abrir la página de ajustes de ORCID",
 
   // "item.page.person.search.title": "Articles by this author",
-  "item.page.person.search.title": "Ítems de este autor",
+  "item.page.person.search.title": "Ítem de este autor",
 
   // "item.page.related-items.view-more": "Show {{ amount }} more",
   "item.page.related-items.view-more": "Mostrar {{ amount }} más",
 
   // "item.page.related-items.view-less": "Hide last {{ amount }}",
-  "item.page.related-items.view-less": "Ocultar loa últimos {{ amount }}",
+  "item.page.related-items.view-less": "Ocultar los últimos {{ amount }}",
 
   // "item.page.relationships.isAuthorOfPublication": "Publications",
   "item.page.relationships.isAuthorOfPublication": "Publicaciones",
@@ -3799,7 +3807,7 @@
   "login.form.forgot-password": "¿Has olvidado tu contraseña?",
 
   // "login.form.header": "Please log in to DSpace",
-  "login.form.header": "Inicie sesión en DSpace",
+  "login.form.header": "Inicie sesión en CIC-Digital",
 
   // "login.form.new-user": "New user? Click here to register.",
   "login.form.new-user": "¿Nuevo Usuario? Pulse aquí para registrarse",
@@ -4037,7 +4045,7 @@
   "menu.section.processes": "Procesos",
 
   // "menu.section.health": "Health",
-  "menu.section.health": "Chequeo",
+  "menu.section.health": "Salud",
 
 
 
@@ -4104,7 +4112,7 @@
 
 
   // "mydspace.breadcrumbs": "MyDSpace",
-  "mydspace.breadcrumbs": "Mi DSpace",
+  "mydspace.breadcrumbs": "Envíos",
 
   // "mydspace.description": "",
   "mydspace.description": "",
@@ -4140,7 +4148,7 @@
   "mydspace.messages.subject-placeholder": "Asunto...",
 
   // "mydspace.messages.submitter-help": "Select this option to send a message to controller.",
-  "mydspace.messages.submitter-help": "Seleccione esta opción para enviar un mensaje al controlador.",
+  "mydspace.messages.submitter-help": "Seleccione esta opción para enviar un mensaje al revisor.",
 
   // "mydspace.messages.title": "Messages",
   "mydspace.messages.title": "Mensajes",
@@ -4185,7 +4193,7 @@
   "mydspace.results.no-uri": "Sin URI",
 
   // "mydspace.search-form.placeholder": "Search in mydspace...",
-  "mydspace.search-form.placeholder": "Buscar en Mi DSpace...",
+  "mydspace.search-form.placeholder": "Buscar en Envíos...",
 
   // "mydspace.show.workflow": "Workflow tasks",
   "mydspace.show.workflow": "Tareas del flujo de trabajo",
@@ -4194,22 +4202,22 @@
   "mydspace.show.workspace": "Sus envíos",
 
   // "mydspace.status.archived": "Archived",
-  "mydspace.status.archived": "Archivado",
+  "mydspace.status.archived": "Publicado",
 
   // "mydspace.status.validation": "Validation",
-  "mydspace.status.validation": "Validación",
+  "mydspace.status.validation": "Revisión",
 
   // "mydspace.status.waiting-for-controller": "Waiting for controller",
-  "mydspace.status.waiting-for-controller": "Esperando al controlador",
+  "mydspace.status.waiting-for-controller": "Esperando revisor",
 
   // "mydspace.status.workflow": "Workflow",
-  "mydspace.status.workflow": "Flujo de trabajo",
+  "mydspace.status.workflow": "En revisión",
 
   // "mydspace.status.workspace": "Workspace",
   "mydspace.status.workspace": "Espacio de trabajo",
 
   // "mydspace.title": "MyDSpace",
-  "mydspace.title": "Mi DSpace",
+  "mydspace.title": "Envíos",
 
   // "mydspace.upload.upload-failed": "Error creating new workspace. Please verify the content uploaded before retry.",
   "mydspace.upload.upload-failed": "Error al crear un nuevo espacio de trabajo. Verifique el contenido cargado antes de volver a intentarlo.",
@@ -4250,7 +4258,7 @@
   "nav.main.description": "Barra de navegación principal",
 
   // "nav.mydspace": "MyDSpace",
-  "nav.mydspace": "Mi DSpace",
+  "nav.mydspace": "Envíos",
 
   // "nav.profile": "Profile",
   "nav.profile": "Perfil",
@@ -4799,7 +4807,9 @@
   "register-page.registration.header": "Registro de nuevo usuario",
 
   // "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to DSpace.",
-  "register-page.registration.info": "Registre una cuenta para suscribirse a colecciones y recibir actualizaciones por correo electrónico, así como enviar nuevos ítems a DSpace.",
+
+  // "register-page.registration.info": "Registre una cuenta para suscribirse a colecciones y recibir actualizaciones por correo electrónico, así como enviar nuevos ítems a DSpace.",
+  "register-page.registration.info": "Registre una cuenta para suscribirse a colecciones para recibir actualizaciones por correo electrónico y enviar nuevos artículos a CIC-Digital.",
 
   // "register-page.registration.email": "Email Address *",
   "register-page.registration.email": "Dirección de correo electrónico *",
@@ -5131,7 +5141,9 @@
   "search.filters.applied.f.has_content_in_original_bundle": "Tiene archivos",
 
   // "search.filters.applied.f.itemtype": "Type",
-  "search.filters.applied.f.itemtype": "Tipo",
+
+  // "search.filters.applied.f.itemtype": "Tipo",
+  "search.filters.applied.f.itemtype": "Tipo de documento",
 
   // "search.filters.applied.f.namedresourcetype": "Status",
   "search.filters.applied.f.namedresourcetype": "Estado",
@@ -5214,7 +5226,9 @@
   "search.filters.filter.creativeWorkPublisher.label": "Búsqueda de Editor",
 
   // "search.filters.filter.dateIssued.head": "Date",
-  "search.filters.filter.dateIssued.head": "Fecha",
+
+  // "search.filters.filter.dateIssued.head": "Fecha",
+  "search.filters.filter.dateIssued.head": "Fecha de publicación",
 
   // "search.filters.filter.dateIssued.max.placeholder": "Maximum Date",
   "search.filters.filter.dateIssued.max.placeholder": "Fecha máxima",
@@ -5259,10 +5273,10 @@
   "search.filters.filter.has_content_in_original_bundle.head": "Tiene archivos",
 
   // "search.filters.filter.itemtype.head": "Type",
-  "search.filters.filter.itemtype.head": "Tipo",
+  "search.filters.filter.itemtype.head": "Tipo de documento",
 
   // "search.filters.filter.itemtype.placeholder": "Type",
-  "search.filters.filter.itemtype.placeholder": "Tipo",
+  "search.filters.filter.itemtype.placeholder": "Tipo de documento",
 
   // "search.filters.filter.itemtype.label": "Search type",
   "search.filters.filter.itemtype.label": "Búsqueda de Tipo",
@@ -5413,7 +5427,7 @@
   "search.form.search_dspace": "Todo el repositorio",
 
   // "search.form.scope.all": "All of DSpace",
-  "search.form.scope.all": "Todo DSpace",
+  "search.form.scope.all": "Todo el repositorio",
 
 
 
@@ -5455,7 +5469,7 @@
   "search.sidebar.results": "resultados",
 
   // "search.sidebar.settings.rpp": "Results per page",
-  "search.sidebar.settings.rpp": "resultados por página",
+  "search.sidebar.settings.rpp": "Resultados por página",
 
   // "search.sidebar.settings.sort-by": "Sort By",
   "search.sidebar.settings.sort-by": "Ordenar por",
@@ -5495,10 +5509,10 @@
   "sorting.score.DESC": "Lo más relevante",
 
   // "sorting.dc.date.issued.ASC": "Date Issued Ascending",
-  "sorting.dc.date.issued.ASC": "Fecha de publicación Ascendente",
+  "sorting.dc.date.issued.ASC": "Fecha de publicación ascendente",
 
   // "sorting.dc.date.issued.DESC": "Date Issued Descending",
-  "sorting.dc.date.issued.DESC": "Fecha de publicación Descendente",
+  "sorting.dc.date.issued.DESC": "Fecha de publicación descendente",
 
   // "sorting.dc.date.accessioned.ASC": "Accessioned Date Ascending",
   "sorting.dc.date.accessioned.ASC": "Fecha de envío Ascendente",
@@ -5625,7 +5639,7 @@
   "submission.import-external.page.hint": "Introduzca una consulta arriba para buscar í de la web para importarlos a DSpace.",
 
   // "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
-  "submission.import-external.back-to-my-dspace": "Volver a Mi DSpace",
+  "submission.import-external.back-to-my-dspace": "Volver a envíos",
 
   // "submission.import-external.search.placeholder": "Search the external source",
   "submission.import-external.search.placeholder": "Buscar fuente externa",
@@ -6168,19 +6182,19 @@
   "submission.sections.general.add-more": "Añadir más",
 
   // "submission.sections.general.cannot_deposit": "Deposit cannot be completed due to errors in the form.<br>Please fill out all required fields to complete the deposit.",
-  "submission.sections.general.cannot_deposit": "No se puede finalizar el depósito por errores en el formulario.<br>Por favor, complete todos los campos requeridos para finalizar el envío.",
+  "submission.sections.general.cannot_deposit": "No se pudo completar el envío debido a errores en el formulario.<br>Por favor complete todos los campos obligatorios para poder finalizar el envío.",
 
   // "submission.sections.general.collection": "Collection",
   "submission.sections.general.collection": "Colección",
 
   // "submission.sections.general.deposit_error_notice": "There was an issue when submitting the item, please try again later.",
-  "submission.sections.general.deposit_error_notice": "Hubo un problema al enviar el ítem. Vuelva a intentarlo más tarde.",
+  "submission.sections.general.deposit_error_notice": "Hubo un problema al enviar el ítem. Vuelve a intentarlo más tarde.",
 
   // "submission.sections.general.deposit_success_notice": "Submission deposited successfully.",
   "submission.sections.general.deposit_success_notice": "Envío depositado con éxito.",
 
   // "submission.sections.general.discard_error_notice": "There was an issue when discarding the item, please try again later.",
-  "submission.sections.general.discard_error_notice": "Hubo un problema al descartar el ítem. Vuelva a intentarlo más tarde.",
+  "submission.sections.general.discard_error_notice": "Hubo un problema al descartar el ítem. Vuelve a intentarlo más tarde.",
 
   // "submission.sections.general.discard_success_notice": "Submission discarded successfully.",
   "submission.sections.general.discard_success_notice": "Envío descartado con éxito.",
@@ -6530,7 +6544,7 @@
   "submission.workflow.generic.edit-help": "Seleccione esta opción para cambiar los metadatos del ítem.",
 
   // "submission.workflow.generic.view": "View",
-  "submission.workflow.generic.view": "Ver",
+  "submission.workflow.generic.view": "Vista previa",
 
   // "submission.workflow.generic.view-help": "Select this option to view the item's metadata.",
   "submission.workflow.generic.view-help": "Seleccione esta opción para ver los metadatos del ítem.",
@@ -6541,7 +6555,7 @@
   "submission.workflow.tasks.claimed.approve": "Aprobar",
 
   // "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the collection, select \"Approve\".",
-  "submission.workflow.tasks.claimed.approve_help": "Si ha revisado el ítem y es adecuado para su inclusión en la colección, seleccione \"Aprobar\".",
+  "submission.workflow.tasks.claimed.approve_help": "Si ha revisado el ítem y es adecuado para su inclusión en la colección, seleccione \"Aprobar \".",
 
   // "submission.workflow.tasks.claimed.edit": "Edit",
   "submission.workflow.tasks.claimed.edit": "Editar",
@@ -6568,10 +6582,10 @@
   "submission.workflow.tasks.claimed.reject_help": "Si ha revisado el ítem y ha encontrado que <strong> no </strong> es adecuado para su inclusión en la colección, seleccione \"Rechazar\". Luego, se le pedirá que introduzca un mensaje que indique por qué el ítem no es adecuado y si el remitente debe cambiar algo y volver a enviarlo.",
 
   // "submission.workflow.tasks.claimed.return": "Return to pool",
-  "submission.workflow.tasks.claimed.return": "Devolver al pool",
+  "submission.workflow.tasks.claimed.return": "Volver a la cola de tareas",
 
   // "submission.workflow.tasks.claimed.return_help": "Return the task to the pool so that another user may perform the task.",
-  "submission.workflow.tasks.claimed.return_help": "Devuelva la tarea al pool para que otro usuario pueda realizarla.",
+  "submission.workflow.tasks.claimed.return_help": "Devolver a la cola de tareas",
 
 
 
@@ -6603,10 +6617,10 @@
 
 
   // "submission.workspace.generic.view": "View",
-  "submission.workspace.generic.view": "Ver",
+  "submission.workspace.generic.view": "Vista previa",
 
   // "submission.workspace.generic.view-help": "Select this option to view the item's metadata.",
-  "submission.workspace.generic.view-help": "Seleccione esta opción para ver los metadatos del ítem.",
+  "submission.workspace.generic.view-help": "Seleccione esta opción para ver el estado actual de los metadatos del recurso",
 
 
   // "thumbnail.default.alt": "Thumbnail Image",
@@ -6694,27 +6708,27 @@
 
 
   // "workspace.search.results.head": "Your submissions",
-  "workspace.search.results.head": "Sus envíos",
+  "workspace.search.results.head": "Sus envíos archivados",
 
   // "workflowAdmin.search.results.head": "Administer Workflow",
   "workflowAdmin.search.results.head": "Administrar flujo de trabajo",
 
   // "workflow.search.results.head": "Workflow tasks",
-  "workflow.search.results.head": "Tareas del flujo de trabajo",
+  "workflow.search.results.head": "Envíos en la cola de tareas",
 
 
 
   // "workflow-item.edit.breadcrumbs": "Edit workflowitem",
-  "workflow-item.edit.breadcrumbs": "Editar ítem del flujo de trabajo",
+  "workflow-item.edit.breadcrumbs": "Editar ítem de flujo de trabajo",
 
   // "workflow-item.edit.title": "Edit workflowitem",
-  "workflow-item.edit.title": "Editar ítem del flujo de trabajo",
+  "workflow-item.edit.title": "Editar ítem de flujo de trabajo",
 
   // "workflow-item.delete.notification.success.title": "Deleted",
   "workflow-item.delete.notification.success.title": "Eliminado",
 
   // "workflow-item.delete.notification.success.content": "This workflow item was successfully deleted",
-  "workflow-item.delete.notification.success.content": "Este ítem del flujo de trabajo se eliminó correctamente",
+  "workflow-item.delete.notification.success.content": "Este ítem de flujo de trabajo se eliminó correctamente",
 
   // "workflow-item.delete.notification.error.title": "Something went wrong",
   "workflow-item.delete.notification.error.title": "Algo salió mal",
@@ -6723,10 +6737,10 @@
   "workflow-item.delete.notification.error.content": "No se pudo eliminar el ítem del flujo de trabajo",
 
   // "workflow-item.delete.title": "Delete workflow item",
-  "workflow-item.delete.title": "Eliminar ítem del flujo de trabajo",
+  "workflow-item.delete.title": "Eliminar ítem de flujo de trabajo",
 
   // "workflow-item.delete.header": "Delete workflow item",
-  "workflow-item.delete.header": "Eliminar ítem del flujo de trabajo",
+  "workflow-item.delete.header": "Eliminar ítem de flujo de trabajo",
 
   // "workflow-item.delete.button.cancel": "Cancel",
   "workflow-item.delete.button.cancel": "Cancelar",
@@ -6739,7 +6753,7 @@
   "workflow-item.send-back.notification.success.title": "Devolver al remitente",
 
   // "workflow-item.send-back.notification.success.content": "This workflow item was successfully sent back to the submitter",
-  "workflow-item.send-back.notification.success.content": "Este ítem del flujo de trabajo se devolvió correctamente al remitente.",
+  "workflow-item.send-back.notification.success.content": "Este ítem de flujo de trabajo se envió correctamente al remitente.",
 
   // "workflow-item.send-back.notification.error.title": "Something went wrong",
   "workflow-item.send-back.notification.error.title": "Algo salió mal",
@@ -7145,11 +7159,881 @@
 
   // "person.orcid.registry.auth": "ORCID Authorizations",
   "person.orcid.registry.auth": "Autorizaciones ORCID",
+
   // "home.recent-submissions.head": "Recent Submissions",
   "home.recent-submissions.head": "Envíos recientes",
 
   // "listable-notification-object.default-message": "This object couldn't be retrieved",
   "listable-notification-object.default-message": "Este objeto no se pudo recuperar",
 
+  // "subscriptions.modal.new-subscription-form.submit" : "Enviar",
+    "subscriptions.modal.new-subscription-form.submit" : "Enviar",
+
+  // "item.page.dcterms.isPartOf.issue" : "Volumen de la revista",
+    "item.page.dcterms.isPartOf.issue" : "Volumen de la revista",
+
+  // "last.accessioned.items.title" : "Añadido Recientemente",
+    "last.accessioned.items.title" : "Añadido Recientemente",
+
+  // "subscriptions.table.action" : "Acción",
+    "subscriptions.table.action" : "Acción",
+
+  // "claimed-declined-search-result-list-element.title" : "Rechazado, devuelto al remitente",
+    "claimed-declined-search-result-list-element.title" : "Rechazado, devuelto al remitente",
+
+  // "system-wide-alert.form.create.success" : "La alerta de todo el sistema se creó correctamente",
+    "system-wide-alert.form.create.success" : "La alerta de todo el sistema se creó correctamente",
+
+  // "system-wide-alert-banner.countdown.minutes" : "{{minutes}} minuto(s):",
+    "system-wide-alert-banner.countdown.minutes" : "{{minutes}} minuto(s):",
+
+  // "submission.sections.identifiers.doi_label" : "DOI: ",
+    "submission.sections.identifiers.doi_label" : "DOI: ",
+
+  // "itemtemplate.edit.metadata.metadatafield.invalid" : "Por favor, elija un campo de metadatos válido",
+    "itemtemplate.edit.metadata.metadatafield.invalid" : "Por favor, elija un campo de metadatos válido",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.metadata" : "Metadatos",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.metadata" : "Metadatos",
+
+  // "supervision-group-selector.notification.create.already-existing" : "Ya existe una orden de supervisión en este elemento para el grupo seleccionado",
+  "supervision-group-selector.notification.create.already-existing" : "Ya existe una orden de supervisión en este elemento para el grupo seleccionado",
+
+  // "submission.workflow.generic.submit_select_reviewer-help" : "",
+    "submission.workflow.generic.submit_select_reviewer-help" : "",
+
+  // "item.edit.register-doi.success" : "DOI colocado en cola para registro con éxito.",
+    "item.edit.register-doi.success" : "DOI colocado en cola para registro con éxito.",
+
+  // "itemtemplate.edit.metadata.discard-button" : "Descartar",
+    "itemtemplate.edit.metadata.discard-button" : "Descartar",
+
+  // "forgot-email.form.email.error.not-email-form" : "Por favor, ingrese una dirección de correo electrónico válida",
+    "forgot-email.form.email.error.not-email-form" : "Por favor, ingrese una dirección de correo electrónico válida",
+
+  // "supervision-group-selector.notification.create.success.title" : "Orden de supervisión creada con éxito para el grupo {{ name }}",
+    "supervision-group-selector.notification.create.success.title" : "Orden de supervisión creada con éxito para el grupo {{ name }}",
+
+  // "subscriptions.modal.title" : "Suscripciones",
+    "subscriptions.modal.title" : "Suscripciones",
+
+  // "item.edit.register-doi.header" : "Registrar un nuevo o pendiente DOI",
+    "item.edit.register-doi.header" : "Registrar un nuevo o pendiente DOI",
+
+  // "system-wide-alert-banner.countdown.hours" : "{{hours}} hora(s) y",
+    "system-wide-alert-banner.countdown.hours" : "{{hours}} hora(s) y",
+
+  // "workflow-item.selectrevieweraction.button.cancel" : "Cancelar",
+    "workflow-item.selectrevieweraction.button.cancel" : "Cancelar",
+
+  // "system-wide-alert.form.save" : "Guardar",
+    "system-wide-alert.form.save" : "Guardar",
+
+  // "item.page.cic.lugarDesarrollo" : "Lugar de desarrollo",
+    "item.page.cic.lugarDesarrollo" : "Lugar de desarrollo",
+
+  // "search.filters.namedresourcetype.Validation" : "En revisión",
+    "search.filters.namedresourcetype.Validation" : "En revisión",
+
+  // "item.edit.identifiers.doi.status.UPDATE_RESERVED" : "Reservado (actualización en cola)",
+    "item.edit.identifiers.doi.status.UPDATE_RESERVED" : "Reservado (actualización en cola)",
+
+  // "search.filters.filter.supervisedBy.head" : "Supervisado por",
+    "search.filters.filter.supervisedBy.head" : "Supervisado por",
+
+  // "subscriptions.table.empty.message" : "Actualmente no tienes suscripciones. Para suscribirse a las actualizaciones por correo electrónico de una Comunidad o Colección, use el botón de suscripción en la página del objeto.",
+    "subscriptions.table.empty.message" : "Actualmente no tienes suscripciones. Para suscribirse a las actualizaciones por correo electrónico de una Comunidad o Colección, use el botón de suscripción en la página del objeto.",
+
+  // "subscriptions.modal.create.error" : "Se produjo un error durante la creación de la suscripción",
+    "subscriptions.modal.create.error" : "Se produjo un error durante la creación de la suscripción",
+
+  // "submission.workflow.generic.submit_score" : "Calificar",
+    "submission.workflow.generic.submit_score" : "Calificar",
+
+  // "system-wide-alert.form.label.message" : "Mensaje de alerta",
+    "system-wide-alert.form.label.message" : "Mensaje de alerta",
+
+  // "subscriptions.frequency.D" : "Diario",
+    "subscriptions.frequency.D" : "Diario",
+
+  // "system-wide-alert.form.update.success" : "La alerta de todo el sistema se actualizó correctamente",
+    "system-wide-alert.form.update.success" : "La alerta de todo el sistema se actualizó correctamente",
+
+  // "item.page.dcterms.alternative" : "Título alternativo",
+    "item.page.dcterms.alternative" : "Título alternativo",
+
+  // "subscriptions.frequency.M" : "Mensualmente",
+    "subscriptions.frequency.M" : "Mensualmente",
+
+  // "subscriptions.modal.delete-info" : "Para eliminar esta suscripción, visite la página "Suscripciones" en su perfil de usuario",
+    "subscriptions.modal.delete-info" : "Para eliminar esta suscripción, visite la página "Suscripciones" en su perfil de usuario",
+
+  // "item.edit.identifiers.doi.status.PENDING" : "Pendiente (no registrado)",
+    "item.edit.identifiers.doi.status.PENDING" : "Pendiente (no registrado)",
+
+  // "menu.section.navbar.contact" : "Contacto",
+    "menu.section.navbar.contact" : "Contacto",
+
+  // "itemtemplate.edit.metadata.add-button" : "Agregar",
+    "itemtemplate.edit.metadata.add-button" : "Agregar",
+
+  // "menu.section.navbar.explore" : "Explorar",
+    "menu.section.navbar.explore" : "Explorar",
+
+  // "home.navigation.publications" : "Publicaciones",
+    "home.navigation.publications" : "Publicaciones",
+
+  // "item.edit.identifiers.doi.status.TO_BE_REGISTERED" : "En cola para registro",
+    "item.edit.identifiers.doi.status.TO_BE_REGISTERED" : "En cola para registro",
+
+  // "itemtemplate.edit.metadata.headers.edit" : "Editar",
+    "itemtemplate.edit.metadata.headers.edit" : "Editar",
+
+  // "item.page.dcterms.subject.ford" : "Clasificación FORD",
+    "item.page.dcterms.subject.ford" : "Clasificación FORD",
+
+  // "info.how-to-contribute.breadcrumbs" : "¿Cómo aportar material?",
+    "info.how-to-contribute.breadcrumbs" : "¿Cómo aportar material?",
+
+  // "submission.workflow.generic.submit_select_reviewer" : "Seleccionar revisor",
+    "submission.workflow.generic.submit_select_reviewer" : "Seleccionar revisor",
+
+  // "admin.access-control.groups.form.tooltip.editGroup.addEpeople" : "Para agregar o quitar un EPerson de este grupo, haga clic en el botón 'Explorar todos' o use la barra de búsqueda a continuación para buscar usuarios (use el desplegable a la izquierda de la barra de búsqueda para elegir si buscar por metadatos o por correo electrónico). Luego haga clic en el icono de más para cada usuario que desee agregar en la lista a continuación, o en el icono de la papelera para cada usuario que desee eliminar. La lista a continuación puede tener varias páginas: use los controles de página debajo de la lista para navegar a las siguientes páginas. Una vez que esté listo, guarde sus cambios haciendo clic en el botón 'Guardar' en la sección superior.",
+    "admin.access-control.groups.form.tooltip.editGroup.addEpeople" : "Para agregar o quitar un EPerson de este grupo, haga clic en el botón 'Explorar todos' o use la barra de búsqueda a continuación para buscar usuarios (use el desplegable a la izquierda de la barra de búsqueda para elegir si buscar por metadatos o por correo electrónico). Luego haga clic en el icono de más para cada usuario que desee agregar en la lista a continuación, o en el icono de la papelera para cada usuario que desee eliminar. La lista a continuación puede tener varias páginas: use los controles de página debajo de la lista para navegar a las siguientes páginas. Una vez que esté listo, guarde sus cambios haciendo clic en el botón 'Guardar' en la sección superior.",
+
+  // "system-wide-alert-banner.retrieval.error" : "Algo salió mal al recuperar el banner de alerta de todo el sistema",
+    "system-wide-alert-banner.retrieval.error" : "Algo salió mal al recuperar el banner de alerta de todo el sistema",
+
+  // "supervision-group-selector.select.type-of-order.label" : "Seleccionar un tipo de Orden",
+    "supervision-group-selector.select.type-of-order.label" : "Seleccionar un tipo de Orden",
+
+  // "workflow-item.search.result.delete-supervision.modal.header" : "Eliminar orden de supervisión",
+    "workflow-item.search.result.delete-supervision.modal.header" : "Eliminar orden de supervisión",
+
+  // "item.page.date.issued" : "Fecha de publicación",
+    "item.page.date.issued" : "Fecha de publicación",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.button.see-all" : "Explorar todos",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.button.see-all" : "Explorar todos",
+
+  // "admin.access-control.groups.form.tooltip.editGroupPage" : "En esta página, puede modificar las propiedades y miembros de un grupo. En la sección superior, puede editar el nombre y la descripción del grupo, a menos que se trate de un grupo de administración para una colección o comunidad, en cuyo caso el nombre y la descripción del grupo se generan automáticamente y no se pueden editar. En las siguientes secciones, puede editar la pertenencia al grupo. Vea [la wiki](https://wiki.lyrasis.org/display/DSDOC7x/Create+or+manage+a+user+group) para más detalles.",
+    "admin.access-control.groups.form.tooltip.editGroupPage" : "En esta página, puede modificar las propiedades y miembros de un grupo. En la sección superior, puede editar el nombre y la descripción del grupo, a menos que se trate de un grupo de administración para una colección o comunidad, en cuyo caso el nombre y la descripción del grupo se generan automáticamente y no se pueden editar. En las siguientes secciones, puede editar la pertenencia al grupo. Vea [la wiki](https://wiki.lyrasis.org/display/DSDOC7x/Create+or+manage+a+user+group) para más detalles.",
+
+  // "workflow-item.search.result.delete-supervision.modal.info" : "¿Está seguro de que desea eliminar el pedido de supervisión?",
+    "workflow-item.search.result.delete-supervision.modal.info" : "¿Está seguro de que desea eliminar el pedido de supervisión?",
+
+  // "advanced-workflow-action.rating.form.rating.error" : "Debes calificar el elemento",
+    "advanced-workflow-action.rating.form.rating.error" : "Debes calificar el elemento",
+
+  // "item.page.dcterms.isPartOf.series" : "Serie",
+    "item.page.dcterms.isPartOf.series" : "Serie",
+
+  // "item.edit.metadata.reset-order-button" : "Deshacer reordenamiento",
+    "item.edit.metadata.reset-order-button" : "Deshacer reordenamiento",
+
+  // "itemtemplate.edit.metadata.reinstate-button" : "Deshacer",
+    "itemtemplate.edit.metadata.reinstate-button" : "Deshacer",
+
+  // "workflow-item.selectrevieweraction.notification.success.content" : "El revisor para este elemento del flujo de trabajo se ha seleccionado correctamente",
+    "workflow-item.selectrevieweraction.notification.success.content" : "El revisor para este elemento del flujo de trabajo se ha seleccionado correctamente",
+
+  // "itemtemplate.edit.metadata.edit.buttons.undo" : "Deshacer cambios",
+    "itemtemplate.edit.metadata.edit.buttons.undo" : "Deshacer cambios",
+
+  // "advanced-workflow-action.rating.form.review.error" : "Debe ingresar una reseña para enviar esta calificación",
+    "advanced-workflow-action.rating.form.review.error" : "Debe ingresar una reseña para enviar esta calificación",
+
+  // "search.filters.filter.lugarDesarrollo.label" : "Buscar por lugar de desarrollo",
+    "search.filters.filter.lugarDesarrollo.label" : "Buscar por lugar de desarrollo",
+
+  // "itemtemplate.edit.metadata.notifications.outdated.content" : "La plantilla de elementos con la que actualmente está trabajando ha sido cambiada por otro usuario. Sus cambios actuales se descartan para evitar conflictos",
+    "itemtemplate.edit.metadata.notifications.outdated.content" : "La plantilla de elementos con la que actualmente está trabajando ha sido cambiada por otro usuario. Sus cambios actuales se descartan para evitar conflictos",
+
+  // "item.edit.register-doi.description" : "Revise los identificadores pendientes y los metadatos del elemento a continuación y haga clic en Confirmar para proceder con el registro de DOI, o Cancelar para salir",
+    "item.edit.register-doi.description" : "Revise los identificadores pendientes y los metadatos del elemento a continuación y haga clic en Confirmar para proceder con el registro de DOI, o Cancelar para salir",
+
+  // "submission.sections.identifiers.otherIdentifiers_label" : "Otros identificadores: ",
+    "submission.sections.identifiers.otherIdentifiers_label" : "Otros identificadores: ",
+
+  // "subscriptions.modal.update.error" : "Se ha producido un error durante la actualización de la suscripción",
+    "subscriptions.modal.update.error" : "Se ha producido un error durante la actualización de la suscripción",
+
+  // "subscriptions.modal.new-subscription-form.frequency.M" : "Mensualmente",
+    "subscriptions.modal.new-subscription-form.frequency.M" : "Mensualmente",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.headMembers" : "Miembros actuales",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.headMembers" : "Miembros actuales",
+
+  // "item.page.dcterms.extent" : "Extensión",
+    "item.page.dcterms.extent" : "Extensión",
+
+  // "subscriptions.modal.update.success" : "Suscripción a {{ type }} actualizada correctamente",
+    "subscriptions.modal.update.success" : "Suscripción a {{ type }} actualizada correctamente",
+
+  // "item.page.statistics.label.TotalDownloads" : "Descargas",
+    "item.page.statistics.label.TotalDownloads" : "Descargas",
+
+  // "workflow-item.scorereviewaction.header" : "Califica este elemento",
+    "workflow-item.scorereviewaction.header" : "Califica este elemento",
+
+  // "admin.workflow.item.policies" : "Políticas",
+    "admin.workflow.item.policies" : "Políticas",
+
+  // "item.edit.metadata.edit.buttons.virtual" : "Este es un valor de metadatos virtual, es decir, un valor heredado de una entidad relacionada. No se puede modificar directamente. Agregue o elimine la relación correspondiente en la pestaña "Relaciones"",
+    "item.edit.metadata.edit.buttons.virtual" : "Este es un valor de metadatos virtual, es decir, un valor heredado de una entidad relacionada. No se puede modificar directamente. Agregue o elimine la relación correspondiente en la pestaña "Relaciones"",
+
+  // "subscriptions.table.subscription_type" : "Tipo de suscripción",
+    "subscriptions.table.subscription_type" : "Tipo de suscripción",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.addMember" : "Error al agregar miembro: "{{name}}"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.addMember" : "Error al agregar miembro: "{{name}}"",
+
+  // "itemtemplate.edit.metadata.notifications.outdated.title" : "Cambiado desactualizado",
+    "itemtemplate.edit.metadata.notifications.outdated.title" : "Cambiado desactualizado",
+
+  // "menu.section.system-wide-alert" : "Alerta de todo el sistema",
+    "menu.section.system-wide-alert" : "Alerta de todo el sistema",
+
+  // "system-wide-alert.form.label.preview" : "Vista previa de alerta a nivel de sistema",
+    "system-wide-alert.form.label.preview" : "Vista previa de alerta a nivel de sistema",
+
+  // "admin.system-wide-alert.title" : "Alertas a nivel de sistema",
+    "admin.system-wide-alert.title" : "Alertas a nivel de sistema",
+
+  // "item.edit.identifiers.doi.status.TO_BE_DELETED" : "En cola para su eliminación",
+    "item.edit.identifiers.doi.status.TO_BE_DELETED" : "En cola para su eliminación",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.deleteMember" : "Error al eliminar al miembro: "{{name}}"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.deleteMember" : "Error al eliminar al miembro: "{{name}}"",
+
+  // "item.page.download" : "Descargar",
+    "item.page.download" : "Descargar",
+
+  // "menu.home.image.upload_material" : "Subir material",
+    "menu.home.image.upload_material" : "Subir material",
+
+  // "system-wide-alert.form.label.active" : "ACTIVO",
+    "system-wide-alert.form.label.active" : "ACTIVO",
+
+  // "subscriptions.modal.new-subscription-form.frequency.D" : "Diario",
+    "subscriptions.modal.new-subscription-form.frequency.D" : "Diario",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.no-items" : "No se encontraron EPeople en esa búsqueda",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.no-items" : "No se encontraron EPeople en esa búsqueda",
+
+  // "workflow-item.search.result.list.element.supervised-by" : "Supervisado por:",
+    "workflow-item.search.result.list.element.supervised-by" : "Supervisado por:",
+
+  // "subscriptions.modal.create.success" : "Suscrito a {{type}} exitosamente.",
+    "subscriptions.modal.create.success" : "Suscrito a {{type}} exitosamente.",
+
+  // "subscriptions.table.subscription_frequency" : "Frecuencia de suscripción",
+    "subscriptions.table.subscription_frequency" : "Frecuencia de suscripción",
+
+  // "system-wide-alert.form.error.message" : "La alerta a nivel de sistema debe tener un mensaje",
+    "system-wide-alert.form.error.message" : "La alerta a nivel de sistema debe tener un mensaje",
+
+  // "supervision-group-selector.select.type-of-order.option.editor" : "EDITOR",
+    "supervision-group-selector.select.type-of-order.option.editor" : "EDITOR",
+
+  // "item.edit.tabs.status.buttons.register-doi.label" : "Registrar un nuevo DOI pendiente",
+    "item.edit.tabs.status.buttons.register-doi.label" : "Registrar un nuevo DOI pendiente",
+
+  // "sorting.dcterms.issued.ASC" : "Fecha de publicación ascendente",
+    "sorting.dcterms.issued.ASC" : "Fecha de publicación ascendente",
+
+  // "confirmation-modal.delete-subscription.confirm" : "Eliminar",
+    "confirmation-modal.delete-subscription.confirm" : "Eliminar",
+
+  // "supervision-group-selector.button.cancel" : "Cancelar",
+    "supervision-group-selector.button.cancel" : "Cancelar",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.addMember" : "Miembro agregado correctamente: "{{name}}"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.addMember" : "Miembro agregado correctamente: "{{name}}"",
+
+  // "submission.sections.identifiers.no_handle" : "No se han acuñado manejadores para este elemento.",
+    "submission.sections.identifiers.no_handle" : "No se han acuñado manejadores para este elemento.",
+
+  // "subscriptions.modal.new-subscription-form.processing" : "Procesando...",
+    "subscriptions.modal.new-subscription-form.processing" : "Procesando...",
+
+  // "item.edit.identifiers.doi.status.IS_REGISTERED" : "Registrado",
+    "item.edit.identifiers.doi.status.IS_REGISTERED" : "Registrado",
+
+  // "search.filters.applied.f.lugarDesarrollo" : "Lugar de desarrollo",
+    "search.filters.applied.f.lugarDesarrollo" : "Lugar de desarrollo",
+
+  // "workflow-item.search.result.delete-supervision.modal.confirm" : "Eliminar",
+    "workflow-item.search.result.delete-supervision.modal.confirm" : "Eliminar",
+
+  // "itemtemplate.edit.metadata.reset-order-button" : "Deshacer reordenar",
+    "itemtemplate.edit.metadata.reset-order-button" : "Deshacer reordenar",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.name" : "Nombre",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.name" : "Nombre",
+
+  // "system-wide-alert-form.retrieval.error" : "Algo salió mal al recuperar la alerta de todo el sistema",
+    "system-wide-alert-form.retrieval.error" : "Algo salió mal al recuperar la alerta de todo el sistema",
+
+  // "workflow-item.scorereviewaction.title" : "Califica este elemento",
+    "workflow-item.scorereviewaction.title" : "Califica este elemento",
+
+  // "menu.section.navbar.register" : "Registrarse",
+    "menu.section.navbar.register" : "Registrarse",
+
+  // "search.filters.namedresourcetype.Waiting for Controller" : "Esperando revisor",
+    "search.filters.namedresourcetype.Waiting for Controller" : "Esperando revisor",
+
+  // "item.page.dcterms.language" : "Idioma",
+    "item.page.dcterms.language" : "Idioma",
+
+  // "system-wide-alert.form.label.countdownTo.hint" : "Sugerencia: establecer un temporizador de cuenta regresiva. Cuando está habilitado, se puede establecer una fecha en el futuro y la barra de alerta de todo el sistema realizará una cuenta regresiva hasta la fecha establecida. Cuando finalice este temporizador, desaparecerá de la alerta. El servidor NO se detendrá automáticamente.",
+    "system-wide-alert.form.label.countdownTo.hint" : "Sugerencia: establecer un temporizador de cuenta regresiva. Cuando está habilitado, se puede establecer una fecha en el futuro y la barra de alerta de todo el sistema realizará una cuenta regresiva hasta la fecha establecida. Cuando finalice este temporizador, desaparecerá de la alerta. El servidor NO se detendrá automáticamente.",
+
+  // "nav.subscriptions" : "Suscripciones",
+  "nav.subscriptions" : "Suscripciones",
+
+  // "workflow-item.search.result.delete-supervision.modal.cancel" : "Cancelar",
+    "workflow-item.search.result.delete-supervision.modal.cancel" : "Cancelar",
+
+  // "item.edit.identifiers.doi.status.DELETED" : "Eliminado",
+    "item.edit.identifiers.doi.status.DELETED" : "Eliminado",
+
+  // "item.page.dcterms.spatial" : "Cobertura Espacial",
+    "item.page.dcterms.spatial" : "Cobertura Espacial",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.add" : "Añadir miembro con el nombre "{{name}}"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.add" : "Añadir miembro con el nombre "{{name}}"",
+
+  // "item.page.dcterms.relation" : "Recursos relacionados",
+    "item.page.dcterms.relation" : "Recursos relacionados",
+
+  // "system-wide-alert.form.label.countdownTo.enable" : "Habilitar un temporizador de cuenta regresiva",
+    "system-wide-alert.form.label.countdownTo.enable" : "Habilitar un temporizador de cuenta regresiva",
+
+  // "info.cic-digital-info.breadcrumbs" : "¿Qué es CIC Digital?",
+    "info.cic-digital-info.breadcrumbs" : "¿Qué es CIC Digital?",
+
+  // "nav.context-help-toggle" : "Alternar ayuda contextual",
+    "nav.context-help-toggle" : "Alternar ayuda contextual",
+
+  // "item.edit.identifiers.doi.status.UNKNOWN" : "Desconocido",
+    "item.edit.identifiers.doi.status.UNKNOWN" : "Desconocido",
+
+  // "subscriptions.modal.type-frequency" : "Tipo y frecuencia",
+    "subscriptions.modal.type-frequency" : "Tipo y frecuencia",
+
+  // "workflow-item.selectrevieweraction.header" : "Seleccionar revisor",
+    "workflow-item.selectrevieweraction.header" : "Seleccionar revisor",
+
+  // "system-wide-alert.form.header" : "Alerta a nivel de sistema",
+    "system-wide-alert.form.header" : "Alerta a nivel de sistema",
+
+  // "item.page.cic.thesis.grantor" : "Emisor del título",
+    "item.page.cic.thesis.grantor" : "Emisor del título",
+
+  // "itemtemplate.edit.metadata.headers.value" : "Valor",
+    "itemtemplate.edit.metadata.headers.value" : "Valor",
+
+  // "item.page.relationships.isDirectorOf" : "Directores",
+    "item.page.relationships.isDirectorOf" : "Directores",
+
+  // "admin.workflow.item.supervision" : "Supervisión",
+    "admin.workflow.item.supervision" : "Supervisión",
+
+  // "supervision-group-selector.header" : "Selector de grupo de supervisión",
+    "supervision-group-selector.header" : "Selector de grupo de supervisión",
+
+  // "workflow-item.selectrevieweraction.title" : "Seleccionar revisor",
+    "workflow-item.selectrevieweraction.title" : "Seleccionar revisor",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.no-members-yet" : "Aún no hay miembros en el grupo, busque y agregue.",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.no-members-yet" : "Aún no hay miembros en el grupo, busque y agregue.",
+
+  // "subscriptions.table.delete" : "Eliminar",
+    "subscriptions.table.delete" : "Eliminar",
+
+  // "submission.sections.submit.progressbar.describe.step3" : "Licencia CC",
+    "submission.sections.submit.progressbar.describe.step3" : "Licencia CC",
+
+  // "register-page.registration.email.error.not-email-form" : "Por favor ingrese una dirección de correo electrónico válida.",
+    "register-page.registration.email.error.not-email-form" : "Por favor ingrese una dirección de correo electrónico válida.",
+
+  // "submission.workflow.tasks.claimed.decline_help" : "",
+    "submission.workflow.tasks.claimed.decline_help" : "",
+
+  // "item.edit.identifiers.doi.status.UPDATE_BEFORE_REGISTRATION" : "En cola para actualizar y registrar",
+    "item.edit.identifiers.doi.status.UPDATE_BEFORE_REGISTRATION" : "En cola para actualizar y registrar",
+
+  // "system-wide-alert.form.update.error" : "Algo salió mal al actualizar la alerta de todo el sistema",
+    "system-wide-alert.form.update.error" : "Algo salió mal al actualizar la alerta de todo el sistema",
+
+  // "search.filters.namedresourcetype.Workflow" : "En revisión",
+    "search.filters.namedresourcetype.Workflow" : "En revisión",
+
+  // "home.navigation.cicOrganizations" : "Centros",
+    "home.navigation.cicOrganizations" : "Centros",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.id" : "ID",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.id" : "ID",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.button" : "Buscar",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.button" : "Buscar",
+
+  // "claimed-declined-task-search-result-list-element.title" : "Rechazado, devuelto al flujo de trabajo del Administrador de Revisión",
+    "claimed-declined-task-search-result-list-element.title" : "Rechazado, devuelto al flujo de trabajo del Administrador de Revisión",
+
+  // "submission.workflow.generic.submit_score-help" : "",
+    "submission.workflow.generic.submit_score-help" : "",
+
+  // "workflow-item.scorereviewaction.notification.error.title" : "Algo salió mal",
+    "workflow-item.scorereviewaction.notification.error.title" : "Algo salió mal",
+
+  // "subscriptions.frequency" : "Frecuencia de suscripción",
+    "subscriptions.frequency" : "Frecuencia de suscripción",
+
+  // "menu.section.navbar.how_to_contribute" : "¿Cómo aportar material?",
+    "menu.section.navbar.how_to_contribute" : "¿Cómo aportar material?",
+
+  // "advanced-workflow-action.rating.form.rating.label" : "Calificación",
+    "advanced-workflow-action.rating.form.rating.label" : "Calificación",
+
+  // "supervision.search.results.head" : "Tareas de flujo de trabajo y espacio de trabajo",
+    "supervision.search.results.head" : "Tareas de flujo de trabajo y espacio de trabajo",
+
+  // "subscriptions.table.dso" : "Asunto",
+    "subscriptions.table.dso" : "Asunto",
+
+  // "search.filters.filter.supervisedBy.placeholder" : "Supervisado por",
+    "search.filters.filter.supervisedBy.placeholder" : "Supervisado por",
+
+  // "item.page.dcterms.subject.area" : "Area temática",
+    "item.page.dcterms.subject.area" : "Area temática",
+
+  // "system-wide-alert.form.create.error" : "Algo salió mal al crear la alerta de todo el sistema",
+    "system-wide-alert.form.create.error" : "Algo salió mal al crear la alerta de todo el sistema",
+
+  // "itemtemplate.edit.metadata.notifications.saved.title" : "Metadatos guardados",
+    "itemtemplate.edit.metadata.notifications.saved.title" : "Metadatos guardados",
+
+  // "register-page.registration.info.maildomain" : "Las cuentas se pueden registrar para direcciones de correo electrónico de los dominios",
+    "register-page.registration.info.maildomain" : "Las cuentas se pueden registrar para direcciones de correo electrónico de los dominios",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.identity" : "Identidad",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.identity" : "Identidad",
+
+  // "system-wide-alert-banner.countdown.prefix" : "En",
+    "system-wide-alert-banner.countdown.prefix" : "En",
+
+  // "advanced-workflow-action.rating.description" : "Por favor seleccione una calificación a continuación",
+    "advanced-workflow-action.rating.description" : "Por favor seleccione una calificación a continuación",
+
+  // "claimed-approved-search-result-list-element.title" : "Aprobado",
+    "claimed-approved-search-result-list-element.title" : "Aprobado",
+
+  // "itemtemplate.edit.metadata.save-button" : "Guardar",
+    "itemtemplate.edit.metadata.save-button" : "Guardar",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.email" : "Correo electrónico",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.email" : "Correo electrónico",
+
+  // "register-page.registration.email.error.not-valid-domain" : "Usa un correo electrónico con los dominios permitidos: {{dominios}}",
+    "register-page.registration.email.error.not-valid-domain" : "Usa un correo electrónico con los dominios permitidos: {{dominios}}",
+
+  // "confirmation-modal.delete-subscription.header" : "Eliminar suscripción",
+    "confirmation-modal.delete-subscription.header" : "Eliminar suscripción",
+
+  // "item.edit.register-doi.cancel" : "Cancelar",
+    "item.edit.register-doi.cancel" : "Cancelar",
+
+  // "item.page.dcterms.isPartOf.series.event" : "Evento",
+    "item.page.dcterms.isPartOf.series.event" : "Evento",
+
+  // "info.cic-digital-info.title" : "¿Qué es CIC Digital?",
+    "info.cic-digital-info.title" : "¿Qué es CIC Digital?",
+
+  // "subscriptions.collection" : "Suscripciones para colecciones",
+    "subscriptions.collection" : "Suscripciones para colecciones",
+
+  // "workflow-item.scorereviewaction.button.cancel" : "Cancelar",
+    "workflow-item.scorereviewaction.button.cancel" : "Cancelar",
+
+  // "submission.sections.identifiers.handle_label" : "Handle: ",
+    "submission.sections.identifiers.handle_label" : "Handle: ",
+
+  // "subscriptions.modal.close" : "Cerrar",
+    "subscriptions.modal.close" : "Cerrar",
+
+  // "item.edit.tabs.status.buttons.register-doi.button" : "Registrar DOI...",
+    "item.edit.tabs.status.buttons.register-doi.button" : "Registrar DOI...",
+
+  // "itemtemplate.edit.metadata.notifications.invalid.title" : "Metadatos inválidos",
+    "itemtemplate.edit.metadata.notifications.invalid.title" : "Metadatos inválidos",
+
+  // "item.page.dcterms.isPartOf.item" : "Libro/Informe",
+    "item.page.dcterms.isPartOf.item" : "Libro/Informe",
+
+  // "item.page.relationships.isEditorOf" : "Editores",
+    "item.page.relationships.isEditorOf" : "Editores",
+
+  // "submission.sections.submit.progressbar.identifiers" : "Identificadores",
+    "submission.sections.submit.progressbar.identifiers" : "Identificadores",
+
+  // "workflow-item.search.result.notification.deleted.failure" : "Error al eliminar la orden de supervisión "{{name}}"",
+    "workflow-item.search.result.notification.deleted.failure" : "Error al eliminar la orden de supervisión "{{name}}"",
+
+  // "search.browse.item-back" : "Volver a los resultados",
+    "search.browse.item-back" : "Volver a los resultados",
+
+  // "item.edit.register-doi.confirm" : "Confirmar",
+    "item.edit.register-doi.confirm" : "Confirmar",
+
+  // "supervision-group-selector.select.group.error" : "Por favor seleccione un grupo",
+    "supervision-group-selector.select.group.error" : "Por favor seleccione un grupo",
+
+  // "advanced-workflow-action.select-reviewer.description-single" : "Por favor seleccione un revisor a continuación antes de enviar",
+    "advanced-workflow-action.select-reviewer.description-single" : "Por favor seleccione un revisor a continuación antes de enviar",
+
+  // "home.navigation.authors" : "Autores",
+    "home.navigation.authors" : "Autores",
+
+  // "info.repository-policy.title" : "Políticas del repositorio",
+    "info.repository-policy.title" : "Políticas del repositorio",
+
+  // "sorting.dcterms.issued.DESC" : "Fecha de publicación descendente",
+    "sorting.dcterms.issued.DESC" : "Fecha de publicación descendente",
+
+  // "supervision-group-selector.select.type-of-order.option.none" : "NINGUNO",
+    "supervision-group-selector.select.type-of-order.option.none" : "NINGUNO",
+
+  // "subscriptions.modal.delete.success" : "Suscripción eliminada correctamente",
+    "subscriptions.modal.delete.success" : "Suscripción eliminada correctamente",
+
+  // "home.navigation.communities" : "Comunidades",
+    "home.navigation.communities" : "Comunidades",
+
+  // "submission.sections.submit.progressbar.describe.step1" : "Describir",
+    "submission.sections.submit.progressbar.describe.step1" : "Describir",
+
+  // "submission.workflow.tasks.claimed.decline" : "Rechazar",
+    "submission.workflow.tasks.claimed.decline" : "Rechazar",
+
+  // "itemtemplate.edit.metadata.metadatafield.error" : "Se produjo un error al validar el campo de metadatos",
+    "itemtemplate.edit.metadata.metadatafield.error" : "Se produjo un error al validar el campo de metadatos",
+
+  // "system-wide-alert-banner.countdown.days" : "{{days}} día(s),",
+    "system-wide-alert-banner.countdown.days" : "{{days}} día(s),",
+
+  // "curation-task.task.register-doi.label" : "Registrar DOI",
+    "curation-task.task.register-doi.label" : "Registrar DOI",
+
+  // "system-wide-alert.form.label.inactive" : "INACTIVO",
+    "system-wide-alert.form.label.inactive" : "INACTIVO",
+
+  // "supervision-group-selector.notification.create.failure.title" : "Error",
+    "supervision-group-selector.notification.create.failure.title" : "Error",
+
+  // "itemtemplate.edit.metadata.notifications.saved.content" : "Tus cambios en los metadatos de esta plantilla de elemento se han guardado.",
+    "itemtemplate.edit.metadata.notifications.saved.content" : "Tus cambios en los metadatos de esta plantilla de elemento se han guardado.",
+
+  // "search.filters.filter.keyword.placeholder" : "Materia",
+    "search.filters.filter.keyword.placeholder" : "Materia",
+
+  // "system-wide-alert.form.cancel" : "Cancelar",
+    "system-wide-alert.form.cancel" : "Cancelar",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit" : "Eliminar / Agregar",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit" : "Eliminar / Agregar",
+
+  // "mydspace.show.supervisedWorkspace" : "Elementos supervisados",
+    "mydspace.show.supervisedWorkspace" : "Elementos supervisados",
+
+  // "item.page.dcterms.subject.materia" : "Materia",
+    "item.page.dcterms.subject.materia" : "Materia",
+
+  // "info.how-to-contribute.title" : "¿Cómo aportar material?",
+    "info.how-to-contribute.title" : "¿Cómo aportar material?",
+
+  // "admin.system-wide-alert.breadcrumbs" : "Alertas a nivel de sistema",
+    "admin.system-wide-alert.breadcrumbs" : "Alertas a nivel de sistema",
+
+  // "item.page.dcterms.license.text" : "Esta obra se publica con la licencia Creative Commons ",
+    "item.page.dcterms.license.text" : "Esta obra se publica con la licencia Creative Commons ",
+
+  // "itemtemplate.edit.metadata.edit.buttons.edit" : "Editar",
+    "itemtemplate.edit.metadata.edit.buttons.edit" : "Editar",
+
+  // "item.edit.register-doi.error" : "Error al registrar DOI",
+    "item.edit.register-doi.error" : "Error al registrar DOI",
+
+  // "search.filters.filter.lugarDesarrollo.placeholder" : "Lugar de desarrollo",
+    "search.filters.filter.lugarDesarrollo.placeholder" : "Lugar de desarrollo",
+
+  // "supervisedWorkspace.search.results.head" : "Elementos supervisados",
+    "supervisedWorkspace.search.results.head" : "Elementos supervisados",
+
+  // "itemtemplate.edit.metadata.notifications.error.title" : "Se produjo un error",
+    "itemtemplate.edit.metadata.notifications.error.title" : "Se produjo un error",
+
+  // "admin.workflow.item.workspace" : "Espacio de trabajo",
+    "admin.workflow.item.workspace" : "Espacio de trabajo",
+
+  // "itemtemplate.edit.metadata.headers.field" : "Campo",
+    "itemtemplate.edit.metadata.headers.field" : "Campo",
+
+  // "itemtemplate.edit.metadata.notifications.discarded.title" : "Cambio descartado",
+    "itemtemplate.edit.metadata.notifications.discarded.title" : "Cambio descartado",
+
+  // "subscriptions.modal.new-subscription-form.frequency.W" : "Semanalmente",
+    "subscriptions.modal.new-subscription-form.frequency.W" : "Semanalmente",
+
+  // "subscriptions.modal.delete.error" : "Se produjo un error durante la eliminación de la suscripción",
+    "subscriptions.modal.delete.error" : "Se produjo un error durante la eliminación de la suscripción",
+
+  // "item.page.statistics.label.TotalVisits" : "Vistas",
+    "item.page.statistics.label.TotalVisits" : "Vistas",
+
+  // "advanced-workflow-action.select-reviewer.no-reviewer-selected.error" : "Ningún revisor seleccionado.",
+    "advanced-workflow-action.select-reviewer.no-reviewer-selected.error" : "Ningún revisor seleccionado.",
+
+  // "workflow-item.scorereviewaction.notification.error.content" : "No se pudo calificar este elemento",
+    "workflow-item.scorereviewaction.notification.error.content" : "No se pudo calificar este elemento",
+
+  // "workflow-item.scorereviewaction.button.confirm" : "Confirmar",
+    "workflow-item.scorereviewaction.button.confirm" : "Confirmar",
+
+  // "submission.sections.identifiers.info" : "Los siguientes identificadores se crearán para su elemento:",
+    "submission.sections.identifiers.info" : "Los siguientes identificadores se crearán para su elemento:",
+
+  // "subscriptions.table.edit" : "Editar",
+    "subscriptions.table.edit" : "Editar",
+
+  // "subscriptions.subscription_type" : "Tipo de suscripción",
+    "subscriptions.subscription_type" : "Tipo de suscripción",
+
+  // "last.accessioned.items.see-more" : "Ver más",
+    "last.accessioned.items.see-more" : "Ver más",
+
+  // "advanced-workflow-action.select-reviewer.description-multiple" : "Por favor seleccione uno o más revisores a continuación antes de enviar",
+    "advanced-workflow-action.select-reviewer.description-multiple" : "Por favor seleccione uno o más revisores a continuación antes de enviar",
+
+  // "menu.section.navbar.more_information" : "Mas información",
+    "menu.section.navbar.more_information" : "Mas información",
+
+  // "itemtemplate.edit.metadata.empty" : "La plantilla de elemento actualmente no contiene ningún metadato. Haga clic en Agregar para comenzar a agregar un valor de metadatos.",
+    "itemtemplate.edit.metadata.empty" : "La plantilla de elemento actualmente no contiene ningún metadato. Haga clic en Agregar para comenzar a agregar un valor de metadatos.",
+
+  // "item.edit.identifiers.doi.status.IS_RESERVED" : "Reservado",
+    "item.edit.identifiers.doi.status.IS_RESERVED" : "Reservado",
+
+  // "workflow-item.selectrevieweraction.notification.success.title" : "Revisor seleccionado",
+    "workflow-item.selectrevieweraction.notification.success.title" : "Revisor seleccionado",
+
+  // "advanced-workflow-action.rating.form.review.label" : "Revisión",
+    "advanced-workflow-action.rating.form.review.label" : "Revisión",
+
+  // "subscriptions.modal.new-subscription-form.type.content" : "Contenido",
+    "subscriptions.modal.new-subscription-form.type.content" : "Contenido",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.noActiveGroup" : "No hay grupo activo actual, primero envíe un nombre.",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.failure.noActiveGroup" : "No hay grupo activo actual, primero envíe un nombre.",
+
+  // "info.repository-policy.breadcrumbs" : "Políticas del repositorio",
+    "info.repository-policy.breadcrumbs" : "Políticas del repositorio",
+
+  // "submission.sections.submit.progressbar.describe.step2" : "Describir",
+    "submission.sections.submit.progressbar.describe.step2" : "Describir",
+
+  // "itemtemplate.edit.metadata.edit.buttons.drag" : "Arrastrar para reordenar",
+    "itemtemplate.edit.metadata.edit.buttons.drag" : "Arrastrar para reordenar",
+
+  // "search.filters.namedresourcetype.Archived" : "Publicado",
+    "search.filters.namedresourcetype.Archived" : "Publicado",
+
+  // "subscriptions.frequency.W" : "Semanalmente",
+    "subscriptions.frequency.W" : "Semanalmente",
+
+  // "search.filters.namedresourcetype.Workspace" : "Espacio de trabajo",
+    "search.filters.namedresourcetype.Workspace" : "Espacio de trabajo",
+
+  // "workflow-item.selectrevieweraction.notification.error.content" : "No se pudo seleccionar el revisor para este elemento de flujo de trabajo",
+    "workflow-item.selectrevieweraction.notification.error.content" : "No se pudo seleccionar el revisor para este elemento de flujo de trabajo",
+
+  // "supervision-group-selector.select.type-of-order.error" : "Por favor seleccione un tipo de pedido",
+    "supervision-group-selector.select.type-of-order.error" : "Por favor seleccione un tipo de pedido",
+
+  // "menu.section.navbar.what_is_cic_digital" : "¿Qué es CIC Digital?",
+    "menu.section.navbar.what_is_cic_digital" : "¿Qué es CIC Digital?",
+
+  // "itemtemplate.edit.metadata.edit.buttons.unedit" : "Detener edición",
+    "itemtemplate.edit.metadata.edit.buttons.unedit" : "Detener edición",
+
+  // "itemtemplate.edit.metadata.headers.language" : "Idioma",
+    "itemtemplate.edit.metadata.headers.language" : "Idioma",
+
+  // "workflow-item.search.result.notification.deleted.success" : "Pedido de supervisión "{{name}}" eliminado correctamente",
+    "workflow-item.search.result.notification.deleted.success" : "Pedido de supervisión "{{name}}" eliminado correctamente",
+
+  // "advanced-workflow-action.rating.description-requiredDescription" : "Por favor seleccione una calificación a continuación y también agregue una reseña",
+    "advanced-workflow-action.rating.description-requiredDescription" : "Por favor seleccione una calificación a continuación y también agregue una reseña",
+
+  // "item.page.cic.institucionOrigen" : "Centro CIC",
+    "item.page.cic.institucionOrigen" : "Centro CIC",
+
+  // "workflow-item.selectrevieweraction.button.confirm" : "Confirmar",
+    "workflow-item.selectrevieweraction.button.confirm" : "Confirmar",
+
+  // "item.edit.metadata.edit.buttons.confirm" : "Confirmar",
+    "item.edit.metadata.edit.buttons.confirm" : "Confirmar",
+
+  // "admin.access-control.groups.form.tooltip.editGroup.addSubgroups" : "Para agregar o eliminar un Subgrupo de este grupo, haga clic en el botón 'Explorar todo' o use la barra de búsqueda a continuación para buscar usuarios. Luego haga clic en el icono de más para cada usuario que desee agregar en la lista a continuación, o el icono de la papelera para cada usuario que desee eliminar. La lista a continuación puede tener varias páginas: use los controles de página a continuación de la lista para navegar a las siguientes páginas. Una vez que esté listo, guarde sus cambios haciendo clic en el botón 'Guardar' en la sección superior.",
+    "admin.access-control.groups.form.tooltip.editGroup.addSubgroups" : "Para agregar o eliminar un Subgrupo de este grupo, haga clic en el botón 'Explorar todo' o use la barra de búsqueda a continuación para buscar usuarios. Luego haga clic en el icono de más para cada usuario que desee agregar en la lista a continuación, o el icono de la papelera para cada usuario que desee eliminar. La lista a continuación puede tener varias páginas: use los controles de página a continuación de la lista para navegar a las siguientes páginas. Una vez que esté listo, guarde sus cambios haciendo clic en el botón 'Guardar' en la sección superior.",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.remove" : "Eliminar miembro con nombre "{{name}}"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.edit.buttons.remove" : "Eliminar miembro con nombre "{{name}}"",
+
+  // "itemtemplate.edit.metadata.notifications.invalid.content" : "Sus cambios no fueron guardados. Asegúrese de que todos los campos sean válidos antes de guardar.",
+    "itemtemplate.edit.metadata.notifications.invalid.content" : "Sus cambios no fueron guardados. Asegúrese de que todos los campos sean válidos antes de guardar.",
+
+  // "search.filters.filter.supervisedBy.label" : "Buscar supervisado por",
+    "search.filters.filter.supervisedBy.label" : "Buscar supervisado por",
+
+  // "item.edit.metadata.metadatafield.error" : "Se produjo un error al validar el campo de metadatos",
+    "item.edit.metadata.metadatafield.error" : "Se produjo un error al validar el campo de metadatos",
+
+  // "workflow-item.advanced.title" : "Flujo de trabajo avanzado",
+    "workflow-item.advanced.title" : "Flujo de trabajo avanzado",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.head" : "Añadir EPeople",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.head" : "Añadir EPeople",
+
+  // "item.page.dcterms.title.investigacion" : "Título de investigación",
+    "item.page.dcterms.title.investigacion" : "Título de investigación",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.deleteMember" : "Miembro eliminado con éxito: "{{name}}"",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.notification.success.deleteMember" : "Miembro eliminado con éxito: "{{name}}"",
+
+  // "workflow-item.scorereviewaction.notification.success.title" : "Revisión de calificación",
+    "workflow-item.scorereviewaction.notification.success.title" : "Revisión de calificación",
+
+  // "workflow-item.search.result.list.element.supervised.remove-tooltip" : "Eliminar grupo de supervisión",
+    "workflow-item.search.result.list.element.supervised.remove-tooltip" : "Eliminar grupo de supervisión",
+
+  // "search.filters.applied.f.supervisedBy" : "Supervisado por",
+    "search.filters.applied.f.supervisedBy" : "Supervisado por",
+
+  // "workflow-item.scorereviewaction.notification.success.content" : "La calificación para este elemento del flujo de trabajo se ha enviado con éxito",
+    "workflow-item.scorereviewaction.notification.success.content" : "La calificación para este elemento del flujo de trabajo se ha enviado con éxito",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.netid" : "NetID",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.table.netid" : "NetID",
+
+  // "itemtemplate.edit.metadata.notifications.discarded.content" : "Sus cambios fueron descartados. Para reestablecer sus cambios haga clic en el botón 'Deshacer'",
+    "itemtemplate.edit.metadata.notifications.discarded.content" : "Sus cambios fueron descartados. Para reestablecer sus cambios haga clic en el botón 'Deshacer'",
+
+  // "register-page.registration.error.maildomain" : "Esta dirección de correo electrónico no está en la lista de dominios que pueden registrarse. Los dominios permitidos son {{ domains }}",
+    "register-page.registration.error.maildomain" : "Esta dirección de correo electrónico no está en la lista de dominios que pueden registrarse. Los dominios permitidos son {{ domains }}",
+
+  // "search.filters.filter.keyword.label" : "Buscar materia",
+    "search.filters.filter.keyword.label" : "Buscar materia",
+
+  // "confirmation-modal.delete-subscription.info" : "¿Estás seguro de que deseas eliminar la suscripción para "{{ dsoName }}"?",
+    "confirmation-modal.delete-subscription.info" : "¿Estás seguro de que deseas eliminar la suscripción para "{{ dsoName }}"?",
+
+  // "confirmation-modal.delete-subscription.cancel" : "Cancelar",
+    "confirmation-modal.delete-subscription.cancel" : "Cancelar",
+
+  // "item.page.dcterms.subject" : "Palabras clave",
+    "item.page.dcterms.subject" : "Palabras clave",
+
+  // "submission.sections.identifiers.no_doi" : "No se han acuñado DOIs para este elemento.",
+    "submission.sections.identifiers.no_doi" : "No se han acuñado DOIs para este elemento.",
+
+  // "comcol-role.edit.scorereviewers.description" : "Los revisores pueden otorgar una puntuación a las presentaciones entrantes, esto definirá si la presentación será rechazada o no.",
+    "comcol-role.edit.scorereviewers.description" : "Los revisores pueden otorgar una puntuación a las presentaciones entrantes, esto definirá si la presentación será rechazada o no.",
+
+  // "subscriptions.table.not-available" : "No disponible",
+    "subscriptions.table.not-available" : "No disponible",
+
+  // "subscriptions.table.not-available-message" : "El elemento suscrito ha sido eliminado o actualmente no tiene permiso para verlo",
+    "subscriptions.table.not-available-message" : "El elemento suscrito ha sido eliminado o actualmente no tiene permiso para verlo",
+
+  // "subscriptions.community" : "Suscripciones para comunidades",
+    "subscriptions.community" : "Suscripciones para comunidades",
+
+  // "item.edit.register-doi.to-update" : "El siguiente DOI ya se ha acuñado y se colocará en cola para su registro en línea",
+    "item.edit.register-doi.to-update" : "El siguiente DOI ya se ha acuñado y se colocará en cola para su registro en línea",
+
+  // "workflow-item.selectrevieweraction.notification.error.title" : "Algo salió mal",
+    "workflow-item.selectrevieweraction.notification.error.title" : "Algo salió mal",
+
+  // "supervision-group-selector.select.type-of-order.option.observer" : "OBSERVADOR",
+    "supervision-group-selector.select.type-of-order.option.observer" : "OBSERVADOR",
+
+  // "menu.section.navbar.contribute" : "Aportar material",
+    "menu.section.navbar.contribute" : "Aportar material",
+
+  // "item.page.dcterms.identifier.url" : "Enlace externo",
+    "item.page.dcterms.identifier.url" : "Enlace externo",
+
+  // "supervision-group-selector.button.save" : "Guardar",
+    "supervision-group-selector.button.save" : "Guardar",
+
+  // "itemtemplate.edit.metadata.edit.buttons.remove" : "Eliminar",
+    "itemtemplate.edit.metadata.edit.buttons.remove" : "Eliminar",
+
+  // "item.page.dcterms.isPartOf.issue.event" : "Nombre del evento",
+    "item.page.dcterms.isPartOf.issue.event" : "Nombre del evento",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.head" : "EPersonas",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.head" : "EPersonas",
+
+  // "subscriptions.item" : "Suscripciones para elementos",
+    "subscriptions.item" : "Suscripciones para elementos",
+
+  // "item.edit.metadata.edit.buttons.drag" : "Arrastrar para reordenar",
+    "item.edit.metadata.edit.buttons.drag" : "Arrastrar para reordenar",
+
+  // "subscriptions.tooltip" : "Suscribir",
+    "subscriptions.tooltip" : "Suscribir",
+
+  // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.email" : "Correo electrónico (exacto)",
+    "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.search.scope.email" : "Correo electrónico (exacto)",
+
+  // "item.edit.identifiers.doi.status.TO_BE_RESERVED" : "En cola para reservar",
+    "item.edit.identifiers.doi.status.TO_BE_RESERVED" : "En cola para reservar",
+
+  // "search.filters.filter.keyword.head" : "Materias",
+    "search.filters.filter.keyword.head" : "Materias",
+
+  // "itemtemplate.edit.metadata.edit.buttons.confirm" : "Confirmar",
+    "itemtemplate.edit.metadata.edit.buttons.confirm" : "Confirmar",
+
+  // "menu.section.navbar.repository_policy" : "Políticas del repositorio",
+    "menu.section.navbar.repository_policy" : "Políticas del repositorio",
+
+  // "supervision-group-selector.select.group.label" : "Seleccione un Grupo",
+    "supervision-group-selector.select.group.label" : "Seleccione un Grupo",
+
+  // "search.filters.applied.f.keyword" : "Materia",
+    "search.filters.applied.f.keyword" : "Materia",
+
+  // "search.filters.filter.lugarDesarrollo.head" : "Lugar de desarrollo",
+    "search.filters.filter.lugarDesarrollo.head" : "Lugar de desarrollo",
+
+  // "subscriptions.title" : "Suscripciones",
+    "subscriptions.title" : "Suscripciones",
+
+  // "comcol-role.edit.scorereviewers.name" : "Revisores de puntaje",
+    "comcol-role.edit.scorereviewers.name" : "Revisores de puntaje",
+
+  // "item.page.relationships.isCompilatorOf" : "Compiladores",
+    "item.page.relationships.isCompilatorOf" : "Compiladores",
+
+  // "item.edit.identifiers.doi.status.MINTED" : "Minted (no registrado)",
+    "item.edit.identifiers.doi.status.MINTED" : "Minted (no registrado)",
+
+  // "item.edit.identifiers.doi.status.UPDATE_REGISTERED" : "Registrado (cola de actualización)",
+    "item.edit.identifiers.doi.status.UPDATE_REGISTERED" : "Registrado (cola de actualización)",
 
 }
