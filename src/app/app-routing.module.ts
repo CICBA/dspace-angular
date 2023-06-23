@@ -40,7 +40,7 @@ import {
 import { ServerCheckGuard } from './core/server-check/server-check.guard';
 // Utilizo un menu resolver propio para personalizar el menu del navbar
 import { CICBAMenuResolver } from './cicba-menu.resolver';
-import { MenuResolver } from './menu.resolver';
+// import { MenuResolver } from './menu.resolver';
 import { ThemedPageErrorComponent } from './page-error/themed-page-error.component';
 
 @NgModule({
@@ -54,6 +54,7 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
         canActivateChild: [ServerCheckGuard],
         // Utilizo un menu resolver propio para personalizar el menu del navbar
         resolve: [CICBAMenuResolver],
+        // resolve: [MenuResolver],
         children: [
           { path: '', redirectTo: '/home', pathMatch: 'full' },
           {
@@ -232,6 +233,12 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
             path: ACCESS_CONTROL_MODULE_PATH,
             loadChildren: () => import('./access-control/access-control.module').then((m) => m.AccessControlModule),
             canActivate: [GroupAdministratorGuard],
+          },
+          {
+            path: 'subscriptions',
+            loadChildren: () => import('./subscriptions-page/subscriptions-page-routing.module')
+              .then((m) => m.SubscriptionsPageRoutingModule),
+            canActivate: [AuthenticatedGuard]
           },
           { path: '**', pathMatch: 'full', component: ThemedPageNotFoundComponent },
         ]

@@ -5,18 +5,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { Item } from '../../../../../../../app/core/shared/item.model';
 import { ViewMode } from '../../../../../../../app/core/shared/view-mode.model';
 import { listableObjectComponent } from '../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
-import { VersionedItemComponent } from '../../../../../../../app/item-page/simple/item-types/versioned-item/versioned-item.component';
 import { Context } from 'src/app/core/shared/context.model';
 import { MetadataValue } from 'src/app/core/shared/metadata.models';
 import { VersionHistoryDataService } from 'src/app/core/data/version-history-data.service';
 import { VersionDataService } from 'src/app/core/data/version-data.service';
-import { ItemVersionsSharedService } from 'src/app/shared/item/item-versions/item-versions-shared.service';
+import { ItemVersionsSharedService } from 'src/app/item-page/versions/item-versions-shared.service';
 import { WorkspaceitemDataService } from 'src/app/core/submission/workspaceitem-data.service';
 import { SearchService } from 'src/app/core/shared/search/search.service';
 import { RouteService } from 'src/app/core/services/route.service';
 import { ItemDataService } from 'src/app/core/data/item-data.service';
 import { HostWindowService } from 'src/app/shared/host-window.service';
-
+import {
+  UntypedItemComponent as BaseComponent
+} from '../../../../../../../app/item-page/simple/item-types/untyped-item/untyped-item.component';
 /**
  * Component that represents a publication Item page
  */
@@ -28,13 +29,25 @@ import { HostWindowService } from 'src/app/shared/host-window.service';
   templateUrl: './untyped-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UntypedItemComponent extends VersionedItemComponent implements OnInit {
+export class UntypedItemComponent extends BaseComponent implements OnInit {
 
   identifierOtherMetadataName = 'dcterms.identifier.other';
   itemIdentifiers: { mdValue: MetadataValue, label: string }[];
 
-  constructor(modalService: NgbModal, versionHistoryService: VersionHistoryDataService, translateService: TranslateService, versionService: VersionDataService, itemVersionShared: ItemVersionsSharedService, router: Router, workspaceItemDataService: WorkspaceitemDataService, searchService: SearchService, itemService: ItemDataService, routeService: RouteService, public windowService: HostWindowService) {
-    super(modalService, versionHistoryService, translateService, versionService, itemVersionShared, router, workspaceItemDataService, searchService, itemService, routeService);
+  constructor(
+    private modalService: NgbModal,
+    private versionHistoryService: VersionHistoryDataService,
+    private translateService: TranslateService,
+    private versionService: VersionDataService,
+    private itemVersionShared: ItemVersionsSharedService,
+    public router: Router,
+    private workspaceItemDataService: WorkspaceitemDataService,
+    private searchService: SearchService,
+    private itemService: ItemDataService,
+    public routeService: RouteService,
+    public windowService: HostWindowService
+  ) {
+    super(routeService,router);
   }
 
   ngOnInit(): void {

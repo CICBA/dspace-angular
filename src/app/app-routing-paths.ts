@@ -107,10 +107,9 @@ export function getPageInternalServerErrorRoute() {
   return `/${INTERNAL_SERVER_ERROR}`;
 }
 
-export const INFO_MODULE_PATH = 'page';
-
 export const ERROR_PAGE = 'error';
 
+export const INFO_MODULE_PATH = 'page';
 export function getInfoModulePath() {
   return `/${INFO_MODULE_PATH}`;
 }
@@ -127,3 +126,9 @@ export function getRequestCopyModulePath() {
 }
 
 export const HEALTH_PAGE_PATH = 'health';
+
+export const SUBSCRIPTIONS_MODULE_PATH = 'subscriptions';
+
+export function getSubscriptionsModuleRoute() {
+  return `/${SUBSCRIPTIONS_MODULE_PATH}`;
+}
