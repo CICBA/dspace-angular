@@ -97,7 +97,6 @@ import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.c
 import {
   ExpandableNavbarSectionComponent
 } from './app/navbar/expandable-navbar-section/expandable-navbar-section.component';
-import { FeedbackComponent } from './app/info/feedback/feedback.component';
 //import { DsoEditMetadataComponent } from './app/dso-shared/dso-edit-metadata/dso-edit-metadata.component';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
 import {
@@ -166,7 +165,6 @@ const DECLARATIONS = [
   ComcolPageBrowseByComponent,
   AuthNavMenuComponent,
   ExpandableNavbarSectionComponent,
-  FeedbackComponent,
   //DsoEditMetadataComponent,
   CommunityPageSubCollectionListComponent,
   //CommunityListComponent,
