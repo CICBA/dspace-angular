@@ -63,7 +63,6 @@ import { LogoutPageComponent } from './app/logout-page/logout-page.component';
 import { CreateProfileComponent } from './app/register-page/create-profile/create-profile.component';
 import { ProfilePageComponent } from './app/profile-page/profile-page.component';
 import { RegisterEmailComponent } from './app/register-page/register-email/register-email.component';
-import { MyDSpacePageComponent } from './app/my-dspace-page/my-dspace-page.component';
 import { SubmissionEditComponent } from './app/submission/edit/submission-edit.component';
 import { SubmissionImportExternalComponent } from './app/submission/import-external/submission-import-external.component';
 import { SubmissionSubmitComponent } from './app/submission/submit/submission-submit.component';
@@ -87,9 +86,6 @@ import {
 } from './app/shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/external-source-entry-import-modal.component';
 import { ComcolPageBrowseByComponent } from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
 import { AuthNavMenuComponent } from './app/shared/auth-nav-menu/auth-nav-menu.component';
-import {
-  ExpandableNavbarSectionComponent
-} from './app/navbar/expandable-navbar-section/expandable-navbar-section.component';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
 import {
   CommunityPageSubCollectionListComponent
@@ -120,7 +116,6 @@ const DECLARATIONS = [
   CreateProfileComponent,
   ProfilePageComponent,
   RegisterEmailComponent,
-  MyDSpacePageComponent,
   SubmissionEditComponent,
   SubmissionImportExternalComponent,
   SubmissionSubmitComponent,
@@ -141,7 +136,6 @@ const DECLARATIONS = [
   ExternalSourceEntryImportModalComponent,
   ComcolPageBrowseByComponent,
   AuthNavMenuComponent,
-  ExpandableNavbarSectionComponent,
   CommunityPageSubCollectionListComponent,
 ];
 
