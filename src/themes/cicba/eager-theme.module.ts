@@ -44,7 +44,6 @@ import {
 import {
   EditItemSelectorComponent
 } from './app/shared/dso-selector/modal-wrappers/edit-item-selector/edit-item-selector.component';
-import { CollectionDropdownComponent } from './app/shared/collection-dropdown/collection-dropdown.component';
 import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
 import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 import { ItemSharedModule } from '../../app/item-page/item-shared.module';
@@ -60,7 +59,7 @@ const ENTRY_COMPONENTS = [
   ItemSearchResultListElementComponent,
   ItemListElementComponent,
   FileDownloadLinkComponent,
-  CollectionDropdownComponent
+
 ];
 
 const DECLARATIONS = [
