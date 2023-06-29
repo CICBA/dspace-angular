@@ -46,7 +46,6 @@ import { RootModule } from 'src/app/root.module';
 import { EagerThemeModule } from './eager-theme.module';
 import { FileSectionComponent } from './app/item-page/simple/field-components/file-section/file-section.component';
 import { HomePageComponent } from './app/home-page/home-page.component';
-import { RootComponent } from './app/root/root.component';
 import { BrowseBySwitcherComponent } from './app/browse-by/browse-by-switcher/browse-by-switcher.component';
 import { SearchPageComponent } from './app/search-page/search-page.component';
 import { ConfigurationSearchPageComponent } from './app/search-page/configuration-search-page.component';
@@ -95,7 +94,6 @@ import { SharedBrowseByModule } from '../../app/shared/browse-by/shared-browse-b
 const DECLARATIONS = [
   FileSectionComponent,
   HomePageComponent,
-  RootComponent,
   BrowseBySwitcherComponent,
   SearchPageComponent,
   ConfigurationSearchPageComponent,
