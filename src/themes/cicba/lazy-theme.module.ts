@@ -59,8 +59,6 @@ import { CommunityPageComponent } from './app/community-page/community-page.comp
 import { CollectionPageComponent } from './app/collection-page/collection-page.component';
 import { LoginPageComponent } from './app/login-page/login-page.component';
 import { LogoutPageComponent } from './app/logout-page/logout-page.component';
-import { CreateProfileComponent } from './app/register-page/create-profile/create-profile.component';
-import { RegisterEmailComponent } from './app/register-page/register-email/register-email.component';
 import { SubmissionEditComponent } from './app/submission/edit/submission-edit.component';
 import { SubmissionImportExternalComponent } from './app/submission/import-external/submission-import-external.component';
 import { SubmissionSubmitComponent } from './app/submission/submit/submission-submit.component';
@@ -110,8 +108,6 @@ const DECLARATIONS = [
   CollectionPageComponent,
   LoginPageComponent,
   LogoutPageComponent,
-  CreateProfileComponent,
-  RegisterEmailComponent,
   SubmissionEditComponent,
   SubmissionImportExternalComponent,
   SubmissionSubmitComponent,
