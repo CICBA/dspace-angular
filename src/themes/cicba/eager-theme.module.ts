@@ -25,7 +25,6 @@ import { CicSearchSettingsComponent } from './app/search-settings/cic-search-set
 import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
 import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
 import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
-import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
 import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 import { ItemSharedModule } from '../../app/item-page/item-shared.module';
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
@@ -58,7 +57,6 @@ const DECLARATIONS = [
   CicSearchSidebarComponent,
   CicSidebarDropdownComponent,
   LastAccessionedItemsComponent,
-  SearchNavbarComponent,
 ];
 
 const EXPORTS = [
