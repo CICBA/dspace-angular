@@ -60,7 +60,6 @@ import { CollectionPageComponent } from './app/collection-page/collection-page.c
 import { LoginPageComponent } from './app/login-page/login-page.component';
 import { LogoutPageComponent } from './app/logout-page/logout-page.component';
 import { CreateProfileComponent } from './app/register-page/create-profile/create-profile.component';
-import { ProfilePageComponent } from './app/profile-page/profile-page.component';
 import { RegisterEmailComponent } from './app/register-page/register-email/register-email.component';
 import { SubmissionEditComponent } from './app/submission/edit/submission-edit.component';
 import { SubmissionImportExternalComponent } from './app/submission/import-external/submission-import-external.component';
@@ -112,7 +111,6 @@ const DECLARATIONS = [
   LoginPageComponent,
   LogoutPageComponent,
   CreateProfileComponent,
-  ProfilePageComponent,
   RegisterEmailComponent,
   SubmissionEditComponent,
   SubmissionImportExternalComponent,
