@@ -49,10 +49,6 @@ import { HomePageComponent } from './app/home-page/home-page.component';
 import { BrowseBySwitcherComponent } from './app/browse-by/browse-by-switcher/browse-by-switcher.component';
 import { SearchPageComponent } from './app/search-page/search-page.component';
 import { EndUserAgreementComponent } from './app/info/end-user-agreement/end-user-agreement.component';
-import { CollectionStatisticsPageComponent } from './app/statistics-page/collection-statistics-page/collection-statistics-page.component';
-import { CommunityStatisticsPageComponent } from './app/statistics-page/community-statistics-page/community-statistics-page.component';
-import { ItemStatisticsPageComponent } from './app/statistics-page/item-statistics-page/item-statistics-page.component';
-import { SiteStatisticsPageComponent } from './app/statistics-page/site-statistics-page/site-statistics-page.component';
 import { CommunityPageComponent } from './app/community-page/community-page.component';
 import { CollectionPageComponent } from './app/collection-page/collection-page.component';
 import { LoginPageComponent } from './app/login-page/login-page.component';
@@ -96,10 +92,6 @@ const DECLARATIONS = [
   BrowseBySwitcherComponent,
   SearchPageComponent,
   EndUserAgreementComponent,
-  CollectionStatisticsPageComponent,
-  CommunityStatisticsPageComponent,
-  ItemStatisticsPageComponent,
-  SiteStatisticsPageComponent,
   CommunityPageComponent,
   CollectionPageComponent,
   LoginPageComponent,
