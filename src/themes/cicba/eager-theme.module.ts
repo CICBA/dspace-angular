@@ -14,7 +14,6 @@ import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-na
 import { ItemSearchResultListElementComponent } from './app/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 import { ItemListElementComponent } from './app/object-list/item-list-element/item-types/item/item-list-element.component';
 import { NavbarComponent } from './app/navbar/navbar.component';
-import { PublicationComponent } from './app/item-page/simple/item-types/publication/publication.component';
 import { UntypedItemComponent } from './app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { BadgeMetadataValuesComponent } from './app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
 import { CicDateMetadataValuesComponent } from './app/item-page/simple/field-components/date-metadata-values/cic-date-metadata-values.component';
@@ -57,7 +56,6 @@ import { SharedBrowseByModule } from '../../app/shared/browse-by/shared-browse-b
  * This will ensure that decorator gets picked up when the app loads
  */
 const ENTRY_COMPONENTS = [
-  PublicationComponent,
   UntypedItemComponent,
   ItemSearchResultListElementComponent,
   ItemListElementComponent,
