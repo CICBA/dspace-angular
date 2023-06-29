@@ -48,7 +48,6 @@ import { FileSectionComponent } from './app/item-page/simple/field-components/fi
 import { HomePageComponent } from './app/home-page/home-page.component';
 import { BrowseBySwitcherComponent } from './app/browse-by/browse-by-switcher/browse-by-switcher.component';
 import { SearchPageComponent } from './app/search-page/search-page.component';
-import { ConfigurationSearchPageComponent } from './app/search-page/configuration-search-page.component';
 import { EndUserAgreementComponent } from './app/info/end-user-agreement/end-user-agreement.component';
 import { CollectionStatisticsPageComponent } from './app/statistics-page/collection-statistics-page/collection-statistics-page.component';
 import { CommunityStatisticsPageComponent } from './app/statistics-page/community-statistics-page/community-statistics-page.component';
@@ -96,7 +95,6 @@ const DECLARATIONS = [
   HomePageComponent,
   BrowseBySwitcherComponent,
   SearchPageComponent,
-  ConfigurationSearchPageComponent,
   EndUserAgreementComponent,
   CollectionStatisticsPageComponent,
   CommunityStatisticsPageComponent,
