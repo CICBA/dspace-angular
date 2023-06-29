@@ -25,7 +25,6 @@ import { CicSearchSettingsComponent } from './app/search-settings/cic-search-set
 import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
 import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
 import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
-import { FileDownloadLinkComponent } from './app/shared/file-download-link/file-download-link.component';
 import {
   CreateCollectionParentSelectorComponent
 } from './app/shared/dso-selector/modal-wrappers/create-collection-parent-selector/create-collection-parent-selector.component';
@@ -58,8 +57,6 @@ const ENTRY_COMPONENTS = [
   UntypedItemComponent,
   ItemSearchResultListElementComponent,
   ItemListElementComponent,
-  FileDownloadLinkComponent,
-
 ];
 
 const DECLARATIONS = [
