@@ -54,8 +54,6 @@ import { CollectionPageComponent } from './app/collection-page/collection-page.c
 import { LoginPageComponent } from './app/login-page/login-page.component';
 import { LogoutPageComponent } from './app/logout-page/logout-page.component';
 import { SubmissionEditComponent } from './app/submission/edit/submission-edit.component';
-import { WorkflowItemDeleteComponent } from './app/workflowitems-edit-page/workflow-item-delete/workflow-item-delete.component';
-import { WorkflowItemSendBackComponent } from './app/workflowitems-edit-page/workflow-item-send-back/workflow-item-send-back.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { CommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
 import { CicDigitalInfoComponent } from './app/info/cic-digital-info/cic-digital-info.component';
@@ -95,8 +93,6 @@ const DECLARATIONS = [
   LoginPageComponent,
   LogoutPageComponent,
   SubmissionEditComponent,
-  WorkflowItemDeleteComponent,
-  WorkflowItemSendBackComponent,
   BreadcrumbsComponent,
   CommunityPageSubCommunityListComponent,
   CicDigitalInfoComponent,
