@@ -70,7 +70,6 @@ import { LoadingComponent } from './app/shared/loading/loading.component';
 import {
   ExternalSourceEntryImportModalComponent
 } from './app/shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/external-source-entry-import-modal.component';
-import { ComcolPageBrowseByComponent } from './app/shared/comcol-page-browse-by/comcol-page-browse-by.component';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
 import {
   CommunityPageSubCollectionListComponent
@@ -105,7 +104,6 @@ const DECLARATIONS = [
   ObjectListComponent,
   LoadingComponent,
   ExternalSourceEntryImportModalComponent,
-  ComcolPageBrowseByComponent,
   CommunityPageSubCollectionListComponent,
 ];
 
