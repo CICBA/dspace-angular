@@ -66,7 +66,6 @@ import { SearchResultsComponent } from './app/shared/search/search-results/searc
 import { ResultsBackButtonComponent } from './app/shared/results-back-button/results-back-button.component';
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
 import { ObjectListComponent } from './app/shared/object-list/object-list.component';
-import { LoadingComponent } from './app/shared/loading/loading.component';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
 import {
   CommunityPageSubCollectionListComponent
@@ -99,7 +98,6 @@ const DECLARATIONS = [
   SearchResultsComponent,
   ResultsBackButtonComponent,
   ObjectListComponent,
-  LoadingComponent,
   CommunityPageSubCollectionListComponent,
 ];
 
