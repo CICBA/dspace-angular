@@ -61,8 +61,6 @@ import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-co
 import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
 import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
 import { SearchExpandedNavbarComponent } from './app/search-navbar/search-expanded-navbar.component';
-import { SearchSettingsComponent } from './app/shared/search/search-settings/search-settings.component';
-import { SearchResultsComponent } from './app/shared/search/search-results/search-results.component';
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
 import { ObjectListComponent } from './app/shared/object-list/object-list.component';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
@@ -93,8 +91,6 @@ const DECLARATIONS = [
   ItemPageStatisticsComponent,
   RepositoryPolicyComponent,
   SearchExpandedNavbarComponent,
-  SearchSettingsComponent,
-  SearchResultsComponent,
   ObjectListComponent,
   CommunityPageSubCollectionListComponent,
 ];
