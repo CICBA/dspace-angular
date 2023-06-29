@@ -62,7 +62,6 @@ import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/i
 import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
 import { SearchExpandedNavbarComponent } from './app/search-navbar/search-expanded-navbar.component';
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
-import { ObjectListComponent } from './app/shared/object-list/object-list.component';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
 import {
   CommunityPageSubCollectionListComponent
@@ -91,7 +90,6 @@ const DECLARATIONS = [
   ItemPageStatisticsComponent,
   RepositoryPolicyComponent,
   SearchExpandedNavbarComponent,
-  ObjectListComponent,
   CommunityPageSubCollectionListComponent,
 ];
 
