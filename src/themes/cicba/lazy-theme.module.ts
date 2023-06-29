@@ -67,9 +67,6 @@ import { ResultsBackButtonComponent } from './app/shared/results-back-button/res
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
 import { ObjectListComponent } from './app/shared/object-list/object-list.component';
 import { LoadingComponent } from './app/shared/loading/loading.component';
-import {
-  ExternalSourceEntryImportModalComponent
-} from './app/shared/form/builder/ds-dynamic-form-ui/relation-lookup-modal/external-source-tab/external-source-entry-import-modal/external-source-entry-import-modal.component';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
 import {
   CommunityPageSubCollectionListComponent
@@ -103,7 +100,6 @@ const DECLARATIONS = [
   ResultsBackButtonComponent,
   ObjectListComponent,
   LoadingComponent,
-  ExternalSourceEntryImportModalComponent,
   CommunityPageSubCollectionListComponent,
 ];
 
