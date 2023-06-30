@@ -21,9 +21,9 @@ import { CicMetadataFieldWrapperComponent } from './app/item-page/simple/field-c
 import { CicMetadataRepresentationListComponent } from './app/item-page/simple/field-components/metadata-representation-list/cic-metadata-representation-list.component';
 import { CicMetadataValuesComponent } from './app/item-page/simple/field-components/metadata-values/cic-metadata-values.component';
 import { CicSearchComponent } from './app/search/cic-search.component';
-import { CicSearchSettingsComponent } from './app/search-settings/cic-search-settings.component';
+import { SearchSettingsComponent } from './app/shared/search/search-settings/search-settings.component';
 import { CicSearchSidebarComponent } from './app/search-sidebar/cic-search-sidebar.component';
-import { CicSidebarDropdownComponent } from './app/search-settings/cic-sidebar-dropdown.component';
+import { CicSidebarDropdownComponent } from './app/shared/search/search-settings/cic-sidebar-dropdown.component';
 import { LastAccessionedItemsComponent } from './app/home-page/last-accessioned-items/last-accessioned-items.component';
 import { DsoPageModule } from '../../app/shared/dso-page/dso-page.module';
 import { ItemSharedModule } from '../../app/item-page/item-shared.module';
@@ -53,7 +53,7 @@ const DECLARATIONS = [
   CicMetadataRepresentationListComponent,
   CicMetadataValuesComponent,
   CicSearchComponent,
-  CicSearchSettingsComponent,
+  SearchSettingsComponent,
   CicSearchSidebarComponent,
   CicSidebarDropdownComponent,
   LastAccessionedItemsComponent,
@@ -66,7 +66,7 @@ const EXPORTS = [
   CicMetadataRepresentationListComponent,
   CicMetadataValuesComponent,
   CicSearchComponent,
-  CicSearchSettingsComponent,
+  SearchSettingsComponent,
   CicSearchSidebarComponent,
   CicSidebarDropdownComponent,
   LastAccessionedItemsComponent,
