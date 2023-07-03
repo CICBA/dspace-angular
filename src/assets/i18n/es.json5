@@ -8635,7 +8635,7 @@
   // "item.edit.identifiers.doi.status.UPDATE_REGISTERED" : "Registrado (cola de actualización)",
     "item.edit.identifiers.doi.status.UPDATE_REGISTERED" : "Registrado (cola de actualización)",
 
-}
+
   // "system-wide-alert-banner.retrieval.error": "Something went wrong retrieving the system-wide alert banner",
   "system-wide-alert-banner.retrieval.error": "Algo salió mal al recuperar el banner de alerta del sistema",
 
