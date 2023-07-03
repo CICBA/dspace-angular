@@ -2557,7 +2557,7 @@
   "home.search-form.placeholder": "Buscar en el repositorio ...",
 
   // "home.title": "Home",
-  "home.title": "Home",
+  "home.title": "Inicio",
 
   // "home.top-level-communities.head": "Communities in DSpace",
   "home.top-level-communities.head": "Comunidades en DSpace",
@@ -4924,10 +4924,10 @@
   "repository.image.logo": "Logotipo del repositorio",
 
   // "repository.title.prefix": "DSpace Angular :: ",
-  "repository.title.prefix": "DSpace Angular :: ",
+  "repository.title.prefix": "CIC Digital | ",
 
   // "repository.title.prefixDSpace": "DSpace Angular ::",
-  "repository.title.prefixDSpace": "DSpace Angular ::",
+  "repository.title.prefixDSpace": "CIC Digital | ",
 
 
   // "resource-policies.add.button": "Add",
