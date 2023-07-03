@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { listableObjectComponent } from '../../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
-import { ViewMode } from '../../../../../../../../app/core/shared/view-mode.model';
-import { ItemSearchResult } from '../../../../../../../../app/shared/object-collection/shared/item-search-result.model';
-import { SearchResultListElementComponent } from '../../../../../../../../app/shared/object-list/search-result-list-element/search-result-list-element.component';
-import { Item } from '../../../../../../../../app/core/shared/item.model';
-import { getItemPageRoute } from '../../../../../../../../app/item-page/item-page-routing-paths';
+import { listableObjectComponent } from '../../../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
+import { ViewMode } from '../../../../../../../../../app/core/shared/view-mode.model';
+import { ItemSearchResult } from '../../../../../../../../../app/shared/object-collection/shared/item-search-result.model';
+import { SearchResultListElementComponent } from '../../../../../../../../../app/shared/object-list/search-result-list-element/search-result-list-element.component';
+import { Item } from '../../../../../../../../../app/core/shared/item.model';
+import { getItemPageRoute } from '../../../../../../../../../app/item-page/item-page-routing-paths';
 import { Context } from 'src/app/core/shared/context.model';
 import { TruncatableService } from 'src/app/shared/truncatable/truncatable.service';
 import { DSONameService } from 'src/app/core/breadcrumbs/dso-name.service';
