@@ -8043,5 +8043,91 @@
   // "admin.system-wide-alert.title": "System-wide Alerts",
   "admin.system-wide-alert.title": "Alertas del sistema",
 
+  //"collection-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by this collection. Changes may be performed to either all Item metadata or all content (bitstreams).",
+  "item-access-control-title": "Este formulario permite realizar cambios en las condiciones de acceso de los metadatos del elemento o de sus flujos de bits.",
+
+  //"item-access-control-title": "This form allows you to perform changes to the access conditions of the item's metadata or its bitstreams.",
+  "collection-access-control-title": "Este formulario permite realizar cambios en las condiciones de acceso de todos los artículos que pertenecen a esta colección. Los cambios pueden realizarse en todos los metadatos del elemento o en todo el contenido (flujos de bits).",
+
+  //"community-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by any collection under this community. Changes may be performed to either all Item metadata or all content (bitstreams).",
+  "community-access-control-title": "Este formulario permite realizar cambios en las condiciones de acceso de todos los elementos pertenecientes a cualquier colección de esta comunidad. Los cambios pueden realizarse en todos los metadatos del elemento o en todo el contenido (flujos de bits).",
+
+  //"access-control-item-header-toggle": "Item's Metadata",
+  "access-control-item-header-toggle": "Metadatos del elemento",
+
+  //"access-control-bitstream-header-toggle": "Bitstreams",
+  "access-control-bitstream-header-toggle": "Bitstreams",
+
+  //"access-control-mode": "Mode",
+  "access-control-mode": "Modo",
+
+  //"access-control-access-conditions": "Access conditions",
+  "access-control-access-conditions": "Condiciones de acceso",
+
+  //"access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning collection.",
+  "access-control-no-access-conditions-warning-message": "Actualmente, no se especifican condiciones de acceso a continuación. Si se ejecuta, se sustituirán las condiciones de acceso actuales por las condiciones de acceso predeterminadas heredadas de la colección propietaria.",
+
+  //"access-control-replace-all": "Replace access conditions",
+  "access-control-replace-all": "Reemplazar condiciones de acceso",
+
+  //"access-control-add-to-existing": "Add to existing ones",
+  "access-control-add-to-existing": "Añadir a las existentes",
+
+  //"access-control-limit-to-specific": "Limit the changes to specific bitstreams",
+  "access-control-limit-to-specific": "Limitar los cambios a flujos de bits específicos",
+
+  //"access-control-process-all-bitstreams": "Update all the bitstreams in the item",
+  "access-control-process-all-bitstreams": "Actualizar todos los bitstreams del elemento",
+
+  //"access-control-bitstreams-selected": "bitstreams selected",
+  "access-control-bitstreams-selected": "flujos de bits seleccionados",
+
+  //"access-control-cancel": "Cancel",
+  "access-control-cancel": "Cancelar",
+
+  //"access-control-execute": "Execute",
+  "access-control-execute": "Ejecutar",
+
+  //"access-control-add-more": "Add more",
+  "access-control-add-more": "Añadir más",
+
+  //"access-control-select-bitstreams-modal.title": "Select bitstreams",
+  "access-control-select-bitstreams-modal.title": "Seleccionar secuencias de bits",
+
+  //"access-control-select-bitstreams-modal.no-items": "No items to show.",
+  "access-control-select-bitstreams-modal.no-items": "No hay elementos que mostrar",
+
+  //"access-control-select-bitstreams-modal.close": "Close",
+  "access-control-select-bitstreams-modal.close": "Cerrar",
+
+  //"access-control-option-label": "Access condition type",
+  "access-control-option-label": "Tipo de condición de acceso",
+
+  //"access-control-option-note": "Choose an access condition to apply to selected objects.",
+  "access-control-option-note": "Elija una condición de acceso para aplicarla a los objetos seleccionados",
+
+  //"access-control-option-start-date": "Grant access from",
+  "access-control-option-start-date": "Conceder acceso desde",
+
+  //"access-control-option-start-date-note": "Select the date from which the related access condition is applied",
+  "access-control-option-start-date-note": "Seleccione la fecha a partir de la cual se aplica la condición de acceso relacionada",
+
+  //"access-control-option-end-date": "Grant access until",
+  "access-control-option-end-date": "Conceder acceso hasta",
+
+  //"access-control-option-end-date-note": "Select the date until which the related access condition is applied",
+  "access-control-option-end-date-note": "Seleccione la fecha hasta la que se aplica la condición de acceso relacionada",
+
+  //"collection.edit.tabs.access-control.head": "Access Control",
+  "collection.edit.tabs.access-control.head": "Control de acceso",
+
+  //"collection.edit.tabs.access-control.title": "Collection Edit - Access Control",
+  "collection.edit.tabs.access-control.title": "Editar colección - Control de acceso",
+
+  //"item.edit.tabs.access-control.head": "Access Control",
+  "item.edit.tabs.access-control.head": "Control de acceso",
+
+  //"item.edit.tabs.access-control.title": "Item Edit - Access Control",
+  "item.edit.tabs.access-control.title": "Editar item - Control de acceso",
 
 }
