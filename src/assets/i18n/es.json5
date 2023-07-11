@@ -337,6 +337,29 @@
   // "admin.registries.schema.title": "Metadata Schema Registry",
   "admin.registries.schema.title": "Registro de esquemas de metadatos",
 
+  // "admin.access-control.bulk-access.breadcrumbs": "Bulk Access Management",
+  "admin.access-control.bulk-access.breadcrumbs": "Gestión de permisos en lote",
+
+  // "administrativeBulkAccess.search.results.head": "Search Results",
+  "administrativeBulkAccess.search.results.head": "Resultados de Búsqueda",
+
+  // "admin.access-control.bulk-access": "Bulk Access Management",
+  "admin.access-control.bulk-access": "Gestión de permisos en lote",
+
+  // "admin.access-control.bulk-access.title": "Bulk Access Management",
+  "admin.access-control.bulk-access.title": "Gestión de permisos en lote",
+
+  // "admin.access-control.bulk-access-browse.header": "Step 1: Select Objects",
+  "admin.access-control.bulk-access-browse.header": "Paso 1: Seleccionar Objetos",
+
+  // "admin.access-control.bulk-access-browse.search.header": "Search",
+  "admin.access-control.bulk-access-browse.search.header": "Buscar",
+
+  // "admin.access-control.bulk-access-browse.selected.header": "Current selection({{number}})",
+  "admin.access-control.bulk-access-browse.selected.header": "Selección actual({{number}})",
+
+  // "admin.access-control.bulk-access-settings.header": "Step 2: Operation to Perform",
+  "admin.access-control.bulk-access-settings.header": "Paso 2: Operación a Realizar",
 
 
   // "admin.access-control.epeople.actions.delete": "Delete EPerson",
@@ -4229,6 +4252,9 @@
 
   // "menu.section.access_control_authorizations": "Authorizations",
   "menu.section.access_control_authorizations": "Autorizaciones",
+
+  // "menu.section.access_control_bulk": "Bulk Access Management",
+  "menu.section.access_control_bulk": "Gestión de permisos en lote",
 
   // "menu.section.access_control_groups": "Groups",
   "menu.section.access_control_groups": "Grupos",
