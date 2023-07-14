@@ -4646,10 +4646,10 @@
   "repository.image.logo": "Logo do Repositório",
 
   // "repository.title.prefix": "DSpace Angular :: ",
-  "repository.title.prefix": "DSpace Angular :: ",
+  "repository.title.prefix": "Repositório CIC Digital | ",
 
   // "repository.title.prefixDSpace": "DSpace Angular ::",
-  "repository.title.prefixDSpace": "DSpace Angular ::",
+  "repository.title.prefixDSpace": "Repositório CIC Digital | ",
 
   // "resource-policies.add.button": "Add",
   "resource-policies.add.button": "Adicionar",
