@@ -22,7 +22,7 @@
       [mdValues]="object?.allMetadata(['dc.type'])"
       [badgeType]="'badge-info type-badge'">
     </ds-badge-metadata-values>
-    <ds-access-status-badge class="badge-group" [item]="object"></ds-access-status-badge>
+    <ds-access-status-badge class="badge-group" [object]="object"></ds-access-status-badge>
   </div>
 
   <h4 class="item-page-title-field mr-auto font-weight-bold">
@@ -213,7 +213,7 @@
       </ds-metadata-field-wrapper>
     </ng-container>
     <ng-container *ngIf="mediaViewer.image">
-      <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
+      <ds-media-viewer [item]="object"></ds-media-viewer>
     </ng-container>
   </div>
 </div>

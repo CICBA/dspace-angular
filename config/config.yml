@@ -10,3 +10,7 @@ item:
     undoTimeout: 10000 # 10 seconds
   # Show the item access status label in items lists
   showAccessStatuses: true
+
+info:
+  enableEndUserAgreement: false
+  enablePrivacyStatement: false

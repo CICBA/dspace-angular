@@ -34,7 +34,12 @@ import {
             resolve: {
               breadcrumb: I18nBreadcrumbResolver
             },
-            data: { title: 'workflow-item.edit.title', breadcrumbKey: 'workflow-item.edit' }
+            data: {
+              title: 'workflow-item.edit.title',
+              breadcrumbKey: 'workflow-item.edit',
+              //Pongo collectionModifiable en true para poder mover items de workflow a otras colecciones debido al cambio de https://github.com/DSpace/dspace-angular/pull/2143
+              collectionModifiable: true
+            }
           },
           {
             canActivate: [AuthenticatedGuard],
