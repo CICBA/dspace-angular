@@ -7917,8 +7917,8 @@
   // "submission.sections.submit.progressbar.describe.step1" : "Describir",
     "submission.sections.submit.progressbar.describe.step1" : "Describir",
 
-  // "search.filters.filter.keyword.placeholder" : "Materia",
-    "search.filters.filter.keyword.placeholder" : "Materia",
+  // "search.filters.filter.keyword.placeholder" : "Palabras clave",
+    "search.filters.filter.keyword.placeholder" : "Palabras clave",
 
   // "item.page.dcterms.subject.materia" : "Materia",
     "item.page.dcterms.subject.materia" : "Materia",
@@ -7965,8 +7965,8 @@
   // "search.filters.applied.f.supervisedBy" : "Supervisado por",
     "search.filters.applied.f.supervisedBy" : "Supervisado por",
 
-  // "search.filters.filter.keyword.label" : "Buscar materia",
-    "search.filters.filter.keyword.label" : "Buscar materia",
+  // "search.filters.filter.keyword.label" : "Buscar palabras clave",
+    "search.filters.filter.keyword.label" : "Buscar palabras clave",
 
   // "item.page.dcterms.subject" : "Palabras clave",
     "item.page.dcterms.subject" : "Palabras clave",
@@ -7983,8 +7983,8 @@
   // "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.head" : "EPersonas",
     "advanced-workflow-action-select-reviewer.groups.form.reviewers-list.head" : "EPersonas",
 
-  // "search.filters.filter.keyword.head" : "Materias",
-    "search.filters.filter.keyword.head" : "Materias",
+  // "search.filters.filter.keyword.head" : "Palabras clave",
+    "search.filters.filter.keyword.head" : "Palabras clave",
 
   // "menu.section.navbar.repository_policy" : "Políticas del repositorio",
     "menu.section.navbar.repository_policy" : "Políticas del repositorio",
