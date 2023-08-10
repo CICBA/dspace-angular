@@ -40,7 +40,7 @@ export class CicUsageStatsComponent implements OnInit {
             scope_labels: {
                 'L': 'LA Referencia',
                 'N': 'SNRD',
-                'R': 'CICBA'
+                'R': 'CIC Digital'
             },
             country: 'AR',
             national_source: 'SITEID::132',
