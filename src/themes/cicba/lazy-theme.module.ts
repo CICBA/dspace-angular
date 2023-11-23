@@ -58,9 +58,7 @@ import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { CommunityPageSubCommunityListComponent } from './app/community-page/sub-community-list/community-page-sub-community-list.component';
 import { CicDigitalInfoComponent } from './app/info/cic-digital-info/cic-digital-info.component';
 import { HowToContributeComponent } from './app/info/how-to-contribute/how-to-contribute.component';
-import { ItemPageStatisticsComponent } from './app/item-page/simple/statistics/item-page-statistics.component';
 import { RepositoryPolicyComponent } from './app/info/repository-policy/repository-policy.component';
-import { SearchExpandedNavbarComponent } from './app/search-navbar/search-expanded-navbar.component';
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
 import { DsoSharedModule } from '../../app/dso-shared/dso-shared.module';
 import {
@@ -87,9 +85,7 @@ const DECLARATIONS = [
   CommunityPageSubCommunityListComponent,
   CicDigitalInfoComponent,
   HowToContributeComponent,
-  ItemPageStatisticsComponent,
   RepositoryPolicyComponent,
-  SearchExpandedNavbarComponent,
   CommunityPageSubCollectionListComponent,
 ];
 
