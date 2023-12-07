@@ -22,7 +22,7 @@ export class CicUsageStatsComponent implements OnInit {
             js.src = f;
             js.async = 1;
             fjs.parentNode.insertBefore(js, fjs);
-        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@1.1.2/dist/lrw.js'));
+        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@1.1.5/dist/lrw.js'));
     }
 
     ngOnInit() {
@@ -30,8 +30,10 @@ export class CicUsageStatsComponent implements OnInit {
         if (typeof window['lrw'] === 'function') {
           window['lrw']({
             widget_div_id: 'usage-stats',
-            identifier_prefix: 'oai:digital.cic.gba.gob.ar:11746/',
-            identifier_regex: '\/handle\/[0-9\.]+\/([0-9]+)\/?', // build the identifier from the url
+            //identifier_prefix: 'oai:digital.cic.gba.gob.ar:11746/',
+            //identifier_regex: '\/handle\/[0-9\.]+\/([0-9]+)\/?', // build the identifier from the url
+            //identifier_meta_field: 'citation_abstract_html_url',
+            identifier:  'oai:digital.cic.gba.gob.ar:11746/' ,
             event_labels: {
                 'view': 'Vistas',
                 'download': 'Descargas',
