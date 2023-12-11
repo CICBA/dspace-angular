@@ -3,3 +3,9 @@
   align-items: center;
   height: 100%;
 }
+
+@media (max-width: 767px) {
+  .navbar-section {
+    align-items: flex-start;
+  }
+}
