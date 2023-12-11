@@ -34,7 +34,7 @@ export class CicUsageStatsComponent implements OnInit {
             js.src = f;
             js.async = 1;
             fjs.parentNode.insertBefore(js, fjs);
-        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@$this.{version}/dist/lrw.js'));
+        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@${this.version}/dist/lrw.js'));
     }
 
     ngOnInit() {
