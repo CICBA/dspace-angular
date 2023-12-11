@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Item } from '../../../../../../../app/core/shared/item.model';
 
 /**
  * This component renders the usage-stats badge provided by La Referencia.
@@ -9,6 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class CicUsageStatsComponent implements OnInit {
+   
+    @Input() item!: Item;
+    @Input() version: string = '1.1.5';
+    @Input() baseIdentifierOAI! : string;
+    @Input() identifierHandle? : string = '/handle/[0-9.]+/([0-9]+)/?';
+    @Input() nodoName! : string;
+    @Input() repositoryName! : string;
+    @Input() contryCode! : string;
+    @Input() identifierMetaField? : string;
+    @Input() nationalSource! : string;
+    @Input() repositorySource! : string;
 
     constructor() {
         // script
@@ -22,7 +34,7 @@ export class CicUsageStatsComponent implements OnInit {
             js.src = f;
             js.async = 1;
             fjs.parentNode.insertBefore(js, fjs);
-        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@1.1.5/dist/lrw.js'));
+        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@$this.{version}/dist/lrw.js'));
     }
 
     ngOnInit() {
@@ -33,7 +45,7 @@ export class CicUsageStatsComponent implements OnInit {
             //identifier_prefix: 'oai:digital.cic.gba.gob.ar:11746/',
             //identifier_regex: '\/handle\/[0-9\.]+\/([0-9]+)\/?', // build the identifier from the url
             //identifier_meta_field: 'citation_abstract_html_url',
-            identifier:  'oai:digital.cic.gba.gob.ar:11746/' ,
+            identifier:  '${this.baseIdentifierOAI}:${this.item.handle}' ,
             event_labels: {
                 'view': 'Vistas',
                 'download': 'Descargas',
@@ -41,12 +53,12 @@ export class CicUsageStatsComponent implements OnInit {
             },
             scope_labels: {
                 'L': 'LA Referencia',
-                'N': 'SNRD',
-                'R': 'CIC Digital'
+                'N': '${this.nodoName}',
+                'R': '${this.repositoryName}'
             },
-            country: 'AR',
-            national_source: 'SITEID::132',
-            repository_source: 'OPENDOAR::5634'
+            country: '${this.countryCode}',
+            national_source: 'SITEID::${this.nationalSource}',
+            repository_source: 'OPENDOAR::${this.repositorySource}'
           });
         }
       }
