@@ -17,7 +17,7 @@ export class CicUsageStatsComponent implements OnInit {
     @Input() identifierHandle? : string = '/handle/[0-9.]+/([0-9]+)/?';
     @Input() nodoName! : string;
     @Input() repositoryName! : string;
-    @Input() contryCode! : string;
+    @Input() countryCode! : string;
     @Input() identifierMetaField? : string;
     @Input() nationalSource! : string;
     @Input() repositorySource! : string;
@@ -34,7 +34,7 @@ export class CicUsageStatsComponent implements OnInit {
             js.src = f;
             js.async = 1;
             fjs.parentNode.insertBefore(js, fjs);
-        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@${this.version}/dist/lrw.js'));
+        }(window, document, 'script', 'lrw', 'parameters', 'https://cdn.jsdelivr.net/gh/lareferencia/lrw@'+this.version+'/dist/lrw.js'));
     }
 
     ngOnInit() {
@@ -45,7 +45,7 @@ export class CicUsageStatsComponent implements OnInit {
             //identifier_prefix: 'oai:digital.cic.gba.gob.ar:11746/',
             //identifier_regex: '\/handle\/[0-9\.]+\/([0-9]+)\/?', // build the identifier from the url
             //identifier_meta_field: 'citation_abstract_html_url',
-            identifier:  '${this.baseIdentifierOAI}:${this.item.handle}' ,
+            identifier:  this.baseIdentifierOAI +':' + this.item.handle ,
             event_labels: {
                 'view': 'Vistas',
                 'download': 'Descargas',
@@ -53,12 +53,12 @@ export class CicUsageStatsComponent implements OnInit {
             },
             scope_labels: {
                 'L': 'LA Referencia',
-                'N': '${this.nodoName}',
-                'R': '${this.repositoryName}'
+                'N': this.nodoName,
+                'R': this.repositoryName
             },
-            country: '${this.countryCode}',
-            national_source: 'SITEID::${this.nationalSource}',
-            repository_source: 'OPENDOAR::${this.repositorySource}'
+            country: this.countryCode,
+            national_source: 'SITEID::' + this.nationalSource ,
+            repository_source: 'OPENDOAR::' + this.repositorySource
           });
         }
       }
