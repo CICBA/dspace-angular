@@ -22,9 +22,9 @@ export class PlainTextMetadataListElementComponent extends MetadataRepresentatio
    */
   getQueryParams() {
     let queryParams = {startsWith: this.mdRepresentation.getValue()};
-    if (this.mdRepresentation.browseDefinition.getRenderType() === VALUE_LIST_BROWSE_DEFINITION.value) {
-      return {value: this.mdRepresentation.getValue()};
-    }
+    // if (this.mdRepresentation.browseDefinition.getRenderType() === VALUE_LIST_BROWSE_DEFINITION.value) {
+    //   return {value: this.mdRepresentation.getValue()};
+    // }
     return queryParams;
   }
 }
