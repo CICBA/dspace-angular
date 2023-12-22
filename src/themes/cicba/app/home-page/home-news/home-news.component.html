@@ -5,12 +5,32 @@
         <div class="col-lg-7 col-sm-12">
           <ds-search-form [inPlaceSearch]="false" [searchPlaceholder]="'home.search-form.placeholder' | translate">
           </ds-search-form>
-          <ul class="menu list-inline">
-            <li class="list-navigation-item"><a href="/search?spc.sf=dc.date.accessioned&spc.sd=DESC&spc.page=1"><i class="fa fa-book"></i> {{'home.navigation.publications' | translate}}</a></li>
-            <li class="list-navigation-item"><a href="/handle/11746/3"><i class="fa fa-landmark"></i> {{'home.navigation.cicOrganizations' | translate}}</a></li>
-            <li class="list-navigation-item"><a href="/community-list"><i class="fa fa-sitemap"></i> {{'home.navigation.communities' | translate}}</a></li>
-            <li class="list-navigation-item"><a href="/browse/author"><i class="fa fa-male"></i> {{'home.navigation.authors' | translate}}</a></li>
-          </ul>
+          <div class="row justify-content-center menu">
+            <div class="col-md-3 col-sm-4 col-6 text-center">
+              <a href="/search?spc.sf=dc.date.accessioned&spc.sd=DESC&spc.page=1">
+                <i class="fa fa-book mb-2"></i>
+                {{'home.navigation.publications' | translate}}
+              </a>
+            </div>
+            <div class="col-md-3 col-sm-4 col-6 text-center">
+              <a href="/browse/author">
+                <i class="fa fa-male mb-2"></i>
+                {{'home.navigation.authors' | translate}}
+              </a>
+            </div>
+            <div class="col-md-3 col-sm-4 col-6 text-center">
+              <a href="/handle/11746/3">
+                  <i class="fa fa-landmark mb-2"></i>
+                  {{ 'home.navigation.cicOrganizations' | translate }}
+              </a>
+            </div>
+            <div class="col-md-3 col-sm-4 col-6 text-center">
+              <a href="/community-list">
+                <i class="fa fa-sitemap mb-2"></i>
+                {{'home.navigation.communities' | translate}}
+              </a>
+            </div>
+          </div>
         </div>
         <div class="col-lg-5 d-none d-lg-block p-0">
           <img src="assets/cicba/images/home_image.png" [attr.alt]="'menu.home.image.logo' | translate"/>
