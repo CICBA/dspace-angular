@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuService } from 'src/app/shared/menu/menu.service';
 import { HeaderComponent as BaseComponent } from '../../../../app/header/header.component';
+import { HostWindowService } from 'src/app/shared/host-window.service';
 
 /**
  * Represents the header with the logo and simple navigation
@@ -14,8 +15,8 @@ import { HeaderComponent as BaseComponent } from '../../../../app/header/header.
 export class HeaderComponent extends BaseComponent {
 
   router: string;
-  constructor(private _router: Router, menuService: MenuService) {
-    super(menuService);
+  constructor(private _router: Router, menuService: MenuService, windowService: HostWindowService) {
+    super(menuService, windowService);
     this.router = _router.url;
   }
 }
