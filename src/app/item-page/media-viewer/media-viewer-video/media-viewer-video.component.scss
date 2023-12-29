@@ -1,10 +1,13 @@
 video {
   width: 100%;
   height: auto;
-  max-width: 340px;
 }
 
 .buttons {
   display: flex;
   gap: .25rem;
+}
+
+.col-6 {
+  padding: 10px 0 !important;
 }

@@ -395,8 +395,8 @@ export class DefaultAppConfig implements AppConfig {
   // For images, this enables a gallery viewer where you can zoom or page through images.
   // For videos, this enables embedded video streaming
   mediaViewer: MediaViewerConfig = {
-    image: false,
-    video: false
+    image: true,
+    video: true
   };
   // Whether the end-user-agreement and privacy policy feature should be enabled or not.
   // Disabling the end user agreement feature will result in:

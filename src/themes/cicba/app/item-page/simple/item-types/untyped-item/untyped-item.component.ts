@@ -18,6 +18,8 @@ import { HostWindowService } from 'src/app/shared/host-window.service';
 import {
   UntypedItemComponent as BaseComponent
 } from '../../../../../../../app/item-page/simple/item-types/untyped-item/untyped-item.component';
+import { MediaViewerService } from 'src/app/item-page/media-viewer/media-viewer.service';
+
 /**
  * Component that represents a publication Item page
  */
@@ -34,6 +36,8 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
   identifierOtherMetadataName = 'dcterms.identifier.other';
   itemIdentifiers: { mdValue: MetadataValue, label: string }[];
 
+  video: boolean = false;
+
   constructor(
     private modalService: NgbModal,
     private versionHistoryService: VersionHistoryDataService,
@@ -45,7 +49,8 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
     private searchService: SearchService,
     private itemService: ItemDataService,
     public routeService: RouteService,
-    public windowService: HostWindowService
+    public windowService: HostWindowService,
+    private mediaViewerService: MediaViewerService
   ) {
     super(routeService,router);
   }
@@ -53,6 +58,9 @@ export class UntypedItemComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.setIdentifierOtherValues();
+    this.mediaViewerService.video$.subscribe((value) => {
+      this.video = value;
+    });
   }
 
   setIdentifierOtherValues(): void {

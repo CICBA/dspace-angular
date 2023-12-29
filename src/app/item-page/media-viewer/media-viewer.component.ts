@@ -14,6 +14,7 @@ import { followLink } from '../../shared/utils/follow-link-config.model';
 import { MediaViewerConfig } from '../../../config/media-viewer-config.interface';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { MediaViewerService } from './media-viewer.service';
 
 /**
  * This component renders the media viewers
@@ -42,6 +43,7 @@ export class MediaViewerComponent implements OnDestroy, OnInit {
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
+    private mediaViewerService: MediaViewerService
   ) {
   }
 
@@ -79,6 +81,10 @@ export class MediaViewerComponent implements OnDestroy, OnInit {
                 );
                 if (types.includes(mediaItem.format)) {
                   this.mediaList$.next([...this.mediaList$.getValue(), mediaItem]);
+                  // Actualizar el servicio con el resultado de la consulta
+                  this.mediaViewerService.setVideo(
+                    types.includes(mediaItem.format)
+                  );
                 } else if (format.mimetype === 'text/vtt') {
                   this.captions$.next([...this.captions$.getValue(), bitstreamsRD.payload.page[index]]);
                 }

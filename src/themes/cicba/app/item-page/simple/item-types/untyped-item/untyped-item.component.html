@@ -39,183 +39,185 @@
    [separator]="'|'">
   </ds-cic-metadata-representation-list>
 </div>
-<div class="item-content">
-  <div class="metadata-section">
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.alternative'])"
-      [label]="'item.page.dcterms.alternative'"
-      [inlineLabel]="false">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.title.investigacion'])"
-      [label]="'item.page.dcterms.title.investigacion'"
-      [inlineLabel]="false">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-representation-list
-      [parentItem]="object"
-      [itemType]="'Person'"
-      [metadataFields]="['dcterms.contributor.director']"
-      [label]="'item.page.relationships.isDirectorOf' | translate"
-      [separator]="'|'">
-    </ds-cic-metadata-representation-list>
-    <ds-cic-metadata-representation-list
-      [parentItem]="object"
-      [itemType]="'Person'"
-      [metadataFields]="['dcterms.creator.compilator']"
-      [label]="'item.page.relationships.isCompilatorOf' | translate"
-      [separator]="'|'">
-    </ds-cic-metadata-representation-list>
-    <ds-cic-metadata-representation-list
-      [parentItem]="object"
-      [itemType]="'Person'"
-      [metadataFields]="['dcterms.creator.editor']"
-      [label]="'item.page.relationships.isEditorOf' | translate"
-      [separator]="'|'">
-    </ds-cic-metadata-representation-list>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.publisher'])"
-      [label]="'item.page.publisher'">
-    </ds-cic-metadata-values>
-    <ds-cic-date-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.issued'])"
-      [label]="'item.page.date.issued'">
-    </ds-cic-date-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.description'])"
-      [label]="'item.page.description'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['cic.thesis.grantor'])"
-      [label]="'item.page.cic.thesis.grantor'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['cic.lugarDesarrollo'])"
-      [label]="'item.page.cic.lugarDesarrollo'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['cic.institucionOrigen'])"
-      [label]="'item.page.cic.institucionOrigen'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.isPartOf.item'])"
-      [label]="'item.page.dcterms.isPartOf.item'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.relation'])"
-      [separator]="','"
-      [label]="'item.page.dcterms.relation'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
-      [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'series')">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
-      [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'issue')">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.language'])"
-      [label]="'item.page.dcterms.language'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.subject.materia'])"
-      [separator]="','"
-      [label]="'item.page.dcterms.subject.materia'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.subject.area'])"
-      [separator]="','"
-      [label]="'item.page.dcterms.subject.area'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.subject.ford'])"
-      [separator]="','"
-      [label]="'item.page.dcterms.subject.ford'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.spatial'])"
-      [label]="'item.page.dcterms.spatial'">
-    </ds-cic-metadata-values>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.extent'])"
-      [label]="'item.page.dcterms.extent'">
-    </ds-cic-metadata-values>
-    <div class="item-identifiers">
-      <ng-container *ngFor="let idValue of itemIdentifiers">
+<div [ngClass]="{'item-with-video': video}">
+  <div class="item-content">
+    <div class="metadata-section">
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.alternative'])"
+        [label]="'item.page.dcterms.alternative'"
+        [inlineLabel]="false">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.title.investigacion'])"
+        [label]="'item.page.dcterms.title.investigacion'"
+        [inlineLabel]="false">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-representation-list
+        [parentItem]="object"
+        [itemType]="'Person'"
+        [metadataFields]="['dcterms.contributor.director']"
+        [label]="'item.page.relationships.isDirectorOf' | translate"
+        [separator]="'|'">
+      </ds-cic-metadata-representation-list>
+      <ds-cic-metadata-representation-list
+        [parentItem]="object"
+        [itemType]="'Person'"
+        [metadataFields]="['dcterms.creator.compilator']"
+        [label]="'item.page.relationships.isCompilatorOf' | translate"
+        [separator]="'|'">
+      </ds-cic-metadata-representation-list>
+      <ds-cic-metadata-representation-list
+        [parentItem]="object"
+        [itemType]="'Person'"
+        [metadataFields]="['dcterms.creator.editor']"
+        [label]="'item.page.relationships.isEditorOf' | translate"
+        [separator]="'|'">
+      </ds-cic-metadata-representation-list>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.publisher'])"
+        [label]="'item.page.publisher'">
+      </ds-cic-metadata-values>
+      <ds-cic-date-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.issued'])"
+        [label]="'item.page.date.issued'">
+      </ds-cic-date-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.description'])"
+        [label]="'item.page.description'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['cic.thesis.grantor'])"
+        [label]="'item.page.cic.thesis.grantor'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['cic.lugarDesarrollo'])"
+        [label]="'item.page.cic.lugarDesarrollo'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['cic.institucionOrigen'])"
+        [label]="'item.page.cic.institucionOrigen'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.isPartOf.item'])"
+        [label]="'item.page.dcterms.isPartOf.item'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.relation'])"
+        [separator]="','"
+        [label]="'item.page.dcterms.relation'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.isPartOf.series'])"
+        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'series')">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.isPartOf.issue'])"
+        [label]="getLabelByDcType(object?.allMetadata(['dc.type'])[0].value, 'issue')">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.language'])"
+        [label]="'item.page.dcterms.language'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.subject.materia'])"
+        [separator]="','"
+        [label]="'item.page.dcterms.subject.materia'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.subject.area'])"
+        [separator]="','"
+        [label]="'item.page.dcterms.subject.area'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.subject.ford'])"
+        [separator]="','"
+        [label]="'item.page.dcterms.subject.ford'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.spatial'])"
+        [label]="'item.page.dcterms.spatial'">
+      </ds-cic-metadata-values>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.extent'])"
+        [label]="'item.page.dcterms.extent'">
+      </ds-cic-metadata-values>
+      <div class="item-identifiers">
+        <ng-container *ngFor="let idValue of itemIdentifiers">
+          <ds-badge-metadata-values
+            [mdValues]="[idValue.mdValue]"
+            [badgeType]="'badge-identifier'"
+            [badgeLabelType]="'badge-dark'"
+            [badgeLabel]="idValue.label"
+            [copyToClipboardButton]="true">
+          </ds-badge-metadata-values>
+        </ng-container>
         <ds-badge-metadata-values
-          [mdValues]="[idValue.mdValue]"
+          [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
           [badgeType]="'badge-identifier'"
           [badgeLabelType]="'badge-dark'"
-          [badgeLabel]="idValue.label"
-          [copyToClipboardButton]="true">
+          [badgeLabel]="'ISSN'">
         </ds-badge-metadata-values>
-      </ng-container>
-      <ds-badge-metadata-values
-        [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
-        [badgeType]="'badge-identifier'"
-        [badgeLabelType]="'badge-dark'"
-        [badgeLabel]="'ISSN'">
-      </ds-badge-metadata-values>
-      <ds-badge-metadata-values
-        [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
-        [badgeType]="'badge-identifier'"
-        [badgeLabelType]="'badge-dark'"
-        [badgeLabel]="'ISBN'">
-      </ds-badge-metadata-values>
-    </div>
-  </div>
-  <div class="download-section">
-    <!-- <ds-item-page-statistics [item]="object"></ds-item-page-statistics> -->
-    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
-    <ds-cic-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.identifier.url'])"
-      [label]="'item.page.dcterms.identifier.url'"
-      [inlineLabel]="true"
-      [authorityUrl]="true">
-    </ds-cic-metadata-values>
-    <ds-cic-usage-stats></ds-cic-usage-stats>
-  </div>
-  <div class="abstract-section">
-    <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
-      <ds-truncatable *ngIf="(windowService.isXsOrSm() | async)" [id]="object?.id">
-        <!-- <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" -->
-        <ds-truncatable-part *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
-          [id]="object?.id"
-          [minLines]="5">
-          <p class="abstract-text" [innerHTML]="mdValue.value"></p>
-        </ds-truncatable-part>
-      </ds-truncatable>
-      <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
-        <p class="abstract-text" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
-      </ng-container>
-    </ds-cic-metadata-field-wrapper>
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dcterms.subject'])"
-      [badgeType]="'badge-secondary'"
-      [label]="'item.page.dcterms.subject'">
-    </ds-badge-metadata-values>
-    <ds-cic-metadata-field-wrapper *ngFor="let mdValue of object?.allMetadata(['dcterms.license'])">
-      <div class="item-cc-license">
-        <a href="{{mdValue.authority}}">
-          <img src="https://licensebuttons.net/l/{{mdValue.authority.substring(36)}}/88x31.png" alt="{{mdValue.authority}}">
-        </a>
-        <p>{{"item.page.dcterms.license.text" | translate}}{{mdValue.value}}</p>
+        <ds-badge-metadata-values
+          [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
+          [badgeType]="'badge-identifier'"
+          [badgeLabelType]="'badge-dark'"
+          [badgeLabel]="'ISBN'">
+        </ds-badge-metadata-values>
       </div>
-    </ds-cic-metadata-field-wrapper>
-    <ds-cic-metadata-values
-      [mdValues]=""
-      [label]="'item.page.license'">
-    </ds-cic-metadata-values>
-  </div>
-  <div class="file-section">
-    <ng-container *ngIf="!mediaViewer.image">
-      <ds-metadata-field-wrapper class="d-none d-md-block" [hideIfNoTextContent]="false">
-        <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
-      </ds-metadata-field-wrapper>
-    </ng-container>
-    <ng-container *ngIf="mediaViewer.image">
-      <ds-media-viewer [item]="object"></ds-media-viewer>
-    </ng-container>
+    </div>
+    <div class="download-section">
+      <!-- <ds-item-page-statistics [item]="object"></ds-item-page-statistics> -->
+      <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
+      <ds-cic-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.identifier.url'])"
+        [label]="'item.page.dcterms.identifier.url'"
+        [inlineLabel]="true"
+        [authorityUrl]="true">
+      </ds-cic-metadata-values>
+      <ds-cic-usage-stats></ds-cic-usage-stats>
+    </div>
+    <div class="abstract-section">
+      <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
+        <ds-truncatable *ngIf="(windowService.isXsOrSm() | async)" [id]="object?.id">
+          <!-- <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" -->
+          <ds-truncatable-part *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
+            [id]="object?.id"
+            [minLines]="5">
+            <p class="abstract-text" [innerHTML]="mdValue.value"></p>
+          </ds-truncatable-part>
+        </ds-truncatable>
+        <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
+          <p class="abstract-text" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
+        </ng-container>
+      </ds-cic-metadata-field-wrapper>
+      <ds-badge-metadata-values
+        [mdValues]="object?.allMetadata(['dcterms.subject'])"
+        [badgeType]="'badge-secondary'"
+        [label]="'item.page.dcterms.subject'">
+      </ds-badge-metadata-values>
+      <ds-cic-metadata-field-wrapper *ngFor="let mdValue of object?.allMetadata(['dcterms.license'])">
+        <div class="item-cc-license">
+          <a href="{{mdValue.authority}}">
+            <img src="https://licensebuttons.net/l/{{mdValue.authority.substring(36)}}/88x31.png" alt="{{mdValue.authority}}">
+          </a>
+          <p>{{"item.page.dcterms.license.text" | translate}}{{mdValue.value}}</p>
+        </div>
+      </ds-cic-metadata-field-wrapper>
+      <ds-cic-metadata-values
+        [mdValues]=""
+        [label]="'item.page.license'">
+      </ds-cic-metadata-values>
+    </div>
+    <div class="file-section">
+      <ng-container *ngIf="!mediaViewer.image">
+        <ds-metadata-field-wrapper class="d-none d-md-block" [hideIfNoTextContent]="false">
+          <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+        </ds-metadata-field-wrapper>
+      </ng-container>
+      <ng-container *ngIf="mediaViewer.image">
+        <ds-media-viewer [item]="object"></ds-media-viewer>
+      </ng-container>
+    </div>
   </div>
 </div>
 <div class="text-center">
