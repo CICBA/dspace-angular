@@ -3,7 +3,7 @@
     <div class="jumbotron jumbotron-fluid">
       <div class="row align-items-center">
         <div class="col-lg-7 col-sm-12">
-          <ds-search-form [inPlaceSearch]="false" [searchPlaceholder]="'home.search-form.placeholder' | translate">
+          <ds-search-form [inPlaceSearch]="false" [searchPlaceholder]="placeholder$ | async">
           </ds-search-form>
           <div class="row justify-content-center menu">
             <div class="col-md-3 col-sm-4 col-6 text-center">
