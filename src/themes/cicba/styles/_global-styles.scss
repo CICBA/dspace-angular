@@ -13,6 +13,29 @@ header {
     }
 }
 
+.header {
+  .ds-menu-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  ds-link-menu-item .ds-menu-item,
+  .ds-menu-toggler-wrapper {
+    @media (min-width: 768px) {
+      padding-right: .5rem;
+      padding-left: .5rem;
+    }
+
+    @media (max-width: 767px) {
+      padding: .5rem 1rem;
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
 .jumbotron{
   input{
     border-radius: 10px;

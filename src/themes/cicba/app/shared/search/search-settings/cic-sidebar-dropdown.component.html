@@ -1,6 +1,6 @@
 <div id="order-result-by" class="setting-option mb-3">
   <span>{{label | translate}}</span>
-  <select id="{{id}}" class="form-control" (change)="change.emit($event)">
+  <select id="{{id}}" class="form-control" (change)="changed.emit($event)">
     <ng-content></ng-content>
   </select>
 </div>

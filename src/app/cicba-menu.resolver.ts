@@ -17,6 +17,7 @@ import {
   ScriptDataService
 } from './core/data/processes/script-data.service';
 import { MenuResolver } from './menu.resolver';
+import { AuthService } from './core/auth/auth.service';
 
 /**
  * Creates all of the app's menus
@@ -35,8 +36,9 @@ export class CICBAMenuResolver extends MenuResolver {
     protected authorizationService: AuthorizationDataService,
     protected modalService: NgbModal,
     protected scriptDataService: ScriptDataService,
+    protected authService: AuthService,
   ) {
-    super(menuService, browseService, authorizationService, modalService, scriptDataService);
+    super(menuService, browseService, authorizationService, modalService, scriptDataService, authService);
     this.router = _router.url;
   }
 

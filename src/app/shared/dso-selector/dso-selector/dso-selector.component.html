@@ -21,7 +21,7 @@
         {{'dso-selector.no-results' | translate: { type: typesString } }}
       </button>
       <div class="d-flex justify-content-between mb-2" *ngFor="let listEntry of (listEntries$ | async)">
-        <ds-listable-object-component-loader class="w-auto" [object]="listEntry" [viewMode]="viewMode"
+        <ds-listable-object-component-loader [object]="listEntry" [viewMode]="viewMode"
           [linkType]=linkTypes.None [context]="getContext(listEntry.indexableObject.id)"></ds-listable-object-component-loader>
         <div>
           <a class="btn coll-handle submit-button list-group-item list-group-item-action border-0 list-entry m-2" href="{{ listEntry.indexableObject.handle }}" target="_blank">
