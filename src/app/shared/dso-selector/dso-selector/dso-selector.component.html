@@ -20,7 +20,7 @@
               *ngIf="(listEntries$ | async).length == 0">
         {{'dso-selector.no-results' | translate: { type: typesString } }}
       </button>
-      <div class="d-flex justify-content-between mb-2" *ngFor="let listEntry of (listEntries$ | async)">
+      <div class="d-flex justify-content-between mb-2 container-listable-object" *ngFor="let listEntry of (listEntries$ | async)">
         <ds-listable-object-component-loader [object]="listEntry" [viewMode]="viewMode"
           [linkType]=linkTypes.None [context]="getContext(listEntry.indexableObject.id)"></ds-listable-object-component-loader>
         <div>
