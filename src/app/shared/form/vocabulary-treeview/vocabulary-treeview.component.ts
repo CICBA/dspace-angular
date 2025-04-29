@@ -1,5 +1,5 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -17,6 +17,7 @@ import { VocabularyTreeFlatDataSource } from './vocabulary-tree-flat-data-source
 import { CoreState } from '../../../core/core-state.model';
 import { VocabularyService } from '../../../core/submission/vocabularies/vocabulary.service';
 import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
+import { AlertType } from '../../alert/alert-type';
 
 /**
  * Component that shows a hierarchical vocabulary in a tree view
@@ -27,6 +28,11 @@ import { getFirstSucceededRemoteDataPayload } from '../../../core/shared/operato
   styleUrls: ['./vocabulary-treeview.component.scss']
 })
 export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges {
+
+  /**
+   * Implemented to manage focus on input
+   */
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   /**
    * The {@link VocabularyOptions} object
@@ -104,6 +110,8 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
    * Array to track all subscriptions and unsubscribe them onDestroy
    */
   private subs: Subscription[] = [];
+
+  readonly AlertType = AlertType;
 
   /**
    * Initialize instance variables
@@ -290,6 +298,9 @@ export class VocabularyTreeviewComponent implements OnDestroy, OnInit, OnChanges
       this.nodeMap = this.storedNodeMap;
       this.storedNodeMap = new Map<string, TreeviewFlatNode>();
       this.vocabularyTreeviewService.restoreNodes();
+    }
+    if (this.searchInput) {
+      this.searchInput.nativeElement.focus();
     }
   }
 

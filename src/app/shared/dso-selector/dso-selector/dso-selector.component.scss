@@ -13,3 +13,7 @@
   display: inline;
   background-color: #e9ecef;
 }
+
+.container-listable-object ::ng-deep ds-listable-object-component-loader {
+  width: 64% !important;
+}
