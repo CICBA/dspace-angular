@@ -287,6 +287,7 @@ import {ThemedUserMenuComponent} from './auth-nav-menu/user-menu/themed-user-men
 import { OrcidBadgeAndTooltipComponent } from './orcid-badge-and-tooltip/orcid-badge-and-tooltip.component';
 import { LiveRegionComponent } from './live-region/live-region.component';
 import {BtnDisabledDirective} from './btn-disabled.directive';
+import { lareferenciaWidgetEmbedModule } from 'lareferencia-widget-embed';
 
 const MODULES = [
   CommonModule,
@@ -302,7 +303,8 @@ const MODULES = [
   DragDropModule,
   GoogleRecaptchaModule,
   MenuModule,
-  NgxPaginationModule
+  NgxPaginationModule,
+  lareferenciaWidgetEmbedModule,
 ];
 
 const ROOT_MODULES = [
