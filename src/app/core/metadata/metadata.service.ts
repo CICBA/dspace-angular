@@ -199,7 +199,7 @@ export class MetadataService {
    */
   private setDescriptionTag(): void {
     // TODO: truncate abstract
-    const value = this.getMetaTagValue('dc.description.abstract');
+    const value = this.getMetaTagValue('dcterms.abstract');
     this.addMetaTag('description', value);
   }
 
@@ -215,7 +215,7 @@ export class MetadataService {
    * Add <meta name="citation_author" ... >  to the <head>
    */
   private setCitationAuthorTags(): void {
-    const values: string[] = this.getMetaTagValues(['dc.author', 'dc.contributor.author', 'dc.creator']);
+    const values: string[] = this.getMetaTagValues(['dcterms.creator.author']);
     this.addMetaTags('citation_author', values);
   }
 
@@ -223,7 +223,7 @@ export class MetadataService {
    * Add <meta name="citation_publication_date" ... >  to the <head>
    */
   private setCitationPublicationDateTag(): void {
-    const value = this.getFirstMetaTagValue(['dc.date.copyright', 'dc.date.issued', 'dc.date.available', 'dc.date.accessioned']);
+    const value = this.getFirstMetaTagValue(['dcterms.issued', 'dc.date.available', 'dc.date.accessioned']);
     this.addMetaTag('citation_publication_date', value);
   }
 
@@ -277,7 +277,7 @@ export class MetadataService {
    * Add <meta name="citation_keywords" ... >  to the <head>
    */
   private setCitationKeywordsTag(): void {
-    const value = this.getMetaTagValuesAndCombine('dc.subject');
+    const value = this.getMetaTagValuesAndCombine('dcterms.subject');
     this.addMetaTag('citation_keywords', value);
   }
 
