@@ -1,17 +1,28 @@
-import { getFirstCompletedRemoteData, getFirstSucceededRemoteDataPayload } from '../../../core/shared/operators';
-import { RemoteData } from '../../../core/data/remote-data';
-import { Version } from '../../../core/shared/version.model';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { Item } from '../../../core/shared/item.model';
-import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { VersionDataService } from '../../../core/data/version-data.service';
-import { VersionHistoryDataService } from '../../../core/data/version-history-data.service';
-import { Router } from '@angular/router';
-import { WorkspaceitemDataService } from '../../../core/submission/workspaceitem-data.service';
-import { ItemDataService } from '../../../core/data/item-data.service';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
+import { ItemDataService } from '@dspace/core/data/item-data.service';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { VersionDataService } from '@dspace/core/data/version-data.service';
+import { VersionHistoryDataService } from '@dspace/core/data/version-history-data.service';
+import { Item } from '@dspace/core/shared/item.model';
+import {
+  getFirstCompletedRemoteData,
+  getFirstSucceededRemoteDataPayload,
+} from '@dspace/core/shared/operators';
+import { Version } from '@dspace/core/shared/version.model';
+import { WorkspaceItem } from '@dspace/core/submission/models/workspaceitem.model';
+import { WorkspaceitemDataService } from '@dspace/core/submission/workspaceitem-data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+
 import { ItemVersionsSharedService } from '../../../item-page/versions/item-versions-shared.service';
 import { ItemVersionsSummaryModalComponent } from '../../../item-page/versions/item-versions-summary-modal/item-versions-summary-modal.component';
 
@@ -19,7 +30,7 @@ import { ItemVersionsSummaryModalComponent } from '../../../item-page/versions/i
  * Service to take care of all the functionality related to the version creation modal
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DsoVersioningModalService {
 
@@ -70,6 +81,11 @@ export class DsoVersioningModalService {
       switchMap((newVersionItem: Item) => this.workspaceItemDataService.findByItem(newVersionItem.uuid, true, false)),
       getFirstSucceededRemoteDataPayload<WorkspaceItem>(),
     ).subscribe((wsItem) => {
+      this.versionService.invalidateVersionHrefCache(item);
+      if (item.hasMetadata('dspace.customurl')) {
+        // when a new version is created we need to invalidate the cache for findByCustomURL so the item will not be resolved with the cached old version.
+        this.itemService.invalidateFindByCustomUrlCache(item.firstMetadataValue('dspace.customurl'));
+      }
       const wsiId = wsItem.id;
       const route = 'workspaceitems/' + wsiId + '/edit';
       this.router.navigateByUrl(route);

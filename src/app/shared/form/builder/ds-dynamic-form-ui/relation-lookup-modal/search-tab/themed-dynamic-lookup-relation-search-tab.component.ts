@@ -1,19 +1,24 @@
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { Context } from '@dspace/core/shared/context.model';
+import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
+import { Item } from '@dspace/core/shared/item.model';
+import { RelationshipType } from '@dspace/core/shared/item-relationships/relationship-type.model';
+import { ListableObject } from '@dspace/core/shared/object-collection/listable-object.model';
+import { RelationshipOptions } from '@dspace/core/shared/relationship-options.model';
+import { SearchObjects } from '@dspace/core/shared/search/models/search-objects.model';
+import { SearchResult } from '@dspace/core/shared/search/models/search-result.model';
+import { Observable } from 'rxjs';
+
 import { ThemedComponent } from '../../../../../theme-support/themed.component';
 import { DsDynamicLookupRelationSearchTabComponent } from './dynamic-lookup-relation-search-tab.component';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RelationshipOptions } from '../../../models/relationship-options.model';
-import { Observable } from 'rxjs';
-import { ListableObject } from '../../../../../object-collection/shared/listable-object.model';
-import { Context } from '../../../../../../core/shared/context.model';
-import { RelationshipType } from '../../../../../../core/shared/item-relationships/relationship-type.model';
-import { Item } from '../../../../../../core/shared/item.model';
-import { SearchResult } from '../../../../../search/models/search-result.model';
-import { SearchObjects } from '../../../../../search/models/search-objects.model';
-import { DSpaceObject } from '../../../../../../core/shared/dspace-object.model';
 
 @Component({
-  selector: 'ds-themed-dynamic-lookup-relation-search-tab',
-  styleUrls: [],
+  selector: 'ds-dynamic-lookup-relation-search-tab',
   templateUrl: '../../../../../theme-support/themed.component.html',
 })
 export class ThemedDynamicLookupRelationSearchTabComponent extends ThemedComponent<DsDynamicLookupRelationSearchTabComponent> {

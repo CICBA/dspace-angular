@@ -1,36 +1,52 @@
-import { Component, ElementRef, ViewChild, ComponentRef, OnDestroy, OnInit } from '@angular/core';
-import { Item } from '../../../../../core/shared/item.model';
-import { ViewMode } from '../../../../../core/shared/view-mode.model';
+
 import {
-  getListableObjectComponent,
-  listableObjectComponent
-} from '../../../../../shared/object-collection/shared/listable-object/listable-object.decorator';
-import { Context } from '../../../../../core/shared/context.model';
-import { SearchResultGridElementComponent } from '../../../../../shared/object-grid/search-result-grid-element/search-result-grid-element.component';
-import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
-import { BitstreamDataService } from '../../../../../core/data/bitstream-data.service';
-import { GenericConstructor } from '../../../../../core/shared/generic-constructor';
-import { ListableObjectDirective } from '../../../../../shared/object-collection/shared/listable-object/listable-object.directive';
-import { WorkflowItem } from '../../../../../core/submission/models/workflowitem.model';
-import { Observable } from 'rxjs';
-import { LinkService } from '../../../../../core/cache/builders/link.service';
-import { followLink } from '../../../../../shared/utils/follow-link-config.model';
-import { RemoteData } from '../../../../../core/data/remote-data';
+  Component,
+  ComponentRef,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { DSONameService } from '@dspace/core/breadcrumbs/dso-name.service';
+import { LinkService } from '@dspace/core/cache/builders/link.service';
+import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { Context } from '@dspace/core/shared/context.model';
+import { followLink } from '@dspace/core/shared/follow-link-config.model';
+import { GenericConstructor } from '@dspace/core/shared/generic-constructor';
+import { Item } from '@dspace/core/shared/item.model';
+import { WorkflowItemSearchResult } from '@dspace/core/shared/object-collection/workflow-item-search-result.model';
 import {
   getAllSucceededRemoteData,
-  getRemoteDataPayload
-} from '../../../../../core/shared/operators';
+  getRemoteDataPayload,
+} from '@dspace/core/shared/operators';
+import { ViewMode } from '@dspace/core/shared/view-mode.model';
+import { WorkflowItem } from '@dspace/core/submission/models/workflowitem.model';
+import { hasValue } from '@dspace/shared/utils/empty.util';
+import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { WorkflowItemSearchResult } from '../../../../../shared/object-collection/shared/workflow-item-search-result.model';
+
+import { DynamicComponentLoaderDirective } from '../../../../../shared/abstract-component-loader/dynamic-component-loader.directive';
+import {
+  getListableObjectComponent,
+  listableObjectComponent,
+} from '../../../../../shared/object-collection/shared/listable-object/listable-object.decorator';
+import { SearchResultGridElementComponent } from '../../../../../shared/object-grid/search-result-grid-element/search-result-grid-element.component';
 import { ThemeService } from '../../../../../shared/theme-support/theme.service';
-import { DSONameService } from '../../../../../core/breadcrumbs/dso-name.service';
-import { hasValue } from '../../../../../shared/empty.util';
+import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
+import { WorkflowItemAdminWorkflowActionsComponent } from '../../actions/workflow-item/workflow-item-admin-workflow-actions.component';
 
 @listableObjectComponent(WorkflowItemSearchResult, ViewMode.GridElement, Context.AdminWorkflowSearch)
 @Component({
   selector: 'ds-workflow-item-search-result-admin-workflow-grid-element',
   styleUrls: ['./workflow-item-search-result-admin-workflow-grid-element.component.scss'],
-  templateUrl: './workflow-item-search-result-admin-workflow-grid-element.component.html'
+  templateUrl: './workflow-item-search-result-admin-workflow-grid-element.component.html',
+  imports: [
+    DynamicComponentLoaderDirective,
+    TranslateModule,
+    WorkflowItemAdminWorkflowActionsComponent,
+  ],
 })
 /**
  * The component for displaying a grid element for an workflow item on the admin workflow search page
@@ -39,7 +55,7 @@ export class WorkflowItemSearchResultAdminWorkflowGridElementComponent extends S
   /**
    * Directive used to render the dynamic component in
    */
-  @ViewChild(ListableObjectDirective, { static: true }) listableObjectDirective: ListableObjectDirective;
+  @ViewChild(DynamicComponentLoaderDirective, { static: true }) dynamicComponentLoaderDirective: DynamicComponentLoaderDirective;
 
   /**
    * The html child that contains the badges html
@@ -63,7 +79,7 @@ export class WorkflowItemSearchResultAdminWorkflowGridElementComponent extends S
     private linkService: LinkService,
     protected truncatableService: TruncatableService,
     private themeService: ThemeService,
-    protected bitstreamDataService: BitstreamDataService
+    protected bitstreamDataService: BitstreamDataService,
   ) {
     super(dsoNameService, truncatableService, bitstreamDataService);
   }
@@ -79,7 +95,7 @@ export class WorkflowItemSearchResultAdminWorkflowGridElementComponent extends S
     this.item$.pipe(take(1)).subscribe((item: Item) => {
       const component: GenericConstructor<Component> = this.getComponent(item);
 
-      const viewContainerRef = this.listableObjectDirective.viewContainerRef;
+      const viewContainerRef = this.dynamicComponentLoaderDirective.viewContainerRef;
       viewContainerRef.clear();
 
       this.compRef = viewContainerRef.createComponent(

@@ -1,6 +1,9 @@
 import { Item } from '../../item.model';
-import { MetadataRepresentation, MetadataRepresentationType } from '../metadata-representation.model';
 import { MetadataValue } from '../../metadata.models';
+import {
+  MetadataRepresentation,
+  MetadataRepresentationType,
+} from '../metadata-representation.model';
 
 /**
  * This class determines which fields to use when rendering an Item as a metadata value.
@@ -36,6 +39,13 @@ export class ItemMetadataRepresentation extends Item implements MetadataRepresen
    */
   getValue(): string {
     return this.virtualMetadata.value;
+  }
+
+  /**
+   * Get the language of the value to display
+   */
+  getLanguage(): string {
+    return this.virtualMetadata.language || null;
   }
 
 }

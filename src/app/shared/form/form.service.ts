@@ -1,15 +1,34 @@
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-
-import { AppState } from '../../app.reducer';
-import { formObjectFromIdSelector } from './selectors';
-import { FormBuilderService } from './builder/form-builder.service';
-import { DynamicFormControlEvent, DynamicFormControlModel, DynamicFormGroupModel } from '@ng-dynamic-forms/core';
-import { isEmpty, isNotUndefined } from '../empty.util';
+import {
+  AbstractControl,
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import {
+  isEmpty,
+  isNotUndefined,
+} from '@dspace/shared/utils/empty.util';
+import {
+  DynamicFormControlEvent,
+  DynamicFormControlModel,
+  DynamicFormGroupModel,
+} from '@ng-dynamic-forms/core';
+import {
+  select,
+  Store,
+} from '@ngrx/store';
 import uniqueId from 'lodash/uniqueId';
+import { Observable } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+} from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
+import { AppState } from '../../app.reducer';
+import { FormBuilderService } from './builder/form-builder.service';
 import {
   FormAddError,
   FormAddTouchedAction,
@@ -17,12 +36,16 @@ import {
   FormInitAction,
   FormRemoveAction,
   FormRemoveErrorAction,
-  FormStatusChangeAction
+  FormStatusChangeAction,
 } from './form.actions';
-import { FormEntry, FormError, FormTouchedState } from './form.reducer';
-import { environment } from '../../../environments/environment';
+import {
+  FormEntry,
+  FormError,
+  FormTouchedState,
+} from './form.reducer';
+import { formObjectFromIdSelector } from './selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FormService {
 
   constructor(
@@ -38,7 +61,7 @@ export class FormService {
       select(formObjectFromIdSelector(formId)),
       filter((state) => isNotUndefined(state)),
       map((state) => state.valid),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
   }
 
@@ -50,7 +73,7 @@ export class FormService {
       select(formObjectFromIdSelector(formId)),
       filter((state) => isNotUndefined(state)),
       map((state) => state.data),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
   }
 
@@ -62,7 +85,7 @@ export class FormService {
       select(formObjectFromIdSelector(formId)),
       filter((state) => isNotUndefined(state)),
       map((state) => state.touched),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
   }
 
@@ -74,7 +97,7 @@ export class FormService {
       select(formObjectFromIdSelector(formId)),
       filter((state) => isNotUndefined(state)),
       map((state) => state.errors),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
   }
 
@@ -85,7 +108,7 @@ export class FormService {
     return this.store.pipe(
       select(formObjectFromIdSelector(formId)),
       distinctUntilChanged(),
-      map((state) => isNotUndefined(state))
+      map((state) => isNotUndefined(state)),
     );
   }
 
@@ -162,6 +185,7 @@ export class FormService {
       error[errorKey] = true;
       // add the error in the form control
       field.setErrors(error);
+      field.setValidators(() => error);
     }
 
     // if the field in question is a concat group, pass down the error to its fields
@@ -183,6 +207,8 @@ export class FormService {
     if (field.hasError(errorKey)) {
       error[errorKey] = null;
       field.setErrors(error);
+      field.clearValidators();
+      field.updateValueAndValidity();
     }
 
     // if the field in question is a concat group, clear the error from its fields

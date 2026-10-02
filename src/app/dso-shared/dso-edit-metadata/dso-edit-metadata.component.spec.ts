@@ -1,34 +1,55 @@
-import { DsoEditMetadataComponent } from './dso-edit-metadata.component';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { VarDirective } from '../../shared/utils/var.directive';
-import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import {
+  DebugElement,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  BrowserModule,
+  By,
+} from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { DebugElement, Injectable, NO_ERRORS_SCHEMA } from '@angular/core';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { Item } from '../../core/shared/item.model';
-import { MetadataValue } from '../../core/shared/metadata.models';
-import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { By } from '@angular/platform-browser';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { ArrayMoveChangeAnalyzer } from '../../core/data/array-move-change-analyzer.service';
-import { ITEM } from '../../core/shared/item.resource-type';
-import { DATA_SERVICE_FACTORY } from '../../core/data/base/data-service.decorator';
-import { Operation } from 'fast-json-patch';
-import { RemoteData } from '../../core/data/remote-data';
-import { Observable } from 'rxjs/internal/Observable';
-import {BtnDisabledDirective} from '../../shared/btn-disabled.directive';
+import { ArrayMoveChangeAnalyzer } from '@dspace/core/data/array-move-change-analyzer.service';
+import { APP_DATA_SERVICES_MAP } from '@dspace/core/data-services-map-type';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
+import { Item } from '@dspace/core/shared/item.model';
+import { ITEM } from '@dspace/core/shared/item.resource-type';
+import { MetadataValue } from '@dspace/core/shared/metadata.models';
+import { MetadataSecurityConfigurationService } from '@dspace/core/submission/metadatasecurityconfig-data.service';
+import { MetadataSecurityConfiguration } from '@dspace/core/submission/models/metadata-security-configuration';
+import { TestDataService } from '@dspace/core/testing/test-data-service.mock';
+import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
+import { TranslateModule } from '@ngx-translate/core';
+import { mockSecurityConfig } from 'src/app/submission/utils/submission.mock';
+
+import { AlertComponent } from '../../shared/alert/alert.component';
+import { BtnDisabledDirective } from '../../shared/btn-disabled.directive';
+import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.component';
+import { VarDirective } from '../../shared/utils/var.directive';
+import { DsoEditMetadataComponent } from './dso-edit-metadata.component';
+import { DsoEditMetadataFieldValuesComponent } from './dso-edit-metadata-field-values/dso-edit-metadata-field-values.component';
+import { DsoEditMetadataHeadersComponent } from './dso-edit-metadata-headers/dso-edit-metadata-headers.component';
+import { DsoEditMetadataValueComponent } from './dso-edit-metadata-value/dso-edit-metadata-value.component';
+import { DsoEditMetadataValueHeadersComponent } from './dso-edit-metadata-value-headers/dso-edit-metadata-value-headers.component';
+import { MetadataFieldSelectorComponent } from './metadata-field-selector/metadata-field-selector.component';
 
 const ADD_BTN = 'add';
 const REINSTATE_BTN = 'reinstate';
 const SAVE_BTN = 'save';
 const DISCARD_BTN = 'discard';
 
-@Injectable()
-class TestDataService {
-  patch(object: Item, operations: Operation[]): Observable<RemoteData<Item>> {
-    return createSuccessfulRemoteDataObject$(object);
-  }
-}
+const mockDataServiceMap: any = new Map([
+  [ITEM.value, () => import('@dspace/core/testing/test-data-service.mock').then(m => m.TestDataService)],
+]);
+
+const metadataSecurityConfigDataServiceSpy = jasmine.createSpyObj('metadataSecurityConfigDataService', {
+  findById: createSuccessfulRemoteDataObject$(mockSecurityConfig),
+});
 
 describe('DsoEditMetadataComponent', () => {
   let component: DsoEditMetadataComponent;
@@ -69,26 +90,55 @@ describe('DsoEditMetadataComponent', () => {
       },
     });
 
-    notificationsService = jasmine.createSpyObj('notificationsService', ['error', 'success']);
+    notificationsService = jasmine.createSpyObj('notificationsService', [
+      'error',
+      'success',
+    ]);
 
     TestBed.configureTestingModule({
-      declarations: [DsoEditMetadataComponent, VarDirective, BtnDisabledDirective],
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
-      providers: [
-        TestDataService,
-        { provide: DATA_SERVICE_FACTORY, useValue: jasmine.createSpy('getDataServiceFor').and.returnValue(TestDataService) },
-        { provide: NotificationsService, useValue: notificationsService },
-        ArrayMoveChangeAnalyzer,
+      imports: [
+        CommonModule,
+        BrowserModule,
+        TranslateModule.forRoot(),
+        RouterTestingModule.withRoutes([]),
+        DsoEditMetadataComponent,
+        VarDirective,
+        BtnDisabledDirective,
       ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+      providers: [
+        { provide: APP_DATA_SERVICES_MAP, useValue: mockDataServiceMap },
+        { provide: NotificationsService, useValue: notificationsService },
+        { provide: MetadataSecurityConfigurationService, useValue: metadataSecurityConfigDataServiceSpy },
+        ArrayMoveChangeAnalyzer,
+        TestDataService,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    })
+      .overrideComponent(DsoEditMetadataComponent, {
+        remove: {
+          imports: [
+            DsoEditMetadataValueComponent,
+            DsoEditMetadataHeadersComponent,
+            MetadataFieldSelectorComponent,
+            DsoEditMetadataValueHeadersComponent,
+            DsoEditMetadataFieldValuesComponent,
+            AlertComponent,
+            ThemedLoadingComponent,
+          ],
+        },
+      })
+      .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(waitForAsync(() => {
     fixture = TestBed.createComponent(DsoEditMetadataComponent);
     component = fixture.componentInstance;
     component.dso = dso;
     fixture.detectChanges();
+  }));
+
+  it('should set security configuration object', () => {
+    expect(component.securitySettings$.value).toEqual(mockSecurityConfig);
   });
 
   describe('when no changes have been made', () => {
@@ -165,20 +215,35 @@ describe('DsoEditMetadataComponent', () => {
         expect(fixture.debugElement.query(By.css('ds-dso-edit-metadata-value'))).toBeNull();
       });
     });
+
+    it('should fetch security settings for Item', () => {
+      component.dso = Object.assign(new Item(), {
+        ...dso,
+        entityType: 'Person',
+      });
+      component.getSecuritySettings().subscribe((securitySettings: MetadataSecurityConfiguration) => {
+        expect(securitySettings).toBeDefined();
+      });
+    });
   });
 
   function assertButton(name: string, exists: boolean, disabled: boolean = false): void {
     describe(`${name} button`, () => {
       let btn: DebugElement;
 
-      beforeEach(() => {
+      beforeEach(waitForAsync(() => {
+        fixture.detectChanges();
         btn = fixture.debugElement.query(By.css(`#dso-${name}-btn`));
-      });
+      }));
 
       if (exists) {
-        it('should exist', () => {
+        it('form should be initialized', waitForAsync(() => {
+          expect(component.isFormInitialized$.value).toBeTrue();
+        }));
+
+        it('should exist', waitForAsync(() => {
           expect(btn).toBeTruthy();
-        });
+        }));
 
         it(`should${disabled ? ' ' : ' not '}be disabled`, () => {
           if (disabled) {
@@ -190,9 +255,9 @@ describe('DsoEditMetadataComponent', () => {
           }
         });
       } else {
-        it('should not exist', () => {
+        it('should not exist', waitForAsync(() => {
           expect(btn).toBeNull();
-        });
+        }));
       }
     });
   }

@@ -1,10 +1,11 @@
-import { FormFieldModel } from '../models/form-field.model';
-import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
-import { ListFieldParser } from './list-field-parser';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import { getMockTranslateService } from '@dspace/core/testing/translate.service.mock';
+
 import { DynamicListCheckboxGroupModel } from '../ds-dynamic-form-ui/models/list/dynamic-list-checkbox-group.model';
 import { DynamicListRadioGroupModel } from '../ds-dynamic-form-ui/models/list/dynamic-list-radio-group.model';
+import { ListFieldParser } from './list-field-parser';
 import { ParserOptions } from './parser-options';
-import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
 
 describe('ListFieldParser test suite', () => {
   let field: FormFieldModel;
@@ -16,13 +17,14 @@ describe('ListFieldParser test suite', () => {
     readOnly: false,
     submissionScope: 'testScopeUUID',
     collectionUUID: null,
-    typeField: 'dc_type'
+    typeField: 'dc_type',
+    isInnerForm: false,
   };
 
   beforeEach(() => {
     field = {
       input: {
-        type: 'list'
+        type: 'list',
       },
       label: 'Type',
       mandatory: 'false',
@@ -32,22 +34,22 @@ describe('ListFieldParser test suite', () => {
         {
           metadata: 'type',
           controlledVocabulary: 'type_programme',
-          closed: false
-        }
+          closed: false,
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
   });
 
   it('should init parser properly', () => {
-    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     expect(parser instanceof ListFieldParser).toBe(true);
   });
 
   it('should return a DynamicListCheckboxGroupModel object when repeatable option is true', () => {
-    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 
@@ -56,20 +58,34 @@ describe('ListFieldParser test suite', () => {
 
   it('should return a DynamicListRadioGroupModel object when repeatable option is false', () => {
     field.repeatable = false;
-    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 
     expect(fieldModel instanceof DynamicListRadioGroupModel).toBe(true);
   });
 
-  it('should set init value properly', () => {
+  it('should set init value properly when repeatable option is true', () => {
     initFormValues = {
       type: [new FormFieldMetadataValueObject('test type')],
     };
     const expectedValue = [new FormFieldMetadataValueObject('test type')];
 
-    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
+
+    const fieldModel = parser.parse();
+
+    expect(fieldModel.value).toEqual(expectedValue);
+  });
+
+  it('should set init value properly when repeatable option is false', () => {
+    field.repeatable = false;
+    initFormValues = {
+      type: [new FormFieldMetadataValueObject('test type')],
+    };
+    const expectedValue = new FormFieldMetadataValueObject('test type');
+
+    const parser = new ListFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 

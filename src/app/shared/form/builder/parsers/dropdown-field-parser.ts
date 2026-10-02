@@ -1,21 +1,24 @@
-import {Inject} from '@angular/core';
-import { FormFieldModel } from '../models/form-field.model';
+import { Inject } from '@angular/core';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import { MetadataSecurityConfiguration } from '@dspace/core/submission/models/metadata-security-configuration';
+import { isNotEmpty } from '@dspace/shared/utils/empty.util';
+import { DynamicFormControlLayout } from '@ng-dynamic-forms/core';
+import { TranslateService } from '@ngx-translate/core';
+
+import {
+  DynamicScrollableDropdownModel,
+  DynamicScrollableDropdownModelConfig,
+} from '../ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
 import {
   CONFIG_DATA,
   FieldParser,
   INIT_FORM_VALUES,
   PARSER_OPTIONS,
-  SUBMISSION_ID
+  SECURITY_CONFIG,
+  SUBMISSION_ID,
 } from './field-parser';
-import { DynamicFormControlLayout, } from '@ng-dynamic-forms/core';
-import {
-  DynamicScrollableDropdownModel,
-  DynamicScrollableDropdownModelConfig
-} from '../ds-dynamic-form-ui/models/scrollable-dropdown/dynamic-scrollable-dropdown.model';
-import { isNotEmpty } from '../../../empty.util';
-import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
 import { ParserOptions } from './parser-options';
-import { TranslateService } from '@ngx-translate/core';
 
 export class DropdownFieldParser extends FieldParser {
 
@@ -24,27 +27,26 @@ export class DropdownFieldParser extends FieldParser {
     @Inject(CONFIG_DATA) configData: FormFieldModel,
     @Inject(INIT_FORM_VALUES) initFormValues,
     @Inject(PARSER_OPTIONS) parserOptions: ParserOptions,
-    translate: TranslateService
+    @Inject(SECURITY_CONFIG)  securityConfig: MetadataSecurityConfiguration = null,
+      translate: TranslateService,
   ) {
-    super(submissionId, configData, initFormValues, parserOptions, translate);
+    super(submissionId, configData, initFormValues, parserOptions, securityConfig, translate);
   }
 
-  public modelFactory(fieldValue?: FormFieldMetadataValueObject | any, label?: boolean): any {
+  public modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any {
     const dropdownModelConfig: DynamicScrollableDropdownModelConfig = this.initModel(null, label);
     let layout: DynamicFormControlLayout;
 
     if (isNotEmpty(this.configData.selectableMetadata[0].controlledVocabulary)) {
-      this.setVocabularyOptions(dropdownModelConfig);
-      if (isNotEmpty(fieldValue)) {
-        dropdownModelConfig.value = fieldValue;
-      }
+      this.setVocabularyOptions(dropdownModelConfig, this.parserOptions.collectionUUID);
+      this.setValues(dropdownModelConfig, fieldValue, true);
       layout = {
         element: {
-          control: 'col'
+          control: 'col',
         },
         grid: {
-          host: 'col'
-        }
+          host: 'col',
+        },
       };
       const dropdownModel = new DynamicScrollableDropdownModel(dropdownModelConfig, layout);
       return dropdownModel;

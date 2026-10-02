@@ -1,18 +1,21 @@
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import { MetadataValue } from '@dspace/core/shared/metadata.models';
+import { RelationshipOptions } from '@dspace/core/shared/relationship-options.model';
+import {
+  hasNoValue,
+  isNotEmpty,
+  isNotUndefined,
+} from '@dspace/shared/utils/empty.util';
 import {
   DynamicFormControlLayout,
   DynamicFormControlRelation,
   DynamicFormGroupModel,
   DynamicFormGroupModelConfig,
-  serializable
+  serializable,
 } from '@ng-dynamic-forms/core';
-
 import { Subject } from 'rxjs';
 
-import { hasNoValue, isNotEmpty } from '../../../../empty.util';
 import { DsDynamicInputModel } from './ds-dynamic-input.model';
-import { FormFieldMetadataValueObject } from '../../models/form-field-metadata-value.model';
-import { RelationshipOptions } from '../../models/relationship-options.model';
-import { MetadataValue } from '../../../../../core/shared/metadata.models';
 
 export const CONCAT_GROUP_SUFFIX = '_CONCAT_GROUP';
 export const CONCAT_FIRST_INPUT_SUFFIX = '_CONCAT_FIRST_INPUT';
@@ -30,6 +33,9 @@ export interface DynamicConcatModelConfig extends DynamicFormGroupModelConfig {
   submissionId: string;
   hasSelectableMetadata: boolean;
   metadataValue?: MetadataValue;
+  securityLevel?: number;
+  securityConfigLevel?: number[];
+  toggleSecurityVisibility?: boolean;
 }
 
 export class DynamicConcatModel extends DynamicFormGroupModel {
@@ -47,7 +53,9 @@ export class DynamicConcatModel extends DynamicFormGroupModel {
   @serializable() hasSelectableMetadata: boolean;
   @serializable() metadataValue: MetadataValue;
   @serializable() readOnly?: boolean;
-
+  @serializable() securityLevel?: number;
+  @serializable() securityConfigLevel?: number[];
+  @serializable() toggleSecurityVisibility = true;
   isCustomGroup = true;
   valueUpdates: Subject<string>;
 
@@ -67,6 +75,11 @@ export class DynamicConcatModel extends DynamicFormGroupModel {
     this.valueUpdates.subscribe((value: string) => this.value = value);
     this.typeBindRelations = config.typeBindRelations ? config.typeBindRelations : [];
     this.readOnly = config.disabled;
+    this.securityLevel = config.securityLevel;
+    this.securityConfigLevel = config.securityConfigLevel;
+    if (isNotUndefined(config.toggleSecurityVisibility)) {
+      this.toggleSecurityVisibility = config.toggleSecurityVisibility;
+    }
   }
 
   get value() {
@@ -81,35 +94,47 @@ export class DynamicConcatModel extends DynamicFormGroupModel {
     } else if (isNotEmpty(secondValue) && isNotEmpty(secondValue.value)) {
       return Object.assign(new FormFieldMetadataValueObject(), secondValue);
     } else {
-      return null;
+      return new FormFieldMetadataValueObject();
     }
   }
 
   set value(value: string | FormFieldMetadataValueObject) {
-    let values;
     let tempValue: string;
 
-    if (typeof value === 'string') {
-      tempValue = value;
-    } else {
-      tempValue = value.value;
+    if (isNotEmpty(value)) {
+      if (typeof value === 'string') {
+        tempValue = value;
+      } else {
+        tempValue = value?.value;
+      }
     }
     if (hasNoValue(tempValue)) {
       tempValue = '';
     }
-    values = [...tempValue.split(this.separator), null].map((v) =>
+
+    // todo: this used to be valid, but results in a type error now -- REMEMBER TO INVESTIGATE!
+    const values = [...tempValue.split(this.separator), null].map((v) =>
       Object.assign(new FormFieldMetadataValueObject(), value, { display: v, value: v }));
 
     if (values[0].value) {
+      // @ts-ignore
       (this.get(0) as DsDynamicInputModel).value = values[0];
     } else {
       (this.get(0) as DsDynamicInputModel).value = undefined;
     }
     if (values[1].value) {
+      // @ts-ignore
       (this.get(1) as DsDynamicInputModel).value = values[1];
     } else {
       (this.get(1) as DsDynamicInputModel).value = undefined;
     }
   }
 
+  get hasSecurityLevel(): boolean {
+    return isNotEmpty(this.securityLevel);
+  }
+
+  get hasSecurityToggle(): boolean {
+    return isNotEmpty(this.securityConfigLevel) && this.securityConfigLevel.length > 1 && this.toggleSecurityVisibility;
+  }
 }

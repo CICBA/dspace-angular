@@ -1,23 +1,30 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { Context } from '@dspace/core/shared/context.model';
+import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
+import { ListableObject } from '@dspace/core/shared/object-collection/listable-object.model';
+import { SearchObjects } from '@dspace/core/shared/search/models/search-objects.model';
+import { ViewMode } from '@dspace/core/shared/view-mode.model';
+
+import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { ThemedComponent } from '../theme-support/themed.component';
 import { SearchComponent } from './search.component';
-import { SearchConfigurationOption } from './search-switch-configuration/search-configuration-option.model';
-import { Context } from '../../core/shared/context.model';
-import { CollectionElementLinkType } from '../object-collection/collection-element-link.type';
 import { SelectionConfig } from './search-results/search-results.component';
-import { ViewMode } from '../../core/shared/view-mode.model';
-import { SearchObjects } from './models/search-objects.model';
-import { DSpaceObject } from '../../core/shared/dspace-object.model';
-import { ListableObject } from '../object-collection/shared/listable-object.model';
+import { SearchConfigurationOption } from './search-switch-configuration/search-configuration-option.model';
 
 /**
  * Themed wrapper for {@link SearchComponent}
  */
 @Component({
-  selector: 'ds-themed-search',
+  selector: 'ds-search',
   templateUrl: '../theme-support/themed.component.html',
 })
 export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
+
   protected inAndOutputNames: (keyof SearchComponent & keyof this)[] = [
     'configurationList',
     'context',
@@ -43,6 +50,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
     'trackStatistics',
     'query',
     'scope',
+    'hideScopeInUrl',
     'resultFound',
     'deselectObject',
     'selectObject',
@@ -95,6 +103,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() query: string;
 
   @Input() scope: string;
+
+  @Input() hideScopeInUrl: boolean;
 
   @Output() resultFound: EventEmitter<SearchObjects<DSpaceObject>> = new EventEmitter();
 

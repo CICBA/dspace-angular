@@ -1,43 +1,78 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  BrowserModule,
+  By,
+} from '@angular/platform-browser';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { APP_CONFIG } from '@dspace/config/app-config.interface';
+import { DSONameService } from '@dspace/core/breadcrumbs/dso-name.service';
+import { RemoteDataBuildService } from '@dspace/core/cache/builders/remote-data-build.service';
+import { ObjectCacheService } from '@dspace/core/cache/object-cache.service';
+import { DSOChangeAnalyzer } from '@dspace/core/data/dso-change-analyzer.service';
+import { DSpaceObjectDataService } from '@dspace/core/data/dspace-object-data.service';
+import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
+import {
+  buildPaginatedList,
+  PaginatedList,
+} from '@dspace/core/data/paginated-list.model';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { EPersonDataService } from '@dspace/core/eperson/eperson-data.service';
+import { GroupDataService } from '@dspace/core/eperson/group-data.service';
+import { Group } from '@dspace/core/eperson/models/group.model';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
+import { HALEndpointService } from '@dspace/core/shared/hal-endpoint.service';
+import { NoContent } from '@dspace/core/shared/NoContent.model';
+import { PageInfo } from '@dspace/core/shared/page-info.model';
+import { UUIDService } from '@dspace/core/shared/uuid.service';
+import { ActivatedRouteStub } from '@dspace/core/testing/active-router.stub';
+import { DSONameServiceMock } from '@dspace/core/testing/dso-name.service.mock';
+import {
+  GroupMock,
+  GroupMock2,
+} from '@dspace/core/testing/group-mock';
+import { NotificationsServiceStub } from '@dspace/core/testing/notifications-service.stub';
+import { RouterMock } from '@dspace/core/testing/router.mock';
+import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
+import { XSRFService } from '@dspace/core/xsrf/xsrf.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable, of as observableOf } from 'rxjs';
-import { RemoteDataBuildService } from '../../../core/cache/builders/remote-data-build.service';
-import { ObjectCacheService } from '../../../core/cache/object-cache.service';
-import { DSOChangeAnalyzer } from '../../../core/data/dso-change-analyzer.service';
-import { DSpaceObjectDataService } from '../../../core/data/dspace-object-data.service';
-import { AuthorizationDataService } from '../../../core/data/feature-authorization/authorization-data.service';
-import { buildPaginatedList, PaginatedList } from '../../../core/data/paginated-list.model';
-import { RemoteData } from '../../../core/data/remote-data';
-import { EPersonDataService } from '../../../core/eperson/eperson-data.service';
-import { GroupDataService } from '../../../core/eperson/group-data.service';
-import { Group } from '../../../core/eperson/models/group.model';
-import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { HALEndpointService } from '../../../core/shared/hal-endpoint.service';
-import { PageInfo } from '../../../core/shared/page-info.model';
-import { UUIDService } from '../../../core/shared/uuid.service';
-import { XSRFService } from '../../../core/xsrf/xsrf.service';
-import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { GroupMock, GroupMock2 } from '../../../shared/testing/group-mock';
-import { GroupFormComponent } from './group-form.component';
-import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
-import { getMockFormBuilderService } from '../../../shared/mocks/form-builder-service.mock';
-import { RouterMock } from '../../../shared/mocks/router.mock';
-import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
 import { Operation } from 'fast-json-patch';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+
+import { AlertComponent } from '../../../shared/alert/alert.component';
+import { ContextHelpDirective } from '../../../shared/context-help.directive';
+import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
+import { FormComponent } from '../../../shared/form/form.component';
+import { getMockFormBuilderService } from '../../../shared/form/testing/form-builder-service.mock';
+import { GroupRegistryService } from '../group-registry.service';
+import { GroupFormComponent } from './group-form.component';
+import { MembersListComponent } from './members-list/members-list.component';
+import { SubgroupsListComponent } from './subgroup-list/subgroups-list.component';
 import { ValidateGroupExists } from './validators/group-exists.validator';
-import { NoContent } from '../../../core/shared/NoContent.model';
-import { DSONameService } from '../../../core/breadcrumbs/dso-name.service';
-import { DSONameServiceMock } from '../../../shared/mocks/dso-name.service.mock';
-import { ActivatedRouteStub } from '../../../shared/testing/active-router.stub';
 
 describe('GroupFormComponent', () => {
   let component: GroupFormComponent;
@@ -45,6 +80,7 @@ describe('GroupFormComponent', () => {
   let builderService: FormBuilderService;
   let ePersonDataServiceStub: any;
   let groupsDataServiceStub: any;
+  let groupRegistryServiceStub: any;
   let dsoDataServiceStub: any;
   let authorizationService: AuthorizationDataService;
   let notificationService: NotificationsServiceStub;
@@ -55,6 +91,7 @@ describe('GroupFormComponent', () => {
   let groupName: string;
   let groupDescription: string;
   let expected: Group;
+  let activeGroup;
 
   beforeEach(waitForAsync(() => {
     groups = [GroupMock, GroupMock2];
@@ -65,8 +102,8 @@ describe('GroupFormComponent', () => {
       metadata: {
         'dc.description': [
           {
-            value: groupDescription
-          }
+            value: groupDescription,
+          },
         ],
       },
       object: createSuccessfulRemoteDataObject$(undefined),
@@ -76,22 +113,27 @@ describe('GroupFormComponent', () => {
         },
         object: {
           href: 'group-objectlink',
-        }
+        },
       },
     });
     ePersonDataServiceStub = {};
+    groupRegistryServiceStub = {
+      getActiveGroup(): Observable<Group> {
+        return of(activeGroup);
+      },
+      cancelEditGroup(): void {
+        activeGroup = null;
+      },
+      editGroup(group: Group) {
+        activeGroup = group;
+      },
+    };
     groupsDataServiceStub = {
       allGroups: groups,
       activeGroup: null,
       createdGroup: null,
-      getActiveGroup(): Observable<Group> {
-        return observableOf(this.activeGroup);
-      },
       getGroupRegistryRouterLink(): string {
         return '/access-control/groups';
-      },
-      editGroup(group: Group) {
-        this.activeGroup = group;
       },
       clearGroupsRequests() {
         return null;
@@ -102,11 +144,9 @@ describe('GroupFormComponent', () => {
       delete(objectId: string, copyVirtualMetadata?: string[]): Observable<RemoteData<NoContent>> {
         return createSuccessfulRemoteDataObject$({});
       },
-      cancelEditGroup(): void {
-        this.activeGroup = null;
-      },
+
       findById(id: string) {
-        return observableOf({ payload: null, hasSucceeded: true });
+        return of({ payload: null, hasSucceeded: true });
       },
       findByHref(href: string) {
         return createSuccessfulRemoteDataObject$(this.createdGroup);
@@ -130,78 +170,78 @@ describe('GroupFormComponent', () => {
       },
       getGroupEditPageRouterLinkWithID(id: string) {
         return `group-edit-page-for-${id}`;
-      }
+      },
     };
     authorizationService = jasmine.createSpyObj('authorizationService', {
-      isAuthorized: observableOf(true)
+      isAuthorized: of(true),
     });
     dsoDataServiceStub = {
       findByHref(href: string): Observable<RemoteData<DSpaceObject>> {
         return null;
-      }
+      },
     };
     builderService = Object.assign(getMockFormBuilderService(),{
       createFormGroup(formModel, options = null) {
         const controls = {};
         formModel.forEach( model => {
-            model.parent = parent;
-            const controlModel = model;
-            const controlState = { value: controlModel.value, disabled: controlModel.disabled };
-            const controlOptions = this.createAbstractControlOptions(controlModel.validators, controlModel.asyncValidators, controlModel.updateOn);
-            controls[model.id] = new UntypedFormControl(controlState, controlOptions);
+          model.parent = parent;
+          const controlModel = model;
+          const controlState = { value: controlModel.value, disabled: controlModel.disabled };
+          const controlOptions = this.createAbstractControlOptions(controlModel.validators, controlModel.asyncValidators, controlModel.updateOn);
+          controls[model.id] = new UntypedFormControl(controlState, controlOptions);
         });
         return new UntypedFormGroup(controls, options);
       },
       createAbstractControlOptions(validatorsConfig = null, asyncValidatorsConfig = null, updateOn = null) {
         return {
-            validators: validatorsConfig !== null ? this.getValidators(validatorsConfig) : null,
+          validators: validatorsConfig !== null ? this.getValidators(validatorsConfig) : null,
         };
       },
       getValidators(validatorsConfig) {
-          return this.getValidatorFns(validatorsConfig);
+        return this.getValidatorFns(validatorsConfig);
       },
       getValidatorFns(validatorsConfig, validatorsToken = this._NG_VALIDATORS) {
         let validatorFns = [];
         if (this.isObject(validatorsConfig)) {
-            validatorFns = Object.keys(validatorsConfig).map(validatorConfigKey => {
-                const validatorConfigValue = validatorsConfig[validatorConfigKey];
-                if (this.isValidatorDescriptor(validatorConfigValue)) {
-                    const descriptor = validatorConfigValue;
-                    return this.getValidatorFn(descriptor.name, descriptor.args, validatorsToken);
-                }
-                return this.getValidatorFn(validatorConfigKey, validatorConfigValue, validatorsToken);
-            });
+          validatorFns = Object.keys(validatorsConfig).map(validatorConfigKey => {
+            const validatorConfigValue = validatorsConfig[validatorConfigKey];
+            if (this.isValidatorDescriptor(validatorConfigValue)) {
+              const descriptor = validatorConfigValue;
+              return this.getValidatorFn(descriptor.name, descriptor.args, validatorsToken);
+            }
+            return this.getValidatorFn(validatorConfigKey, validatorConfigValue, validatorsToken);
+          });
         }
         return validatorFns;
       },
       getValidatorFn(validatorName, validatorArgs = null, validatorsToken = this._NG_VALIDATORS) {
         let validatorFn;
         if (Validators.hasOwnProperty(validatorName)) { // Built-in Angular Validators
-            validatorFn = Validators[validatorName];
+          validatorFn = Validators[validatorName];
         } else { // Custom Validators
-            if (this._DYNAMIC_VALIDATORS && this._DYNAMIC_VALIDATORS.has(validatorName)) {
-                validatorFn = this._DYNAMIC_VALIDATORS.get(validatorName);
-            } else if (validatorsToken) {
-                validatorFn = validatorsToken.find(validator => validator.name === validatorName);
-            }
+          if (this._DYNAMIC_VALIDATORS && this._DYNAMIC_VALIDATORS.has(validatorName)) {
+            validatorFn = this._DYNAMIC_VALIDATORS.get(validatorName);
+          } else if (validatorsToken) {
+            validatorFn = validatorsToken.find(validator => validator.name === validatorName);
+          }
         }
         if (validatorFn === undefined) { // throw when no validator could be resolved
-            throw new Error(`validator '${validatorName}' is not provided via NG_VALIDATORS, NG_ASYNC_VALIDATORS or DYNAMIC_FORM_VALIDATORS`);
+          throw new Error(`validator '${validatorName}' is not provided via NG_VALIDATORS, NG_ASYNC_VALIDATORS or DYNAMIC_FORM_VALIDATORS`);
         }
         if (validatorArgs !== null) {
-            return validatorFn(validatorArgs);
+          return validatorFn(validatorArgs);
         }
         return validatorFn;
-    },
+      },
       isValidatorDescriptor(value) {
-          if (this.isObject(value)) {
-              return value.hasOwnProperty('name') && value.hasOwnProperty('args');
-          }
-          return false;
+        if (this.isObject(value)) {
+          return value.hasOwnProperty('name') && value.hasOwnProperty('args');
+        }
+        return false;
       },
       isObject(value) {
         return typeof value === 'object' && value !== null;
-      }
+      },
     });
     router = new RouterMock();
     route = new ActivatedRouteStub();
@@ -210,12 +250,13 @@ describe('GroupFormComponent', () => {
     return TestBed.configureTestingModule({
       imports: [CommonModule, NgbModule, FormsModule, ReactiveFormsModule, BrowserModule,
         TranslateModule.forRoot(),
+        GroupFormComponent,
       ],
-      declarations: [GroupFormComponent],
       providers: [
         { provide: DSONameService, useValue: new DSONameServiceMock() },
         { provide: EPersonDataService, useValue: ePersonDataServiceStub },
         { provide: GroupDataService, useValue: groupsDataServiceStub },
+        { provide: GroupRegistryService, useValue: groupRegistryServiceStub },
         { provide: DSpaceObjectDataService, useValue: dsoDataServiceStub },
         { provide: NotificationsService, useValue: notificationService },
         { provide: FormBuilderService, useValue: builderService },
@@ -230,9 +271,20 @@ describe('GroupFormComponent', () => {
         { provide: ActivatedRoute, useValue: route },
         { provide: Router, useValue: router },
         { provide: AuthorizationDataService, useValue: authorizationService },
+        { provide: APP_CONFIG, useValue: { cache : { msToLive: { default: 15 * 60 * 1000 } } } },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+    })
+      .overrideComponent(GroupFormComponent, {
+        remove: { imports: [
+          FormComponent,
+          AlertComponent,
+          ContextHelpDirective,
+          MembersListComponent,
+          SubgroupsListComponent,
+        ] },
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -275,8 +327,8 @@ describe('GroupFormComponent', () => {
           metadata: {
             'dc.description': [
               {
-                value: groupDescription
-              }
+                value: groupDescription,
+              },
             ],
           },
           object: createSuccessfulRemoteDataObject$(undefined),
@@ -289,10 +341,23 @@ describe('GroupFormComponent', () => {
             },
           },
         });
-        spyOn(groupsDataServiceStub, 'getActiveGroup').and.returnValue(observableOf(expected));
+        spyOn(groupRegistryServiceStub, 'getActiveGroup').and.returnValue(of(expected));
         spyOn(groupsDataServiceStub, 'patch').and.returnValue(createSuccessfulRemoteDataObject$(expected2));
         component.ngOnInit();
       });
+
+      it('should update the form fields with the new values after successful edit', fakeAsync(() => {
+        component.groupName.setValue('newGroupName');
+        component.groupDescription.setValue(groupDescription);
+
+        component.onSubmit();
+        tick();
+
+        expect(component.formGroup.value.groupName).toBe(expected2.name);
+        expect(component.formGroup.value.groupDescription).toBe(
+          expected2.firstMetadataValue('dc.description'),
+        );
+      }));
 
       it('should edit with name and description operations', () => {
         component.groupName.setValue('newGroupName');
@@ -300,11 +365,11 @@ describe('GroupFormComponent', () => {
         const operations = [{
           op: 'add',
           path: '/metadata/dc.description',
-          value: 'testDescription'
+          value: 'testDescription',
         }, {
           op: 'replace',
           path: '/name',
-          value: 'newGroupName'
+          value: 'newGroupName',
         }];
         expect(groupsDataServiceStub.patch).toHaveBeenCalledWith(expected, operations);
       });
@@ -315,7 +380,7 @@ describe('GroupFormComponent', () => {
         const operations = [{
           op: 'add',
           path: '/metadata/dc.description',
-          value: 'testDescription'
+          value: 'testDescription',
         }];
         expect(groupsDataServiceStub.patch).toHaveBeenCalledWith(expected, operations);
       });
@@ -327,7 +392,7 @@ describe('GroupFormComponent', () => {
         const operations = [{
           op: 'replace',
           path: '/name',
-          value: 'newGroupName'
+          value: 'newGroupName',
         }];
         expect(groupsDataServiceStub.patch).toHaveBeenCalledWith(expected, operations);
       });
@@ -362,8 +427,8 @@ describe('GroupFormComponent', () => {
         metadata: {
           'dc.description': [
             {
-              value: groupDescription
-            }
+              value: groupDescription,
+            },
           ],
         },
         _links: {
@@ -376,7 +441,7 @@ describe('GroupFormComponent', () => {
         },
       });
       spyOn(component.submitForm, 'emit');
-      spyOn(dsoDataServiceStub, 'findByHref').and.returnValue(observableOf(expected));
+      spyOn(dsoDataServiceStub, 'findByHref').and.returnValue(of(expected));
 
       fixture.detectChanges();
       component.initialisePage();
@@ -409,7 +474,7 @@ describe('GroupFormComponent', () => {
         const groupsDataServiceStubWithGroup = Object.assign(groupsDataServiceStub,{
           searchGroups(query: string): Observable<RemoteData<PaginatedList<Group>>> {
             return createSuccessfulRemoteDataObject$(buildPaginatedList(new PageInfo(), [expected]));
-          }
+          },
         });
         component.formGroup.controls.groupName.setValue('testName');
         component.formGroup.controls.groupName.setAsyncValidators(ValidateGroupExists.createValidator(groupsDataServiceStubWithGroup));
@@ -430,11 +495,11 @@ describe('GroupFormComponent', () => {
 
     beforeEach(async () => {
       spyOn(groupsDataServiceStub, 'delete').and.callThrough();
-      component.activeGroup$ = observableOf({
+      component.activeGroup$ = of({
         id: 'active-group',
         permanent: false,
       } as Group);
-      component.canEdit$ = observableOf(true);
+      component.canEdit$ = of(true);
 
       component.initialisePage();
 

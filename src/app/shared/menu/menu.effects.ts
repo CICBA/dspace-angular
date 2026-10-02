@@ -1,8 +1,12 @@
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { StoreActionTypes } from '@dspace/core/ngrx/type';
+import {
+  Actions,
+  createEffect,
+  ofType,
+} from '@ngrx/effects';
+import { map } from 'rxjs/operators';
 
-import { StoreActionTypes } from '../../store.actions';
 import { ReinitMenuAction } from './menu.actions';
 
 @Injectable()
@@ -14,7 +18,7 @@ export class MenuEffects {
    */
   reinitDSOMenus = createEffect(() => this.actions$
     .pipe(ofType(StoreActionTypes.REHYDRATE),
-      map(() => new ReinitMenuAction())
+      map(() => new ReinitMenuAction()),
     ));
 
   constructor(private actions$: Actions) {

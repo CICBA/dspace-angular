@@ -1,11 +1,36 @@
-import { DynamicFormControlModel, DynamicInputModel, DynamicTextAreaModel } from '@ng-dynamic-forms/core';
-import { DynamicSelectModelConfig } from '@ng-dynamic-forms/core/lib/model/select/dynamic-select.model';
+import {
+  DynamicCheckboxModelConfig,
+  DynamicFormControlModel,
+  DynamicInputModel,
+  DynamicSelectModelConfig,
+  DynamicTextAreaModel,
+} from '@ng-dynamic-forms/core';
+
 import { environment } from '../../../environments/environment';
 
 export const collectionFormEntityTypeSelectionConfig: DynamicSelectModelConfig<string> = {
   id: 'entityType',
   name: 'dspace.entity.type',
-  disabled: false
+  disabled: false,
+  errorMessages: {
+    required: 'collection.form.errors.entityType.required',
+  },
+};
+
+export const collectionFormSubmissionDefinitionSelectionConfig: DynamicSelectModelConfig<string> = {
+  id: 'submissionDefinition',
+  name: 'dspace.submission.definition',
+  disabled: false,
+  errorMessages: {
+    required: 'collection.form.errors.submissionDefinition.required',
+  },
+};
+
+
+export const collectionFormSharedWorkspaceCheckboxConfig: DynamicCheckboxModelConfig = {
+  id: 'sharedWorkspace',
+  name: 'dspace.workspace.shared',
+  disabled: false,
 };
 
 /**
@@ -18,10 +43,10 @@ export const collectionFormModels: DynamicFormControlModel[] = [
     name: 'dc.title',
     required: true,
     validators: {
-      required: null
+      required: null,
     },
     errorMessages: {
-      required: 'Please enter a name for this title'
+      required: 'Please enter a name for this title',
     },
   }),
   new DynamicTextAreaModel({
@@ -48,5 +73,5 @@ export const collectionFormModels: DynamicFormControlModel[] = [
     id: 'license',
     name: 'dc.rights.license',
     spellCheck: environment.form.spellCheck,
-  })
+  }),
 ];

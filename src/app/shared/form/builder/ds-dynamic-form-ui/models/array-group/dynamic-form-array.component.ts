@@ -1,6 +1,27 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, Output, QueryList } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
+import {
+  NgClass,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  QueryList,
+} from '@angular/core';
+import {
+  ReactiveFormsModule,
+  UntypedFormGroup,
+} from '@angular/forms';
+import { Relationship } from '@dspace/core/shared/item-relationships/relationship.model';
+import { hasValue } from '@dspace/shared/utils/empty.util';
 import {
   DynamicFormArrayComponent,
   DynamicFormControlCustomEvent,
@@ -10,18 +31,31 @@ import {
   DynamicFormLayout,
   DynamicFormLayoutService,
   DynamicFormValidationService,
-  DynamicTemplateDirective
+  DynamicTemplateDirective,
 } from '@ng-dynamic-forms/core';
-import { Relationship } from '../../../../../../core/shared/item-relationships/relationship.model';
-import { hasValue } from '../../../../../empty.util';
-import { DynamicRowArrayModel } from '../ds-dynamic-row-array-model';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+
 import { LiveRegionService } from '../../../../../live-region/live-region.service';
-import { TranslateService } from '@ngx-translate/core';
+import { DsDynamicFormControlContainerComponent } from '../../ds-dynamic-form-control-container.component';
+import { DynamicRowArrayModel } from '../ds-dynamic-row-array-model';
 
 @Component({
   selector: 'ds-dynamic-form-array',
   templateUrl: './dynamic-form-array.component.html',
-  styleUrls: ['./dynamic-form-array.component.scss']
+  styleUrls: ['./dynamic-form-array.component.scss'],
+  imports: [
+    CdkDrag,
+    CdkDragHandle,
+    CdkDropList,
+    forwardRef(() => DsDynamicFormControlContainerComponent),
+    NgClass,
+    NgTemplateOutlet,
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
 })
 export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
 
@@ -53,15 +87,16 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
   }
 
   moveSelection(event: CdkDragDrop<Relationship>) {
+    const prevIndex = event.previousIndex;
+    const index = event.currentIndex;
 
     // prevent propagating events generated releasing on the same position
-    if (event.previousIndex === event.currentIndex) {
+    if (prevIndex === index) {
       return;
     }
 
-    this.model.moveGroup(event.previousIndex, event.currentIndex - event.previousIndex);
-    const prevIndex = event.previousIndex;
-    const index = event.currentIndex;
+    this.model.moveGroup(prevIndex, index - prevIndex);
+    this.moveFormControlToPosition(prevIndex, index);
 
     if (hasValue(this.model.groups[index]) && hasValue((this.control as any).controls[index])) {
       this.onCustomEvent({
@@ -69,14 +104,14 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
         index,
         arrayModel: this.model,
         model: this.model.groups[index].group[0],
-        control: (this.control as any).controls[index]
+        control: (this.control as any).controls[index],
       }, 'move');
     }
   }
 
   update(event: any, index: number) {
     const $event = Object.assign({}, event, {
-      context: { index: index - 1}
+      context: { index: index - 1 },
     });
 
     this.onChange($event);
@@ -86,20 +121,7 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
    * If the drag feature is disabled for this DynamicRowArrayModel.
    */
   get dragDisabled(): boolean {
-    return this.model.groups.length === 1 || !this.model.isDraggable;
-  }
-
-  /**
-   * Gets the control of the specified group model. It adds the startingIndex property to the group model if it does not
-   * already have it. This ensures that the controls are always linked to the correct group model.
-   * @param groupModel The group model to get the control for.
-   * @returns The form control of the specified group model.
-   */
-  getControlOfGroup(groupModel: any) {
-    if (!groupModel.hasOwnProperty('startingIndex')) {
-      groupModel.startingIndex = groupModel.index;
-    }
-    return this.control.get([groupModel.startingIndex]);
+    return this.model.groups.length === 1 || !this.model.isDraggable || this.model.notRepeatable;
   }
 
   /**
@@ -164,6 +186,7 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
 
     if (this.elementBeingSorted) {
       this.model.moveGroup(idx, newIndex - idx);
+      this.moveFormControlToPosition(idx, newIndex);
       if (hasValue(this.model.groups[newIndex]) && hasValue((this.control as any).controls[newIndex])) {
         this.onCustomEvent({
           previousIndex: idx,
@@ -192,6 +215,7 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
 
   cancelKeyboardDragAndDrop(sortableElement: HTMLDivElement, index: number, length: number) {
     this.model.moveGroup(index, this.elementBeingSortedStartingIndex - index);
+    this.moveFormControlToPosition(index, this.elementBeingSortedStartingIndex);
     if (hasValue(this.model.groups[this.elementBeingSortedStartingIndex]) && hasValue((this.control as any).controls[this.elementBeingSortedStartingIndex])) {
       this.onCustomEvent({
         previousIndex: index,
@@ -244,6 +268,21 @@ export class DsDynamicFormArrayComponent extends DynamicFormArrayComponent {
       this.liveRegionService.addMessage(this.translateService.instant('live-region.ordering.instructions', {
         itemName: sortableElement.querySelector('input')?.value,
       }));
+    }
+  }
+
+  private moveFormControlToPosition(fromIndex: number, toIndex: number) {
+    if (!hasValue(fromIndex) || !hasValue(toIndex)) {
+      return;
+    }
+
+    const formArray = this.control as any;
+    if (formArray && formArray.controls) {
+      const movedControl = formArray.at(fromIndex);
+      if (movedControl) {
+        formArray.removeAt(fromIndex,{ emitEvent: false });
+        formArray.insert(toIndex, movedControl, { emitEvent: false });
+      }
     }
   }
 }

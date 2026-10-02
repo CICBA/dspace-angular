@@ -1,17 +1,32 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SearchSettingsComponent } from './search-settings.component';
-import { of as observableOf } from 'rxjs';
-import { PaginationComponentOptions } from '../../pagination/pagination-component-options.model';
-import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';
-import { TranslateModule } from '@ngx-translate/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { EnumKeysPipe } from '../../utils/enum-keys-pipe';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import {
+  SortDirection,
+  SortOptions,
+} from '@dspace/core/cache/models/sort-options.model';
+import { PaginationService } from '@dspace/core/pagination/pagination.service';
+import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
+import { ActivatedRouteStub } from '@dspace/core/testing/active-router.stub';
+import { PaginationServiceStub } from '@dspace/core/testing/pagination-service.stub';
+import { SearchServiceStub } from '@dspace/core/testing/search-service.stub';
+import { SidebarServiceStub } from '@dspace/core/testing/sidebar-service.stub';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-configuration.service';
+import { SidebarService } from '../../sidebar/sidebar.service';
+import { EnumKeysPipe } from '../../utils/enum-keys-pipe';
 import { VarDirective } from '../../utils/var.directive';
-import { SEARCH_CONFIG_SERVICE } from '../../../my-dspace-page/my-dspace-page.component';
-import { PaginationService } from '../../../core/pagination/pagination.service';
-import { PaginationServiceStub } from '../../testing/pagination-service.stub';
+import { SearchService } from '../search.service';
+import { SearchFilterService } from '../search-filters/search-filter.service';
+import { SearchSettingsComponent } from './search-settings.component';
 
 describe('SearchSettingsComponent', () => {
 
@@ -47,9 +62,18 @@ describe('SearchSettingsComponent', () => {
     paginationService = new PaginationServiceStub(pagination, sort);
 
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
-      declarations: [SearchSettingsComponent, EnumKeysPipe, VarDirective],
+      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), SearchSettingsComponent, EnumKeysPipe, VarDirective],
       providers: [
+        { provide: SearchService, useValue: new SearchServiceStub() },
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        {
+          provide: SidebarService,
+          useValue: SidebarServiceStub,
+        },
+        {
+          provide: SearchFilterService,
+          useValue: {},
+        },
         {
           provide: PaginationService,
           useValue: paginationService,
@@ -57,9 +81,9 @@ describe('SearchSettingsComponent', () => {
         {
           provide: SEARCH_CONFIG_SERVICE,
           useValue: {
-            paginatedSearchOptions: observableOf(paginatedSearchOptions),
-            getCurrentScope: observableOf('test-id'),
-          }
+            paginatedSearchOptions: of(paginatedSearchOptions),
+            getCurrentScope: of('test-id'),
+          },
         },
       ],
       schemas: [NO_ERRORS_SCHEMA],
@@ -73,7 +97,7 @@ describe('SearchSettingsComponent', () => {
     comp.sortOptionsList = [
       new SortOptions('score', SortDirection.DESC),
       new SortOptions('dc.title', SortDirection.ASC),
-      new SortOptions('dc.title', SortDirection.DESC)
+      new SortOptions('dc.title', SortDirection.DESC),
     ];
     comp.currentSortOption = new SortOptions('score', SortDirection.DESC);
 

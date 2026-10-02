@@ -1,8 +1,10 @@
 /* eslint-disable max-classes-per-file */
 import { Action } from '@ngrx/store';
-import { type } from '../../shared/ngrx/type';
+
+import { type } from '../ngrx/type';
 import { HALLink } from '../shared/hal-link.model';
 import { UnCacheableObject } from '../shared/uncacheable-object.model';
+import { PathableObjectError } from './response-state.model';
 import { RestRequest } from './rest-request.model';
 
 /**
@@ -15,7 +17,7 @@ export const RequestActionTypes = {
   ERROR: type('dspace/core/data/request/ERROR'),
   STALE: type('dspace/core/data/request/STALE'),
   RESET_TIMESTAMPS: type('dspace/core/data/request/RESET_TIMESTAMPS'),
-  REMOVE: type('dspace/core/data/request/REMOVE')
+  REMOVE: type('dspace/core/data/request/REMOVE'),
 };
 
 export abstract class RequestUpdateAction implements Action {
@@ -32,7 +34,7 @@ export class RequestConfigureAction extends RequestUpdateAction {
   payload: RestRequest;
 
   constructor(
-    request: RestRequest
+    request: RestRequest,
   ) {
     super();
     this.payload = request;
@@ -88,7 +90,7 @@ export class RequestSuccessAction extends RequestUpdateAction {
       timeCompleted: new Date().getTime(),
       statusCode,
       link,
-      unCacheableObject
+      unCacheableObject,
     };
   }
 }
@@ -102,7 +104,8 @@ export class RequestErrorAction extends RequestUpdateAction {
     uuid: string,
     timeCompleted: number,
     statusCode: number,
-    errorMessage: string
+    errorMessage: string,
+    errors?: PathableObjectError[]
   };
 
   /**
@@ -114,14 +117,17 @@ export class RequestErrorAction extends RequestUpdateAction {
    *    the statusCode of the response
    * @param errorMessage
    *    the error message in the response
+   * @param errors
+   *    the list of pathable errors
    */
-  constructor(uuid: string, statusCode: number, errorMessage: string) {
+  constructor(uuid: string, statusCode: number, errorMessage: string, errors?: PathableObjectError[]) {
     super();
     this.payload = {
       uuid,
       timeCompleted: new Date().getTime(),
       statusCode,
-      errorMessage
+      errorMessage,
+      errors,
     };
   }
 }

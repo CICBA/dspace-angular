@@ -1,13 +1,14 @@
-import { RootDataService } from './root-data.service';
+import { cold } from 'jasmine-marbles';
+import { Observable } from 'rxjs';
+
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import {
+  createFailedRemoteDataObject$,
   createSuccessfulRemoteDataObject$,
-  createFailedRemoteDataObject$
-} from '../../shared/remote-data.utils';
-import { Observable } from 'rxjs';
+} from '../utilities/remote-data.utils';
 import { RemoteData } from './remote-data';
 import { Root } from './root.model';
-import { cold } from 'jasmine-marbles';
+import { RootDataService } from './root-data.service';
 
 describe('RootDataService', () => {
   let service: RootDataService;
@@ -54,7 +55,7 @@ describe('RootDataService', () => {
       result$ = service.checkServerAvailability();
 
       expect(result$).toBeObservable(cold('(a|)', {
-        a: true
+        a: true,
       }));
     });
 
@@ -64,7 +65,7 @@ describe('RootDataService', () => {
       result$ = service.checkServerAvailability();
 
       expect(result$).toBeObservable(cold('(a|)', {
-        a: false
+        a: false,
       }));
     });
 

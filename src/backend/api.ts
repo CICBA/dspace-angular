@@ -1,15 +1,12 @@
-const { Router } = require('express');
-const util = require('util');
+import { Router } from 'express';
 
-// Our API for demos only
-import { fakeDataBase } from './db';
 import { fakeDemoRedisCache } from './cache';
-
-import COMMUNITIES from './data/communities.json';
-import COLLECTIONS from './data/collections.json';
-import ITEMS from './data/items.json';
-import BUNDLES from './data/bundles.json';
 import BITSTREAMS from './data/bitstreams.json';
+import BUNDLES from './data/bundles.json';
+import COLLECTIONS from './data/collections.json';
+import COMMUNITIES from './data/communities.json';
+import ITEMS from './data/items.json';
+import { fakeDataBase } from './db';
 
 // you would use cookies/token etc
 const USER_ID = 'f9d98cf1-1b96-464e-8755-bcc2a5c09077'; // hardcoded as an example
@@ -19,10 +16,10 @@ export function serverApi(req, res) {
   const key = USER_ID + '/data.json';
   const cache = fakeDemoRedisCache.get(key);
   if (cache !== undefined) {
-    console.log('/data.json Cache Hit');
+    console.info('/data.json Cache Hit');
     return res.json(cache);
   }
-  console.log('/data.json Cache Miss');
+  console.info('/data.json Cache Miss');
 
   fakeDataBase.get()
     .then((data) => {
@@ -36,12 +33,12 @@ function toHALResponse(req, data, included?) {
   const result = {
     _embedded: data,
     _links: {
-      self: req.protocol + '://' + req.get('host') + req.originalUrl
-    }
+      self: req.protocol + '://' + req.get('host') + req.originalUrl,
+    },
   };
   if (included && Array.isArray(included) && included.length > 0) {
     Object.assign(result, {
-      included: included
+      included: included,
     });
   }
   return result;
@@ -52,7 +49,7 @@ export function createMockApi() {
   const router = Router();
 
   router.route('/communities').get((req, res) => {
-    console.log('GET');
+    console.info('GET');
     // 70ms latency
     setTimeout(() => {
       res.json(toHALResponse(req, COMMUNITIES));
@@ -78,7 +75,7 @@ export function createMockApi() {
   });
 
   router.route('/collections').get((req, res) => {
-    console.log('GET');
+    console.info('GET');
     // 70ms latency
     setTimeout(() => {
       res.json(toHALResponse(req, COLLECTIONS));
@@ -104,7 +101,7 @@ export function createMockApi() {
   });
 
   router.route('/items').get((req, res) => {
-    console.log('GET');
+    console.info('GET');
     // 70ms latency
     setTimeout(() => {
       res.json(toHALResponse(req, ITEMS));
@@ -130,7 +127,7 @@ export function createMockApi() {
   });
 
   router.route('/bundles').get((req, res) => {
-    console.log('GET');
+    console.info('GET');
     // 70ms latency
     setTimeout(() => {
       res.json(toHALResponse(req, BUNDLES));
@@ -157,7 +154,7 @@ export function createMockApi() {
   });
 
   router.route('/bitstreams').get((req, res) => {
-    console.log('GET');
+    console.info('GET');
     // 70ms latency
     setTimeout(() => {
       res.json(toHALResponse(req, BITSTREAMS));

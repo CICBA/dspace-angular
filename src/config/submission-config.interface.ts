@@ -5,15 +5,26 @@ interface AutosaveConfig extends Config {
   timer: number;
 }
 
+interface DuplicateDetectionConfig extends Config {
+  alwaysShowSection: boolean;
+}
+
 interface TypeBindConfig extends Config {
   field: string;
+}
+
+export interface AuthorithyIcon {
+  source: string,
+  path: string
 }
 
 interface IconsConfig extends Config {
   metadata: MetadataIconConfig[];
   authority: {
     confidence: ConfidenceIconConfig[];
+    sourceIcons?: AuthorithyIcon[]
   };
+  iconsVisibleWithNoAuthority?: string[]
 }
 
 export interface MetadataIconConfig extends Config {
@@ -24,10 +35,12 @@ export interface MetadataIconConfig extends Config {
 export interface ConfidenceIconConfig extends Config {
   value: any;
   style: string;
+  icon: string;
 }
 
 export interface SubmissionConfig extends Config {
   autosave: AutosaveConfig;
+  duplicateDetection: DuplicateDetectionConfig;
   typeBind: TypeBindConfig;
   icons: IconsConfig;
 }

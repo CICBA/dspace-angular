@@ -1,37 +1,70 @@
-import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
-
-import { createSelector, MemoizedSelector, select, Store } from '@ngrx/store';
-import { Observable, from as observableFrom } from 'rxjs';
-import { filter, find, map, mergeMap, switchMap, take, tap, toArray } from 'rxjs/operators';
+import {
+  inject,
+  Injectable,
+} from '@angular/core';
+import { APP_CONFIG } from '@dspace/config/app-config.interface';
+import { RestRequestMethod } from '@dspace/config/rest-request-method';
+import {
+  hasNoValue,
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+} from '@dspace/shared/utils/empty.util';
+import {
+  createSelector,
+  MemoizedSelector,
+  select,
+  Store,
+} from '@ngrx/store';
 import cloneDeep from 'lodash/cloneDeep';
-import { hasValue, isEmpty, isNotEmpty, hasNoValue } from '../../shared/empty.util';
+import {
+  asapScheduler,
+  from as observableFrom,
+  Observable,
+} from 'rxjs';
+import {
+  filter,
+  find,
+  map,
+  mergeMap,
+  switchMap,
+  take,
+  tap,
+  toArray,
+} from 'rxjs/operators';
+
 import { ObjectCacheEntry } from '../cache/object-cache.reducer';
 import { ObjectCacheService } from '../cache/object-cache.service';
+import { CommitSSBAction } from '../cache/server-sync-buffer.actions';
+import { coreSelector } from '../core.selectors';
+import { CoreState } from '../core-state.model';
 import { IndexState } from '../index/index.reducer';
-import { requestIndexSelector, getUrlWithoutEmbedParams } from '../index/index.selectors';
+import {
+  getUrlWithoutEmbedParams,
+  requestIndexSelector,
+} from '../index/index.selectors';
 import { UUIDService } from '../shared/uuid.service';
 import {
   RequestConfigureAction,
   RequestExecuteAction,
-  RequestStaleAction
+  RequestStaleAction,
 } from './request.actions';
 import { GetRequest } from './request.models';
-import { CommitSSBAction } from '../cache/server-sync-buffer.actions';
-import { RestRequestMethod } from './rest-request-method';
-import { coreSelector } from '../core.selectors';
-import { isLoading, isStale } from './request-entry-state.model';
-import { RestRequest } from './rest-request.model';
-import { CoreState } from '../core-state.model';
-import { RequestState } from './request-state.model';
 import { RequestEntry } from './request-entry.model';
+import {
+  isLoading,
+  isStale,
+} from './request-entry-state.model';
+import { RequestState } from './request-state.model';
+import { RestRequest } from './rest-request.model';
 
 /**
  * The base selector function to select the request state in the store
  */
 const requestCacheSelector = createSelector(
   coreSelector,
-  (state: CoreState) => state['data/request']
+  (state: CoreState) => state['data/request'],
 );
 
 /**
@@ -42,7 +75,7 @@ const entryFromUUIDSelector = (uuid: string): MemoizedSelector<CoreState, Reques
   requestCacheSelector,
   (state: RequestState) => {
     return hasValue(state) ? state[uuid] : undefined;
-  }
+  },
 );
 
 /**
@@ -65,7 +98,7 @@ const entryFromHrefSelector = (href: string): MemoizedSelector<CoreState, Reques
     } else {
       return undefined;
     }
-  }
+  },
 );
 
 /**
@@ -77,7 +110,7 @@ const entryFromHrefSelector = (href: string): MemoizedSelector<CoreState, Reques
 const uuidsFromHrefSubstringSelector =
   (selector: MemoizedSelector<CoreState, IndexState>, href: string): MemoizedSelector<CoreState, string[]> => createSelector(
     selector,
-    (state: IndexState) => getUuidsFromHrefSubstring(state, href)
+    (state: IndexState) => getUuidsFromHrefSubstring(state, href),
   );
 
 /**
@@ -93,51 +126,54 @@ const getUuidsFromHrefSubstring = (state: IndexState, href: string): string[] =>
   return result;
 };
 
-/**
- * Check whether a cached entry exists and isn't stale
- *
- * @param entry
- *    the entry to check
- * @return boolean
- *    false if the entry has no value, or its time to live has exceeded,
- *    true otherwise
- */
-const isValid = (entry: RequestEntry): boolean => {
-  if (hasNoValue(entry)) {
-    // undefined entries are invalid
-    return false;
-  } else {
-    if (isLoading(entry.state)) {
-      // entries that are still loading are always valid
-      return true;
-    } else {
-      if (isStale(entry.state)) {
-        // entries that are stale are always invalid
-        return false;
-      } else {
-        // check whether it should be stale
-        const timeOutdated = entry.response.timeCompleted + entry.request.responseMsToLive;
-        const now = new Date().getTime();
-        const isOutDated = now > timeOutdated;
-        return !isOutDated;
-      }
-    }
-  }
-};
+
 
 /**
  * A service to interact with the request state in the store
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RequestService {
   private requestsOnTheirWayToTheStore: string[] = [];
+  private defaultResponseMsToLive = inject(APP_CONFIG).cache.msToLive.default;
+
 
   constructor(private objectCache: ObjectCacheService,
               private uuidService: UUIDService,
               private store: Store<CoreState>) {
   }
+  /**
+   * Check whether a cached entry exists and isn't stale
+   *
+   * @param entry
+   *    the entry to check
+   * @return boolean
+   *    false if the entry has no value, or its time to live has exceeded,
+   *    true otherwise
+   */
+  isValid = (entry: RequestEntry): boolean => {
+    if (hasNoValue(entry)) {
+      // undefined entries are invalid
+      return false;
+    } else {
+      if (isLoading(entry.state)) {
+        // entries that are still loading are always valid
+        return true;
+      } else {
+        if (isStale(entry.state)) {
+          // entries that are stale are always invalid
+          return false;
+        } else {
+          // check whether it should be stale
+          const timeOutdated = entry.response.timeCompleted + (entry.request.responseMsToLive ?? this.defaultResponseMsToLive);
+          const now = new Date().getTime();
+          const isOutDated = now > timeOutdated;
+          return !isOutDated;
+        }
+      }
+    }
+  };
 
   generateRequestId(): string {
     return `client/${this.uuidService.generate()}`;
@@ -175,7 +211,7 @@ export class RequestService {
     return this.store.pipe(
       select(entryFromUUIDSelector(uuid)),
       this.fixRequestHeaders(),
-      this.checkStale()
+      this.checkStale(),
     );
   }
 
@@ -187,14 +223,14 @@ export class RequestService {
   private fixRequestHeaders() {
     return (source: Observable<RequestEntry>): Observable<RequestEntry> => {
       return source.pipe(map((entry: RequestEntry) => {
-          // Headers break after being retrieved from the store (because of lazy initialization)
-          // Combining them with a new object fixes this issue
-          if (hasValue(entry) && hasValue(entry.request) && hasValue(entry.request.options) && hasValue(entry.request.options.headers)) {
-            entry = cloneDeep(entry);
-            entry.request.options.headers = Object.assign(new HttpHeaders(), entry.request.options.headers);
-          }
-          return entry;
-        })
+        // Headers break after being retrieved from the store (because of lazy initialization)
+        // Combining them with a new object fixes this issue
+        if (hasValue(entry) && hasValue(entry.request) && hasValue(entry.request.options) && hasValue(entry.request.options.headers)) {
+          entry = cloneDeep(entry);
+          entry.request.options.headers = Object.assign(new HttpHeaders(), entry.request.options.headers);
+        }
+        return entry;
+      }),
       );
     };
   }
@@ -208,10 +244,10 @@ export class RequestService {
     return (source: Observable<RequestEntry>): Observable<RequestEntry> => {
       return source.pipe(
         tap((entry: RequestEntry) => {
-          if (hasValue(entry) && hasValue(entry.request) && !isStale(entry.state) && !isValid(entry)) {
-            this.store.dispatch(new RequestStaleAction(entry.request.uuid));
+          if (hasValue(entry) && hasValue(entry.request) && !isStale(entry.state) && !this.isValid(entry)) {
+            asapScheduler.schedule(() => this.store.dispatch(new RequestStaleAction(entry.request.uuid)));
           }
-        })
+        }),
       );
     };
   }
@@ -223,7 +259,7 @@ export class RequestService {
     return this.store.pipe(
       select(entryFromHrefSelector(href)),
       this.fixRequestHeaders(),
-      this.checkStale()
+      this.checkStale(),
     );
   }
 
@@ -304,7 +340,7 @@ export class RequestService {
   setStaleByHrefSubstring(href: string): Observable<boolean> {
     const requestUUIDs$ = this.store.pipe(
       select(uuidsFromHrefSubstringSelector(requestIndexSelector, href)),
-      take(1)
+      take(1),
     );
     requestUUIDs$.subscribe((uuids: string[]) => {
       for (const uuid of uuids) {
@@ -331,10 +367,10 @@ export class RequestService {
             // after all observables above are completed, emit them as a single array
             toArray(),
             // when the array comes in, emit true
-            map(() => true)
+            map(() => true),
           );
         }
-      })
+      }),
     );
   }
 
@@ -362,6 +398,7 @@ export class RequestService {
     const requestEntry$ = this.getByHref(href);
 
     requestEntry$.pipe(
+      filter((re: RequestEntry) => isNotEmpty(re)),
       map((re: RequestEntry) => re.request.uuid),
       take(1),
     ).subscribe((uuid: string) => {
@@ -371,7 +408,7 @@ export class RequestService {
     return requestEntry$.pipe(
       map((request: RequestEntry) => isStale(request.state)),
       filter((stale: boolean) => stale),
-      take(1)
+      take(1),
     );
   }
 
@@ -417,8 +454,10 @@ export class RequestService {
    * @param {RestRequest} request to dispatch
    */
   private dispatchRequest(request: RestRequest) {
-    this.store.dispatch(new RequestConfigureAction(request));
-    this.store.dispatch(new RequestExecuteAction(request.uuid));
+    asapScheduler.schedule(() => {
+      this.store.dispatch(new RequestConfigureAction(request));
+      this.store.dispatch(new RequestExecuteAction(request.uuid));
+    });
   }
 
   /**
@@ -432,7 +471,7 @@ export class RequestService {
     this.requestsOnTheirWayToTheStore = [...this.requestsOnTheirWayToTheStore, request.href];
     this.getByHref(request.href).pipe(
       filter((re: RequestEntry) => hasValue(re) && hasValue(re.request) && re.request.uuid === request.uuid),
-      take(1)
+      take(1),
     ).subscribe((re: RequestEntry) => {
       this.requestsOnTheirWayToTheStore = this.requestsOnTheirWayToTheStore.filter((pendingHref: string) => pendingHref !== request.href);
     });
@@ -479,7 +518,7 @@ export class RequestService {
    */
   hasByHref$(href: string, checkValidity = true): Observable<boolean> {
     return this.getByHref(href).pipe(
-      map((requestEntry: RequestEntry) => checkValidity ? isValid(requestEntry) : hasValue(requestEntry))
+      map((requestEntry: RequestEntry) => checkValidity ? this.isValid(requestEntry) : hasValue(requestEntry)),
     );
   }
 
@@ -516,7 +555,7 @@ export class RequestService {
    */
   hasByUUID$(uuid: string, checkValidity = true): Observable<boolean> {
     return this.getByUUID(uuid).pipe(
-      map((requestEntry: RequestEntry) => checkValidity ? isValid(requestEntry) : hasValue(requestEntry))
+      map((requestEntry: RequestEntry) => checkValidity ? this.isValid(requestEntry) : hasValue(requestEntry)),
     );
   }
 

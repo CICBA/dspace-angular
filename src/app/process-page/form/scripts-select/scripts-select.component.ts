@@ -1,18 +1,45 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output } from '@angular/core';
-import { ScriptDataService } from '../../../core/data/processes/script-data.service';
-import { Script } from '../../scripts/script.model';
-import { BehaviorSubject, Subscription, tap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
 import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
+} from '@angular/core';
+import {
+  ControlContainer,
+  FormsModule,
+  NgForm,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { FindListOptions } from '@dspace/core/data/find-list-options.model';
+import { PaginatedList } from '@dspace/core/data/paginated-list.model';
+import { ScriptDataService } from '@dspace/core/data/processes/script-data.service';
+import {
+  getFirstCompletedRemoteData,
   getRemoteDataPayload,
-  getFirstCompletedRemoteData
-} from '../../../core/shared/operators';
-import { PaginatedList } from '../../../core/data/paginated-list.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { hasValue } from '../../../shared/empty.util';
-import { ControlContainer, NgForm } from '@angular/forms';
-import { controlContainerFactory } from '../process-form.component';
-import { FindListOptions } from '../../../core/data/find-list-options.model';
+} from '@dspace/core/shared/operators';
+import { Script } from '@dspace/core/shared/scripts/script.model';
+import { hasValue } from '@dspace/shared/utils/empty.util';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {
+  BehaviorSubject,
+  Subscription,
+} from 'rxjs';
+import {
+  map,
+  tap,
+} from 'rxjs/operators';
+
+import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
+import { controlContainerFactory } from '../process-form-factory';
 
 const SCRIPT_QUERY_PARAMETER = 'script';
 
@@ -23,9 +50,17 @@ const SCRIPT_QUERY_PARAMETER = 'script';
   selector: 'ds-scripts-select',
   templateUrl: './scripts-select.component.html',
   styleUrls: ['./scripts-select.component.scss'],
-  viewProviders: [ { provide: ControlContainer,
+  viewProviders: [{ provide: ControlContainer,
     useFactory: controlContainerFactory,
-    deps: [[new Optional(), NgForm]] } ]
+    deps: [[new Optional(), NgForm]] }],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    InfiniteScrollModule,
+    NgbDropdownModule,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 export class ScriptsSelectComponent implements OnInit, OnDestroy {
   /**
@@ -38,7 +73,7 @@ export class ScriptsSelectComponent implements OnInit, OnDestroy {
   scripts: Script[] = [];
 
   private _selectedScript: Script;
-  private routeSub: Subscription;
+  private subscription: Subscription;
 
   private _isLastPage = false;
 
@@ -71,7 +106,7 @@ export class ScriptsSelectComponent implements OnInit, OnDestroy {
     if (this.isLoading$.value) {return;}
     this.isLoading$.next(true);
 
-    this.routeSub = this.scriptService.findAll(this.scriptOptions).pipe(
+    this.subscription = this.scriptService.findAll(this.scriptOptions).pipe(
       getFirstCompletedRemoteData(),
       getRemoteDataPayload(),
       tap((paginatedList: PaginatedList<Script>) => {
@@ -95,7 +130,9 @@ export class ScriptsSelectComponent implements OnInit, OnDestroy {
    * @param event The scroll event
    */
   onScroll(event: any) {
-    if (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight) {
+    // offset to fix issues with zooming in or out in the browser
+    const offset = 5;
+    if (event.target.scrollTop + event.target.clientHeight + offset >= event.target.scrollHeight) {
       if (!this.isLoading$.value && !this._isLastPage) {
         this.scriptOptions.currentPage++;
         this.loadScripts();
@@ -118,7 +155,7 @@ export class ScriptsSelectComponent implements OnInit, OnDestroy {
     this.router.navigate([],
       {
         queryParams: { [SCRIPT_QUERY_PARAMETER]: value },
-      }
+      },
     );
   }
 
@@ -135,12 +172,12 @@ export class ScriptsSelectComponent implements OnInit, OnDestroy {
 
   @Input()
   set script(value: Script) {
-     this._selectedScript = value;
+    this._selectedScript = value;
   }
 
   ngOnDestroy(): void {
-    if (hasValue(this.routeSub)) {
-      this.routeSub.unsubscribe();
+    if (hasValue(this.subscription)) {
+      this.subscription.unsubscribe();
     }
   }
 }

@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
-import { isEmpty, hasNoValue } from './empty.util';
-import { ConfigurationDataService } from '../core/data/configuration-data.service';
-import { getFirstCompletedRemoteData } from '../core/shared/operators';
-import { map, take } from 'rxjs/operators';
-import { ConfigurationProperty } from '../core/shared/configuration-property.model';
-import { Observable, of as observableOf } from 'rxjs';
-import { RemoteData } from '../core/data/remote-data';
+import { ConfigurationDataService } from '@dspace/core/data/configuration-data.service';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { ConfigurationProperty } from '@dspace/core/shared/configuration-property.model';
+import { getFirstCompletedRemoteData } from '@dspace/core/shared/operators';
+import {
+  hasNoValue,
+  isEmpty,
+} from '@dspace/shared/utils/empty.util';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  map,
+  take,
+} from 'rxjs/operators';
 
 export const CANONICAL_PREFIX_KEY = 'handle.canonical.prefix';
 
@@ -16,7 +25,7 @@ const PREFIX_REGEX = (prefix: string | undefined) => {
 const NO_PREFIX_REGEX = /^([^\/]+\/[^\/]+)$/;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HandleService {
 
@@ -43,7 +52,7 @@ export class HandleService {
    */
   normalizeHandle(handle: string): Observable<string | null> {
     if (hasNoValue(handle)) {
-      return observableOf(null);
+      return of(null);
     }
     return this.configurationService.findByPropertyName(CANONICAL_PREFIX_KEY).pipe(
       getFirstCompletedRemoteData(),

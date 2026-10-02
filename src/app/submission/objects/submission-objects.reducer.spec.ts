@@ -1,7 +1,17 @@
-import { submissionObjectReducer, SubmissionObjectState } from './submission-objects.reducer';
+import { Item } from '@dspace/core/shared/item.model';
+import { SectionsType } from '@dspace/core/submission/sections-type';
+
+import {
+  mockSubmissionCollectionId,
+  mockSubmissionDefinitionResponse,
+  mockSubmissionId,
+  mockSubmissionSelfUrl,
+  mockSubmissionState,
+} from '../utils/submission.mock';
 import {
   CancelSubmissionFormAction,
   ChangeSubmissionCollectionAction,
+  CleanDuplicateDetectionAction,
   CompleteInitSubmissionFormAction,
   DeleteSectionErrorsAction,
   DeleteUploadedFileAction,
@@ -9,6 +19,7 @@ import {
   DepositSubmissionErrorAction,
   DepositSubmissionSuccessAction,
   DisableSectionAction,
+  DisableSectionSuccessAction,
   DiscardSubmissionAction,
   DiscardSubmissionSuccessAction,
   EditFileDataAction,
@@ -30,17 +41,13 @@ import {
   SaveSubmissionSectionFormSuccessAction,
   SectionStatusChangeAction,
   SubmissionObjectAction,
-  UpdateSectionDataAction
+  UpdateSectionDataAction,
+  UpdateSectionErrorsAction,
 } from './submission-objects.actions';
-import { SectionsType } from '../sections/sections-type';
 import {
-  mockSubmissionCollectionId,
-  mockSubmissionDefinitionResponse,
-  mockSubmissionId,
-  mockSubmissionSelfUrl,
-  mockSubmissionState
-} from '../../shared/mocks/submission.mock';
-import { Item } from '../../core/shared/item.model';
+  submissionObjectReducer,
+  SubmissionObjectState,
+} from './submission-objects.reducer';
 
 describe('submissionReducer test suite', () => {
 
@@ -48,6 +55,20 @@ describe('submissionReducer test suite', () => {
   const submissionId = mockSubmissionId;
   const submissionDefinition = mockSubmissionDefinitionResponse;
   const selfUrl = mockSubmissionSelfUrl;
+  const metadataSecurityConfiguration = {
+    'uuid': null,
+    'metadataSecurityDefault': [
+      0,
+      1,
+    ],
+    'metadataCustomSecurity': {},
+    'type': 'securitysetting',
+    '_links': {
+      'self': {
+        'href': 'http://localhost:8080/server/api/core/securitysettings',
+      },
+    },
+  };
 
   let initState: any;
 
@@ -64,12 +85,15 @@ describe('submissionReducer test suite', () => {
         activeSection: null,
         sections: Object.create(null),
         isLoading: true,
+        isDiscarding: false,
         savePending: false,
+        saveDecisionPending: false,
         depositPending: false,
-      }
+        metadataSecurityConfiguration: metadataSecurityConfiguration as any,
+      },
     };
 
-    const action = new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, {}, new Item(), null);
+    const action = new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, {}, new Item(), null, metadataSecurityConfiguration as any);
     const newState = submissionObjectReducer({}, action);
 
     expect(newState).toEqual(expectedState);
@@ -78,8 +102,8 @@ describe('submissionReducer test suite', () => {
   it('should complete submission initialization', () => {
     const state = Object.assign({}, initState, {
       [submissionId]: Object.assign({}, initState[submissionId], {
-        isLoading: true
-      })
+        isLoading: true,
+      }),
     });
 
     const action = new CompleteInitSubmissionFormAction(submissionId);
@@ -97,14 +121,14 @@ describe('submissionReducer test suite', () => {
         activeSection: null,
         sections: Object.create(null),
         isLoading: true,
+        isDiscarding: false,
         savePending: false,
         depositPending: false,
-      }
+      },
     };
 
-    const action = new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, {}, submissionDefinition, new Item());
+    const action = new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, {}, submissionDefinition, new Item(), metadataSecurityConfiguration);
     const newState = submissionObjectReducer(initState, action);
-
     expect(newState).toEqual(expectedState);
   });
 
@@ -143,7 +167,7 @@ describe('submissionReducer test suite', () => {
     const state = Object.assign({}, initState, {
       [submissionId]: Object.assign({}, initState[submissionId], {
         savePending: true,
-      })
+      }),
     });
 
     let action: any = new SaveSubmissionFormSuccessAction(submissionId, []);
@@ -156,7 +180,7 @@ describe('submissionReducer test suite', () => {
 
     expect(newState[826].savePending).toBeFalsy();
 
-    action = new SaveSubmissionFormErrorAction(submissionId);
+    action = new SaveSubmissionFormErrorAction(submissionId, undefined, undefined);
     newState = submissionObjectReducer(state, action);
 
     expect(newState[826].savePending).toBeFalsy();
@@ -166,7 +190,7 @@ describe('submissionReducer test suite', () => {
 
     expect(newState[826].savePending).toBeFalsy();
 
-    action = new SaveSubmissionSectionFormErrorAction(submissionId);
+    action = new SaveSubmissionSectionFormErrorAction(submissionId, undefined, undefined);
     newState = submissionObjectReducer(state, action);
 
     expect(newState[826].savePending).toBeFalsy();
@@ -191,7 +215,7 @@ describe('submissionReducer test suite', () => {
     const state = Object.assign({}, initState, {
       [submissionId]: Object.assign({}, initState[submissionId], {
         depositPending: true,
-      })
+      }),
     });
 
     const action: any = new DepositSubmissionSuccessAction(submissionId);
@@ -217,8 +241,7 @@ describe('submissionReducer test suite', () => {
   it('should reset state once the discard action is completed successfully', () => {
     const action: any = new DiscardSubmissionSuccessAction(submissionId);
     const newState = submissionObjectReducer(initState, action);
-
-    expect(newState).toEqual({});
+    expect(newState).toEqual(Object.assign({}, initState, { 826: Object.assign({}, initState[826], { isDiscarding: true }) }));
   });
 
   it('should return same state once the discard action is completed unsuccessfully', () => {
@@ -233,6 +256,7 @@ describe('submissionReducer test suite', () => {
       header: 'submit.progressbar.describe.stepone',
       config: 'https://rest.api/dspace-spring-rest/api/config/submissionforms/traditionalpageone',
       mandatory: true,
+      scope: null,
       sectionType: 'submission-form',
       visibility: undefined,
       collapsed: false,
@@ -241,7 +265,8 @@ describe('submissionReducer test suite', () => {
       errorsToShow: [],
       serverValidationErrors: [],
       isLoading: false,
-      isValid: true
+      isValid: true,
+      removePending: false,
     } as any;
 
     let action: any = new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, {}, new Item(), null);
@@ -253,6 +278,7 @@ describe('submissionReducer test suite', () => {
       'submit.progressbar.describe.stepone',
       'https://rest.api/dspace-spring-rest/api/config/submissionforms/traditionalpageone',
       true,
+      null,
       SectionsType.SubmissionForm,
       undefined,
       true,
@@ -273,7 +299,7 @@ describe('submissionReducer test suite', () => {
     expect(newState[826].sections.traditionalpagetwo.enabled).toBeTruthy();
   });
 
-  it('should enable submission section properly', () => {
+  it('should disable submission section properly', () => {
 
     let action: SubmissionObjectAction = new EnableSectionAction(submissionId, 'traditionalpagetwo');
     let newState = submissionObjectReducer(initState, action);
@@ -281,6 +307,13 @@ describe('submissionReducer test suite', () => {
     action = new DisableSectionAction(submissionId, 'traditionalpagetwo');
     newState = submissionObjectReducer(newState, action);
 
+    expect(newState[826].sections.traditionalpagetwo.removePending).toBeTruthy();
+    expect(newState[826].sections.traditionalpagetwo.enabled).toBeTruthy();
+
+    action = new DisableSectionSuccessAction(submissionId, 'traditionalpagetwo');
+    newState = submissionObjectReducer(newState, action);
+
+    expect(newState[826].sections.traditionalpagetwo.removePending).toBeFalsy();
     expect(newState[826].sections.traditionalpagetwo.enabled).toBeFalsy();
   });
 
@@ -306,8 +339,8 @@ describe('submissionReducer test suite', () => {
           authority: null,
           display: 'Author, Test',
           confidence: -1,
-          place: 0
-        }
+          place: 0,
+        },
       ],
       'dc.title': [
         {
@@ -316,8 +349,8 @@ describe('submissionReducer test suite', () => {
           authority: null,
           display: 'Title Test',
           confidence: -1,
-          place: 0
-        }
+          place: 0,
+        },
       ],
       'dc.date.issued': [
         {
@@ -326,9 +359,9 @@ describe('submissionReducer test suite', () => {
           authority: null,
           display: '2015',
           confidence: -1,
-          place: 0
-        }
-      ]
+          place: 0,
+        },
+      ],
     } as any;
 
     const action = new UpdateSectionDataAction(submissionId, 'traditionalpageone', data, [], []);
@@ -352,14 +385,29 @@ describe('submissionReducer test suite', () => {
     const errors = [
       {
         path: '/sections/license',
-        message: 'error.validation.license.notgranted'
-      }
+        message: 'error.validation.license.notgranted',
+      },
     ];
 
     const action = new UpdateSectionDataAction(submissionId, 'traditionalpageone', {}, errors, errors);
     const newState = submissionObjectReducer(initState, action);
 
     expect(newState[826].sections.traditionalpageone.errorsToShow).toEqual(errors);
+  });
+
+  it('should add submission section errors properly', () => {
+    const errors = [
+      {
+        path: '/sections/traditionalpageone/dc.title/0',
+        message: 'error.validation.traditionalpageone.required',
+      },
+    ];
+
+    const action = new UpdateSectionErrorsAction(submissionId, 'traditionalpageone', errors, errors);
+    const newState = submissionObjectReducer(initState, action);
+
+    expect(newState[826].sections.traditionalpageone.errorsToShow).toEqual(errors);
+    expect(newState[826].savePending).toBeFalsy();
   });
 
   it('should remove all submission section errors properly', () => {
@@ -374,7 +422,7 @@ describe('submissionReducer test suite', () => {
   it('should add submission section error properly', () => {
     const error = {
       path: '/sections/traditionalpageone/dc.title/0',
-      message: 'error.validation.traditionalpageone.required'
+      message: 'error.validation.traditionalpageone.required',
     };
 
     const action = new InertSectionErrorsAction(submissionId, 'traditionalpageone', error);
@@ -387,21 +435,21 @@ describe('submissionReducer test suite', () => {
     const errors = [
       {
         path: '/sections/traditionalpageone/dc.contributor.author',
-        message: 'error.validation.required'
+        message: 'error.validation.required',
       },
       {
         path: '/sections/traditionalpageone/dc.date.issued',
-        message: 'error.validation.required'
-      }
+        message: 'error.validation.required',
+      },
     ];
     const error = {
       path: '/sections/traditionalpageone/dc.contributor.author',
-      message: 'error.validation.required'
+      message: 'error.validation.required',
     };
 
     const expectedErrors = [{
       path: '/sections/traditionalpageone/dc.date.issued',
-      message: 'error.validation.required'
+      message: 'error.validation.required',
     }];
 
     let action: any = new UpdateSectionDataAction(submissionId, 'traditionalpageone', {}, errors, errors);
@@ -433,9 +481,9 @@ describe('submissionReducer test suite', () => {
             authority: null,
             display: '28297_389341539060_6452876_n.jpg',
             confidence: -1,
-            place: 0
-          }
-        ]
+            place: 0,
+          },
+        ],
       },
       accessConditions: [],
       format: {
@@ -446,17 +494,17 @@ describe('submissionReducer test suite', () => {
         supportLevel: 0,
         internal: false,
         extensions: null,
-        type: 'bitstreamformat'
+        type: 'bitstreamformat',
       },
       sizeBytes: 22737,
       checkSum: {
         checkSumAlgorithm: 'MD5',
-        value: '8722864dd671912f94a999ac7c4949d2'
+        value: '8722864dd671912f94a999ac7c4949d2',
       },
-      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/8cd86fba-70c8-483d-838a-70d28e7ed570/content'
+      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/8cd86fba-70c8-483d-838a-70d28e7ed570/content',
     };
     const expectedState = {
-      files: [fileData]
+      files: [fileData],
     };
 
     const action = new NewUploadedFileAction(submissionId, 'upload', uuid, fileData);
@@ -478,9 +526,9 @@ describe('submissionReducer test suite', () => {
             authority: null,
             display: 'image_test.jpg',
             confidence: -1,
-            place: 0
-          }
-        ]
+            place: 0,
+          },
+        ],
       },
       accessConditions: [],
       format: {
@@ -491,14 +539,14 @@ describe('submissionReducer test suite', () => {
         supportLevel: 0,
         internal: false,
         extensions: null,
-        type: 'bitstreamformat'
+        type: 'bitstreamformat',
       },
       sizeBytes: 22737,
       checkSum: {
         checkSumAlgorithm: 'MD5',
-        value: '8722864dd671912f94a999ac7c4949d2'
+        value: '8722864dd671912f94a999ac7c4949d2',
       },
-      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/8cd86fba-70c8-483d-838a-70d28e7ed570/content'
+      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/8cd86fba-70c8-483d-838a-70d28e7ed570/content',
     };
     const fileData2: any = {
       uuid: uuid2,
@@ -510,9 +558,9 @@ describe('submissionReducer test suite', () => {
             authority: null,
             display: 'image_test.jpg',
             confidence: -1,
-            place: 0
-          }
-        ]
+            place: 0,
+          },
+        ],
       },
       accessConditions: [],
       format: {
@@ -523,14 +571,14 @@ describe('submissionReducer test suite', () => {
         supportLevel: 0,
         internal: false,
         extensions: null,
-        type: 'bitstreamformat'
+        type: 'bitstreamformat',
       },
       sizeBytes: 22737,
       checkSum: {
         checkSumAlgorithm: 'MD5',
-        value: '8722864dd671912f94a999ac7c4949d2'
+        value: '8722864dd671912f94a999ac7c4949d2',
       },
-      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/7e2f4ba9-9316-41fd-844a-1ef435f41a42/content'
+      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/7e2f4ba9-9316-41fd-844a-1ef435f41a42/content',
     };
 
     const state: SubmissionObjectState = Object.assign({}, initState, {
@@ -538,15 +586,15 @@ describe('submissionReducer test suite', () => {
         sections: Object.assign({}, initState[submissionId].sections, {
           upload: Object.assign({}, initState[submissionId].sections.upload, {
             data: {
-              files: [fileData, fileData2]
-            }
-          })
-        })
-      })
+              files: [fileData, fileData2],
+            },
+          }),
+        }),
+      }),
     });
 
     const expectedState = {
-      files: [fileData]
+      files: [fileData],
     };
 
     const action = new DeleteUploadedFileAction(submissionId, 'upload', uuid2);
@@ -567,9 +615,9 @@ describe('submissionReducer test suite', () => {
             authority: null,
             display: 'image_test.jpg',
             confidence: -1,
-            place: 0
-          }
-        ]
+            place: 0,
+          },
+        ],
       },
       accessConditions: [],
       format: {
@@ -580,14 +628,14 @@ describe('submissionReducer test suite', () => {
         supportLevel: 0,
         internal: false,
         extensions: null,
-        type: 'bitstreamformat'
+        type: 'bitstreamformat',
       },
       sizeBytes: 22737,
       checkSum: {
         checkSumAlgorithm: 'MD5',
-        value: '8722864dd671912f94a999ac7c4949d2'
+        value: '8722864dd671912f94a999ac7c4949d2',
       },
-      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/8cd86fba-70c8-483d-838a-70d28e7ed570/content'
+      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/8cd86fba-70c8-483d-838a-70d28e7ed570/content',
     };
     const fileData2: any = {
       uuid: uuid,
@@ -599,9 +647,9 @@ describe('submissionReducer test suite', () => {
             authority: null,
             display: 'New title',
             confidence: -1,
-            place: 0
-          }
-        ]
+            place: 0,
+          },
+        ],
       },
       accessConditions: [],
       format: {
@@ -612,14 +660,14 @@ describe('submissionReducer test suite', () => {
         supportLevel: 0,
         internal: false,
         extensions: null,
-        type: 'bitstreamformat'
+        type: 'bitstreamformat',
       },
       sizeBytes: 22737,
       checkSum: {
         checkSumAlgorithm: 'MD5',
-        value: '8722864dd671912f94a999ac7c4949d2'
+        value: '8722864dd671912f94a999ac7c4949d2',
       },
-      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/7e2f4ba9-9316-41fd-844a-1ef435f41a42/content'
+      url: 'https://rest.api/dspace-spring-rest/api/core/bitstreams/7e2f4ba9-9316-41fd-844a-1ef435f41a42/content',
     };
 
     const state: SubmissionObjectState = Object.assign({}, initState, {
@@ -627,21 +675,37 @@ describe('submissionReducer test suite', () => {
         sections: Object.assign({}, initState[submissionId].sections, {
           upload: Object.assign({}, initState[submissionId].sections.upload, {
             data: {
-              files: [fileData]
-            }
-          })
-        })
-      })
+              files: [fileData],
+            },
+          }),
+        }),
+      }),
     });
 
     const expectedState = {
-      files: [fileData2]
+      files: [fileData2],
     };
 
     const action = new EditFileDataAction(submissionId, 'upload', uuid, fileData2);
     const newState = submissionObjectReducer(state, action);
 
     expect(newState[826].sections.upload.data).toEqual(expectedState);
+  });
+
+  it('should enable duplicates section properly', () => {
+
+    let action: SubmissionObjectAction = new EnableSectionAction(submissionId, 'duplicates');
+    let newState = submissionObjectReducer(initState, action);
+
+    expect(newState[826].sections.duplicates.enabled).toBeTruthy();
+  });
+
+  it('should clean duplicates section properly', () => {
+
+    let action = new CleanDuplicateDetectionAction(submissionId);
+    let newState = submissionObjectReducer(initState, action);
+
+    expect(newState[826].sections.duplicates.enabled).toBeFalsy();
   });
 
 });

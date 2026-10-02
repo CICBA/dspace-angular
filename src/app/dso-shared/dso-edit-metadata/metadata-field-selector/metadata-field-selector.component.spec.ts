@@ -1,18 +1,29 @@
-import { MetadataFieldSelectorComponent } from './metadata-field-selector.component';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { VarDirective } from '../../../shared/utils/var.directive';
-import { TranslateModule } from '@ngx-translate/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RegistryService } from '../../../core/registry/registry.service';
-import { MetadataField } from '../../../core/metadata/metadata-field.model';
-import { MetadataSchema } from '../../../core/metadata/metadata-schema.model';
-import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
-import { createPaginatedList } from '../../../shared/testing/utils.test';
-import { followLink } from '../../../shared/utils/follow-link-config.model';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { SortDirection, SortOptions } from '../../../core/cache/models/sort-options.model';
+import { RouterTestingModule } from '@angular/router/testing';
+import {
+  SortDirection,
+  SortOptions,
+} from '@dspace/core/cache/models/sort-options.model';
+import { MetadataField } from '@dspace/core/metadata/metadata-field.model';
+import { MetadataSchema } from '@dspace/core/metadata/metadata-schema.model';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { followLink } from '@dspace/core/shared/follow-link-config.model';
+import { createPaginatedList } from '@dspace/core/testing/utils.test';
+import {
+  createFailedRemoteDataObject$,
+  createSuccessfulRemoteDataObject$,
+} from '@dspace/core/utilities/remote-data.utils';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { RegistryService } from '../../../admin/admin-registries/registry/registry.service';
+import { VarDirective } from '../../../shared/utils/var.directive';
+import { MetadataFieldSelectorComponent } from './metadata-field-selector.component';
 
 describe('MetadataFieldSelectorComponent', () => {
   let component: MetadataFieldSelectorComponent;
@@ -52,13 +63,12 @@ describe('MetadataFieldSelectorComponent', () => {
     notificationsService = jasmine.createSpyObj('notificationsService', ['error', 'success']);
 
     TestBed.configureTestingModule({
-      declarations: [MetadataFieldSelectorComponent, VarDirective],
-      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([])],
+      imports: [TranslateModule.forRoot(), RouterTestingModule.withRoutes([]), MetadataFieldSelectorComponent, VarDirective],
       providers: [
         { provide: RegistryService, useValue: registryService },
         { provide: NotificationsService, useValue: notificationsService },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -104,6 +114,14 @@ describe('MetadataFieldSelectorComponent', () => {
         expect(fixture.debugElement.query(By.css('.invalid-feedback'))).toBeTruthy();
         done();
       });
+    });
+
+    it('should sort the fields by name to ensure the one without a qualifier is first', () => {
+      component.mdField = 'dc.relation';
+
+      component.validate();
+
+      expect(registryService.queryMetadataFields).toHaveBeenCalledWith('dc.relation', { elementsPerPage: 20, sort: new SortOptions('fieldName', SortDirection.ASC), currentPage: 1 }, true, false, followLink('schema'));
     });
 
     describe('when querying the metadata fields returns an error response', () => {

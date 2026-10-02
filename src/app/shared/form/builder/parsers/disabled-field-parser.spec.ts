@@ -1,8 +1,9 @@
-import { FormFieldModel } from '../models/form-field.model';
-import { ParserOptions } from './parser-options';
-import { DisabledFieldParser } from './disabled-field-parser';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { getMockTranslateService } from '@dspace/core/testing/translate.service.mock';
+
 import { DynamicDisabledModel } from '../ds-dynamic-form-ui/models/disabled/dynamic-disabled.model';
-import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
+import { DisabledFieldParser } from './disabled-field-parser';
+import { ParserOptions } from './parser-options';
 
 describe('DisabledFieldParser test suite', () => {
   let field: FormFieldModel;
@@ -14,13 +15,14 @@ describe('DisabledFieldParser test suite', () => {
     readOnly: false,
     submissionScope: null,
     collectionUUID: null,
-    typeField: 'dc_type'
+    typeField: 'dc_type',
+    isInnerForm: false,
   };
 
   beforeEach(() => {
     field = {
       input: {
-        type: ''
+        type: '',
       },
       label: 'Description',
       mandatory: 'false',
@@ -28,22 +30,22 @@ describe('DisabledFieldParser test suite', () => {
       hints: 'Enter a description.',
       selectableMetadata: [
         {
-          metadata: 'description'
-        }
+          metadata: 'description',
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
   });
 
   it('should init parser properly', () => {
-    const parser = new DisabledFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new DisabledFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     expect(parser instanceof DisabledFieldParser).toBe(true);
   });
 
   it('should return a DynamicDisabledModel object when repeatable option is false', () => {
-    const parser = new DisabledFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new DisabledFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 
@@ -58,7 +60,7 @@ describe('DisabledFieldParser test suite', () => {
     };
     const expectedValue = 'test description';
 
-    const parser = new DisabledFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new DisabledFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
     expect(fieldModel.value.value).toEqual(expectedValue);

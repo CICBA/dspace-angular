@@ -1,6 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
-// eslint-disable-next-line import/no-namespace
-import * as fileSize from 'filesize';
+import {
+  Pipe,
+  PipeTransform,
+} from '@angular/core';
+import { LocaleService } from '@dspace/core/locale/locale.service';
+import { filesize } from 'filesize';
+import { take } from 'rxjs/operators';
 
 /*
  * Convert bytes into largest possible unit.
@@ -12,9 +16,24 @@ import * as fileSize from 'filesize';
  *   formats to: 1 KB
  */
 
-@Pipe({ name: 'dsFileSize' })
+@Pipe({
+  name: 'dsFileSize',
+})
 export class FileSizePipe implements PipeTransform {
+
+  private currentLocale: string;
+
+  constructor(private localeService: LocaleService) {
+    this.localeService.getCurrentLanguageCode().pipe(take(1)).subscribe(locale => {
+      this.currentLocale = locale;
+    });
+  }
+
   transform(bytes: number = 0, precision: number = 2): string {
-    return fileSize(bytes, { standard: 'jedec', round: precision });
+    return filesize(bytes, {
+      standard: 'jedec',
+      round: precision,
+      locale: this.currentLocale,
+    });
   }
 }

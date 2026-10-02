@@ -1,9 +1,17 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
+import {
+  Router,
+  RouterLink,
+} from '@angular/router';
+import { isNotEmpty } from '@dspace/shared/utils/empty.util';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { LinkMenuItemModel } from './models/link.model';
-import { rendersMenuItemForType } from '../menu-item.decorator';
-import { isNotEmpty } from '../../empty.util';
-import { MenuItemType } from '../menu-item-type.model';
-import { Router } from '@angular/router';
 
 /**
  * Component that renders a menu section of type LINK
@@ -12,8 +20,12 @@ import { Router } from '@angular/router';
   selector: 'ds-link-menu-item',
   styleUrls: ['./menu-item.component.scss'],
   templateUrl: './link-menu-item.component.html',
+  imports: [
+    NgClass,
+    RouterLink,
+    TranslateModule,
+  ],
 })
-@rendersMenuItemForType(MenuItemType.LINK)
 export class LinkMenuItemComponent implements OnInit {
   item: LinkMenuItemModel;
   hasLink: boolean;

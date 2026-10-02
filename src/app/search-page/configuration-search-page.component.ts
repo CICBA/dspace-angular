@@ -1,20 +1,41 @@
-import { HostWindowService } from '../shared/host-window.service';
-import { SidebarService } from '../shared/sidebar/sidebar.service';
-import { SearchComponent } from '../shared/search/search.component';
-import { ChangeDetectionStrategy, Component, Inject, PLATFORM_ID } from '@angular/core';
-import { pushInOut } from '../shared/animations/push';
-import { SEARCH_CONFIG_SERVICE } from '../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../core/shared/search/search-configuration.service';
-import { RouteService } from '../core/services/route.service';
-import { SearchService } from '../core/shared/search/search.service';
+import {
+  AsyncPipe,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { APP_CONFIG, AppConfig } from '../../config/app-config.interface';
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '@dspace/config/app-config.interface';
+import { SearchManager } from '@dspace/core/browse/search-manager';
+import { RouteService } from '@dspace/core/services/route.service';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { SEARCH_CONFIG_SERVICE } from '../my-dspace-page/my-dspace-configuration.service';
+import { pushInOut } from '../shared/animations/push';
+import { HostWindowService } from '../shared/host-window.service';
+import { SearchComponent } from '../shared/search/search.component';
+import { SearchService } from '../shared/search/search.service';
+import { SearchConfigurationService } from '../shared/search/search-configuration.service';
+import { SearchLabelsComponent } from '../shared/search/search-labels/search-labels.component';
+import { ThemedSearchResultsComponent } from '../shared/search/search-results/themed-search-results.component';
+import { ThemedSearchSidebarComponent } from '../shared/search/search-sidebar/themed-search-sidebar.component';
+import { ThemedSearchFormComponent } from '../shared/search-form/themed-search-form.component';
+import { PageWithSidebarComponent } from '../shared/sidebar/page-with-sidebar.component';
+import { SidebarService } from '../shared/sidebar/sidebar.service';
+import { ViewModeSwitchComponent } from '../shared/view-mode-switch/view-mode-switch.component';
 
 /**
  * This component renders a search page using a configuration as input.
  */
 @Component({
-  selector: 'ds-configuration-search-page',
+  selector: 'ds-base-configuration-search-page',
   styleUrls: ['../shared/search/search.component.scss'],
   templateUrl: '../shared/search/search.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,9 +43,20 @@ import { APP_CONFIG, AppConfig } from '../../config/app-config.interface';
   providers: [
     {
       provide: SEARCH_CONFIG_SERVICE,
-      useClass: SearchConfigurationService
-    }
-  ]
+      useClass: SearchConfigurationService,
+    },
+  ],
+  imports: [
+    AsyncPipe,
+    NgTemplateOutlet,
+    PageWithSidebarComponent,
+    SearchLabelsComponent,
+    ThemedSearchFormComponent,
+    ThemedSearchResultsComponent,
+    ThemedSearchSidebarComponent,
+    TranslateModule,
+    ViewModeSwitchComponent,
+  ],
 })
 
 export class ConfigurationSearchPageComponent extends SearchComponent {
@@ -35,8 +67,9 @@ export class ConfigurationSearchPageComponent extends SearchComponent {
               protected routeService: RouteService,
               protected router: Router,
               @Inject(APP_CONFIG) protected appConfig: AppConfig,
-              @Inject(PLATFORM_ID) public platformId: any,
+              @Inject(PLATFORM_ID) public platformId: string,
+              protected searchManager: SearchManager,
   ) {
-    super(service, sidebarService, windowService, searchConfigService, routeService, router, appConfig, platformId);
+    super(service, sidebarService, windowService, searchConfigService, routeService, router, appConfig, platformId, searchManager);
   }
 }

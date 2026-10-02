@@ -1,9 +1,10 @@
-import { FormFieldModel } from '../models/form-field.model';
-import { NameFieldParser } from './name-field-parser';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import { getMockTranslateService } from '@dspace/core/testing/translate.service.mock';
+
 import { DynamicConcatModel } from '../ds-dynamic-form-ui/models/ds-dynamic-concat.model';
-import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
+import { NameFieldParser } from './name-field-parser';
 import { ParserOptions } from './parser-options';
-import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
 
 describe('NameFieldParser test suite', () => {
   let field1: FormFieldModel;
@@ -17,13 +18,14 @@ describe('NameFieldParser test suite', () => {
     readOnly: false,
     submissionScope: 'testScopeUUID',
     collectionUUID: null,
-    typeField: 'dc_type'
+    typeField: 'dc_type',
+    isInnerForm: false,
   };
 
   beforeEach(() => {
     field1 = {
       input: {
-        type: 'name'
+        type: 'name',
       },
       label: 'Name',
       mandatory: 'false',
@@ -32,9 +34,9 @@ describe('NameFieldParser test suite', () => {
       selectableMetadata: [
         {
           metadata: 'name',
-        }
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
     field2 = {
@@ -53,8 +55,8 @@ describe('NameFieldParser test suite', () => {
         { metadata: 'dc.identifier.isbn', label: 'ISBN' },
         { metadata: 'dc.identifier.doi', label: 'DOI' },
         { metadata: 'dc.identifier.pmid', label: 'PubMed ID' },
-        { metadata: 'dc.identifier.arxiv', label: 'arXiv' }
-      ]
+        { metadata: 'dc.identifier.arxiv', label: 'arXiv' },
+      ],
     } as FormFieldModel;
 
     field3 = {
@@ -66,20 +68,20 @@ describe('NameFieldParser test suite', () => {
       selectableMetadata: [
         {
           metadata: 'title',
-        }
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
   });
 
   it('should init parser properly', () => {
-    const parser = new NameFieldParser(submissionId, field1, initFormValues, parserOptions, translateService);
+    const parser = new NameFieldParser(submissionId, field1, initFormValues, parserOptions, null, translateService);
 
     expect(parser instanceof NameFieldParser).toBe(true);
   });
 
   it('should return a DynamicConcatModel object when repeatable option is false', () => {
-    const parser = new NameFieldParser(submissionId, field2, initFormValues, parserOptions, translateService);
+    const parser = new NameFieldParser(submissionId, field2, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 
@@ -87,7 +89,7 @@ describe('NameFieldParser test suite', () => {
   });
 
   it('should return a DynamicConcatModel object with the correct separator', () => {
-    const parser = new NameFieldParser(submissionId, field2, initFormValues, parserOptions, translateService);
+    const parser = new NameFieldParser(submissionId, field2, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 
@@ -98,9 +100,9 @@ describe('NameFieldParser test suite', () => {
     initFormValues = {
       name: [new FormFieldMetadataValueObject('test, name')],
     };
-    const expectedValue = new FormFieldMetadataValueObject('test, name', undefined, undefined, 'test');
+    const expectedValue = new FormFieldMetadataValueObject('test, name', null, null, null, 'test');
 
-    const parser = new NameFieldParser(submissionId, field1, initFormValues, parserOptions, translateService);
+    const parser = new NameFieldParser(submissionId, field1, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 

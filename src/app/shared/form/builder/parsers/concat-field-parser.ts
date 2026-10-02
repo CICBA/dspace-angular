@@ -1,25 +1,34 @@
-import {Inject} from '@angular/core';
-import { FormFieldModel } from '../models/form-field.model';
-import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
-import { DynamicFormControlLayout, } from '@ng-dynamic-forms/core';
+import { Inject } from '@angular/core';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import { MetadataSecurityConfiguration } from '@dspace/core/submission/models/metadata-security-configuration';
+import {
+  hasNoValue,
+  hasValue,
+  isNotEmpty,
+} from '@dspace/shared/utils/empty.util';
+import { TranslateService } from '@ngx-translate/core';
+
 import {
   CONCAT_FIRST_INPUT_SUFFIX,
   CONCAT_GROUP_SUFFIX,
   CONCAT_SECOND_INPUT_SUFFIX,
   DynamicConcatModel,
-  DynamicConcatModelConfig
+  DynamicConcatModelConfig,
 } from '../ds-dynamic-form-ui/models/ds-dynamic-concat.model';
-import { hasNoValue, hasValue, isNotEmpty } from '../../../empty.util';
-import { ParserOptions } from './parser-options';
+import {
+  DsDynamicInputModel,
+  DsDynamicInputModelConfig,
+} from '../ds-dynamic-form-ui/models/ds-dynamic-input.model';
 import {
   CONFIG_DATA,
   FieldParser,
   INIT_FORM_VALUES,
   PARSER_OPTIONS,
-  SUBMISSION_ID
+  SECURITY_CONFIG,
+  SUBMISSION_ID,
 } from './field-parser';
-import { DsDynamicInputModel, DsDynamicInputModelConfig } from '../ds-dynamic-form-ui/models/ds-dynamic-input.model';
-import { TranslateService } from '@ngx-translate/core';
+import { ParserOptions } from './parser-options';
 
 export class ConcatFieldParser extends FieldParser {
 
@@ -28,27 +37,25 @@ export class ConcatFieldParser extends FieldParser {
     @Inject(CONFIG_DATA) configData: FormFieldModel,
     @Inject(INIT_FORM_VALUES) initFormValues,
     @Inject(PARSER_OPTIONS) parserOptions: ParserOptions,
-    translate: TranslateService,
+    @Inject(SECURITY_CONFIG) securityConfig: MetadataSecurityConfiguration,
+    protected translate: TranslateService,
     protected separator: string,
     protected firstPlaceholder: string = null,
     protected secondPlaceholder: string = null) {
-    super(submissionId, configData, initFormValues, parserOptions, translate);
+    super(submissionId, configData, initFormValues, parserOptions, securityConfig, translate);
 
     this.separator = separator;
     this.firstPlaceholder = firstPlaceholder;
     this.secondPlaceholder = secondPlaceholder;
   }
 
-  public modelFactory(fieldValue?: FormFieldMetadataValueObject | any, label?: boolean): any {
-
-    let clsGroup: DynamicFormControlLayout;
-    let clsInput: DynamicFormControlLayout;
+  public modelFactory(fieldValue?: FormFieldMetadataValueObject, label?: boolean): any {
     const id: string = this.configData.selectableMetadata[0].metadata;
 
-    clsInput = {
+    const clsInput = {
       grid: {
-        host: 'col-sm-6'
-      }
+        host: 'col-sm-6',
+      },
     };
 
     const groupId = id.replace(/\./g, '_') + CONCAT_GROUP_SUFFIX;
@@ -62,14 +69,14 @@ export class ConcatFieldParser extends FieldParser {
       false,
       true,
       true,
-      false
+      false,
     );
     const input2ModelConfig: DsDynamicInputModelConfig = this.initModel(
       id + CONCAT_SECOND_INPUT_SUFFIX,
       false,
       true,
       true,
-      false
+      false,
     );
 
     input1ModelConfig.hideErrorMessages = true;
@@ -88,30 +95,34 @@ export class ConcatFieldParser extends FieldParser {
     concatGroup.disabled = input1ModelConfig.readOnly;
 
     if (isNotEmpty(this.firstPlaceholder)) {
-      input1ModelConfig.placeholder = this.firstPlaceholder;
+      input1ModelConfig.label = this.firstPlaceholder;
     }
 
     if (isNotEmpty(this.secondPlaceholder)) {
-      input2ModelConfig.placeholder = this.secondPlaceholder;
+      input2ModelConfig.label = this.secondPlaceholder;
     }
 
     // Split placeholder if is like 'placeholder1/placeholder2'
     const placeholder = this.configData.label.split('/');
     if (placeholder.length === 2) {
-      input1ModelConfig.placeholder = placeholder[0];
-      input2ModelConfig.placeholder = placeholder[1];
+      input1ModelConfig.label = placeholder[0];
+      input2ModelConfig.label = placeholder[1];
     }
 
     const model1 = new DsDynamicInputModel(input1ModelConfig, clsInput);
     const model2 = new DsDynamicInputModel(input2ModelConfig, clsInput);
+    // attach the security config for children
+    (model1 as any).securityConfigLevel = (concatGroup as any).securityConfigLevel;
+    (model2 as any).securityConfigLevel = (concatGroup as any).securityConfigLevel;
     concatGroup.group.push(model1);
     concatGroup.group.push(model2);
 
-    clsGroup = {
+    const clsGroup = {
       element: {
-        control: 'form-row',
-      }
+        control: 'row',
+      },
     };
+    this.initSecurityValue(concatGroup, fieldValue as any);
     const concatModel = new DynamicConcatModel(concatGroup, clsGroup);
     concatModel.name = this.getFieldId();
 

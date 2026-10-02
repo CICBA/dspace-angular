@@ -4,17 +4,19 @@ describe('Admin Edit Modals', () => {
   beforeEach(() => {
     // Must login as an Admin for sidebar to appear
     cy.visit('/login');
-    cy.loginViaForm(Cypress.env('DSPACE_TEST_ADMIN_USER'), Cypress.env('DSPACE_TEST_ADMIN_PASSWORD'));
+    cy.env(['DSPACE_TEST_ADMIN_USER', 'DSPACE_TEST_ADMIN_PASSWORD']).then(({ DSPACE_TEST_ADMIN_USER, DSPACE_TEST_ADMIN_PASSWORD }) => {
+      cy.loginViaForm(DSPACE_TEST_ADMIN_USER, DSPACE_TEST_ADMIN_PASSWORD);
+    });
   });
 
   it('Edit Community modal should pass accessibility tests', () => {
     // Pin the sidebar open
-    cy.get('#sidebar-collapse-toggle').trigger('mouseover');
-    cy.get('#sidebar-collapse-toggle').click();
+    cy.get('[data-test="sidebar-collapse-toggle"]').trigger('mouseover');
+    cy.get('[data-test="sidebar-collapse-toggle"]').click();
 
     // Click on entry of menu
-    cy.get('#admin-menu-section-edit-title').should('be.visible');
-    cy.get('#admin-menu-section-edit-title').click();
+    cy.get('[data-test="admin-menu-section-edit-title"]').should('be.visible');
+    cy.get('[data-test="admin-menu-section-edit-title"]').click();
 
     cy.get('a[data-test="menu.section.edit_community"]').click();
 
@@ -24,12 +26,12 @@ describe('Admin Edit Modals', () => {
 
   it('Edit Collection modal should pass accessibility tests', () => {
     // Pin the sidebar open
-    cy.get('#sidebar-collapse-toggle').trigger('mouseover');
-    cy.get('#sidebar-collapse-toggle').click();
+    cy.get('[data-test="sidebar-collapse-toggle"]').trigger('mouseover');
+    cy.get('[data-test="sidebar-collapse-toggle"]').click();
 
     // Click on entry of menu
-    cy.get('#admin-menu-section-edit-title').should('be.visible');
-    cy.get('#admin-menu-section-edit-title').click();
+    cy.get('[data-test="admin-menu-section-edit-title"]').should('be.visible');
+    cy.get('[data-test="admin-menu-section-edit-title"]').click();
 
     cy.get('a[data-test="menu.section.edit_collection"]').click();
 
@@ -39,12 +41,12 @@ describe('Admin Edit Modals', () => {
 
   it('Edit Item modal should pass accessibility tests', () => {
     // Pin the sidebar open
-    cy.get('#sidebar-collapse-toggle').trigger('mouseover');
-    cy.get('#sidebar-collapse-toggle').click();
+    cy.get('[data-test="sidebar-collapse-toggle"]').trigger('mouseover');
+    cy.get('[data-test="sidebar-collapse-toggle"]').click();
 
     // Click on entry of menu
-    cy.get('#admin-menu-section-edit-title').should('be.visible');
-    cy.get('#admin-menu-section-edit-title').click();
+    cy.get('[data-test="admin-menu-section-edit-title"]').should('be.visible');
+    cy.get('[data-test="admin-menu-section-edit-title"]').click();
 
     cy.get('a[data-test="menu.section.edit_item"]').click();
 

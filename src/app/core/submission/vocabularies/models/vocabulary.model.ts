@@ -1,14 +1,27 @@
-import { autoserialize, deserialize } from 'cerialize';
-
-import { HALLink } from '../../../shared/hal-link.model';
-import { VOCABULARY, VOCABULARY_ENTRY } from './vocabularies.resource-type';
-import { typedObject, link } from '../../../cache/builders/build-decorators';
-import { excludeFromEquals } from '../../../utilities/equals.decorators';
+import {
+  link,
+  typedObject,
+} from '@dspace/core/cache/builders/build-decorators';
+import { CacheableObject } from '@dspace/core/cache/cacheable-object.model';
+import { PaginatedList } from '@dspace/core/data/paginated-list.model';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { HALLink } from '@dspace/core/shared/hal-link.model';
+import { excludeFromEquals } from '@dspace/core/utilities/equals.decorators';
+import {
+  autoserialize,
+  deserialize,
+} from 'cerialize';
 import { Observable } from 'rxjs';
-import { RemoteData } from '../../../data/remote-data';
-import { PaginatedList } from '../../../data/paginated-list.model';
+
+import {
+  VOCABULARY,
+  VOCABULARY_ENTRY,
+} from './vocabularies.resource-type';
 import { VocabularyEntry } from './vocabulary-entry.model';
-import { CacheableObject } from '../../../cache/cacheable-object.model';
+
+export interface VocabularyExternalSourceMap {
+  [metadata: string]: string;
+}
 
 /**
  * Model class for a Vocabulary
@@ -46,6 +59,20 @@ export class Vocabulary implements CacheableObject {
    */
   @autoserialize
   preloadLevel: any;
+
+  /**
+   * If externalSource is available represent the entity type that can be use to create a new entity from
+   * this vocabulary
+   */
+  @autoserialize
+  entity: string;
+
+  /**
+   * A boolean variable that indicates whether the functionality of
+   * multiple value generation is enabled within a generator context.
+   */
+  @autoserialize
+  multiValueOnGenerator: boolean;
 
   /**
    * A string representing the kind of Vocabulary model
