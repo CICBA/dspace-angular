@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'ds-repository-policy',
   styleUrls: ['./repository-policy.component.scss'],
-  templateUrl: './repository-policy.component.html'
+  templateUrl: './repository-policy.component.html',
+  imports: [
+    TranslateModule,
+  ]
 })
 
 /**

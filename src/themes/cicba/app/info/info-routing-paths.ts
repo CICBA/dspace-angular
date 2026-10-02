@@ -1,4 +1,4 @@
-import { getInfoModulePath } from '../../../../app/app-routing-paths';
+import { getInfoModulePath } from '@dspace/core/router/info-routing-paths';
 
 export const CIC_DIGITAL_INFO_PATH = 'que-es-cic-digital_es';
 export const REPOSITORY_POLICY_PATH = 'politicas-del-repositorio_es';

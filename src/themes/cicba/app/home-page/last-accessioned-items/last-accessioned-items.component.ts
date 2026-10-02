@@ -1,22 +1,28 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
 import { RemoteData } from '../../../../../app/core/data/remote-data';
 import { PaginatedList } from '../../../../../app/core/data/paginated-list.model';
-import { PaginationComponentOptions } from '../../../../../app/shared/pagination/pagination-component-options.model';
+import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
 import { SortDirection, SortOptions } from '../../../../../app/core/cache/models/sort-options.model';
 import { fadeIn, fadeInOut } from '../../../../../app/shared/animations/fade';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { PaginationService } from 'src/app/core/pagination/pagination.service';
-import { SearchService } from 'src/app/core/shared/search/search.service';
-import { followLink } from 'src/app/shared/utils/follow-link-config.model';
+import { SearchService } from 'src/app/shared/search/search.service';
+import { followLink } from '@dspace/core/shared/follow-link-config.model';
 import { Item } from 'src/app/core/shared/item.model';
 import { getFirstSucceededRemoteData } from 'src/app/core/shared/operators';
-import { SearchConfigurationService } from 'src/app/core/shared/search/search-configuration.service';
+import { SearchConfigurationService } from 'src/app/shared/search/search-configuration.service';
 import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
-import { hasValue } from 'src/app/shared/empty.util';
+import { hasValue } from '@dspace/shared/utils/empty.util';
 import { ViewMode } from 'src/app/core/shared/view-mode.model';
-import { SearchResult } from 'src/app/shared/search/models/search-result.model';
-import { PaginatedSearchOptions } from 'src/app/shared/search/models/paginated-search-options.model';
+import { SearchResult } from 'src/app/core/shared/search/models/search-result.model';
+import { PaginatedSearchOptions } from '@dspace/core/shared/search/models/paginated-search-options.model';
+import { ListableObjectComponentLoaderComponent } from 'src/app/shared/object-collection/shared/listable-object/listable-object-component-loader.component';
+import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
+import { ErrorComponent } from 'src/app/shared/error/error.component';
 
 @Component({
   selector: 'ds-last-accessioned-items',
@@ -24,7 +30,15 @@ import { PaginatedSearchOptions } from 'src/app/shared/search/models/paginated-s
   templateUrl: './last-accessioned-items.component.html',
   animations: [
     fadeIn,
-    fadeInOut
+    fadeInOut,
+  ],
+  imports: [
+    TranslateModule,
+    RouterLink,
+    AsyncPipe,
+    ListableObjectComponentLoaderComponent,
+    ThemedLoadingComponent,
+    ErrorComponent,
   ]
 })
 /**

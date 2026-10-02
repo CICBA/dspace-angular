@@ -165,7 +165,6 @@
     </div>
   </div>
   <div class="download-section">
-    <!-- <ds-item-page-statistics [item]="object"></ds-item-page-statistics> -->
     <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.identifier.url'])"
@@ -174,7 +173,7 @@
       [authorityUrl]="true">
     </ds-cic-metadata-values>
     <!-- <ds-cic-usage-stats></ds-cic-usage-stats> -->
-    <lib-lareferencia-widget-embed [widgetType]="'lrw'"></lib-lareferencia-widget-embed>
+    <!-- <lib-lareferencia-widget-embed [widgetType]="'lrw'"></lib-lareferencia-widget-embed> -->
   </div>
   <div class="abstract-section">
     <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
