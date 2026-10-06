@@ -21,7 +21,7 @@ import {
   ITEM_MODULE_PATH,
   LEGACY_BITSTREAM_MODULE_PATH,
 } from '@dspace/core/router/core-routing-paths';
-import { INFO_MODULE_PATH } from '@dspace/core/router/info-routing-paths';
+import { INFO_MODULE_PATH } from 'src/themes/cicba/app/info/info-routing-paths';
 import { ServerCheckGuard } from '@dspace/core/server-check/server-check.guard';
 
 import { ACCESS_CONTROL_MODULE_PATH } from './access-control/access-control-routing-paths';
@@ -242,7 +242,16 @@ export const APP_ROUTES: Route[] = [
       },
       {
         path: INFO_MODULE_PATH,
-        loadChildren: () => import('./info/info-routes').then((m) => m.ROUTES),
+        loadChildren: () => import('../themes/cicba/app/info/info-routes').then((m) => m.ROUTES),
+      },
+      {
+        path: 'info',
+        children: [
+          {
+            path: '**',
+            redirectTo: (route) => `/page/${route.url.join('/')}`
+          }
+        ]
       },
       {
         path: REQUEST_COPY_MODULE_PATH,

@@ -1,5 +1,3 @@
-import { getInfoModulePath } from '@dspace/core/router/info-routing-paths';
-
 export const CIC_DIGITAL_INFO_PATH = 'que-es-cic-digital_es';
 export const REPOSITORY_POLICY_PATH = 'politicas-del-repositorio_es';
 export const HOW_TO_CONTRIBUTE_PATH = 'como-aportar-material_es';
@@ -14,6 +12,12 @@ export function getRepositoryPolicyPath() {
 
 export function getHowToContributePath() {
     return getSubPath(HOW_TO_CONTRIBUTE_PATH);
+}
+
+export const INFO_MODULE_PATH = 'page';
+
+export function getInfoModulePath() {
+  return `/${INFO_MODULE_PATH}`;
 }
 
 function getSubPath(path: string) {
