@@ -40,9 +40,11 @@
             @if (communityPayload.name !== 'Centros') {
               <ds-themed-comcol-page-browse-by [id]="communityPayload.id" [contentType]="communityPayload.type">
               </ds-themed-comcol-page-browse-by>
+              <router-outlet></router-outlet>
+            } @else {
+              <ds-themed-community-page-sub-community-list [community]="communityPayload"></ds-themed-community-page-sub-community-list>
+              <ds-themed-community-page-sub-collection-list [community]="communityPayload"></ds-themed-community-page-sub-collection-list>
             }
-            <ds-themed-community-page-sub-community-list [community]="communityPayload"></ds-themed-community-page-sub-community-list>
-            <ds-themed-community-page-sub-collection-list [community]="communityPayload"></ds-themed-community-page-sub-collection-list>
           </section>
           @if (communityPayload.copyrightText) {
             <footer   class="border-top my-5 pt-4">

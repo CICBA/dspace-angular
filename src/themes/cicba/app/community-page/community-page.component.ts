@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommunityPageComponent as BaseComponent} from '../../../../app/community-page/community-page.component';
 import { fadeInOut } from '../../../../app/shared/animations/fade';
@@ -24,6 +25,7 @@ import { VarDirective } from 'src/app/shared/utils/var.directive';
   animations: [fadeInOut],
   imports: [
     AsyncPipe,
+    RouterOutlet,
     TranslateModule,
     ComcolPageHeaderComponent,
     ComcolPageLogoComponent,
