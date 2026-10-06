@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuService } from 'src/app/shared/menu/menu.service';
 import { HeaderComponent as BaseComponent } from '../../../../app/header/header.component';
@@ -17,6 +17,7 @@ import { ThemedNavbarComponent } from 'src/app/navbar/themed-navbar.component';
   styleUrls: ['header.component.scss'],
   templateUrl: 'header.component.html',
   imports: [
+    RouterLink,
     TranslateModule,
     ThemedAuthNavMenuComponent,
     ThemedLangSwitchComponent,

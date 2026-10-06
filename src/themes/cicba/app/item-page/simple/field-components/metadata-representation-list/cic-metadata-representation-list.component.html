@@ -1,22 +1,32 @@
 <ds-cic-metadata-field-wrapper [label]="label">
-  <ng-container *ngFor="let objectPage of objects; let i = index">
+  @for (objectPage of objects; track objectPage; let i = $index) {
     <ng-container *ngVar="(objectPage | async) as representations">
-      <ng-container *ngFor="let rep of representations; let last = last">
+      @for (rep of representations; track rep; let last = $last) {
         <ds-metadata-representation-loader class="metadata-element" [mdRepresentation]="rep">
         </ds-metadata-representation-loader>
-        <span *ngIf="!last" class="separator">{{separator}}</span>
-      </ng-container>
-      <ds-loading *ngIf="(i + 1) === objects.length && (i > 0) && (!representations || representations?.length === 0)" message="{{'loading.default' | translate}}"></ds-loading>
-      <div class="w-100 mt-2" *ngIf="(i + 1) === objects.length && representations?.length > 0">
-        <div *ngIf="(objects.length * incrementBy) < total">
-          <a [routerLink]="" (click)="increase()">{{'item.page.related-items.view-more' |
-            translate:{ amount: (total - (objects.length * incrementBy) < incrementBy) ? total - (objects.length * incrementBy) : incrementBy } }}</a>
+        @if (!last) {
+          <span class="separator">{{separator}}</span>
+        }
+      }
+      @if ((i + 1) === objects.length && (i > 0) && (!representations || representations?.length === 0)) {
+        <ds-loading message="{{'loading.default' | translate}}"></ds-loading>
+      }
+      @if ((i + 1) === objects.length && representations?.length > 0) {
+        <div class="w-100 mt-2">
+          @if ((objects.length * incrementBy) < total) {
+            <div>
+              <a [routerLink]="" (click)="increase()">{{'item.page.related-items.view-more' |
+              translate:{ amount: (total - (objects.length * incrementBy) < incrementBy) ? total - (objects.length * incrementBy) : incrementBy } }}</a>
+            </div>
+          }
+          @if (objects.length > 1) {
+            <div>
+              <a [routerLink]="" (click)="decrease()">{{'item.page.related-items.view-less' |
+              translate:{ amount: representations?.length } }}</a>
+            </div>
+          }
         </div>
-        <div *ngIf="objects.length > 1">
-          <a [routerLink]="" (click)="decrease()">{{'item.page.related-items.view-less' |
-            translate:{ amount: representations?.length } }}</a>
-        </div>
-      </div>
+      }
     </ng-container>
-  </ng-container>
+  }
 </ds-cic-metadata-field-wrapper>

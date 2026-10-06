@@ -3811,7 +3811,7 @@
   "info.feedback.create.success": "Envío exitoso de sugerencia",
 
   // "info.feedback.error.email.required": "A valid email address is required",
-  "info.feedback.error.email.required": "se requiere una dirección válida de correo electrónico",
+  "info.feedback.error.email.required": "Se requiere una dirección válida de correo electrónico",
 
   // "info.feedback.error.message.required": "A comment is required",
   "info.feedback.error.message.required": "Se requiere un comentario",

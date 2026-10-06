@@ -12,6 +12,7 @@ import { CommunityPageSubCommunityListComponent } from 'src/themes/custom/app/co
 import { CommunityPageSubCollectionListComponent } from 'src/themes/custom/app/community-page/sections/sub-com-col-section/sub-collection-list/community-page-sub-collection-list.component';
 import { ErrorComponent } from 'src/app/shared/error/error.component';
 import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
+import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 @Component({
   selector: 'ds-community-page',
@@ -33,6 +34,7 @@ import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.co
     CommunityPageSubCollectionListComponent,
     ErrorComponent,
     ThemedLoadingComponent,
+    VarDirective,
   ]
 })
 /**

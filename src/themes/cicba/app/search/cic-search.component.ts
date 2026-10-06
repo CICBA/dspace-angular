@@ -1,10 +1,13 @@
-import { AsyncPipe } from '@angular/common';
+import { 
+  AsyncPipe,
+  NgTemplateOutlet,
+} from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchComponent as BaseComponent } from '../../../../app/shared/search/search.component';
 import { expandSearchInput } from '../../../../app/shared/animations/slide';
 import { PageWithSidebarComponent } from 'src/app/shared/sidebar/page-with-sidebar.component';
-import { SearchSettingsComponent } from 'src/themes/custom/app/shared/search/search-settings/search-settings.component';
+import { SearchSettingsComponent } from '../shared/search/search-settings/search-settings.component';
 import { SearchResultsComponent } from 'src/app/shared/search/search-results/search-results.component';
 import { CicSearchSidebarComponent } from 'src/themes/cicba/app/search-sidebar/cic-search-sidebar.component';
 import { ThemedSearchFormComponent } from 'src/app/shared/search-form/themed-search-form.component';
@@ -20,6 +23,7 @@ import { ThemedSearchResultsComponent } from 'src/app/shared/search/search-resul
   animations: [expandSearchInput],
   imports: [
     AsyncPipe,
+    NgTemplateOutlet,
     PageWithSidebarComponent,
     SearchSettingsComponent,
     TranslateModule,

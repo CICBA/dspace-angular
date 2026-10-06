@@ -23,6 +23,7 @@ import { PaginatedSearchOptions } from '@dspace/core/shared/search/models/pagina
 import { ListableObjectComponentLoaderComponent } from 'src/app/shared/object-collection/shared/listable-object/listable-object-component-loader.component';
 import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
 import { ErrorComponent } from 'src/app/shared/error/error.component';
+import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 @Component({
   selector: 'ds-last-accessioned-items',
@@ -39,6 +40,7 @@ import { ErrorComponent } from 'src/app/shared/error/error.component';
     ListableObjectComponentLoaderComponent,
     ThemedLoadingComponent,
     ErrorComponent,
+    VarDirective,
   ]
 })
 /**

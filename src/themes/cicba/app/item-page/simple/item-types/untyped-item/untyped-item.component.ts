@@ -33,7 +33,7 @@ import { ThemedThumbnailComponent } from 'src/app/thumbnail/themed-thumbnail.com
 import { ThemedMediaViewerComponent } from 'src/app/item-page/media-viewer/themed-media-viewer.component';
 import { TruncatableComponent } from 'src/app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from 'src/app/shared/truncatable/truncatable-part/truncatable-part.component';
-import { FileSectionComponent } from 'src/themes/custom/app/item-page/simple/field-components/file-section/file-section.component';
+import { FileSectionComponent } from 'src/themes/cicba/app/item-page/simple/field-components/file-section/file-section.component';
 /**
  * Component that represents a publication Item page
  */

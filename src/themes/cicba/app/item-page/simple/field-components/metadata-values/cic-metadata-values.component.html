@@ -1,19 +1,28 @@
 <ds-cic-metadata-field-wrapper [inlineLabel]="inlineLabel" [label]="label | translate">
-    <ng-container *ngFor="let mdValue of mdValues; let last=last;">
-        <ng-container *ngIf="authorityUrl">
-            <a href="{{ mdValue.authority }}" target="_blank" class="dont-break-out">
-                {{mdValue.value}}<span *ngIf="!last" [innerHTML]="separator"></span>
-            </a>
-        </ng-container>
-        <ng-container *ngIf="!authorityUrl">
-            <ng-container *ngIf="!mdValue.value.startsWith('http')">
-                {{mdValue.value}}
-                <span *ngIf="!last" [innerHTML]="separator"></span>
-              </ng-container>
-              <a *ngIf="mdValue.value.startsWith('http')" [href]="mdValue.value">
-                {{mdValue.value}}
-                <span *ngIf="!last" [innerHTML]="separator"></span>
-              </a>
-        </ng-container>
-    </ng-container>
+@for (mdValue of mdValues; track mdValue; let last = $last) {
+  @if (authorityUrl) {
+    <a href="{{ mdValue.authority }}" target="_blank" class="dont-break-out">
+      {{mdValue.value}}
+      @if (!last) {
+        <span [innerHTML]="separator"></span>
+      }
+    </a>
+  }
+  @if (!authorityUrl) {
+    @if (!mdValue.value.startsWith('http')) {
+      {{mdValue.value}}
+      @if (!last) {
+        <span [innerHTML]="separator"></span>
+      }
+    }
+    @if (mdValue.value.startsWith('http')) {
+      <a [href]="mdValue.value">
+        {{mdValue.value}}
+        @if (!last) {
+          <span [innerHTML]="separator"></span>
+        }
+      </a>
+    }
+  }
+}
 </ds-cic-metadata-field-wrapper>

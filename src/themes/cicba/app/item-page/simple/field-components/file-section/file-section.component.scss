@@ -10,8 +10,7 @@ hr {
     a {
         color: inherit !important;
         text-decoration: none;
-        display: flex;
-        margin-bottom: 1em;
+        display: flex !important;
         gap: 1em;
         > span:first-of-type {
             padding-top: 0.2em;

@@ -1,43 +1,45 @@
-<div class="row" *ngIf="iiifEnabled">
-  <div class="col-12">
-    <ds-mirador-viewer id="iiif-viewer"
-                   [object]="object"
-                   [searchable]="iiifSearchEnabled"
-                   [query]="iiifQuery$ | async">
-    </ds-mirador-viewer>
+@if (iiifEnabled) {
+  <div class="row">
+    <div class="col-12">
+      <ds-mirador-viewer id="iiif-viewer"
+        [object]="object"
+        [searchable]="iiifSearchEnabled"
+        [query]="iiifQuery$ | async">
+      </ds-mirador-viewer>
+    </div>
   </div>
-</div>
+}
 <div class="mb-3">
   <!-- <ds-type-badge [object]="object"></ds-type-badge> -->
-  <div class="pl-2">
+  <div class="ps-2">
     <!--<ds-dso-page-version-button (newVersionEvent)="onCreateNewVersion()" [dso]="object"
-                                [tooltipMsgCreate]="'item.page.version.create'"
-                                [tooltipMsgHasDraft]="'item.page.version.hasDraft'"></ds-dso-page-version-button> -->
-    <ds-dso-edit-menu></ds-dso-edit-menu>
-    <!--<ds-dso-page-edit-button [pageRoute]="itemPageRoute" [dso]="object" [tooltipMsg]="'item.page.edit'"></ds-dso-page-edit-button>
-    -->
-  </div>
-  <div class="badges-section">
-    <ds-badge-metadata-values
-      [mdValues]="object?.allMetadata(['dc.type'])"
-      [badgeType]="'badge-info type-badge'">
-    </ds-badge-metadata-values>
-    <ds-access-status-badge class="badge-group" [object]="object"></ds-access-status-badge>
-  </div>
+    [tooltipMsgCreate]="'item.page.version.create'"
+  [tooltipMsgHasDraft]="'item.page.version.hasDraft'"></ds-dso-page-version-button> -->
+  <ds-dso-edit-menu></ds-dso-edit-menu>
+  <!--<ds-dso-page-edit-button [pageRoute]="itemPageRoute" [dso]="object" [tooltipMsg]="'item.page.edit'"></ds-dso-page-edit-button>
+  -->
+</div>
+<div class="badges-section">
+  <ds-badge-metadata-values
+    [mdValues]="object?.allMetadata(['dc.type'])"
+    [badgeType]="'bg-info type-badge'">
+  </ds-badge-metadata-values>
+  <ds-access-status-badge class="badge-group" [object]="object"></ds-access-status-badge>
+</div>
 
-  <h4 class="item-page-title-field mr-auto font-weight-bold">
-    <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
-  </h4>
-  <h5 class="mr-auto">
-    <ds-metadata-values [mdValues]="object?.allMetadata(['dcterms.title.subtitle'])"></ds-metadata-values>
-  </h5>
-  <ds-cic-metadata-representation-list
-    class="font-italic"
-    [parentItem]="object"
-    [itemType]="'Person'"
-    [metadataFields]="['dcterms.creator.author', 'dcterms.creator.corporate']"
-   [separator]="'|'">
-  </ds-cic-metadata-representation-list>
+<h4 class="item-page-title-field me-auto fw-bold">
+  <ds-metadata-values [mdValues]="object?.allMetadata(['dc.title'])"></ds-metadata-values>
+</h4>
+<h5 class="me-auto">
+  <ds-metadata-values [mdValues]="object?.allMetadata(['dcterms.title.subtitle'])"></ds-metadata-values>
+</h5>
+<ds-cic-metadata-representation-list
+  class="fst-italic"
+  [parentItem]="object"
+  [itemType]="'Person'"
+  [metadataFields]="['dcterms.creator.author', 'dcterms.creator.corporate']"
+  [separator]="'|'">
+</ds-cic-metadata-representation-list>
 </div>
 <div class="item-content">
   <div class="metadata-section">
@@ -141,31 +143,32 @@
       [label]="'item.page.dcterms.extent'">
     </ds-cic-metadata-values>
     <div class="item-identifiers">
-      <ng-container *ngFor="let idValue of itemIdentifiers">
+      @for (idValue of itemIdentifiers; track idValue) {
         <ds-badge-metadata-values
           [mdValues]="[idValue.mdValue]"
           [badgeType]="'badge-identifier'"
-          [badgeLabelType]="'badge-dark'"
+          [badgeLabelType]="'bg-dark'"
           [badgeLabel]="idValue.label"
           [copyToClipboardButton]="true">
         </ds-badge-metadata-values>
-      </ng-container>
+      }
       <ds-badge-metadata-values
         [mdValues]="object?.allMetadata(['journal.identifier.issn'])"
         [badgeType]="'badge-identifier'"
-        [badgeLabelType]="'badge-dark'"
+        [badgeLabelType]="'bg-dark'"
         [badgeLabel]="'ISSN'">
       </ds-badge-metadata-values>
       <ds-badge-metadata-values
         [mdValues]="object?.allMetadata(['dcterms.identifier.isbn'])"
         [badgeType]="'badge-identifier'"
-        [badgeLabelType]="'badge-dark'"
+        [badgeLabelType]="'bg-dark'"
         [badgeLabel]="'ISBN'">
       </ds-badge-metadata-values>
     </div>
   </div>
   <div class="download-section">
-    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
+    <!-- <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section> -->
+    <ds-item-page-file-section [item]="object"></ds-item-page-file-section>
     <ds-cic-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.identifier.url'])"
       [label]="'item.page.dcterms.identifier.url'"
@@ -177,45 +180,53 @@
   </div>
   <div class="abstract-section">
     <ds-cic-metadata-field-wrapper [inlineLabel]="false" [label]="'item.page.abstract' | translate">
-      <ds-truncatable *ngIf="(windowService.isXsOrSm() | async)" [id]="object?.id">
-        <!-- <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" -->
-        <ds-truncatable-part *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])"
-          [id]="object?.id"
-          [minLines]="5">
+      @if ((windowService.isXsOrSm() | async)) {
+        <ds-truncatable [id]="object?.id">
+          <!-- <ds-truncatable-part class="truncatable-abstract" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" -->
+          @for (mdValue of object?.allMetadata(['dcterms.abstract']); track mdValue) {
+            <ds-truncatable-part
+              [id]="object?.id"
+              [minLines]="5">
+              <p class="abstract-text" [innerHTML]="mdValue.value"></p>
+            </ds-truncatable-part>
+          }
+        </ds-truncatable>
+      }
+      @if (!(windowService.isXsOrSm() | async)) {
+        @for (mdValue of object?.allMetadata(['dcterms.abstract']); track mdValue) {
           <p class="abstract-text" [innerHTML]="mdValue.value"></p>
-        </ds-truncatable-part>
-      </ds-truncatable>
-      <ng-container *ngIf="!(windowService.isXsOrSm() | async)">
-        <p class="abstract-text" *ngFor="let mdValue of object?.allMetadata(['dcterms.abstract'])" [innerHTML]="mdValue.value"></p>
-      </ng-container>
+        }
+      }
     </ds-cic-metadata-field-wrapper>
     <ds-badge-metadata-values
       [mdValues]="object?.allMetadata(['dcterms.subject'])"
-      [badgeType]="'badge-secondary'"
+      [badgeType]="'bg-secondary'"
       [label]="'item.page.dcterms.subject'">
     </ds-badge-metadata-values>
-    <ds-cic-metadata-field-wrapper *ngFor="let mdValue of object?.allMetadata(['dcterms.license'])">
-      <div class="item-cc-license">
-        <a href="{{mdValue.authority}}">
-          <img src="https://licensebuttons.net/l/{{mdValue.authority.substring(36)}}/88x31.png" alt="{{mdValue.authority}}">
-        </a>
-        <p>{{"item.page.dcterms.license.text" | translate}}{{mdValue.value}}</p>
-      </div>
-    </ds-cic-metadata-field-wrapper>
+    @for (mdValue of object?.allMetadata(['dcterms.license']); track mdValue) {
+      <ds-cic-metadata-field-wrapper>
+        <div class="item-cc-license">
+          <a href="{{mdValue.authority}}">
+            <img src="https://licensebuttons.net/l/{{mdValue.authority.substring(36)}}/88x31.png" alt="{{mdValue.authority}}">
+          </a>
+          <p>{{"item.page.dcterms.license.text" | translate}}{{mdValue.value}}</p>
+        </div>
+      </ds-cic-metadata-field-wrapper>
+    }
     <ds-cic-metadata-values
       [mdValues]=""
       [label]="'item.page.license'">
     </ds-cic-metadata-values>
   </div>
   <div class="file-section">
-    <ng-container *ngIf="!mediaViewer.image">
+    @if (!mediaViewer.image) {
       <ds-metadata-field-wrapper class="d-none d-md-block" [hideIfNoTextContent]="false">
         <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
       </ds-metadata-field-wrapper>
-    </ng-container>
-    <ng-container *ngIf="mediaViewer.image">
+    }
+    @if (mediaViewer.image) {
       <ds-media-viewer [item]="object"></ds-media-viewer>
-    </ng-container>
+    }
   </div>
 </div>
 <div class="text-center">

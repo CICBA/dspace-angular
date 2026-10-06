@@ -9,6 +9,7 @@ import { FileSizePipe } from 'src/app/shared/utils/file-size-pipe';
 import { CicMetadataFieldWrapperComponent } from 'src/themes/cicba/app/shared/metadata-field-wrapper/cic-metadata-field-wrapper.component';
 import { ThemedFileDownloadLinkComponent } from 'src/app/shared/file-download-link/themed-file-download-link.component';
 import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
+import { VarDirective } from 'src/app/shared/utils/var.directive';
 @Component({
     selector: 'ds-item-page-file-section',
     templateUrl: './file-section.component.html',
@@ -21,7 +22,8 @@ import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.co
         FileSizePipe,
         CicMetadataFieldWrapperComponent,
         ThemedFileDownloadLinkComponent,
-        ThemedLoadingComponent
+        ThemedLoadingComponent,
+        VarDirective,
     ]
 })
 export class FileSectionComponent extends BaseComponent {

@@ -1,10 +1,10 @@
-<div  class="d-inline-block" *ngVar="(metadataView$ | async) as metadataView" [attr.lang]="normalizedLanguageCode">
+<div class="d-inline-block" *ngVar="(metadataView$ | async) as metadataView" [attr.lang]="normalizedLanguageCode">
   @if (metadataView) {
-    <ng-container [ngTemplateOutlet]="metadataView?.authority ? linkToAuthority : (metadataView?.entityType ? textWithIcon : textWithoutIcon)"
-    [ngTemplateOutletContext]="{metadataView: metadataView}"></ng-container>
+    <!-- Se fuerza siempre a utilizar la plantilla de enlaces -->
+    <ng-container [ngTemplateOutlet]="linkToAuthority" [ngTemplateOutletContext]="{metadataView: metadataView}"></ng-container>
   }
 </div>
-<ng-template class="d-flex" #linkToAuthority let-metadataView="metadataView">
+<!-- <ng-template class="d-flex" #linkToAuthority let-metadataView="metadataView">
   <span [dsStickyPopover]="popContent"
     [openDelay]="100"
     [closeDelay]="300"
@@ -31,6 +31,14 @@
       src="assets/images/orcid.logo.icon.svg"
       data-test="orcidIcon"/>
   }
+</ng-template> -->
+
+<ng-template class="d-flex" #linkToAuthority let-metadataView="metadataView">
+  <a rel="noopener noreferrer" data-test="linkToAuthority"
+    [routerLink]="getCustomRoute()"
+    [queryParams]="getCustomQueryParams()">
+    {{metadataView.value}}
+  </a>
 </ng-template>
 
 <ng-template #textWithIcon let-metadataView="metadataView">

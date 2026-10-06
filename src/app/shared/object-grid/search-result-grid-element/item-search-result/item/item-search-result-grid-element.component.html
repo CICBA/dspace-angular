@@ -27,13 +27,13 @@
       <ds-truncatable-part [id]="dso.id" [minLines]="3" type="h4">
         <h4 class="card-title" [dsMetadata]="dsoTitle"></h4>
       </ds-truncatable-part>
-      @if (dso.hasMetadata(['dc.contributor.author', 'dc.creator', 'dc.contributor.*'])) {
+      @if (dso.hasMetadata(['dcterms.creator.author', 'dcterms.creator.corporate'])) {
         <ds-truncatable-part [id]="dso.id" [minLines]="1">
           <p class="item-authors card-text text-muted">
             @if (dso.firstMetadata('dc.date.issued'); as dateIssued) {
               <span class="item-date" [dsMetadata]="dateIssued"></span>
             }
-            @for (author of allMetadata(['dc.contributor.author', 'dc.creator', 'dc.contributor.*']); track author) {
+            @for (author of allMetadata(['dcterms.creator.author', 'dcterms.creator.corporate']); track author) {
               <span>,
                 <span [dsMetadata]="author"></span>
               </span>
@@ -41,10 +41,10 @@
           </p>
         </ds-truncatable-part>
       }
-      @if (dso.hasMetadata('dc.description.abstract')) {
+      @if (dso.hasMetadata('dcterms.abstract')) {
         <ds-truncatable-part [id]="dso.id" [minLines]="3">
           <p class="item-abstract card-text">
-            <span [dsMetadata]="firstMetadata('dc.description.abstract')"></span>
+            <span [dsMetadata]="firstMetadata('dcterms.abstract')"></span>
           </p>
         </ds-truncatable-part>
       }

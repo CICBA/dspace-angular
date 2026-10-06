@@ -1,4 +1,7 @@
-import { NgClass } from '@angular/common';
+import { 
+  NgClass,
+  NgTemplateOutlet,
+} from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MetadataValuesComponent } from 'src/app/item-page/field-components/metadata-values/metadata-values.component';
@@ -13,9 +16,10 @@ import { CicMetadataFieldWrapperComponent } from 'src/themes/cicba/app/shared/me
   templateUrl: './badge-metadata-values.component.html',
   styleUrls: ['./badge-metadata-values.component.scss'],
   imports: [
+    NgClass,
+    NgTemplateOutlet,
     TranslateModule,
     CicMetadataFieldWrapperComponent,
-    NgClass,
   ]
 })
 export class BadgeMetadataValuesComponent extends MetadataValuesComponent {

@@ -1,5 +1,9 @@
-import { AsyncPipe } from '@angular/common';
-import { NgClass } from '@angular/common';
+import {
+  AsyncPipe,
+  NgClass,
+  NgComponentOutlet,
+} from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Component } from '@angular/core';
 import { NavbarComponent as BaseComponent } from '../../../../app/navbar/navbar.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -18,10 +22,12 @@ import { ImpersonateNavbarComponent } from 'src/app/shared/impersonate-navbar/im
   imports: [
     AsyncPipe,
     NgClass,
+    NgComponentOutlet,
     TranslateModule,
     ThemedAuthNavMenuComponent,
     ThemedLangSwitchComponent,
     ImpersonateNavbarComponent,
+    RouterLink,
   ],
 })
 export class NavbarComponent extends BaseComponent {

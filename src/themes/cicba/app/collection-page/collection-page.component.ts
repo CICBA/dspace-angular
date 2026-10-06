@@ -14,6 +14,7 @@ import { ErrorComponent } from 'src/app/shared/error/error.component';
 import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
 import { DsoEditMenuComponent } from 'src/app/shared/dso-page/dso-edit-menu/dso-edit-menu.component';
 import { ThemedComcolPageHandleComponent } from 'src/app/shared/comcol/comcol-page-handle/themed-comcol-page-handle.component';
+import { VarDirective } from 'src/app/shared/utils/var.directive';
 
 @Component({
   selector: 'ds-collection-page',
@@ -40,6 +41,7 @@ import { ThemedComcolPageHandleComponent } from 'src/app/shared/comcol/comcol-pa
     ThemedLoadingComponent,
     DsoEditMenuComponent,
     ThemedComcolPageHandleComponent,
+    VarDirective,
   ]
 })
 /**

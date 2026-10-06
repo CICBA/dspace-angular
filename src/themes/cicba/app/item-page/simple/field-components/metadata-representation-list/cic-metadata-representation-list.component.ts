@@ -6,6 +6,7 @@ import { MetadataRepresentationListComponent } from 'src/app/item-page/simple/me
 import { CicMetadataFieldWrapperComponent } from 'src/themes/cicba/app/shared/metadata-field-wrapper/cic-metadata-field-wrapper.component';
 import { MetadataRepresentationLoaderComponent } from 'src/app/shared/metadata-representation/metadata-representation-loader.component';
 import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
+import { VarDirective } from 'src/app/shared/utils/var.directive';
 @Component({
   selector: 'ds-cic-metadata-representation-list',
   styleUrls: ['./cic-metadata-representation-list.component.scss'],
@@ -17,6 +18,7 @@ import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.co
     ThemedLoadingComponent,
     AsyncPipe,
     TranslateModule,
+    VarDirective,
   ],
 })
 /**

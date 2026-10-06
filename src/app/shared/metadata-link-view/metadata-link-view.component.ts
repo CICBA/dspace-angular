@@ -140,19 +140,15 @@ export class MetadataLinkViewComponent implements OnInit {
   private getMetadataView(metadataValue: MetadataValue): Observable<MetadataView> {
     const linksToFollow = [followLink('thumbnail')];
 
-    if (Metadata.hasValidAuthority(metadataValue.authority)) {
+    // Evitar la búsqueda interna si la autoridad es claramente una URL externa
+    if (Metadata.hasValidAuthority(metadataValue.authority) && !metadataValue.authority.startsWith('http')) {
       return this.itemService.findById(metadataValue.authority, true, false, ...linksToFollow).pipe(
         getFirstCompletedRemoteData(),
         map((itemRD: RemoteData<Item>) => this.createMetadataView(itemRD, metadataValue)),
       );
     } else {
-      return of({
-        authority: null,
-        value: metadataValue.value,
-        orcidAuthenticated: null,
-        entityType: null,
-        entityStyle: null,
-      });
+      // Pasar un RemoteData simulado fallido para procesar la URL o la falta de autoridad
+      return of(this.createMetadataView({ hasSucceeded: false } as RemoteData<Item>, metadataValue));
     }
   }
 
@@ -163,7 +159,7 @@ export class MetadataLinkViewComponent implements OnInit {
    * @returns The created MetadataView object.
    */
   private createMetadataView(itemRD: RemoteData<Item>, metadataValue: MetadataValue): MetadataView {
-    if (itemRD.hasSucceeded && itemRD.payload) {
+    if (itemRD?.hasSucceeded && itemRD?.payload) {
       this.relatedItem = itemRD.payload;
       this.relatedDsoRoute = this.getItemPageRoute(this.relatedItem);
       return {
@@ -174,12 +170,30 @@ export class MetadataLinkViewComponent implements OnInit {
       };
     } else {
       return {
-        authority: null,
+        authority: metadataValue.authority, // Corrección: Se mantiene la autoridad intacta
         value: metadataValue.value,
         orcidAuthenticated: null,
         entityType: 'PRIVATE',
       };
     }
+  }
+
+  getCustomRoute(): string[] {
+    return this.metadata?.authority ? ['/search'] : ['/browse/author'];
+  }
+
+  getCustomQueryParams(): any {
+    if (this.metadata?.authority) {
+      return {
+        'f.author': `${this.metadata.value},equals`,
+        'authority': this.metadata.authority,
+        'spc.page': 1
+      };
+    }
+    
+    return {
+      'startsWith': this.metadata.value
+    };
   }
 
   /**

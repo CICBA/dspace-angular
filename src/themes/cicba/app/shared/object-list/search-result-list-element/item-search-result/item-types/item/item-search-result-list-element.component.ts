@@ -1,3 +1,4 @@
+import { Context } from '@dspace/core/shared/context.model';
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
@@ -16,9 +17,10 @@ import { ThemedBadgesComponent } from 'src/app/shared/object-collection/shared/b
 import { ThemedTypeBadgeComponent } from 'src/app/shared/object-collection/shared/badges/type-badge/themed-type-badge.component';
 import { TruncatableComponent } from 'src/app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from 'src/app/shared/truncatable/truncatable-part/truncatable-part.component';
+import { MetadataDirective } from 'src/app/shared/metadata.directive';
 
-@listableObjectComponent('PublicationSearchResult', ViewMode.ListElement)
-@listableObjectComponent(ItemSearchResult, ViewMode.ListElement)
+@listableObjectComponent('PublicationSearchResult', ViewMode.ListElement, Context.Any, 'cicba')
+@listableObjectComponent(ItemSearchResult, ViewMode.ListElement, Context.Any, 'cicba')
 
 @Component({
   selector: 'ds-cic-item-search-result-list-element',
@@ -33,6 +35,7 @@ import { TruncatablePartComponent } from 'src/app/shared/truncatable/truncatable
     ThemedTypeBadgeComponent,
     TruncatableComponent,
     TruncatablePartComponent,
+    MetadataDirective,
   ],
 })
 /**
