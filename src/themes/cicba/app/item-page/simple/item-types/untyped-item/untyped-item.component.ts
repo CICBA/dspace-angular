@@ -34,6 +34,8 @@ import { ThemedMediaViewerComponent } from 'src/app/item-page/media-viewer/theme
 import { TruncatableComponent } from 'src/app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from 'src/app/shared/truncatable/truncatable-part/truncatable-part.component';
 import { FileSectionComponent } from 'src/themes/cicba/app/item-page/simple/field-components/file-section/file-section.component';
+import { lareferenciaWidgetEmbedModule } from 'lareferencia-widget-embed';
+
 /**
  * Component that represents a publication Item page
  */
@@ -63,6 +65,7 @@ import { FileSectionComponent } from 'src/themes/cicba/app/item-page/simple/fiel
     TruncatableComponent,
     TruncatablePartComponent,
     FileSectionComponent,
+    lareferenciaWidgetEmbedModule,
   ],
 })
 export class UntypedItemComponent extends BaseComponent implements OnInit {
