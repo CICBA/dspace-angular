@@ -1,0 +1,25 @@
+# CIC development overrides for the upstream DSpace Angular Compose stack.
+networks:
+  dspacenet:
+    name: ${DOCKER_EXTERNAL_NETWORK_NAME:-cic-net}
+    external: true
+
+services:
+  dspace-angular:
+    container_name: dspace-angular_${COMPOSE_PROJECT_NAME}
+    environment:
+      # Public REST URL used by the browser.
+      DSPACE_REST_HOST: ${DSPACE_REST_HOST:-localhost}
+      DSPACE_REST_PORT: ${DSPACE_REST_PORT:-8080}
+      DSPACE_REST_NAMESPACE: ${DSPACE_REST_NAMESPACE:-/server}
+      # Internal REST URL used by SSR on the shared Docker network.
+      DSPACE_REST_SSRBASEURL: ${DSPACE_REST_SSRBASEURL:-http://dspace:8080/server}
+      NODE_ENV: development
+    image: dspace:dspace-angular_${COMPOSE_PROJECT_NAME}_latest
+    # Replaces upstream's /app/src mount; requires Docker Compose 2.24.4 or newer.
+    volumes: !override
+      - ../:/app/
+      - node_modules_10:/app/node_modules
+
+volumes:
+  node_modules_10:

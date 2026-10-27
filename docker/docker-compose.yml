@@ -17,7 +17,7 @@ networks:
     external: true
 services:
   dspace-angular:
-    container_name: dspace-angular_${COMPOSE_PROJECT_NAME}
+    container_name: dspace-angular
     environment:
       DSPACE_UI_SSL: ${DSPACE_UI_SSL:-false}
       DSPACE_UI_HOST: ${DSPACE_UI_HOST:-dspace-angular}
@@ -27,8 +27,7 @@ services:
       DSPACE_REST_HOST: ${DSPACE_REST_HOST:-localhost}
       DSPACE_REST_PORT: ${DSPACE_REST_PORT:-8080}
       DSPACE_REST_NAMESPACE: ${DSPACE_REST_NAMESPACE:-/server}
-      NODE_ENV: development
-    image: dspace:dspace-angular_${COMPOSE_PROJECT_NAME}_latest
+    image: "${DOCKER_REGISTRY:-docker.io}/${DOCKER_OWNER:-dspace}/dspace-angular:${DSPACE_VER:-dspace-10_x}"
     build:
       context: ..
       dockerfile: Dockerfile
@@ -40,8 +39,6 @@ services:
     - published: 9876
       target: 9876
     volumes:
-      - ../:/app/
-      - node_modules_10:/app/node_modules
-
-volumes:
-  node_modules_10:
+    # Mount the local 'src' directory to the '/app' directory on the container.
+    # Allows the UI to "watch" this directory for changes and reload/rebuild when changes are detected.
+    - ../src:/app/src
