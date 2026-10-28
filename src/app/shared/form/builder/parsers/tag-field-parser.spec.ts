@@ -1,9 +1,10 @@
-import { FormFieldModel } from '../models/form-field.model';
-import { FormFieldMetadataValueObject } from '../models/form-field-metadata-value.model';
-import { TagFieldParser } from './tag-field-parser';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import { getMockTranslateService } from '@dspace/core/testing/translate.service.mock';
+
 import { DynamicTagModel } from '../ds-dynamic-form-ui/models/tag/dynamic-tag.model';
 import { ParserOptions } from './parser-options';
-import { getMockTranslateService } from 'src/app/shared/mocks/translate.service.mock';
+import { TagFieldParser } from './tag-field-parser';
 
 describe('TagFieldParser test suite', () => {
   let field: FormFieldModel;
@@ -15,13 +16,14 @@ describe('TagFieldParser test suite', () => {
     readOnly: false,
     submissionScope: 'testScopeUUID',
     collectionUUID: null,
-    typeField: 'dc_type'
+    typeField: 'dc_type',
+    isInnerForm: false,
   };
 
   beforeEach(() => {
     field = {
       input: {
-        type: 'tag'
+        type: 'tag',
       },
       label: 'Keywords',
       mandatory: 'false',
@@ -31,22 +33,22 @@ describe('TagFieldParser test suite', () => {
         {
           metadata: 'subject',
           controlledVocabulary: 'JOURNALAuthority',
-          closed: false
-        }
+          closed: false,
+        },
       ],
-      languageCodes: []
+      languageCodes: [],
     } as FormFieldModel;
 
   });
 
   it('should init parser properly', () => {
-    const parser = new TagFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new TagFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     expect(parser instanceof TagFieldParser).toBe(true);
   });
 
   it('should return a DynamicTagModel object when repeatable option is false', () => {
-    const parser = new TagFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new TagFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 
@@ -61,7 +63,7 @@ describe('TagFieldParser test suite', () => {
       ],
     };
 
-    const parser = new TagFieldParser(submissionId, field, initFormValues, parserOptions, translateService);
+    const parser = new TagFieldParser(submissionId, field, initFormValues, parserOptions, null, translateService);
 
     const fieldModel = parser.parse();
 

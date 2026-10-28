@@ -1,39 +1,64 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-page.component';
-import { SearchConfigurationService } from '../../../../../../core/shared/search/search-configuration.service';
-import { Item } from '../../../../../../core/shared/item.model';
-import { SearchResult } from '../../../../../search/models/search-result.model';
-import { PaginatedList } from '../../../../../../core/data/paginated-list.model';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { RelationshipOptions } from '../../../models/relationship-options.model';
-import { ListableObject } from '../../../../../object-collection/shared/listable-object.model';
-import { SearchService } from '../../../../../../core/shared/search/search.service';
-import { SelectableListService } from '../../../../../object-list/selectable-list/selectable-list.service';
-import { hasValue } from '../../../../../empty.util';
-import { take} from 'rxjs/operators';
-import { getFirstSucceededRemoteData, getRemoteDataPayload } from '../../../../../../core/shared/operators';
-import { CollectionElementLinkType } from '../../../../../object-collection/collection-element-link.type';
-import { Context } from '../../../../../../core/shared/context.model';
-import { LookupRelationService } from '../../../../../../core/data/lookup-relation.service';
-import { PaginationService } from '../../../../../../core/pagination/pagination.service';
-import { RelationshipDataService } from '../../../../../../core/data/relationship-data.service';
-import { RelationshipType } from '../../../../../../core/shared/item-relationships/relationship-type.model';
+import { AsyncPipe } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { PaginatedList } from '@dspace/core/data/paginated-list.model';
+import { RelationshipDataService } from '@dspace/core/data/relationship-data.service';
+import { PaginationService } from '@dspace/core/pagination/pagination.service';
+import { Context } from '@dspace/core/shared/context.model';
+import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
+import { Item } from '@dspace/core/shared/item.model';
+import { Relationship } from '@dspace/core/shared/item-relationships/relationship.model';
+import { RelationshipType } from '@dspace/core/shared/item-relationships/relationship-type.model';
+import { ListableObject } from '@dspace/core/shared/object-collection/listable-object.model';
+import {
+  getFirstSucceededRemoteData,
+  getRemoteDataPayload,
+} from '@dspace/core/shared/operators';
+import { RelationshipOptions } from '@dspace/core/shared/relationship-options.model';
+import { SearchObjects } from '@dspace/core/shared/search/models/search-objects.model';
+import { SearchResult } from '@dspace/core/shared/search/models/search-result.model';
+import { hasValue } from '@dspace/shared/utils/empty.util';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+import { take } from 'rxjs/operators';
 
-import { Relationship } from '../../../../../../core/shared/item-relationships/relationship.model';
-import { SearchObjects } from '../../../../../search/models/search-objects.model';
-import { DSpaceObject } from '../../../../../../core/shared/dspace-object.model';
+import { SEARCH_CONFIG_SERVICE } from '../../../../../../my-dspace-page/my-dspace-configuration.service';
+import { CollectionElementLinkType } from '../../../../../object-collection/collection-element-link.type';
+import { SelectableListService } from '../../../../../object-list/selectable-list/selectable-list.service';
+import { SearchService } from '../../../../../search/search.service';
+import { SearchConfigurationService } from '../../../../../search/search-configuration.service';
+import { ThemedSearchComponent } from '../../../../../search/themed-search.component';
+import { VarDirective } from '../../../../../utils/var.directive';
+import { LookupRelationService } from '../lookup-relation.service';
 
 
 @Component({
-  selector: 'ds-dynamic-lookup-relation-search-tab',
+  selector: 'ds-base-dynamic-lookup-relation-search-tab',
   styleUrls: ['./dynamic-lookup-relation-search-tab.component.scss'],
   templateUrl: './dynamic-lookup-relation-search-tab.component.html',
   providers: [
     {
       provide: SEARCH_CONFIG_SERVICE,
-      useClass: SearchConfigurationService
-    }
-  ]
+      useClass: SearchConfigurationService,
+    },
+  ],
+  imports: [
+    AsyncPipe,
+    NgbDropdownModule,
+    ThemedSearchComponent,
+    TranslateModule,
+    VarDirective,
+  ],
 })
 
 /**
@@ -137,7 +162,7 @@ export class DsDynamicLookupRelationSearchTabComponent implements OnInit, OnDest
    */
   initialPagination = {
     page: 1,
-    pageSize: 5
+    pageSize: 5,
   };
 
   /**
@@ -214,30 +239,30 @@ export class DsDynamicLookupRelationSearchTabComponent implements OnInit, OnDest
       relationType = this.relationshipType.leftwardType;
     }
     this.relationshipService.searchByItemsAndType( this.relationshipType.id, this.item.uuid, relationType ,idOfItems ).pipe(
-        getFirstSucceededRemoteData(),
-        getRemoteDataPayload(),
-      ).subscribe( (res: PaginatedList<Relationship>) => {
+      getFirstSucceededRemoteData(),
+      getRemoteDataPayload(),
+    ).subscribe( (res: PaginatedList<Relationship>) => {
 
-        let selectableObject = res.page.map( (relationship: any) => {
+      let selectableObject = res.page.map( (relationship: any) => {
 
-          let arrUrl = [];
-          if ( this.isLeft ) {
-            arrUrl = relationship._links.rightItem.href.split('/');
-          } else {
-            arrUrl = relationship._links.leftItem.href.split('/');
-          }
-          const uuid = arrUrl[ arrUrl.length - 1 ];
-
-          return this.getRelatedItem(uuid, resultListOfItems);
-        });
-
-        selectableObject = selectableObject.filter( (selObject) => {
-          return !this.getIfInRemove(selObject.indexableObject.uuid);
-        });
-
-        if ( selectableObject.length > 0 ) {
-          this.selectableListService.select(this.listId, selectableObject);
+        let arrUrl = [];
+        if ( this.isLeft ) {
+          arrUrl = relationship._links.rightItem.href.split('/');
+        } else {
+          arrUrl = relationship._links.leftItem.href.split('/');
         }
+        const uuid = arrUrl[ arrUrl.length - 1 ];
+
+        return this.getRelatedItem(uuid, resultListOfItems);
+      });
+
+      selectableObject = selectableObject.filter( (selObject) => {
+        return !this.getIfInRemove(selObject.indexableObject.uuid);
+      });
+
+      if ( selectableObject.length > 0 ) {
+        this.selectableListService.select(this.listId, selectableObject);
+      }
     });
   }
 

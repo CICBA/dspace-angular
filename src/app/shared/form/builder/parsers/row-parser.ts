@@ -1,25 +1,36 @@
-import { SubmissionFieldScopeType } from './../../../../core/submission/submission-field-scope-type';
-import { SectionVisibility } from './../../../../submission/objects/section-visibility.model';
-import { Injectable, Injector } from '@angular/core';
-
-import { DYNAMIC_FORM_CONTROL_TYPE_ARRAY, DynamicFormGroupModelConfig } from '@ng-dynamic-forms/core';
+import {
+  Injectable,
+  Injector,
+} from '@angular/core';
+import { DYNAMIC_FORM_CONTROL_TYPE_RELATION_GROUP } from '@dspace/core/shared/form/ds-dynamic-form-constants';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { SubmissionVisibilityType } from '@dspace/core/submission/models/section-visibility.model';
+import { isEmpty } from '@dspace/shared/utils/empty.util';
+import {
+  DYNAMIC_FORM_CONTROL_TYPE_ARRAY,
+  DynamicFormGroupModelConfig,
+} from '@ng-dynamic-forms/core';
 import uniqueId from 'lodash/uniqueId';
+import { SubmissionVisibility } from 'src/app/submission/utils/visibility.util';
 
-import { isEmpty, isNotEmpty } from '../../../empty.util';
 import { DynamicRowGroupModel } from '../ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
-import { FormFieldModel } from '../models/form-field.model';
-import { CONFIG_DATA, FieldParser, INIT_FORM_VALUES, PARSER_OPTIONS, SUBMISSION_ID } from './field-parser';
+import {
+  CONFIG_DATA,
+  FieldParser,
+  INIT_FORM_VALUES,
+  PARSER_OPTIONS,
+  SECURITY_CONFIG,
+  SUBMISSION_ID,
+} from './field-parser';
+import { setLayout } from './parser.utils';
 import { ParserFactory } from './parser-factory';
 import { ParserOptions } from './parser-options';
 import { ParserType } from './parser-type';
-import { setLayout } from './parser.utils';
-import { DYNAMIC_FORM_CONTROL_TYPE_RELATION_GROUP } from '../ds-dynamic-form-ui/ds-dynamic-form-constants';
-import { SubmissionScopeType } from '../../../../core/submission/submission-scope-type';
 
 export const ROW_ID_PREFIX = 'df-row-group-config-';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 /**
@@ -30,12 +41,14 @@ export class RowParser {
   }
 
   public parse(submissionId: string,
-               rowData,
-               scopeUUID,
-               initFormValues: any,
-               submissionScope,
-               readOnly: boolean,
-               typeField: string): DynamicRowGroupModel {
+    rowData,
+    scopeUUID,
+    initFormValues: any,
+    submissionScope,
+    readOnly: boolean,
+    typeField: string,
+    isInnerForm: boolean = false,
+    securityConfig: any = null): DynamicRowGroupModel {
     let fieldModel: any = null;
     let parsedResult = null;
     const config: DynamicFormGroupModelConfig = {
@@ -52,7 +65,8 @@ export class RowParser {
       readOnly: readOnly,
       submissionScope: submissionScope,
       collectionUUID: scopeUUID,
-      typeField: typeField
+      typeField: typeField,
+      isInnerForm: isInnerForm,
     };
 
     // Iterate over row's fields
@@ -67,14 +81,15 @@ export class RowParser {
             { provide: SUBMISSION_ID, useValue: submissionId },
             { provide: CONFIG_DATA, useValue: fieldData },
             { provide: INIT_FORM_VALUES, useValue: initFormValues },
-            { provide: PARSER_OPTIONS, useValue: parserOptions }
+            { provide: PARSER_OPTIONS, useValue: parserOptions },
+            { provide: SECURITY_CONFIG, useValue: securityConfig },
           ],
-          parent: this.parentInjector
+          parent: this.parentInjector,
         });
 
         fieldModel = fieldInjector.get(FieldParser).parse();
       } else {
-        throw new Error(`unknown form control model type "${fieldData.input.type}" defined for Input field with label "${fieldData.label}".`,);
+        throw new Error(`unknown form control model type "${fieldData.input.type}" defined for Input field with label "${fieldData.label}".`);
       }
 
       if (fieldModel) {
@@ -108,8 +123,8 @@ export class RowParser {
     if (config && !isEmpty(config.group)) {
       const clsGroup = {
         element: {
-          control: 'form-row',
-        }
+          control: 'row',
+        },
       };
       const groupModel = new DynamicRowGroupModel(config, clsGroup);
       if (Array.isArray(parsedResult)) {
@@ -121,37 +136,25 @@ export class RowParser {
     return parsedResult;
   }
 
-  checksFieldScope(fieldScope, submissionScope, visibility: SectionVisibility) {
-    return (isEmpty(fieldScope) || !this.isHidden(visibility, fieldScope, submissionScope));
+  /**
+   * Check if a field is visible with the given scope
+   * @param visibility
+   * @param submissionScope
+   */
+  checksFieldScope(visibility: SubmissionVisibilityType, submissionScope) {
+    return isEmpty(submissionScope) || !SubmissionVisibility.isHidden(visibility, submissionScope);
   }
 
   /**
-   * Check if the field is hidden or not.
-   * It is hidden when we do have the scope,
-   * but we do not have the visibility,
-   * also the field scope should be different from the submissionScope.
-   * @param visibility The visibility of the field
-   * @param scope the scope of the field
-   * @param submissionScope the scope of the submission
-   * @returns If the field is hidden or not
+   * Return the list of row's field visible with the given scope
+   * @param fields
+   * @param submissionScope
    */
-  private isHidden(visibility: SectionVisibility, scope: string, submissionScope: string): boolean {
-    return isNotEmpty(scope)
-      && (
-        isEmpty(visibility)
-        && (
-          submissionScope === SubmissionScopeType.WorkspaceItem && scope !== SubmissionFieldScopeType.WorkspaceItem
-          ||
-          submissionScope === SubmissionScopeType.WorkflowItem && scope !== SubmissionFieldScopeType.WorkflowItem
-        )
-      );
-  }
-
   filterScopedFields(fields: FormFieldModel[], submissionScope): FormFieldModel[] {
     const filteredFields: FormFieldModel[] = [];
     fields.forEach((field: FormFieldModel) => {
       // Whether field scope doesn't match the submission scope, skip it
-      if (this.checksFieldScope(field.scope, submissionScope, field.visibility)) {
+      if (this.checksFieldScope(field.visibility, submissionScope)) {
         filteredFields.push(field);
       }
     });

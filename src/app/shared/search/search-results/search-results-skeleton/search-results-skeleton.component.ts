@@ -1,18 +1,24 @@
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
+import { ViewMode } from '@dspace/core/shared/view-mode.model';
+import { hasValue } from '@dspace/shared/utils/empty.util';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { Observable } from 'rxjs';
 
-import { SearchService } from '../../../../core/shared/search/search.service';
-import { ViewMode } from '../../../../core/shared/view-mode.model';
-import { hasValue } from '../../../empty.util';
+import { SearchService } from '../../search.service';
 
 @Component({
   selector: 'ds-search-results-skeleton',
+  imports: [
+    AsyncPipe,
+    NgxSkeletonLoaderModule,
+  ],
   templateUrl: './search-results-skeleton.component.html',
-  styleUrls: ['./search-results-skeleton.component.scss'],
+  styleUrl: './search-results-skeleton.component.scss',
 })
 /**
  * Component to show placeholders for search results while loading, to give a loading feedback to the user without layout shifting.

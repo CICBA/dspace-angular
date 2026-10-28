@@ -1,64 +1,86 @@
-import { BreadcrumbConfig } from '../../breadcrumbs/breadcrumb/breadcrumb-config.model';
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { DSOBreadcrumbsService } from './dso-breadcrumbs.service';
-import { getFirstCompletedRemoteData, getRemoteDataPayload } from '../shared/operators';
-import { map } from 'rxjs/operators';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { hasValue } from '@dspace/shared/utils/empty.util';
 import { Observable } from 'rxjs';
-import { DSpaceObject } from '../shared/dspace-object.model';
-import { ChildHALResource } from '../shared/child-hal-resource.model';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
-import { hasValue } from '../../shared/empty.util';
+import { map } from 'rxjs/operators';
+
 import { IdentifiableDataService } from '../data/base/identifiable-data.service';
-import { getDSORoute } from '../../app-routing-paths';
+import { ItemDataService } from '../data/item-data.service';
+import {
+  CUSTOM_URL_VALID_PATTERN,
+  getDSORoute,
+  getItemPageRoute,
+} from '../router/utils/dso-route.utils';
+import { DSpaceObject } from '../shared/dspace-object.model';
+import { FollowLinkConfig } from '../shared/follow-link-config.model';
+import { Item } from '../shared/item.model';
+import {
+  getFirstCompletedRemoteData,
+  getRemoteDataPayload,
+} from '../shared/operators';
+import { DSOBreadcrumbsService } from './dso-breadcrumbs.service';
+import { BreadcrumbConfig } from './models/breadcrumb-config.model';
 
 /**
- * The class that resolves the BreadcrumbConfig object for a DSpaceObject
+ * Method for resolving a breadcrumb config object
+ * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
+ * @param {RouterStateSnapshot} state The current RouterStateSnapshot
+ * @param {DSOBreadcrumbsService} breadcrumbService
+ * @param {IdentifiableDataService} dataService
+ * @param linksToFollow
+ * @returns BreadcrumbConfig object
  */
-@Injectable({
-  providedIn: 'root',
-})
-export abstract class DSOBreadcrumbResolver<T extends ChildHALResource & DSpaceObject> implements Resolve<BreadcrumbConfig<T>> {
-  protected constructor(
-    protected breadcrumbService: DSOBreadcrumbsService,
-    protected dataService: IdentifiableDataService<T>,
-  ) {
-  }
+export const DSOBreadcrumbResolver: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot, breadcrumbService: DSOBreadcrumbsService, dataService: IdentifiableDataService<DSpaceObject>, ...linksToFollow: FollowLinkConfig<DSpaceObject>[]) => Observable<BreadcrumbConfig<DSpaceObject>> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+  breadcrumbService: DSOBreadcrumbsService,
+  dataService: IdentifiableDataService<DSpaceObject>,
+  ...linksToFollow: FollowLinkConfig<DSpaceObject>[]
+): Observable<BreadcrumbConfig<DSpaceObject>> => {
+  return DSOBreadcrumbResolverByUuid(route, state, route.params.id, breadcrumbService, dataService, ...linksToFollow);
+};
 
-  /**
-   * Method for resolving a breadcrumb config object
-   * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
-   * @param {RouterStateSnapshot} state The current RouterStateSnapshot
-   * @returns BreadcrumbConfig object
-   */
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BreadcrumbConfig<T>> {
-    return this.resolveById(route.params.id);
-  }
-
-  /**
-   * Method for resolving a breadcrumb by id
-   *
-   * @param uuid The uuid to resolve
-   * @returns BreadcrumbConfig object
-   */
-  resolveById(uuid: string): Observable<BreadcrumbConfig<T>> {
-    return this.dataService.findById(uuid, true, false, ...this.followLinks).pipe(
-      getFirstCompletedRemoteData(),
-      getRemoteDataPayload(),
-      map((object: T) => {
-        if (hasValue(object)) {
-          return { provider: this.breadcrumbService, key: object, url: getDSORoute(object) };
+/**
+ * Method for resolving a breadcrumb config object with the given UUID
+ *
+ * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
+ * @param {RouterStateSnapshot} state The current RouterStateSnapshot
+ * @param {String} uuid The uuid of the DSO object
+ * @param {DSOBreadcrumbsService} breadcrumbService
+ * @param {IdentifiableDataService} dataService
+ * @param linksToFollow
+ * @returns BreadcrumbConfig object
+ */
+export const DSOBreadcrumbResolverByUuid: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot, uuid: string, breadcrumbService: DSOBreadcrumbsService, dataService: IdentifiableDataService<DSpaceObject>, ...linksToFollow: FollowLinkConfig<DSpaceObject>[]) => Observable<BreadcrumbConfig<DSpaceObject>> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+  uuid: string,
+  breadcrumbService: DSOBreadcrumbsService,
+  dataService: IdentifiableDataService<DSpaceObject>,
+  ...linksToFollow: FollowLinkConfig<DSpaceObject>[]
+): Observable<BreadcrumbConfig<DSpaceObject>> => {
+  const isItemDataService = dataService instanceof ItemDataService;
+  const findMethod = isItemDataService ? dataService.findByIdOrCustomUrl.bind(dataService) : dataService.findById.bind(dataService);
+  return findMethod(uuid, true, false, ...linksToFollow).pipe(
+    getFirstCompletedRemoteData(),
+    getRemoteDataPayload(),
+    map((object: DSpaceObject) => {
+      if (hasValue(object)) {
+        // For items, fall back to UUID-based route if the custom URL contains non-latin characters
+        let url: string;
+        if (object instanceof Item && object.hasMetadata('dspace.customurl')) {
+          const customUrl = object.firstMetadataValue('dspace.customurl');
+          const ignoreCustomUrl = !CUSTOM_URL_VALID_PATTERN.test(customUrl);
+          url = getItemPageRoute(object as Item, ignoreCustomUrl);
         } else {
-          return undefined;
+          url = getDSORoute(object);
         }
-      })
-    );
-  }
-
-  /**
-   * Method that returns the follow links to already resolve
-   * The self links defined in this list are expected to be requested somewhere in the near future
-   * Requesting them as embeds will limit the number of requests
-   */
-  abstract get followLinks(): FollowLinkConfig<T>[];
-}
+        return { provider: breadcrumbService, key: object, url };
+      } else {
+        return undefined;
+      }
+    }),
+  );
+};

@@ -1,42 +1,85 @@
+import { AsyncPipe } from '@angular/common';
 import {
-    ChangeDetectorRef,
-    Component,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    SimpleChanges,
-    ViewChild
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
+import { SubmissionFormsModel } from '@dspace/core/config/models/config-submission-forms.model';
+import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '@dspace/core/data/feature-authorization/feature-id';
+import { ItemDataService } from '@dspace/core/data/item-data.service';
+import { JsonPatchOperationPathCombiner } from '@dspace/core/json-patch/builder/json-patch-operation-path-combiner';
+import { JsonPatchOperationsBuilder } from '@dspace/core/json-patch/builder/json-patch-operations-builder';
+import { followLink } from '@dspace/core/shared/follow-link-config.model';
+import { HALEndpointService } from '@dspace/core/shared/hal-endpoint.service';
+import { Item } from '@dspace/core/shared/item.model';
+import {
+  getAllSucceededRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  getRemoteDataPayload,
+} from '@dspace/core/shared/operators';
+import { WorkspaceitemSectionUploadFileObject } from '@dspace/core/submission/models/workspaceitem-section-upload-file.model';
+import { SubmissionJsonPatchOperationsService } from '@dspace/core/submission/submission-json-patch-operations.service';
+import { SubmissionScopeType } from '@dspace/core/submission/submission-scope-type';
+import {
+  hasValue,
+  isNotUndefined,
+} from '@dspace/shared/utils/empty.util';
+import {
+  NgbModal,
+  NgbModalOptions,
+} from '@ng-bootstrap/ng-bootstrap';
+import { DynamicFormControlModel } from '@ng-dynamic-forms/core';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+  of,
+  Subscription,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  switchMap,
+  take,
+} from 'rxjs/operators';
 
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { DynamicFormControlModel, } from '@ng-dynamic-forms/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { SectionUploadService } from '../section-upload.service';
-import { hasValue, isNotUndefined } from '../../../../shared/empty.util';
+import { HardRedirectService } from '../../../../core/services/hard-redirect.service';
+import { FileService } from '../../../../core/shared/file.service';
+import { BtnDisabledDirective } from '../../../../shared/btn-disabled.directive';
 import { FormService } from '../../../../shared/form/form.service';
-import { JsonPatchOperationsBuilder } from '../../../../core/json-patch/builder/json-patch-operations-builder';
-import { JsonPatchOperationPathCombiner } from '../../../../core/json-patch/builder/json-patch-operation-path-combiner';
-import { WorkspaceitemSectionUploadFileObject } from '../../../../core/submission/models/workspaceitem-section-upload-file.model';
-import { SubmissionFormsModel } from '../../../../core/config/models/config-submission-forms.model';
 import { SubmissionService } from '../../../submission.service';
-import { HALEndpointService } from '../../../../core/shared/hal-endpoint.service';
-import { SubmissionJsonPatchOperationsService } from '../../../../core/submission/submission-json-patch-operations.service';
+import { SectionUploadService } from '../section-upload.service';
 import { SubmissionSectionUploadFileEditComponent } from './edit/section-upload-file-edit.component';
-import { Bitstream } from '../../../../core/shared/bitstream.model';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
+import { SubmissionSectionUploadFileReplaceComponent } from './replace/submission-section-upload-file-replace/submission-section-upload-file-replace.component';
+import { SubmissionSectionUploadFileViewComponent } from './view/section-upload-file-view.component';
 
 /**
  * This component represents a single bitstream contained in the submission
  */
 @Component({
-  selector: 'ds-submission-upload-section-file',
+  selector: 'ds-base-submission-upload-section-file',
   styleUrls: ['./section-upload-file.component.scss'],
   templateUrl: './section-upload-file.component.html',
+  imports: [
+    AsyncPipe,
+    BtnDisabledDirective,
+    SubmissionSectionUploadFileViewComponent,
+    TranslateModule,
+  ],
 })
 export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, OnDestroy {
+  /**
+   * The indicator is the primary bitstream
+   * it will be null if no primary bitstream is set for the ORIGINAL bundle
+   * @type {boolean, null}
+   */
+  @Input() isPrimary: boolean | null;
 
   /**
    * The list of available access condition
@@ -100,6 +143,11 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
    */
   @ViewChild(SubmissionSectionUploadFileEditComponent) fileEditComp: SubmissionSectionUploadFileEditComponent;
 
+  /**
+   * A boolean representing if a submission save operation is pending
+   * @type {Observable<boolean>}
+   */
+  public processingSaveStatus$: Observable<boolean>;
 
   /**
    * The bitstream's metadata data
@@ -138,6 +186,12 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
   protected pathCombiner: JsonPatchOperationPathCombiner;
 
   /**
+   * The [JsonPatchOperationPathCombiner] object
+   * @type {JsonPatchOperationPathCombiner}
+   */
+  protected primaryBitstreamPathCombiner: JsonPatchOperationPathCombiner;
+
+  /**
    * Array to track all subscriptions and unsubscribe them onDestroy
    * @type {Array}
    */
@@ -150,26 +204,36 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
   protected formMetadata: string[] = [];
 
   /**
+   * Whether to display the replace file button
+   * @protected
+   */
+  protected showReplaceButton$ = new BehaviorSubject(false);
+
+  /**
    * Initialize instance variables
    *
-   * @param {ChangeDetectorRef} cdr
    * @param {FormService} formService
-   * @param {HALEndpointService} halService
    * @param {NgbModal} modalService
    * @param {JsonPatchOperationsBuilder} operationsBuilder
    * @param {SubmissionJsonPatchOperationsService} operationsService
    * @param {SubmissionService} submissionService
    * @param {SectionUploadService} uploadService
+   * @param {AuthorizationDataService} authorizationService
+   * @param {HALEndpointService} halService
+   * @param {ItemDataService} itemDataService
    */
   constructor(
-    private cdr: ChangeDetectorRef,
     private formService: FormService,
-    private halService: HALEndpointService,
     private modalService: NgbModal,
     private operationsBuilder: JsonPatchOperationsBuilder,
     private operationsService: SubmissionJsonPatchOperationsService,
     private submissionService: SubmissionService,
     private uploadService: SectionUploadService,
+    private fileService: FileService,
+    private hardRedirectService: HardRedirectService,
+    private authorizationService: AuthorizationDataService,
+    private halService: HALEndpointService,
+    private itemDataService: ItemDataService,
   ) {
     this.readMode = true;
   }
@@ -185,9 +249,9 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
           .getFileData(this.submissionId, this.sectionId, this.fileId)
           .pipe(filter((bitstream) => isNotUndefined(bitstream)))
           .subscribe((bitstream) => {
-              this.fileData = bitstream;
-            }
-          )
+            this.fileData = bitstream;
+          },
+          ),
       );
     }
   }
@@ -197,8 +261,67 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
    */
   ngOnInit() {
     this.formId = this.formService.getUniqueId(this.fileId);
-    this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionId, 'files', this.fileIndex);
+    this.processingSaveStatus$ = this.submissionService.getSubmissionSaveProcessingStatus(this.submissionId);
+    this.pathCombiner = new JsonPatchOperationPathCombiner('sections', this.sectionId);
     this.loadFormMetadata();
+    this.initReplaceButtonVisibility();
+  }
+
+  /**
+   * Sets up the subscription that drives {@link showReplaceButton$}. The version check
+   * (`isVersionedSubmission`) is kept outside the per-file `switchMap` via `combineLatest`
+   * so that repeated emissions from `getFileData` during form initialisation do not cancel
+   * the in-flight version request before it has had a chance to resolve.
+   */
+  private initReplaceButtonVisibility(): void {
+    const scope = this.submissionService.getSubmissionScope();
+    if (scope === SubmissionScopeType.WorkflowItem) {
+      return;
+    }
+    this.subscriptions.push(
+      combineLatest([
+        this.isVersionedSubmission(scope),
+        this.uploadService.getFileData(this.submissionId, this.sectionId, this.fileId).pipe(
+          filter(isNotUndefined),
+          switchMap((fileData) => this.isAuthorizedToReplace(fileData.uuid)),
+        ),
+      ]).pipe(
+        map(([isVersioned, isAuthorized]) => isVersioned && isAuthorized),
+      ).subscribe((canReplace) => this.showReplaceButton$.next(canReplace)),
+    );
+  }
+
+  /**
+   * Returns `true` when the current submission is a new-version workspace item (i.e. its item
+   * already belongs to a version history), or unconditionally `true` for EditItem scope where
+   * versioning does not apply.
+   */
+  private isVersionedSubmission(scope: SubmissionScopeType): Observable<boolean> {
+    if (scope !== SubmissionScopeType.WorkspaceItem) {
+      return of(true);
+    }
+    return this.submissionService.retrieveSubmission(this.submissionId).pipe(
+      getAllSucceededRemoteData(),
+      getRemoteDataPayload(),
+      switchMap((submissionObject) =>
+        this.itemDataService.findByHref(submissionObject._links.item.href, true, true, followLink('version')).pipe(
+          getFirstSucceededRemoteDataPayload(),
+          switchMap((item: Item) => item.version),
+          getFirstSucceededRemoteDataPayload(),
+          map((version) => hasValue(version)),
+        ),
+      ),
+    );
+  }
+
+  /**
+   * Returns whether the current user is authorized to replace the given bitstream.
+   */
+  private isAuthorizedToReplace(bitstreamUuid: string): Observable<boolean> {
+    return this.halService.getEndpoint('bitstreams').pipe(
+      map((endpoint) => `${endpoint}/${bitstreamUuid}`),
+      switchMap((bitstreamUrl) => this.authorizationService.isAuthorized(FeatureID.CanReplaceBitstreamSubmitter, bitstreamUrl)),
+    );
   }
 
   /**
@@ -211,18 +334,16 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
           this.processingDelete$.next(true);
           this.deleteFile();
         }
-      }
+      },
     );
   }
 
   /**
-   * Build a Bitstream object by the current file uuid
-   *
-   * @return Bitstream object
+   * Download the file using a short-lived token
    */
-  public getBitstream(): Bitstream {
-    return Object.assign(new Bitstream(), {
-      uuid: this.fileData.uuid
+  public downloadFile() {
+    this.fileService.retrieveFileDownloadLink(this.fileData.url).pipe(take(1)).subscribe((link) => {
+      window.open(link, '_blank');
     });
   }
 
@@ -247,7 +368,12 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
     activeModal.componentInstance.formMetadata = this.formMetadata;
     activeModal.componentInstance.pathCombiner = this.pathCombiner;
     activeModal.componentInstance.submissionId = this.submissionId;
+    activeModal.componentInstance.isPrimary = this.isPrimary;
+  }
 
+  togglePrimaryBitstream(event) {
+    this.uploadService.updatePrimaryBitstreamOperation(this.pathCombiner.getPath('primary'), this.isPrimary, event.target.checked, this.fileId);
+    this.submissionService.dispatchSaveSection(this.submissionId, this.sectionId);
   }
 
   ngOnDestroy(): void {
@@ -265,21 +391,42 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
           this.formMetadata.push(metadatum.metadata);
         });
       });
-    }
+    },
     );
+  }
+
+  protected replaceBitstream(): void {
+    const options: NgbModalOptions = {
+      size: 'xl',
+      backdrop: 'static',
+    };
+    const modal = this.modalService.open(SubmissionSectionUploadFileReplaceComponent, options);
+    const instance: SubmissionSectionUploadFileReplaceComponent = modal.componentInstance;
+    instance.bitstreamUuid = this.fileData.uuid;
+    instance.fileIndex = this.fileIndex;
+    instance.fileName = this.fileName;
+    instance.fileSizeBytes = this.fileData.sizeBytes;
+    instance.submissionId = this.submissionId;
   }
 
   /**
    * Delete bitstream from submission
    */
   protected deleteFile() {
-    this.operationsBuilder.remove(this.pathCombiner.getPath());
+    this.operationsBuilder.remove(this.pathCombiner.getPath(['files', this.fileIndex]));
+    if (this.isPrimary) {
+      this.operationsBuilder.remove(this.pathCombiner.getPath('primary'));
+    }
+
     this.subscriptions.push(this.operationsService.jsonPatchByResourceID(
       this.submissionService.getSubmissionObjectLinkName(),
       this.submissionId,
       this.pathCombiner.rootElement,
       this.pathCombiner.subRootElement)
       .subscribe(() => {
+        if (this.isPrimary) {
+          this.uploadService.updateFilePrimaryBitstream(this.submissionId, this.sectionId, null);
+        }
         this.uploadService.removeUploadedFile(this.submissionId, this.sectionId, this.fileId);
         this.processingDelete$.next(false);
       }));

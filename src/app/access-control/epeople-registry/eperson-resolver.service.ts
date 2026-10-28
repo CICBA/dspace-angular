@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { EPerson } from '../../core/eperson/models/eperson.model';
-import { RemoteData } from '../../core/data/remote-data';
-import { getFirstCompletedRemoteData } from '../../core/shared/operators';
-import { ResolvedAction } from '../../core/resolving/resolver.actions';
-import { EPersonDataService } from '../../core/eperson/eperson-data.service';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { EPersonDataService } from '@dspace/core/eperson/eperson-data.service';
+import { EPerson } from '@dspace/core/eperson/models/eperson.model';
+import { ResolvedAction } from '@dspace/core/resolving/resolver.actions';
+import {
+  followLink,
+  FollowLinkConfig,
+} from '@dspace/core/shared/follow-link-config.model';
+import { getFirstCompletedRemoteData } from '@dspace/core/shared/operators';
 import { Store } from '@ngrx/store';
-import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+import { Observable } from 'rxjs';
 
 export const EPERSON_EDIT_FOLLOW_LINKS: FollowLinkConfig<EPerson>[] = [
   followLink('groups'),
@@ -19,7 +25,7 @@ export const EPERSON_EDIT_FOLLOW_LINKS: FollowLinkConfig<EPerson>[] = [
 @Injectable({
   providedIn: 'root',
 })
-export class EPersonResolver implements Resolve<RemoteData<EPerson>> {
+export class EPersonResolver  {
 
   constructor(
     protected ePersonService: EPersonDataService,

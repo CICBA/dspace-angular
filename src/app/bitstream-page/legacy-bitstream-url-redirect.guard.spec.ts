@@ -1,20 +1,21 @@
+import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { RequestEntryState } from '@dspace/core/data/request-entry-state.model';
+import { PAGE_NOT_FOUND_PATH } from '@dspace/core/router/core-routing-paths';
+import { BrowserHardRedirectService } from '@dspace/core/services/browser-hard-redirect.service';
+import { HardRedirectService } from '@dspace/core/services/hard-redirect.service';
+import { Bitstream } from '@dspace/core/shared/bitstream.model';
+import { RouterStub } from '@dspace/core/testing/router.stub';
 import { cold } from 'jasmine-marbles';
 import { EMPTY } from 'rxjs';
 
-import { PAGE_NOT_FOUND_PATH } from '../app-routing-paths';
-import { BitstreamDataService } from '../core/data/bitstream-data.service';
-import { RemoteData } from '../core/data/remote-data';
-import { RequestEntryState } from '../core/data/request-entry-state.model';
-import { BrowserHardRedirectService } from '../core/services/browser-hard-redirect.service';
-import { HardRedirectService } from '../core/services/hard-redirect.service';
-import { Bitstream } from '../core/shared/bitstream.model';
-import { RouterStub } from '../shared/testing/router.stub';
+import { environment } from '../../environments/environment';
 import { legacyBitstreamURLRedirectGuard } from './legacy-bitstream-url-redirect.guard';
 
 describe('legacyBitstreamURLRedirectGuard', () => {
   let resolver: any;
   let bitstreamDataService: BitstreamDataService;
-  let remoteDataMocks: { [type: string]: RemoteData<any> };
+  let remoteDataMocks: { [type: string]: RemoteData<Bitstream> };
   let route;
   let state;
   let hardRedirectService: HardRedirectService;
@@ -25,7 +26,7 @@ describe('legacyBitstreamURLRedirectGuard', () => {
   beforeEach(() => {
     route = {
       params: {},
-      queryParams: {}
+      queryParams: {},
     };
     router = new RouterStub();
     hardRedirectService = new BrowserHardRedirectService(window.location);
@@ -41,7 +42,7 @@ describe('legacyBitstreamURLRedirectGuard', () => {
       Error: new RemoteData(0, 0, 0, RequestEntryState.Error, 'Internal server error', undefined, 500),
     };
     bitstreamDataService = {
-      findByItemHandle: () => undefined
+      findByItemHandle: () => undefined,
     } as any;
     resolver = legacyBitstreamURLRedirectGuard;
   });
@@ -55,8 +56,8 @@ describe('legacyBitstreamURLRedirectGuard', () => {
             prefix: '123456789',
             suffix: '1234',
             filename: 'some-file.pdf',
-            sequence_id: '5'
-          }
+            sequence_id: '5',
+          },
         });
       });
       it(`should call findByItemHandle with the handle, sequence id, and filename from the route`, () => {
@@ -64,7 +65,7 @@ describe('legacyBitstreamURLRedirectGuard', () => {
         expect(bitstreamDataService.findByItemHandle).toHaveBeenCalledWith(
           `${route.params.prefix}/${route.params.suffix}`,
           route.params.sequence_id,
-          route.params.filename
+          route.params.filename,
         );
       });
     });
@@ -80,8 +81,8 @@ describe('legacyBitstreamURLRedirectGuard', () => {
               filename: 'some-file.pdf',
             },
             queryParams: {
-              sequenceId: '5'
-            }
+              sequenceId: '5',
+            },
           });
         });
         it(`should call findByItemHandle with the handle and filename from the route, and the sequence ID from the queryParams`, () => {
@@ -89,7 +90,7 @@ describe('legacyBitstreamURLRedirectGuard', () => {
           expect(bitstreamDataService.findByItemHandle).toHaveBeenCalledWith(
             `${route.params.prefix}/${route.params.suffix}`,
             route.queryParams.sequenceId,
-            route.params.filename
+            route.params.filename,
           );
         });
       });
@@ -109,7 +110,7 @@ describe('legacyBitstreamURLRedirectGuard', () => {
           expect(bitstreamDataService.findByItemHandle).toHaveBeenCalledWith(
             `${route.params.prefix}/${route.params.suffix}`,
             undefined,
-            route.params.filename
+            route.params.filename,
           );
         });
       });
@@ -150,7 +151,7 @@ describe('legacyBitstreamURLRedirectGuard', () => {
         }));
         resolver(route, state, bitstreamDataService, hardRedirectService, router).subscribe(() => {
           expect(bitstreamDataService.findByItemHandle).toHaveBeenCalled();
-          expect(hardRedirectService.redirect).toHaveBeenCalledWith(new URL(`/bitstreams/${bitstream.uuid}/download`, window.location.origin).href, 301);
+          expect(hardRedirectService.redirect).toHaveBeenCalledWith(new URL(`/bitstreams/${bitstream.uuid}/download`, environment.ui.baseUrl).href, 301);
         });
       });
     });

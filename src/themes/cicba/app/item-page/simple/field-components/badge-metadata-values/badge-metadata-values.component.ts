@@ -1,5 +1,11 @@
+import { 
+  NgClass,
+  NgTemplateOutlet,
+} from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { MetadataValuesComponent } from 'src/app/item-page/field-components/metadata-values/metadata-values.component';
+import { CicMetadataFieldWrapperComponent } from 'src/themes/cicba/app/shared/metadata-field-wrapper/cic-metadata-field-wrapper.component';
 
 /**
  * This component renders the configured 'values' into the ds-metadata-field-wrapper component.
@@ -9,6 +15,12 @@ import { MetadataValuesComponent } from 'src/app/item-page/field-components/meta
   selector: 'ds-badge-metadata-values',
   templateUrl: './badge-metadata-values.component.html',
   styleUrls: ['./badge-metadata-values.component.scss'],
+  imports: [
+    NgClass,
+    NgTemplateOutlet,
+    TranslateModule,
+    CicMetadataFieldWrapperComponent,
+  ]
 })
 export class BadgeMetadataValuesComponent extends MetadataValuesComponent {
   @Input() badgeType: string;

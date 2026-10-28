@@ -1,62 +1,68 @@
-import { TestBed, waitForAsync, ComponentFixture } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ItemListElementComponent } from './item-list-element.component';
-import { Item } from '../../../../../core/shared/item.model';
-import { XSRFService } from '../../../../../core/xsrf/xsrf.service';
-import { TruncatableService } from '../../../../truncatable/truncatable.service';
-import { of as observableOf } from 'rxjs';
-import { ListableObjectComponentLoaderComponent } from '../../../../object-collection/shared/listable-object/listable-object-component-loader.component';
-import { getMockThemeService } from '../../../../mocks/theme-service.mock';
-import { ThemeService } from '../../../../theme-support/theme.service';
-import { ListableObjectDirective } from '../../../../object-collection/shared/listable-object/listable-object.directive';
-import { APP_CONFIG } from '../../../../../../config/app-config.interface';
-import { environment } from '../../../../../../environments/environment.test';
-import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRouteStub } from '../../../../testing/active-router.stub';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../../../../core/auth/auth.service';
-import { AuthServiceStub } from '../../../../testing/auth-service.stub';
-import { AuthorizationDataService } from '../../../../../core/data/feature-authorization/authorization-data.service';
-import { AuthorizationDataServiceStub } from '../../../../testing/authorization-service.stub';
-import { FileService } from '../../../../../core/shared/file.service';
-import { FileServiceStub } from '../../../../testing/file-service.stub';
-import { TruncatableServiceStub } from '../../../../testing/truncatable-service.stub';
+import { APP_CONFIG } from '@dspace/config/app-config.interface';
+import { AuthService } from '@dspace/core/auth/auth.service';
+import { DSONameService } from '@dspace/core/breadcrumbs/dso-name.service';
+import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
+import { APP_DATA_SERVICES_MAP } from '@dspace/core/data-services-map-type';
+import { Item } from '@dspace/core/shared/item.model';
+import { ActivatedRouteStub } from '@dspace/core/testing/active-router.stub';
+import { AuthServiceStub } from '@dspace/core/testing/auth-service.stub';
+import { AuthorizationDataServiceStub } from '@dspace/core/testing/authorization-service.stub';
+import { DSONameServiceMock } from '@dspace/core/testing/dso-name.service.mock';
+import { TruncatableServiceStub } from '@dspace/core/testing/truncatable-service.stub';
+import { XSRFService } from '@dspace/core/xsrf/xsrf.service';
+import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { environment } from '../../../../../../environments/environment.test';
+import { getMockThemeService } from '../../../../theme-support/test/theme-service.mock';
+import { ThemeService } from '../../../../theme-support/theme.service';
+import { TruncatableService } from '../../../../truncatable/truncatable.service';
+import { TruncatePipe } from '../../../../utils/truncate.pipe';
+import { ItemListElementComponent } from './item-list-element.component';
 
 const mockItem: Item = Object.assign(new Item(), {
-  bundles: observableOf({}),
+  bundles: of({}),
   metadata: {
     'dc.title': [
       {
         language: 'en_US',
-        value: 'This is just another title'
-      }
+        value: 'This is just another title',
+      },
     ],
     'dc.contributor.author': [
       {
         language: 'en_US',
-        value: 'Smith, Donald'
-      }
+        value: 'Smith, Donald',
+      },
     ],
     'dc.publisher': [
       {
         language: 'en_US',
-        value: 'a publisher'
-      }
+        value: 'a publisher',
+      },
     ],
     'dc.date.issued': [
       {
         language: 'en_US',
-        value: '2015-06-26'
-      }
+        value: '2015-06-26',
+      },
     ],
     'dc.description.abstract': [
       {
         language: 'en_US',
-        value: 'This is the abstract'
-      }
-    ]
-  }
+        value: 'This is the abstract',
+      },
+    ],
+  },
 });
 
 describe('ItemListElementComponent', () => {
@@ -66,7 +72,6 @@ describe('ItemListElementComponent', () => {
   let activatedRoute: ActivatedRouteStub;
   let authService: AuthServiceStub;
   let authorizationService: AuthorizationDataServiceStub;
-  let fileService: FileServiceStub;
   let themeService: ThemeService;
   let truncatableService: TruncatableServiceStub;
 
@@ -74,31 +79,28 @@ describe('ItemListElementComponent', () => {
     activatedRoute = new ActivatedRouteStub();
     authService = new AuthServiceStub();
     authorizationService = new AuthorizationDataServiceStub();
-    fileService = new FileServiceStub();
     themeService = getMockThemeService();
     truncatableService = new TruncatableServiceStub();
 
     void TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot(),
-      ],
-      declarations: [
-        ItemListElementComponent,
-        ListableObjectComponentLoaderComponent,
-        ListableObjectDirective,
+        TruncatePipe,
       ],
       providers: [
+        { provide: DSONameService, useValue: new DSONameServiceMock() },
         { provide: APP_CONFIG, useValue: environment },
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: AuthService, useValue: authService },
         { provide: AuthorizationDataService, useValue: authorizationService },
-        { provide: XSRFService, useValue: {} },
-        { provide: FileService, useValue: fileService },
         { provide: ThemeService, useValue: themeService },
         { provide: TruncatableService, useValue: truncatableService },
+        { provide: XSRFService, useValue: {} },
+        { provide: APP_DATA_SERVICES_MAP, useValue: {} },
+        provideMockStore(),
       ],
     }).overrideComponent(ItemListElementComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default }
+      set: { changeDetection: ChangeDetectionStrategy.Default },
     }).compileComponents();
   }));
 

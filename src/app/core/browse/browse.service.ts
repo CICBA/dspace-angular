@@ -1,47 +1,56 @@
-import { Injectable } from '@angular/core';
+import {
+  inject,
+  Injectable,
+} from '@angular/core';
+import {
+  APP_CONFIG,
+  AppConfig,
+} from '@dspace/config/app-config.interface';
+import {
+  hasValue,
+  hasValueOperator,
+  isEmpty,
+  isNotEmpty,
+} from '@dspace/shared/utils/empty.util';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
-import { hasValue, hasValueOperator, isEmpty, isNotEmpty } from '../../shared/empty.util';
+import {
+  distinctUntilChanged,
+  map,
+  startWith,
+} from 'rxjs/operators';
+
+import { SortDirection } from '../cache/models/sort-options.model';
+import { HrefOnlyDataService } from '../data/href-only-data.service';
 import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
 import { RequestService } from '../data/request.service';
 import { BrowseDefinition } from '../shared/browse-definition.model';
-import { FlatBrowseDefinition } from '../shared/flat-browse-definition.model';
 import { BrowseEntry } from '../shared/browse-entry.model';
+import { FlatBrowseDefinition } from '../shared/flat-browse-definition.model';
+import {
+  followLink,
+  FollowLinkConfig,
+} from '../shared/follow-link-config.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
 import { Item } from '../shared/item.model';
 import {
   getBrowseDefinitionLinks,
   getFirstOccurrence,
-  getRemoteDataPayload,
   getFirstSucceededRemoteData,
-  getPaginatedListPayload
+  getPaginatedListPayload,
+  getRemoteDataPayload,
 } from '../shared/operators';
 import { URLCombiner } from '../url-combiner/url-combiner';
-import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
-import { HrefOnlyDataService } from '../data/href-only-data.service';
-import { followLink, FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
 import { BrowseDefinitionDataService } from './browse-definition-data.service';
-import { SortDirection } from '../cache/models/sort-options.model';
-import { environment } from '../../../environments/environment';
-
-
-export function getBrowseLinksToFollow(): FollowLinkConfig<BrowseEntry | Item>[] {
-  const followLinks = [
-    followLink('thumbnail'),
-  ];
-  if (environment.item.showAccessStatuses) {
-    followLinks.push(followLink('accessStatus'));
-  }
-  return followLinks;
-}
+import { BrowseEntrySearchOptions } from './browse-entry-search-options.model';
 
 /**
  * The service handling all browse requests
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class BrowseService {
   protected linkPath = 'browses';
+  private readonly appConfig: AppConfig = inject(APP_CONFIG);
 
   public static toSearchKeyArray(metadataKey: string): string[] {
     const keyParts = metadataKey.split('.');
@@ -62,6 +71,16 @@ export class BrowseService {
     private browseDefinitionDataService: BrowseDefinitionDataService,
     private hrefOnlyDataService: HrefOnlyDataService,
   ) {
+  }
+
+  getBrowseLinksToFollow(): FollowLinkConfig<BrowseEntry | Item>[] {
+    const followLinks = [
+      followLink('thumbnail'),
+    ];
+    if (this.appConfig.item.showAccessStatuses) {
+      followLinks.push(followLink('accessStatus'));
+    }
+    return followLinks;
   }
 
   /**
@@ -107,12 +126,35 @@ export class BrowseService {
           href = new URLCombiner(href, `?${args.join('&')}`).toString();
         }
         return href;
-      })
+      }),
     );
     if (options.fetchThumbnail ) {
-      return this.hrefOnlyDataService.findListByHref<BrowseEntry>(href$, {}, undefined, undefined, ...getBrowseLinksToFollow());
+      return this.hrefOnlyDataService.findListByHref<BrowseEntry>(href$, {}, undefined, undefined, ...this.getBrowseLinksToFollow());
     }
     return this.hrefOnlyDataService.findListByHref<BrowseEntry>(href$);
+  }
+
+  /*
+   * Get the sort direction for a browse index based on its unique id
+   * @param browseId     The unique id of the browse index
+   * @param defaultDirection  The default sort direction to return if the browse index has no sort direction configured
+   * @returns {Observable<SortDirection>} The sort direction of the browse index
+   */
+  getConfiguredSortDirection(browseId: string, defaultDirection: SortDirection): Observable<SortDirection> {
+    return this.getBrowseDefinitions().pipe(
+      getRemoteDataPayload(),
+      getPaginatedListPayload(),
+      map((browseDefinitions: BrowseDefinition[]) => browseDefinitions
+        .find((def: BrowseDefinition) => def.id === browseId),
+      ),
+      map((browseDef: BrowseDefinition) => {
+        if (browseDef.order === SortDirection.ASC || browseDef.order === SortDirection.DESC) {
+          return browseDef.order;
+        } else {
+          return defaultDirection;
+        }
+      }),
+    );
   }
 
   /**
@@ -158,7 +200,7 @@ export class BrowseService {
       }),
     );
     if (options.fetchThumbnail) {
-      return this.hrefOnlyDataService.findListByHref<Item>(href$, {}, undefined, undefined, ...getBrowseLinksToFollow());
+      return this.hrefOnlyDataService.findListByHref<Item>(href$, {}, undefined, undefined, ...this.getBrowseLinksToFollow());
     }
     return this.hrefOnlyDataService.findListByHref<Item>(href$);
   }
@@ -192,12 +234,12 @@ export class BrowseService {
           href = new URLCombiner(href, `?${args.join('&')}`).toString();
         }
         return href;
-      })
+      }),
     );
 
     return this.hrefOnlyDataService.findListByHref<Item>(href$).pipe(
       getFirstSucceededRemoteData(),
-      getFirstOccurrence()
+      getFirstOccurrence(),
     );
 
   }
@@ -253,7 +295,7 @@ export class BrowseService {
           }
 
           return isNotEmpty(matchingKeys);
-        })
+        }),
       ),
       map((def: BrowseDefinition) => {
         if (isEmpty(def) || isEmpty(def._links) || isEmpty(def._links[linkPath])) {
@@ -263,7 +305,7 @@ export class BrowseService {
         }
       }),
       startWith(undefined),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
   }
 

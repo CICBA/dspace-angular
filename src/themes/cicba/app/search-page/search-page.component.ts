@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { SearchConfigurationService } from 'src/app/core/shared/search/search-configuration.service';
-import { SEARCH_CONFIG_SERVICE } from 'src/app/my-dspace-page/my-dspace-page.component';
+
+import { SEARCH_CONFIG_SERVICE } from 'src/app/my-dspace-page/my-dspace-configuration.service';
+import { SearchConfigurationService } from 'src/app/shared/search/search-configuration.service';
 import { SearchPageComponent as BaseComponent } from '../../../../app/search-page/search-page.component';
+import { CicSearchComponent } from 'src/themes/cicba/app/search/cic-search.component';
 
 @Component({
   selector: 'ds-search-page',
@@ -13,6 +15,9 @@ import { SearchPageComponent as BaseComponent } from '../../../../app/search-pag
       provide: SEARCH_CONFIG_SERVICE,
       useClass: SearchConfigurationService
     }
+  ],
+  imports: [
+    CicSearchComponent,
   ]
 })
 

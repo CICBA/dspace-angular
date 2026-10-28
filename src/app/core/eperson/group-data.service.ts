@@ -1,55 +1,59 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { createSelector, select, Store } from '@ngrx/store';
-import { Observable, zip as observableZip } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { RestRequestMethod } from '@dspace/config/rest-request-method';
+import { Operation } from 'fast-json-patch';
 import {
-  GroupRegistryCancelGroupAction,
-  GroupRegistryEditGroupAction
-} from '../../access-control/group-registry/group-registry.actions';
-import { GroupRegistryState } from '../../access-control/group-registry/group-registry.reducers';
-import { AppState } from '../../app.reducer';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { FollowLinkConfig } from '../../shared/utils/follow-link-config.model';
+  Observable,
+  zip as observableZip,
+} from 'rxjs';
+import { take } from 'rxjs/operators';
+
+import { DSONameService } from '../breadcrumbs/dso-name.service';
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { RequestParam } from '../cache/models/request-param.model';
 import { ObjectCacheService } from '../cache/object-cache.service';
+import {
+  CreateData,
+  CreateDataImpl,
+} from '../data/base/create-data';
+import {
+  DeleteData,
+  DeleteDataImpl,
+} from '../data/base/delete-data';
+import { IdentifiableDataService } from '../data/base/identifiable-data.service';
+import {
+  PatchData,
+  PatchDataImpl,
+} from '../data/base/patch-data';
+import {
+  SearchData,
+  SearchDataImpl,
+} from '../data/base/search-data';
 import { DSOChangeAnalyzer } from '../data/dso-change-analyzer.service';
+import { FindListOptions } from '../data/find-list-options.model';
 import { PaginatedList } from '../data/paginated-list.model';
 import { RemoteData } from '../data/remote-data';
-import { CreateRequest, DeleteRequest, PostRequest } from '../data/request.models';
-
+import {
+  CreateRequest,
+  DeleteRequest,
+  PostRequest,
+} from '../data/request.models';
 import { RequestService } from '../data/request.service';
 import { HttpOptions } from '../dspace-rest/dspace-rest.service';
+import { NotificationsService } from '../notification-system/notifications.service';
+import { Collection } from '../shared/collection.model';
+import { Community } from '../shared/community.model';
+import { FollowLinkConfig } from '../shared/follow-link-config.model';
 import { HALEndpointService } from '../shared/hal-endpoint.service';
+import { NoContent } from '../shared/NoContent.model';
 import { getFirstCompletedRemoteData } from '../shared/operators';
 import { EPerson } from './models/eperson.model';
 import { Group } from './models/group.model';
-import { GROUP } from './models/group.resource-type';
-import { DSONameService } from '../breadcrumbs/dso-name.service';
-import { Community } from '../shared/community.model';
-import { Collection } from '../shared/collection.model';
-import { NoContent } from '../shared/NoContent.model';
-import { FindListOptions } from '../data/find-list-options.model';
-import { CreateData, CreateDataImpl } from '../data/base/create-data';
-import { IdentifiableDataService } from '../data/base/identifiable-data.service';
-import { SearchData, SearchDataImpl } from '../data/base/search-data';
-import { PatchData, PatchDataImpl } from '../data/base/patch-data';
-import { DeleteData, DeleteDataImpl } from '../data/base/delete-data';
-import { Operation } from 'fast-json-patch';
-import { RestRequestMethod } from '../data/rest-request-method';
-import { dataService } from '../data/base/data-service.decorator';
-import { getGroupEditRoute } from '../../access-control/access-control-routing-paths';
-
-const groupRegistryStateSelector = (state: AppState) => state.groupRegistry;
-const editGroupSelector = createSelector(groupRegistryStateSelector, (groupRegistryState: GroupRegistryState) => groupRegistryState.editGroup);
 
 /**
  * Provides methods to retrieve eperson group resources from the REST API & Group related CRUD actions.
  */
-@Injectable()
-@dataService(GROUP)
+@Injectable({ providedIn: 'root' })
 export class GroupDataService extends IdentifiableDataService<Group> implements CreateData<Group>, SearchData<Group>, PatchData<Group>, DeleteData<Group> {
   protected browseEndpoint = '';
   public ePersonsEndpoint = 'epersons';
@@ -68,7 +72,6 @@ export class GroupDataService extends IdentifiableDataService<Group> implements 
     protected comparator: DSOChangeAnalyzer<Group>,
     protected notificationsService: NotificationsService,
     protected nameService: DSONameService,
-    protected store: Store<any>,
   ) {
     super('groups', requestService, rdbService, objectCache, halService);
 
@@ -211,27 +214,7 @@ export class GroupDataService extends IdentifiableDataService<Group> implements 
     ));
   }
 
-  /**
-   * Method to retrieve the group that is currently being edited
-   */
-  public getActiveGroup(): Observable<Group> {
-    return this.store.pipe(select(editGroupSelector));
-  }
 
-  /**
-   * Method to cancel editing a group, dispatches a cancel group action
-   */
-  public cancelEditGroup() {
-    this.store.dispatch(new GroupRegistryCancelGroupAction());
-  }
-
-  /**
-   * Method to set the group being edited, dispatches an edit group action
-   * @param group The group to edit
-   */
-  public editGroup(group: Group) {
-    this.store.dispatch(new GroupRegistryEditGroupAction(group));
-  }
 
   /**
    * Method that clears a cached groups request
@@ -251,37 +234,6 @@ export class GroupDataService extends IdentifiableDataService<Group> implements 
 
   public getGroupRegistryRouterLink(): string {
     return '/access-control/groups';
-  }
-
-  /**
-   * Change which group is being edited and return the link for the edit page of the new group being edited
-   * @param newGroup New group to edit
-   */
-  public startEditingNewGroup(newGroup: Group): string {
-    this.getActiveGroup().pipe(take(1)).subscribe((activeGroup: Group) => {
-      if (newGroup === activeGroup) {
-        this.cancelEditGroup();
-      } else {
-        this.editGroup(newGroup);
-      }
-    });
-    return this.getGroupEditPageRouterLinkWithID(newGroup.id);
-  }
-
-  /**
-   * Get Edit page of group
-   * @param group Group we want edit page for
-   */
-  public getGroupEditPageRouterLink(group: Group): string {
-    return getGroupEditRoute(group.id);
-  }
-
-  /**
-   * Get Edit page of group
-   * @param groupID Group ID we want edit page for
-   */
-  public getGroupEditPageRouterLinkWithID(groupID: string): string {
-    return getGroupEditRoute(groupID);
   }
 
   /**
@@ -312,7 +264,7 @@ export class GroupDataService extends IdentifiableDataService<Group> implements 
         'dc.description': [
           {
             value: `${this.nameService.getName(dso)} ${role} group`,
-          }
+          },
         ],
       },
     });

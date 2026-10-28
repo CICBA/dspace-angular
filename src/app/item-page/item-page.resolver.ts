@@ -1,60 +1,134 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { RemoteData } from '../core/data/remote-data';
-import { ItemDataService } from '../core/data/item-data.service';
-import { Item } from '../core/shared/item.model';
+import { isPlatformServer } from '@angular/common';
+import {
+  inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { AuthService } from '@dspace/core/auth/auth.service';
+import { ItemDataService } from '@dspace/core/data/item-data.service';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { NotificationOptions } from '@dspace/core/notification-system/models/notification-options.model';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { ResolvedAction } from '@dspace/core/resolving/resolver.actions';
+import {
+  CUSTOM_URL_VALID_PATTERN,
+  getItemPageRoute,
+} from '@dspace/core/router/utils/dso-route.utils';
+import { HardRedirectService } from '@dspace/core/services/hard-redirect.service';
+import {
+  redirectOn4xx,
+  redirectOn204,
+} from '@dspace/core/shared/authorized.operators';
+import {
+  getItemPageLinksToFollow,
+  Item,
+} from '@dspace/core/shared/item.model';
+import { getFirstCompletedRemoteData } from '@dspace/core/shared/operators';
+import { hasValue } from '@dspace/shared/utils/empty.util';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { hasValue } from '../shared/empty.util';
-import { getItemPageRoute } from './item-page-routing-paths';
-import { ItemResolver } from './item.resolver';
-import { redirectOn4xx } from '../core/shared/authorized.operators';
-import { AuthService } from '../core/auth/auth.service';
+
+import { AppState } from '../app.reducer';
 
 /**
- * This class represents a resolver that requests a specific item before the route is activated and will redirect to the
- * entity page
+ * Method for resolving an item based on the parameters in the current route
+ * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
+ * @param {RouterStateSnapshot} state The current RouterStateSnapshot
+ * @param {Router} router
+ * @param {ItemDataService} itemService
+ * @param {Store<AppState>} store
+ * @param {AuthService} authService
+ * @returns Observable<<RemoteData<Item>> Emits the found item based on the parameters in the current route,
+ * or an error if something went wrong
  */
-@Injectable()
-export class ItemPageResolver extends ItemResolver {
-  constructor(
-    protected itemService: ItemDataService,
-    protected store: Store<any>,
-    protected router: Router,
-    protected authService: AuthService,
-  ) {
-    super(itemService, store, router);
-  }
+export const itemPageResolver: ResolveFn<RemoteData<Item>> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+  router: Router = inject(Router),
+  itemService: ItemDataService = inject(ItemDataService),
+  store: Store<AppState> = inject(Store<AppState>),
+  authService: AuthService = inject(AuthService),
+  platformId: any = inject(PLATFORM_ID),
+  hardRedirectService: HardRedirectService = inject(HardRedirectService),
+  notificationsService: NotificationsService = inject(NotificationsService),
+  translateService: TranslateService = inject(TranslateService),
+): Observable<RemoteData<Item>> => {
+  const itemRD$ = itemService.findByIdOrCustomUrl(
+    route.params.id,
+    true,
+    true,
+    ...getItemPageLinksToFollow(),
+  ).pipe(
+    getFirstCompletedRemoteData(),
+    redirectOn204<Item>(router, authService),
+    redirectOn4xx(router, authService),
+  );
 
-  /**
-   * Method for resolving an item based on the parameters in the current route
-   * @param {ActivatedRouteSnapshot} route The current ActivatedRouteSnapshot
-   * @param {RouterStateSnapshot} state The current RouterStateSnapshot
-   * @returns Observable<<RemoteData<Item>> Emits the found item based on the parameters in the current route,
-   * or an error if something went wrong
-   */
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RemoteData<Item>> {
-    return super.resolve(route, state).pipe(
-      redirectOn4xx(this.router, this.authService),
-      map((rd: RemoteData<Item>) => {
-        if (rd.hasSucceeded && hasValue(rd.payload)) {
+  itemRD$.subscribe((itemRD: RemoteData<Item>) => {
+    store.dispatch(new ResolvedAction(state.url, itemRD.payload));
+  });
+
+
+  return itemRD$.pipe(
+    map((rd: RemoteData<Item>) => {
+      if (rd.hasSucceeded && hasValue(rd.payload)) {
+        let itemRoute: string;
+        if (hasValue(rd.payload.metadata) && rd.payload.hasMetadata('dspace.customurl')) {
+          const customUrl = rd.payload.firstMetadataValue('dspace.customurl');
+          const isValidCustomUrl = CUSTOM_URL_VALID_PATTERN.test(customUrl);
+          const decodedStateUrl = decodeURIComponent(state.url);
+          const isSubPath = !(decodedStateUrl.endsWith(customUrl) || decodedStateUrl.endsWith(rd.payload.id) || decodedStateUrl.endsWith('/full'));
+          itemRoute = (isSubPath || !isValidCustomUrl) ? state.url : router.parseUrl(getItemPageRoute(rd.payload)).toString();
+          let newUrl: string;
+          if (route.params.id !== customUrl && !isSubPath && isValidCustomUrl) {
+            newUrl = itemRoute.replace(route.params.id, rd.payload.firstMetadataValue('dspace.customurl'));
+          } else if ((isSubPath || !isValidCustomUrl) && route.params.id === customUrl) {
+            // In case of a sub path, we need to ensure we navigate to the edit page of the item ID, not the custom URL
+            const itemId = rd.payload.uuid;
+            newUrl = decodeURIComponent(itemRoute).replace(customUrl, itemId);
+            if (!isValidCustomUrl && !isSubPath) {
+              // Notify the user that custom url won't be used as it is malformed
+              const notificationOptions = new NotificationOptions(-1, true);
+              notificationsService.warning(
+                translateService.instant('item-page.resolver.invalid-custom-url.title'),
+                translateService.instant('item-page.resolver.invalid-custom-url.message'),
+                notificationOptions,
+              );
+            }
+          }
+
+
+          if (hasValue(newUrl)) {
+            router.navigateByUrl(newUrl);
+          }
+        } else  {
           const thisRoute = state.url;
 
           // Angular uses a custom function for encodeURIComponent, (e.g. it doesn't encode commas
           // or semicolons) and thisRoute has been encoded with that function. If we want to compare
           // it with itemRoute, we have to run itemRoute through Angular's version as well to ensure
           // the same characters are encoded the same way.
-          const itemRoute = this.router.parseUrl(getItemPageRoute(rd.payload)).toString();
+          itemRoute = router.parseUrl(getItemPageRoute(rd.payload)).toString();
 
           if (!thisRoute.startsWith(itemRoute)) {
             const itemId = rd.payload.uuid;
             const subRoute = thisRoute.substring(thisRoute.indexOf(itemId) + itemId.length, thisRoute.length);
-            this.router.navigateByUrl(itemRoute + subRoute);
+            if (isPlatformServer(platformId)) {
+              hardRedirectService.redirect(itemRoute + subRoute, 301);
+            } else {
+              router.navigateByUrl(itemRoute + subRoute);
+            }
           }
         }
-        return rd;
-      })
-    );
-  }
-}
+      }
+      return rd;
+    }),
+  );
+};

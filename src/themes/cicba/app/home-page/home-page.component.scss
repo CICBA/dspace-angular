@@ -14,7 +14,7 @@
 .aside a img {
     max-width: 100%;
     margin-bottom: 1em;
-    @include hover {
+    &:hover {
         filter: brightness(90%);
     }
 }

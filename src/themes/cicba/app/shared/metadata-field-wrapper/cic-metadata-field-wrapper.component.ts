@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MetadataFieldWrapperComponent } from 'src/app/shared/metadata-field-wrapper/metadata-field-wrapper.component';
 
@@ -8,9 +9,12 @@ import { MetadataFieldWrapperComponent } from 'src/app/shared/metadata-field-wra
 @Component({
   selector: 'ds-cic-metadata-field-wrapper',
   styleUrls: ['./cic-metadata-field-wrapper.component.scss'],
-  templateUrl: './cic-metadata-field-wrapper.component.html'
+  templateUrl: './cic-metadata-field-wrapper.component.html',
+  imports: [
+    NgClass,
+  ],
 })
-export class CicMetadataFieldWrapperComponent extends MetadataFieldWrapperComponent {
+export class CicMetadataFieldWrapperComponent extends MetadataFieldWrapperComponent implements OnInit {
   @Input() inlineLabel: boolean;
 
   ngOnInit() {

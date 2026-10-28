@@ -58,3 +58,8 @@ header {
   display: flex;
   align-items: baseline;
 }
+
+.comcol-page-browse-section .browse-by-metadata .input-group {
+  flex: 0 0 60%;
+  max-width: 100%;
+}

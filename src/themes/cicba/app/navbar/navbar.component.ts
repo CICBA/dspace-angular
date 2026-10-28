@@ -1,7 +1,16 @@
+import {
+  AsyncPipe,
+  NgClass,
+  NgComponentOutlet,
+} from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Component } from '@angular/core';
 import { NavbarComponent as BaseComponent } from '../../../../app/navbar/navbar.component';
+import { TranslateModule } from '@ngx-translate/core';
 import { slideMobileNav } from '../../../../app/shared/animations/slide';
-
+import { ThemedAuthNavMenuComponent } from 'src/app/shared/auth-nav-menu/themed-auth-nav-menu.component';
+import { ThemedLangSwitchComponent } from 'src/app/shared/lang-switch/themed-lang-switch.component';
+import { ImpersonateNavbarComponent } from 'src/app/shared/impersonate-navbar/impersonate-navbar.component';
 /**
  * Component representing the public navbar
  */
@@ -9,7 +18,17 @@ import { slideMobileNav } from '../../../../app/shared/animations/slide';
   selector: 'ds-navbar',
   styleUrls: ['./navbar.component.scss'],
   templateUrl: './navbar.component.html',
-  animations: [slideMobileNav]
+  animations: [slideMobileNav],
+  imports: [
+    AsyncPipe,
+    NgClass,
+    NgComponentOutlet,
+    TranslateModule,
+    ThemedAuthNavMenuComponent,
+    ThemedLangSwitchComponent,
+    ImpersonateNavbarComponent,
+    RouterLink,
+  ],
 })
 export class NavbarComponent extends BaseComponent {
 }

@@ -1,5 +1,13 @@
-import { AUTOCOMPLETE_OFF, DynamicFormControlLayout, serializable } from '@ng-dynamic-forms/core';
-import { DsDynamicInputModel, DsDynamicInputModelConfig } from '../ds-dynamic-input.model';
+import {
+  AUTOCOMPLETE_OFF,
+  DynamicFormControlLayout,
+  serializable,
+} from '@ng-dynamic-forms/core';
+
+import {
+  DsDynamicInputModel,
+  DsDynamicInputModelConfig,
+} from '../ds-dynamic-input.model';
 
 export const DYNAMIC_FORM_CONTROL_TYPE_TAG = 'TAG';
 
@@ -12,6 +20,8 @@ export class DynamicTagModel extends DsDynamicInputModel {
 
   @serializable() minChars: number;
   @serializable() readonly type: string = DYNAMIC_FORM_CONTROL_TYPE_TAG;
+  // toggle of security must not be shown for tag model
+  @serializable() toggleSecurityVisibility = false;
 
   constructor(config: DynamicTagModelConfig, layout?: DynamicFormControlLayout) {
 

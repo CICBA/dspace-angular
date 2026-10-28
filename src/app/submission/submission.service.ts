@@ -1,14 +1,74 @@
+import {
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-import { Observable, of as observableOf, Subscription, timer as observableTimer } from 'rxjs';
-import { catchError, concatMap, distinctUntilChanged, filter, find, map, startWith, take, tap } from 'rxjs/operators';
-import { Store, MemoizedSelector, createSelector, select } from '@ngrx/store';
+import { ErrorResponse } from '@dspace/core/cache/response.models';
+import { SubmissionDefinitionsModel } from '@dspace/core/config/models/config-submission-definitions.model';
+import { ItemDataService } from '@dspace/core/data/item-data.service';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { RequestService } from '@dspace/core/data/request.service';
+import { HttpOptions } from '@dspace/core/dspace-rest/dspace-rest.service';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { RouteService } from '@dspace/core/services/route.service';
+import { Bundle } from '@dspace/core/shared/bundle.model';
+import { followLink } from '@dspace/core/shared/follow-link-config.model';
+import { Item } from '@dspace/core/shared/item.model';
+import {
+  getFirstCompletedRemoteData,
+  getFirstSucceededRemoteDataPayload,
+  getPaginatedListPayload,
+  getRemoteDataPayload,
+} from '@dspace/core/shared/operators';
+import { MetadataSecurityConfiguration } from '@dspace/core/submission/models/metadata-security-configuration';
+import { SubmissionError } from '@dspace/core/submission/models/submission-error.model';
+import { SubmissionObject } from '@dspace/core/submission/models/submission-object.model';
+import { SubmissionSectionObject } from '@dspace/core/submission/models/submission-section-object.model';
+import { WorkspaceitemSectionsObject } from '@dspace/core/submission/models/workspaceitem-sections.model';
+import { SectionsType } from '@dspace/core/submission/sections-type';
+import { SubmissionJsonPatchOperationsService } from '@dspace/core/submission/submission-json-patch-operations.service';
+import { SubmissionRestService } from '@dspace/core/submission/submission-rest.service';
+import { SubmissionScopeType } from '@dspace/core/submission/submission-scope-type';
+import {
+  createFailedRemoteDataObject$,
+  createSuccessfulRemoteDataObject,
+} from '@dspace/core/utilities/remote-data.utils';
+import {
+  hasValue,
+  isEmpty,
+  isNotEmpty,
+  isNotUndefined,
+} from '@dspace/shared/utils/empty.util';
+import {
+  createSelector,
+  MemoizedSelector,
+  select,
+  Store,
+} from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import {
+  combineLatest,
+  Observable,
+  of,
+  Subscription,
+  timer as observableTimer,
+} from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  distinctUntilChanged,
+  filter,
+  find,
+  map,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
 
-import { submissionSelector, SubmissionState } from './submission.reducers';
-import { hasValue, isEmpty, isNotUndefined } from '../shared/empty.util';
+import { environment } from '../../environments/environment';
+import { SearchService } from '../shared/search/search.service';
 import {
   CancelSubmissionFormAction,
   ChangeSubmissionCollectionAction,
@@ -19,33 +79,22 @@ import {
   SaveForLaterSubmissionFormAction,
   SaveSubmissionFormAction,
   SaveSubmissionSectionFormAction,
-  SetActiveSectionAction
+  SetActiveSectionAction,
 } from './objects/submission-objects.actions';
 import {
   SubmissionObjectEntry,
-  SubmissionSectionEntry
+  SubmissionSectionEntry,
 } from './objects/submission-objects.reducer';
-import { submissionObjectFromIdSelector } from './selectors';
-import { HttpOptions } from '../core/dspace-rest/dspace-rest.service';
-import { SubmissionRestService } from '../core/submission/submission-rest.service';
 import { SectionDataObject } from './sections/models/section-data.model';
-import { SubmissionScopeType } from '../core/submission/submission-scope-type';
-import { SubmissionObject } from '../core/submission/models/submission-object.model';
-import { RouteService } from '../core/services/route.service';
-import { SectionsType } from './sections/sections-type';
-import { NotificationsService } from '../shared/notifications/notifications.service';
-import { SubmissionDefinitionsModel } from '../core/config/models/config-submission-definitions.model';
-import { WorkspaceitemSectionsObject } from '../core/submission/models/workspaceitem-sections.model';
-import { RemoteData } from '../core/data/remote-data';
-import { ErrorResponse } from '../core/cache/response.models';
-import { createFailedRemoteDataObject$, createSuccessfulRemoteDataObject } from '../shared/remote-data.utils';
-import { RequestService } from '../core/data/request.service';
-import { SearchService } from '../core/shared/search/search.service';
-import { Item } from '../core/shared/item.model';
-import { environment } from '../../environments/environment';
-import { SubmissionJsonPatchOperationsService } from '../core/submission/submission-json-patch-operations.service';
-import { SubmissionSectionObject } from './objects/submission-section-object.model';
-import { SubmissionError } from './objects/submission-error.model';
+import {
+  securityConfigurationObjectFromIdSelector,
+  submissionObjectFromIdSelector,
+} from './selectors';
+import {
+  submissionSelector,
+  SubmissionState,
+} from './submission.reducers';
+import { SubmissionVisibility } from './utils/visibility.util';
 
 function getSubmissionSelector(submissionId: string):  MemoizedSelector<SubmissionState, SubmissionObjectEntry> {
   return createSelector(
@@ -79,6 +128,8 @@ export class SubmissionService {
 
   private workspaceLinkPath = 'workspaceitems';
   private workflowLinkPath = 'workflowitems';
+  private editItemsLinkPath = 'edititems';
+
   /**
    * Initialize service variables
    * @param {NotificationsService} notificationsService
@@ -99,7 +150,8 @@ export class SubmissionService {
               protected translate: TranslateService,
               protected searchService: SearchService,
               protected requestService: RequestService,
-              protected jsonPatchOperationService: SubmissionJsonPatchOperationsService) {
+              protected jsonPatchOperationService: SubmissionJsonPatchOperationsService,
+              protected itemDataService: ItemDataService) {
   }
 
   /**
@@ -128,13 +180,48 @@ export class SubmissionService {
    *
    * @param collectionId
    *    The owning collection id
+   * @param entityType
+   *    The entity type
    * @return Observable<SubmissionObject>
    *    observable of SubmissionObject
    */
-  createSubmission(collectionId?: string): Observable<SubmissionObject> {
-    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, null, collectionId).pipe(
+  createSubmission(collectionId?: string, entityType?: string): Observable<SubmissionObject> {
+    const paramsObj = Object.create({});
+
+    if (isNotEmpty(entityType)) {
+      paramsObj.entityType = entityType;
+    }
+
+    const params = new HttpParams({ fromObject: paramsObj });
+    const options: HttpOptions = Object.create({});
+    options.params = params;
+    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options, collectionId).pipe(
       map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
-      catchError(() => observableOf({} as SubmissionObject)));
+      catchError(() => of({} as SubmissionObject)));
+  }
+
+  /**
+   * Perform a REST call to create a new workspaceitem for a specified collection and return response
+   *
+   * @param collectionId
+   *    The collection id
+   * @return Observable<SubmissionObject>
+   *    observable of SubmissionObject
+   */
+  createSubmissionForCollection(collectionId: string): Observable<SubmissionObject> {
+    const paramsObj = Object.create({});
+
+    if (isNotEmpty(collectionId)) {
+      paramsObj.collection = collectionId;
+    }
+
+    const params = new HttpParams({ fromObject: paramsObj });
+    const options: HttpOptions = Object.create({});
+    options.params = params;
+
+    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options).pipe(
+      map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
+      catchError(() => of({} as SubmissionObject)));
   }
 
   /**
@@ -153,6 +240,30 @@ export class SubmissionService {
     headers = headers.append('Content-Type', 'text/uri-list');
     options.headers = headers;
     return this.restService.postToEndpoint(this.workspaceLinkPath, selfUrl, null, options, collectionId) as Observable<SubmissionObject[]>;
+  }
+
+  /**
+   * Perform a REST call to create a new workspaceitem by item and return response
+   *
+   * @return Observable<SubmissionObject>
+   *    observable of SubmissionObject
+   */
+  createSubmissionByItem(itemId: string, relationshipName?: string): Observable<SubmissionObject> {
+    const paramsObj = Object.create({});
+
+    if (isNotEmpty(itemId)) {
+      paramsObj.item = itemId;
+    }
+    if (isNotEmpty(relationshipName)) {
+      paramsObj.relationship = relationshipName;
+    }
+
+    const params = new HttpParams({ fromObject: paramsObj });
+    const options: HttpOptions = Object.create({});
+    options.params = params;
+
+    return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, options).pipe(
+      map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject));
   }
 
   /**
@@ -196,8 +307,10 @@ export class SubmissionService {
    *    The [SubmissionDefinitionsModel] that define submission configuration
    * @param sections
    *    The [WorkspaceitemSectionsObject] that define submission sections init data
+   * @param item
    * @param errors
    *    The [SubmissionSectionError] that define submission sections init errors
+   * @param metadataSecurityConfiguration
    */
   dispatchInit(
     collectionId: string,
@@ -206,8 +319,9 @@ export class SubmissionService {
     submissionDefinition: SubmissionDefinitionsModel,
     sections: WorkspaceitemSectionsObject,
     item: Item,
-    errors: SubmissionError) {
-    this.store.dispatch(new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, sections, item, errors));
+    errors: SubmissionError,
+    metadataSecurityConfiguration?: MetadataSecurityConfiguration) {
+    this.store.dispatch(new InitSubmissionFormAction(collectionId, submissionId, selfUrl, submissionDefinition, sections, item, errors, metadataSecurityConfiguration));
   }
 
   /**
@@ -240,7 +354,7 @@ export class SubmissionService {
    */
   dispatchSave(submissionId, manual?: boolean) {
     this.getSubmissionSaveProcessingStatus(submissionId).pipe(
-      find((isPending: boolean) => !isPending)
+      find((isPending: boolean) => !isPending),
     ).subscribe(() => {
       this.store.dispatch(new SaveSubmissionFormAction(submissionId, manual));
     });
@@ -295,6 +409,19 @@ export class SubmissionService {
   }
 
   /**
+   * Return the [MetadataSecurityConfiguration] for the specified submission
+   *
+   * @param submissionId
+   *    The submission id
+   * @return Observable<MetadataSecurityConfiguration>
+   *    observable of MetadataSecurityConfiguration
+   */
+  getSubmissionSecurityConfiguration(submissionId: string): Observable<MetadataSecurityConfiguration> {
+    return this.store.select(securityConfigurationObjectFromIdSelector(submissionId)).pipe(
+      filter((securityConfiguration: MetadataSecurityConfiguration) => isNotUndefined(securityConfiguration)));
+  }
+
+  /**
    * Return a list of the active [SectionDataObject] belonging to the specified submission
    *
    * @param submissionId
@@ -314,12 +441,14 @@ export class SubmissionService {
             const sectionObject: SectionDataObject = Object.create({});
             sectionObject.config = sections[sectionId].config;
             sectionObject.mandatory = sections[sectionId].mandatory;
+            sectionObject.scope = sections[sectionId].scope;
             sectionObject.data = sections[sectionId].data;
             sectionObject.errorsToShow = sections[sectionId].errorsToShow;
             sectionObject.serverValidationErrors = sections[sectionId].serverValidationErrors;
             sectionObject.header = sections[sectionId].header;
             sectionObject.id = sectionId;
             sectionObject.sectionType = sections[sectionId].sectionType;
+            sectionObject.sectionVisibility = sections[sectionId].visibility;
             availableSections.push(sectionObject);
           });
         return availableSections;
@@ -370,7 +499,7 @@ export class SubmissionService {
     } else if (url.startsWith('/workflowitems')) {
       return this.workflowLinkPath;
     } else {
-      return 'edititems';
+      return this.editItemsLinkPath;
     }
   }
 
@@ -388,6 +517,9 @@ export class SubmissionService {
         break;
       case this.workflowLinkPath:
         scope = SubmissionScopeType.WorkflowItem;
+        break;
+      case this.editItemsLinkPath:
+        scope = SubmissionScopeType.EditItem;
         break;
     }
     return scope;
@@ -474,10 +606,9 @@ export class SubmissionService {
    * @return boolean
    *    true if section is hidden, false otherwise
    */
-  isSectionHidden(sectionData: SubmissionSectionObject): boolean {
-    return (isNotUndefined(sectionData.visibility)
-      && sectionData.visibility.main === 'HIDDEN'
-      && sectionData.visibility.other === 'HIDDEN');
+  private isSectionHidden(sectionData: SubmissionSectionObject): boolean {
+    const scope = this.getSubmissionScope();
+    return SubmissionVisibility.isHidden(sectionData.visibility, scope);
   }
 
   /**
@@ -492,6 +623,21 @@ export class SubmissionService {
     return this.getSubmissionObject(submissionId).pipe(
       map((submission: SubmissionObjectEntry) => submission.isLoading),
       distinctUntilChanged());
+  }
+
+  /**
+   * Return the discard status of the submission
+   *
+   * @param submissionId
+   *    The submission id
+   * @return Observable<boolean>
+   *    observable with submission discard status
+   */
+  isSubmissionDiscarding(submissionId: string): Observable<boolean> {
+    return this.store.select(submissionObjectFromIdSelector(submissionId)).pipe(
+      map((submission: SubmissionObjectEntry) => isEmpty(submission) || submission?.isDiscarding),
+      distinctUntilChanged(),
+    );
   }
 
   /**
@@ -528,8 +674,35 @@ export class SubmissionService {
             } else {
               this.router.navigateByUrl(previousUrl);
             }
-        })))
+          }))),
     ).subscribe();
+  }
+
+  /**
+   * Invalidate item cache and redirect to Item page
+   */
+  invalidateCacheAndRedirectToItemPage(submissionId: string) {
+    const itemUuid = submissionId.indexOf(':') > -1 ? submissionId.split(':')[0] : submissionId;
+    this.itemDataService.findById(
+      itemUuid,
+      false,
+      true,
+      followLink('bundles'),
+    ).pipe(
+      getFirstSucceededRemoteDataPayload(),
+      switchMap((item) => combineLatest([
+        this.requestService.setStaleByHrefSubstring(item._links.self.href),
+        item.bundles.pipe(
+          getFirstCompletedRemoteData(),
+          getRemoteDataPayload(),
+          getPaginatedListPayload(),
+          switchMap(bundles => combineLatest([
+            ...bundles.map((bundle: Bundle) => this.requestService.setStaleByHrefSubstring(bundle._links.bitstreams.href)),
+          ])),
+        ),
+      ])),
+      take(1),
+    ).subscribe(() => this.router.navigateByUrl('/items/' + itemUuid, { replaceUrl: true }));
   }
 
   /**
@@ -552,6 +725,8 @@ export class SubmissionService {
    *    The [SubmissionDefinitionsModel] that define submission configuration
    * @param sections
    *    The [WorkspaceitemSectionsObject] that define submission sections init data
+   * @param item
+   * @param metadataSecurityConfiguration
    */
   resetSubmissionObject(
     collectionId: string,
@@ -559,9 +734,10 @@ export class SubmissionService {
     selfUrl: string,
     submissionDefinition: SubmissionDefinitionsModel,
     sections: WorkspaceitemSectionsObject,
-    item: Item
+    item: Item,
+    metadataSecurityConfiguration: MetadataSecurityConfiguration = null,
   ) {
-    this.store.dispatch(new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, sections, submissionDefinition, item));
+    this.store.dispatch(new ResetSubmissionFormAction(collectionId, submissionId, selfUrl, sections, submissionDefinition, item, metadataSecurityConfiguration));
   }
 
   /**
@@ -570,14 +746,16 @@ export class SubmissionService {
    * @return Observable<RemoteData<SubmissionObject>>
    *    observable of RemoteData<SubmissionObject>
    */
-  retrieveSubmission(submissionId): Observable<RemoteData<SubmissionObject>> {
-    return this.restService.getDataById(this.getSubmissionObjectLinkName(), submissionId).pipe(
+  retrieveSubmission(submissionId, projections: string[] = [], isEditMode = false): Observable<RemoteData<SubmissionObject>> {
+    return this.restService.getDataById(this.getSubmissionObjectLinkName(), submissionId, false, projections, isEditMode).pipe(
       find((submissionObjects: SubmissionObject[]) => isNotUndefined(submissionObjects)),
       map((submissionObjects: SubmissionObject[]) => createSuccessfulRemoteDataObject(
         submissionObjects[0])),
-      catchError((errorResponse: ErrorResponse) => {
-        return createFailedRemoteDataObject$<SubmissionObject>(errorResponse.errorMessage, errorResponse.statusCode);
-      })
+      catchError((errorResponse: unknown) => {
+        if (errorResponse instanceof ErrorResponse) {
+          return createFailedRemoteDataObject$<SubmissionObject>(errorResponse.errorMessage, errorResponse.statusCode);
+        }
+      }),
     );
   }
 

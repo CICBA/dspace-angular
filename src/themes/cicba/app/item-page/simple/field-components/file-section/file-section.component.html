@@ -1,28 +1,38 @@
 <ng-container *ngVar="(bitstreams$ | async) as bitstreams">
-  <ds-cic-metadata-field-wrapper *ngIf="bitstreams?.length > 0" [inlineLabel]="false">
-    <div class="file-section">
-      <h5 id="downloadsTitle">
-        {{'item.page.statistics.label.TotalDownloads' | translate}}
-      </h5>
-      <hr/>
-      <ds-file-download-link *ngFor="let file of bitstreams; let last=last;" [bitstream]="file" [item]="item">
-        <span><button class="btn download-button"><i class="fa fa-download" aria-hidden="true"></i></button></span>
-        <div class="file-full-name">
-          <span class="file-name">
-            {{ getFileName(file) }}
-          </span>
-          <span>
-            ({{(file?.sizeBytes) | dsFileSize}})
-          </span>
-        </div>
-      </ds-file-download-link>
-      <ds-loading *ngIf="isLoading" message="{{'loading.default' | translate}}" [showMessage]="false"></ds-loading>
-      <div *ngIf="!isLastPage" class="mt-1" id="view-more">
-        <a class="bitstream-view-more btn btn-outline-secondary btn-sm" [routerLink]="" (click)="getNextPage()">{{'item.page.bitstreams.view-more' | translate}}</a>
+  @if (bitstreams?.length > 0) {
+    <ds-cic-metadata-field-wrapper [inlineLabel]="false">
+      <div class="file-section">
+        <h5 id="downloadsTitle">
+          {{'item.page.statistics.label.TotalDownloads' | translate}}
+        </h5>
+        <hr/>
+        @for (file of bitstreams; track file; let last = $last) {
+          <ds-file-download-link [bitstream]="file" [item]="item">
+            <span><button class="btn download-button"><i class="fa fa-download" aria-hidden="true"></i></button></span>
+            <div class="file-full-name">
+              <span class="file-name">
+                {{ getFileName(file) }}
+              </span>
+              <span>
+                ({{(file?.sizeBytes) | dsFileSize}})
+              </span>
+            </div>
+          </ds-file-download-link>
+        }
+        @if (isLoading) {
+          <ds-loading message="{{'loading.default' | translate}}" [showMessage]="false"></ds-loading>
+        }
+        @if (!isLastPage) {
+          <div class="mt-1" id="view-more">
+            <a class="bitstream-view-more btn btn-outline-secondary btn-sm" [routerLink]="" (click)="getNextPage()">{{'item.page.bitstreams.view-more' | translate}}</a>
+          </div>
+        }
+        @if (isLastPage && currentPage != 1) {
+          <div class="mt-1" id="collapse">
+            <a class="bitstream-collapse btn btn-outline-secondary btn-sm" [routerLink]="" (click)="currentPage = undefined; getNextPage();">{{'item.page.bitstreams.collapse' | translate}}</a>
+          </div>
+        }
       </div>
-      <div *ngIf="isLastPage && currentPage != 1" class="mt-1" id="collapse">
-        <a class="bitstream-collapse btn btn-outline-secondary btn-sm" [routerLink]="" (click)="currentPage = undefined; getNextPage();">{{'item.page.bitstreams.collapse' | translate}}</a>
-      </div>
-    </div>
-  </ds-cic-metadata-field-wrapper>
+    </ds-cic-metadata-field-wrapper>
+  }
 </ng-container>

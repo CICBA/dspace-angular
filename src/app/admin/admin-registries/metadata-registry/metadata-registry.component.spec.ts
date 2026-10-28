@@ -1,25 +1,45 @@
-import { MetadataRegistryComponent } from './metadata-registry.component';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { of as observableOf } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
-import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RegistryService } from '../../../core/registry/registry.service';
+import { ConfigurationDataService } from '@dspace/core/data/configuration-data.service';
+import { GroupDataService } from '@dspace/core/eperson/group-data.service';
+import { MetadataSchema } from '@dspace/core/metadata/metadata-schema.model';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { PaginationService } from '@dspace/core/pagination/pagination.service';
+import { ConfigurationProperty } from '@dspace/core/shared/configuration-property.model';
+import { HostWindowServiceStub } from '@dspace/core/testing/host-window-service.stub';
+import { NotificationsServiceStub } from '@dspace/core/testing/notifications-service.stub';
+import { PaginationServiceStub } from '@dspace/core/testing/pagination-service.stub';
+import { RegistryServiceStub } from '@dspace/core/testing/registry.service.stub';
+import { SearchConfigurationServiceStub } from '@dspace/core/testing/search-configuration-service.stub';
+import { createPaginatedList } from '@dspace/core/testing/utils.test';
+import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { EnumKeysPipe } from '../../../shared/utils/enum-keys-pipe';
-import { PaginationComponent } from '../../../shared/pagination/pagination.component';
-import { HostWindowServiceStub } from '../../../shared/testing/host-window-service.stub';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { FormBuilderService } from 'src/app/shared/form/builder/form-builder.service';
+
+import { FormService } from '../../../shared/form/form.service';
+import { getMockFormBuilderService } from '../../../shared/form/testing/form-builder-service.mock';
+import { getMockFormService } from '../../../shared/form/testing/form-service.mock';
 import { HostWindowService } from '../../../shared/host-window.service';
-import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
-import { MetadataSchema } from '../../../core/metadata/metadata-schema.model';
-import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
-import { PaginationService } from '../../../core/pagination/pagination.service';
-import { PaginationServiceStub } from '../../../shared/testing/pagination-service.stub';
-import { RegistryServiceStub } from '../../../shared/testing/registry.service.stub';
-import { createPaginatedList } from '../../../shared/testing/utils.test';
+import { PaginationComponent } from '../../../shared/pagination/pagination.component';
+import { SearchConfigurationService } from '../../../shared/search/search-configuration.service';
+import { EnumKeysPipe } from '../../../shared/utils/enum-keys-pipe';
+import { RegistryService } from '../registry/registry.service';
+import { MetadataRegistryComponent } from './metadata-registry.component';
+import { MetadataSchemaFormComponent } from './metadata-schema-form/metadata-schema-form.component';
 
 describe('MetadataRegistryComponent', () => {
   let comp: MetadataRegistryComponent;
@@ -33,23 +53,44 @@ describe('MetadataRegistryComponent', () => {
       id: 1,
       _links: {
         self: {
-          href: 'https://dspace7.4science.it/dspace-spring-rest/api/core/metadataschemas/1'
+          href: 'https://dspace7.4science.it/dspace-spring-rest/api/core/metadataschemas/1',
         },
       },
       prefix: 'dc',
-      namespace: 'http://dublincore.org/documents/dcmi-terms/'
+      namespace: 'http://dublincore.org/documents/dcmi-terms/',
     },
     {
       id: 2,
       _links: {
         self: {
-          href: 'https://dspace7.4science.it/dspace-spring-rest/api/core/metadataschemas/2'
+          href: 'https://dspace7.4science.it/dspace-spring-rest/api/core/metadataschemas/2',
         },
       },
       prefix: 'mock',
-      namespace: 'http://dspace.org/mockschema'
-    }
+      namespace: 'http://dspace.org/mockschema',
+    },
   ] as MetadataSchema[];
+
+  const configurationDataService = jasmine.createSpyObj('configurationDataService', {
+    findByPropertyName: createSuccessfulRemoteDataObject$(Object.assign(new ConfigurationProperty(), {
+      name: 'test',
+      values: [
+        'org.dspace.ctask.general.ProfileFormats = test',
+      ],
+    })),
+  });
+
+  const mockGroupService = jasmine.createSpyObj('groupService',
+    {
+    // findByHref: jasmine.createSpy('findByHref'),
+    // findAll: jasmine.createSpy('findAll'),
+    // searchGroups: jasmine.createSpy('searchGroups'),
+      getUUIDFromString: jasmine.createSpy('getUUIDFromString'),
+    },
+    {
+      linkPath: 'groups',
+    },
+  );
 
   beforeEach(waitForAsync(() => {
     paginationService = new PaginationServiceStub();
@@ -57,18 +98,44 @@ describe('MetadataRegistryComponent', () => {
     spyOn(registryService, 'getMetadataSchemas').and.returnValue(createSuccessfulRemoteDataObject$(createPaginatedList(mockSchemasList)));
 
     TestBed.configureTestingModule({
-      imports: [CommonModule, RouterTestingModule.withRoutes([]), TranslateModule.forRoot(), NgbModule],
-      declarations: [MetadataRegistryComponent, PaginationComponent, EnumKeysPipe],
+      imports: [
+        CommonModule,
+        RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
+        NgbModule,
+        MetadataRegistryComponent,
+        PaginationComponent,
+        EnumKeysPipe,
+      ],
       providers: [
         { provide: RegistryService, useValue: registryService },
         { provide: HostWindowService, useValue: new HostWindowServiceStub(0) },
         { provide: PaginationService, useValue: paginationService },
-        { provide: NotificationsService, useValue: new NotificationsServiceStub() }
+        {
+          provide: NotificationsService,
+          useValue: new NotificationsServiceStub(),
+        },
+        { provide: FormService, useValue: getMockFormService() },
+        { provide: GroupDataService, useValue: mockGroupService },
+        {
+          provide: ConfigurationDataService,
+          useValue: configurationDataService,
+        },
+        {
+          provide: SearchConfigurationService,
+          useValue: new SearchConfigurationServiceStub(),
+        },
+        { provide: FormBuilderService, useValue: getMockFormBuilderService() },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).overrideComponent(MetadataRegistryComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default }
-    }).compileComponents();
+      schemas: [NO_ERRORS_SCHEMA],
+    })
+      .overrideComponent(MetadataRegistryComponent, {
+        remove: {
+          imports: [MetadataSchemaFormComponent, RouterLink],
+        },
+        add: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -111,7 +178,7 @@ describe('MetadataRegistryComponent', () => {
     }));
 
     it('should cancel editing the selected schema when clicked again', waitForAsync(() => {
-      comp.activeMetadataSchema$ = observableOf(mockSchemasList[0] as MetadataSchema);
+      comp.activeMetadataSchema$ = of(mockSchemasList[0] as MetadataSchema);
       spyOn(registryService, 'cancelEditMetadataSchema');
       row.click();
       fixture.detectChanges();
@@ -126,7 +193,7 @@ describe('MetadataRegistryComponent', () => {
 
     beforeEach(() => {
       spyOn(registryService, 'deleteMetadataSchema').and.callThrough();
-      comp.selectedMetadataSchemaIDs$ = observableOf(selectedSchemas.map((selectedSchema: MetadataSchema) => selectedSchema.id));
+      comp.selectedMetadataSchemaIDs$ = of(selectedSchemas.map((selectedSchema: MetadataSchema) => selectedSchema.id));
       comp.deleteSchemas();
       fixture.detectChanges();
     });

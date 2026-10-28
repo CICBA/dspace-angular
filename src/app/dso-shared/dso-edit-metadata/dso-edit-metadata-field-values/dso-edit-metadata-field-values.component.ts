@@ -1,14 +1,41 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DsoEditMetadataChangeType, DsoEditMetadataForm, DsoEditMetadataValue } from '../dso-edit-metadata-form';
-import { Observable } from 'rxjs/internal/Observable';
-import { DSpaceObject } from '../../../core/shared/dspace-object.model';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import { AsyncPipe } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { Context } from '@dspace/core/shared/context.model';
+import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
+import { MetadataSecurityConfiguration } from '@dspace/core/submission/models/metadata-security-configuration';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+
+import {
+  DsoEditMetadataChangeType,
+  DsoEditMetadataForm,
+  DsoEditMetadataValue,
+} from '../dso-edit-metadata-form';
+import { DsoEditMetadataValueComponent } from '../dso-edit-metadata-value/dso-edit-metadata-value.component';
+import { DsoEditMetadataValueHeadersComponent } from '../dso-edit-metadata-value-headers/dso-edit-metadata-value-headers.component';
 
 @Component({
   selector: 'ds-dso-edit-metadata-field-values',
   styleUrls: ['./dso-edit-metadata-field-values.component.scss'],
   templateUrl: './dso-edit-metadata-field-values.component.html',
+  imports: [
+    AsyncPipe,
+    CdkDropList,
+    DsoEditMetadataValueComponent,
+    DsoEditMetadataValueHeadersComponent,
+  ],
 })
 /**
  * Component displaying table rows for each value for a certain metadata field within a form
@@ -47,6 +74,10 @@ export class DsoEditMetadataFieldValuesComponent {
   @Input() draggingMdField$: BehaviorSubject<string>;
 
   /**
+   * Security Settings configuration for the current entity
+   */
+  @Input() metadataSecurityConfiguration: MetadataSecurityConfiguration;
+  /**
    * Emit when the value has been saved within the form
    */
   @Output() valueSaved: EventEmitter<any> = new EventEmitter<any>();
@@ -56,6 +87,8 @@ export class DsoEditMetadataFieldValuesComponent {
    * @type {DsoEditMetadataChangeType}
    */
   public DsoEditMetadataChangeTypeEnum = DsoEditMetadataChangeType;
+
+  public readonly Context = Context;
 
   /**
    * Drop a value into a new position
@@ -77,5 +110,16 @@ export class DsoEditMetadataFieldValuesComponent {
     // Update the form statuses
     this.form.resetReinstatable();
     this.valueSaved.emit();
+  }
+
+  /**
+   * Update the security level for the field at the given index
+   */
+  onUpdateSecurityLevelValue(securityLevel: number, index: number) {
+    if (this.form.fields[this.mdField]?.length > 0) {
+      this.form.fields[this.mdField][index].change = DsoEditMetadataChangeType.UPDATE;
+      this.form.fields[this.mdField][index].newValue.securityLevel = securityLevel;
+      this.valueSaved.emit();
+    }
   }
 }

@@ -1,18 +1,22 @@
-import { RequestService } from './request.service';
+import {
+  fakeAsync,
+  waitForAsync,
+} from '@angular/core/testing';
+import { of } from 'rxjs';
+
 import { RemoteDataBuildService } from '../cache/builders/remote-data-build.service';
 import { ObjectCacheService } from '../cache/object-cache.service';
-import { VersionHistoryDataService } from './version-history-data.service';
-import { NotificationsServiceStub } from '../../shared/testing/notifications-service.stub';
-import { HALEndpointServiceStub } from '../../shared/testing/hal-endpoint-service.stub';
-import { getMockRequestService } from '../../shared/mocks/request.service.mock';
-import { VersionDataService } from './version-data.service';
-import { fakeAsync, waitForAsync } from '@angular/core/testing';
-import { VersionHistory } from '../shared/version-history.model';
-import { Version } from '../shared/version.model';
-import { createSuccessfulRemoteDataObject$ } from '../../shared/remote-data.utils';
-import { createPaginatedList } from '../../shared/testing/utils.test';
 import { Item } from '../shared/item.model';
-import { of } from 'rxjs';
+import { Version } from '../shared/version.model';
+import { VersionHistory } from '../shared/version-history.model';
+import { HALEndpointServiceStub } from '../testing/hal-endpoint-service.stub';
+import { NotificationsServiceStub } from '../testing/notifications-service.stub';
+import { getMockRequestService } from '../testing/request.service.mock';
+import { createPaginatedList } from '../testing/utils.test';
+import { createSuccessfulRemoteDataObject$ } from '../utilities/remote-data.utils';
+import { RequestService } from './request.service';
+import { VersionDataService } from './version-data.service';
+import { VersionHistoryDataService } from './version-history-data.service';
 import SpyObj = jasmine.SpyObj;
 
 const url = 'fake-url';
@@ -78,8 +82,8 @@ describe('VersionHistoryDataService', () => {
     _links: {
       self: {
         href: '/items/' + item2Uuid,
-      }
-    }
+      },
+    },
   });
   const item2 = Object.assign(new Item(), {
     uuid: item2Uuid,
@@ -88,8 +92,8 @@ describe('VersionHistoryDataService', () => {
     _links: {
       self: {
         href: '/items/' + item2Uuid,
-      }
-    }
+      },
+    },
   });
   const items = [item1, item2];
   version1.item = createSuccessfulRemoteDataObject$(item1);

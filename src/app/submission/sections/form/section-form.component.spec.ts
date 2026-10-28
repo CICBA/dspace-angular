@@ -1,49 +1,74 @@
-import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { of as observableOf } from 'rxjs';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
-import { createTestComponent } from '../../../shared/testing/utils.test';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { NotificationsServiceStub } from '../../../shared/testing/notifications-service.stub';
-import { SubmissionService } from '../../submission.service';
-import { SubmissionServiceStub } from '../../../shared/testing/submission-service.stub';
-import { getMockTranslateService } from '../../../shared/mocks/translate.service.mock';
-import { SectionsService } from '../sections.service';
-import { SectionsServiceStub } from '../../../shared/testing/sections-service.stub';
-import { SubmissionSectionFormComponent } from './section-form.component';
-import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
-import { getMockFormBuilderService } from '../../../shared/mocks/form-builder-service.mock';
-import { getMockFormOperationsService } from '../../../shared/mocks/form-operations-service.mock';
-import { SectionFormOperationsService } from './section-form-operations.service';
-import { getMockFormService } from '../../../shared/mocks/form-service.mock';
-import { FormService } from '../../../shared/form/form.service';
-import { SubmissionFormsConfigDataService } from '../../../core/config/submission-forms-config-data.service';
-import { SectionDataObject } from '../models/section-data.model';
-import { SectionsType } from '../sections-type';
-import {
-  mockSubmissionCollectionId, mockSubmissionId, mockUploadResponse1ParsedErrors,
-} from '../../../shared/mocks/submission.mock';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormComponent } from '../../../shared/form/form.component';
-import { FormFieldModel } from '../../../shared/form/builder/models/form-field.model';
-import { FormFieldMetadataValueObject } from '../../../shared/form/builder/models/form-field-metadata-value.model';
-import { DynamicRowGroupModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
-import { DsDynamicInputModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
-import { DynamicFormControlEvent, DynamicFormControlEventType } from '@ng-dynamic-forms/core';
-import { JsonPatchOperationPathCombiner } from '../../../core/json-patch/builder/json-patch-operation-path-combiner';
-import { FormRowModel } from '../../../core/config/models/config-submission-form.model';
-import { WorkspaceItem } from '../../../core/submission/models/workspaceitem.model';
-import { SubmissionObjectDataService } from '../../../core/submission/submission-object-data.service';
-import { ObjectCacheService } from '../../../core/cache/object-cache.service';
-import { RequestService } from '../../../core/data/request.service';
-import { createSuccessfulRemoteDataObject$ } from '../../../shared/remote-data.utils';
+import {
+  ChangeDetectorRef,
+  Component,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  inject,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { ObjectCacheService } from '@dspace/core/cache/object-cache.service';
+import { FormRowModel } from '@dspace/core/config/models/config-submission-form.model';
+import { SubmissionFormsConfigDataService } from '@dspace/core/config/submission-forms-config-data.service';
+import { RequestService } from '@dspace/core/data/request.service';
+import { JsonPatchOperationPathCombiner } from '@dspace/core/json-patch/builder/json-patch-operation-path-combiner';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { FormFieldModel } from '@dspace/core/shared/form/models/form-field.model';
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import {
+  SubmissionVisibilityType,
+  SubmissionVisibilityValue,
+} from '@dspace/core/submission/models/section-visibility.model';
+import { SubmissionSectionError } from '@dspace/core/submission/models/submission-section-error.model';
+import { WorkflowItem } from '@dspace/core/submission/models/workflowitem.model';
+import { WorkspaceItem } from '@dspace/core/submission/models/workspaceitem.model';
+import { SectionsType } from '@dspace/core/submission/sections-type';
+import { SubmissionScopeType } from '@dspace/core/submission/submission-scope-type';
+import { NotificationsServiceStub } from '@dspace/core/testing/notifications-service.stub';
+import { SectionsServiceStub } from '@dspace/core/testing/sections-service.stub';
+import { SubmissionServiceStub } from '@dspace/core/testing/submission-service.stub';
+import { getMockTranslateService } from '@dspace/core/testing/translate.service.mock';
+import { createTestComponent } from '@dspace/core/testing/utils.test';
+import { createSuccessfulRemoteDataObject$ } from '@dspace/core/utilities/remote-data.utils';
+import {
+  DynamicFormControlEvent,
+  DynamicFormControlEventType,
+} from '@ng-dynamic-forms/core';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { cold } from 'jasmine-marbles';
-import { WorkflowItem } from '../../../core/submission/models/workflowitem.model';
-import { SubmissionSectionError } from '../../objects/submission-section-error.model';
+import { of } from 'rxjs';
+
+import { DsDynamicInputModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-input.model';
+import { DynamicRowGroupModel } from '../../../shared/form/builder/ds-dynamic-form-ui/models/ds-dynamic-row-group-model';
+import { FormBuilderService } from '../../../shared/form/builder/form-builder.service';
+import { FormComponent } from '../../../shared/form/form.component';
+import { FormService } from '../../../shared/form/form.service';
+import { getMockFormBuilderService } from '../../../shared/form/testing/form-builder-service.mock';
+import { getMockFormOperationsService } from '../../../shared/form/testing/form-operations-service.mock';
+import { getMockFormService } from '../../../shared/form/testing/form-service.mock';
+import { getMockThemeService } from '../../../shared/theme-support/test/theme-service.mock';
+import { ThemeService } from '../../../shared/theme-support/theme.service';
+import { SubmissionService } from '../../submission.service';
+import { SubmissionObjectService } from '../../submission-object.service';
+import {
+  mockSubmissionCollectionId,
+  mockSubmissionId,
+  mockUploadResponse1ParsedErrors,
+} from '../../utils/submission.mock';
+import { SectionDataObject } from '../models/section-data.model';
+import { SectionsService } from '../sections.service';
+import { SubmissionSectionFormComponent } from './section-form.component';
+import { SectionFormOperationsService } from './section-form-operations.service';
 
 function getMockSubmissionFormsConfigService(): SubmissionFormsConfigDataService {
   return jasmine.createSpyObj('FormOperationsService', {
@@ -63,7 +88,8 @@ const sectionObject: SectionDataObject = {
   serverValidationErrors: [],
   header: 'submit.progressbar.describe.stepone',
   id: 'traditionalpageone',
-  sectionType: SectionsType.SubmissionForm
+  sectionType: SectionsType.SubmissionForm,
+  sectionVisibility: null,
 };
 
 const testFormConfiguration = {
@@ -73,7 +99,7 @@ const testFormConfiguration = {
       fields: [
         {
           input: {
-            type: 'onebox'
+            type: 'onebox',
           },
           label: 'Title',
           mandatory: 'true',
@@ -81,18 +107,18 @@ const testFormConfiguration = {
           hints: ' Enter Title.',
           selectableMetadata: [
             {
-              metadata: 'dc.title'
-            }
+              metadata: 'dc.title',
+            },
           ],
-          languageCodes: []
-        } as FormFieldModel
-      ]
+          languageCodes: [],
+        } as FormFieldModel,
+      ],
     } as FormRowModel,
     {
       fields: [
         {
           input: {
-            type: 'onebox'
+            type: 'onebox',
           },
           label: 'Author',
           mandatory: 'false',
@@ -100,20 +126,20 @@ const testFormConfiguration = {
           hints: ' Enter Author.',
           selectableMetadata: [
             {
-              metadata: 'dc.contributor'
-            }
+              metadata: 'dc.contributor',
+            },
           ],
-          languageCodes: []
-        } as FormFieldModel
-      ]
+          languageCodes: [],
+        } as FormFieldModel,
+      ],
     } as FormRowModel,
   ],
   type: 'submissionform',
   _links: {
     self: {
-      href: 'testFormConfiguration.url'
-    }
-  }
+      href: 'testFormConfiguration.url',
+    },
+  },
 } as any;
 
 const testFormModel = [
@@ -124,7 +150,7 @@ const testFormModel = [
   new DynamicRowGroupModel({
     id: 'df-row-group-config-2',
     group: [new DsDynamicInputModel({ id: 'dc.contributor', metadataFields: [], repeatable: false, submissionId: '1234', hasSelectableMetadata: false })],
-  })
+  }),
 ];
 
 const dynamicFormControlEvent: DynamicFormControlEvent = {
@@ -133,7 +159,7 @@ const dynamicFormControlEvent: DynamicFormControlEvent = {
   control: null,
   group: testFormModel[0] as any,
   model: testFormModel[0].group[0],
-  type: DynamicFormControlEventType.Change
+  type: DynamicFormControlEventType.Change,
 };
 
 describe('SubmissionSectionFormComponent test suite', () => {
@@ -144,6 +170,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
   let submissionServiceStub: SubmissionServiceStub;
   let notificationsServiceStub: NotificationsServiceStub;
   let formService: any = getMockFormService();
+  let themeService = getMockThemeService();
 
   let formOperationsService: any;
   let formBuilderService: any;
@@ -158,16 +185,13 @@ describe('SubmissionSectionFormComponent test suite', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        TranslateModule.forRoot()
-      ],
-      declarations: [
+        TranslateModule.forRoot(),
         FormComponent,
         SubmissionSectionFormComponent,
-        TestComponent
+        TestComponent,
       ],
       providers: [
         { provide: FormBuilderService, useValue: getMockFormBuilderService() },
@@ -176,19 +200,23 @@ describe('SubmissionSectionFormComponent test suite', () => {
         { provide: SubmissionFormsConfigDataService, useValue: formConfigService },
         { provide: NotificationsService, useClass: NotificationsServiceStub },
         { provide: SectionsService, useValue: sectionsServiceStub },
+        { provide: ThemeService, useValue: themeService },
         { provide: SubmissionService, useClass: SubmissionServiceStub },
         { provide: TranslateService, useValue: getMockTranslateService() },
-        { provide: ObjectCacheService, useValue: { remove: () => {/*do nothing*/}, hasBySelfLinkObservable: () => observableOf(false), hasByHref$: () => observableOf(false) } },
-        { provide: RequestService, useValue: { removeByHrefSubstring: () => {/*do nothing*/}, hasByHref$: () => observableOf(false) } },
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        { provide: ObjectCacheService, useValue: { remove: () => { }, hasBySelfLinkObservable: () => of(false), hasByHref$: () => of(false) } },
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        { provide: RequestService, useValue: { removeByHrefSubstring: () => { }, hasByHref$: () => of(false) } },
         { provide: 'collectionIdProvider', useValue: collectionId },
         { provide: 'sectionDataProvider', useValue: Object.assign({}, sectionObject) },
         { provide: 'submissionIdProvider', useValue: submissionId },
-        { provide: SubmissionObjectDataService, useValue: { getHrefByID: () => observableOf('testUrl'), findById: () => createSuccessfulRemoteDataObject$(new WorkspaceItem()) } },
+        { provide: 'entityType', useValue: 'Publication' },
+        { provide: SubmissionObjectService, useValue: { getHrefByID: () => of('testUrl'), findById: () => createSuccessfulRemoteDataObject$(new WorkspaceItem()) } },
         ChangeDetectorRef,
-        SubmissionSectionFormComponent
+        SubmissionSectionFormComponent,
       ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents().then();
+      schemas: [NO_ERRORS_SCHEMA],
+    }).overrideComponent(SubmissionSectionFormComponent, { remove: { imports: [FormComponent] } }).compileComponents().then();
   }));
 
   describe('', () => {
@@ -198,10 +226,10 @@ describe('SubmissionSectionFormComponent test suite', () => {
     // synchronous beforeEach
     beforeEach(() => {
       const sectionData = {};
-      formService.isValid.and.returnValue(observableOf(true));
-      formConfigService.findByHref.and.returnValue(observableOf(testFormConfiguration));
-      sectionsServiceStub.getSectionData.and.returnValue(observableOf(sectionData));
-      sectionsServiceStub.getSectionServerErrors.and.returnValue(observableOf([]));
+      formService.isValid.and.returnValue(of(true));
+      formConfigService.findByHref.and.returnValue(of(testFormConfiguration));
+      sectionsServiceStub.getSectionData.and.returnValue(of(sectionData));
+      sectionsServiceStub.getSectionServerErrors.and.returnValue(of([]));
 
       const html = `
         <ds-submission-section-form></ds-submission-section-form>`;
@@ -233,7 +261,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
       translateService = TestBed.inject(TranslateService);
       notificationsServiceStub = TestBed.inject(NotificationsService as any);
 
-      translateService.get.and.returnValue(observableOf('test'));
+      translateService.get.and.returnValue(of('test'));
       compAsAny.pathCombiner = new JsonPatchOperationPathCombiner('sections', sectionObject.id);
     });
 
@@ -245,11 +273,12 @@ describe('SubmissionSectionFormComponent test suite', () => {
 
     it('should init section properly', () => {
       const sectionData = {};
-      formService.isValid.and.returnValue(observableOf(true));
+      formService.isValid.and.returnValue(of(true));
       formConfigService.findByHref.and.returnValue(createSuccessfulRemoteDataObject$(testFormConfiguration));
-      sectionsServiceStub.getSectionData.and.returnValue(observableOf(sectionData));
-      sectionsServiceStub.getSectionServerErrors.and.returnValue(observableOf([]));
-      sectionsServiceStub.isSectionReadOnly.and.returnValue(observableOf(false));
+      sectionsServiceStub.getSectionData.and.returnValue(of(sectionData));
+      sectionsServiceStub.getSectionServerErrors.and.returnValue(of([]));
+      submissionServiceStub.getSubmissionSecurityConfiguration.and.returnValue(of(sectionData));
+      sectionsServiceStub.isSectionReadOnly.and.returnValue(of(false));
 
       spyOn(comp, 'initForm');
       spyOn(comp, 'subscriptions');
@@ -281,7 +310,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
       const sectionData = {};
       const sectionError: SubmissionSectionError = {
         message: 'test' + 'Error: test',
-        path: '/sections/' + sectionObject.id
+        path: '/sections/' + sectionObject.id,
       };
 
       comp.initForm(sectionData, [], []);
@@ -293,11 +322,11 @@ describe('SubmissionSectionFormComponent test suite', () => {
 
     it('should return true when has Metadata Enrichment', () => {
       const newSectionData = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       compAsAny.formData = {};
       compAsAny.sectionData.data = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       spyOn(compAsAny, 'inCurrentSubmissionScope').and.callThrough();
 
@@ -307,11 +336,11 @@ describe('SubmissionSectionFormComponent test suite', () => {
 
     it('should return false when has not Metadata Enrichment', () => {
       const newSectionData = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       compAsAny.formData = newSectionData;
       compAsAny.sectionData.data = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       spyOn(compAsAny, 'inCurrentSubmissionScope').and.callThrough();
 
@@ -321,7 +350,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
 
     it('should return false when metadata has Metadata Enrichment but not belonging to sectionMetadata', () => {
       const newSectionData = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       compAsAny.formData = newSectionData;
       compAsAny.sectionMetadata = [];
@@ -337,23 +366,29 @@ describe('SubmissionSectionFormComponent test suite', () => {
               fields: [
                 {
                   selectableMetadata: [{ metadata: 'scoped.workflow' }],
-                  scope: 'WORKFLOW',
-                } as FormFieldModel
-              ]
+                  visibility: {
+                    [SubmissionScopeType.WorkspaceItem]: SubmissionVisibilityValue.Hidden,
+                  } as SubmissionVisibilityType,
+                } as FormFieldModel,
+              ],
             },
             {
               fields: [
                 {
                   selectableMetadata: [{ metadata: 'scoped.workspace' }],
-                  scope: 'WORKSPACE',
-                } as FormFieldModel
-              ]
+                  visibility: {
+                    [SubmissionScopeType.WorkflowItem]: SubmissionVisibilityValue.Hidden,
+                  } as SubmissionVisibilityType,
+                } as FormFieldModel,
+              ],
             },
             {
               fields: [
                 {
                   selectableMetadata: [{ metadata: 'scoped.workflow.relation' }],
-                  scope: 'WORKFLOW',
+                  visibility: {
+                    [SubmissionScopeType.WorkspaceItem]: SubmissionVisibilityValue.Hidden,
+                  } as SubmissionVisibilityType,
                 } as FormFieldModel,
               ],
             },
@@ -361,7 +396,9 @@ describe('SubmissionSectionFormComponent test suite', () => {
               fields: [
                 {
                   selectableMetadata: [{ metadata: 'scoped.workspace.relation' }],
-                  scope: 'WORKSPACE',
+                  visibility: {
+                    [SubmissionScopeType.WorkflowItem]: SubmissionVisibilityValue.Hidden,
+                  } as SubmissionVisibilityType,
                 } as FormFieldModel,
               ],
             },
@@ -369,10 +406,10 @@ describe('SubmissionSectionFormComponent test suite', () => {
               fields: [
                 {
                   selectableMetadata: [{ metadata: 'dc.title' }],
-                } as FormFieldModel
-              ]
-            }
-          ]
+                } as FormFieldModel,
+              ],
+            },
+          ],
         };
       });
 
@@ -380,6 +417,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
         beforeEach(() => {
           // @ts-ignore
           comp.submissionObject = { type: WorkspaceItem.type.value };
+          submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkspaceItem);
         });
 
         it('should return true for unscoped fields', () => {
@@ -407,6 +445,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
         beforeEach(() => {
           // @ts-ignore
           comp.submissionObject = { type: WorkflowItem.type.value };
+          submissionServiceStub.getSubmissionScope.and.returnValue(SubmissionScopeType.WorkflowItem);
         });
 
         it('should return true when field is unscoped', () => {
@@ -435,7 +474,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
       spyOn(comp, 'initForm');
       spyOn(comp, 'checksForErrors');
       const sectionData: any = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       const sectionError = [];
       comp.sectionData.data = {};
@@ -456,7 +495,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
       spyOn(comp, 'initForm');
       spyOn(comp, 'checksForErrors');
       const sectionData = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       const sectionState = {
         data: sectionData,
@@ -500,36 +539,36 @@ describe('SubmissionSectionFormComponent test suite', () => {
         sectionObject.id,
         'test',
         parsedSectionErrors,
-        []
+        [],
       );
       expect(comp.sectionData.errorsToShow).toEqual(parsedSectionErrors);
     });
 
     it('should return a valid status when form is valid and there are no server validation errors', () => {
-      formService.isValid.and.returnValue(observableOf(true));
-      sectionsServiceStub.getSectionServerErrors.and.returnValue(observableOf([]));
+      formService.isValid.and.returnValue(of(true));
+      sectionsServiceStub.getSectionServerErrors.and.returnValue(of([]));
       const expected = cold('(b|)', {
-        b: true
+        b: true,
       });
 
       expect(compAsAny.getSectionStatus()).toBeObservable(expected);
     });
 
     it('should return an invalid status when form is valid and there are server validation errors', () => {
-      formService.isValid.and.returnValue(observableOf(true));
-      sectionsServiceStub.getSectionServerErrors.and.returnValue(observableOf(parsedSectionErrors));
+      formService.isValid.and.returnValue(of(true));
+      sectionsServiceStub.getSectionServerErrors.and.returnValue(of(parsedSectionErrors));
       const expected = cold('(b|)', {
-        b: false
+        b: false,
       });
 
       expect(compAsAny.getSectionStatus()).toBeObservable(expected);
     });
 
     it('should return an invalid status when form is not valid and there are no server validation errors', () => {
-      formService.isValid.and.returnValue(observableOf(false));
-      sectionsServiceStub.getSectionServerErrors.and.returnValue(observableOf([]));
+      formService.isValid.and.returnValue(of(false));
+      sectionsServiceStub.getSectionServerErrors.and.returnValue(of([]));
       const expected = cold('(b|)', {
-        b: false
+        b: false,
       });
 
       expect(compAsAny.getSectionStatus()).toBeObservable(expected);
@@ -538,18 +577,18 @@ describe('SubmissionSectionFormComponent test suite', () => {
     it('should subscribe to state properly', () => {
       spyOn(comp, 'updateForm');
       const formData = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       const sectionData: any = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       };
       const sectionState = {
         data: sectionData,
-        errorsToShow: parsedSectionErrors
+        errorsToShow: parsedSectionErrors,
       } as any;
 
-      formService.getFormData.and.returnValue(observableOf(formData));
-      sectionsServiceStub.getSectionState.and.returnValue(observableOf(sectionState));
+      formService.getFormData.and.returnValue(of(formData));
+      sectionsServiceStub.getSectionState.and.returnValue(of(sectionState));
 
       comp.subscriptions();
 
@@ -622,7 +661,7 @@ describe('SubmissionSectionFormComponent test suite', () => {
 
     it('should check if has stored value in the section state', () => {
       comp.sectionData.data = {
-        'dc.title': [new FormFieldMetadataValueObject('test')]
+        'dc.title': [new FormFieldMetadataValueObject('test')],
       } as any;
 
       expect(comp.hasStoredValue('dc.title', 0)).toBeTruthy();
@@ -636,8 +675,10 @@ describe('SubmissionSectionFormComponent test suite', () => {
 // declare a test component
 @Component({
   selector: 'ds-test-cmp',
-  template: ``
+  template: ``,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-class TestComponent {
-
-}
+class TestComponent {}

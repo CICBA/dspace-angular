@@ -14,38 +14,54 @@ import {
   HostListener,
   Input,
   OnChanges,
+  OnDestroy,
   Output,
   Renderer2,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
-
+import { ConfidenceIconConfig } from '@dspace/config/submission-config.interface';
+import { ConfidenceType } from '@dspace/core/shared/confidence-type';
+import { FormFieldMetadataValueObject } from '@dspace/core/shared/form/models/form-field-metadata-value.model';
+import { MetadataValue } from '@dspace/core/shared/metadata.models';
+import { VocabularyEntry } from '@dspace/core/submission/vocabularies/models/vocabulary-entry.model';
+import { VocabularyEntryDetail } from '@dspace/core/submission/vocabularies/models/vocabulary-entry-detail.model';
+import {
+  isNotEmpty,
+  isNull,
+} from '@dspace/shared/utils/empty.util';
+import { TranslateService } from '@ngx-translate/core';
 import findIndex from 'lodash/findIndex';
 
-import { VocabularyEntry } from '../../../core/submission/vocabularies/models/vocabulary-entry.model';
-import { FormFieldMetadataValueObject } from '../builder/models/form-field-metadata-value.model';
-import { ConfidenceType } from '../../../core/shared/confidence-type';
-import { isNotEmpty, isNull } from '../../empty.util';
-import { ConfidenceIconConfig } from '../../../../config/submission-config.interface';
 import { environment } from '../../../../environments/environment';
-import { VocabularyEntryDetail } from '../../../core/submission/vocabularies/models/vocabulary-entry-detail.model';
 
 /**
  * Directive to add to the element a bootstrap utility class based on metadata confidence value
  */
 @Directive({
-  selector: '[dsAuthorityConfidenceState]'
+  selector: '[dsAuthorityConfidenceState]',
 })
-export class AuthorityConfidenceStateDirective implements OnChanges, AfterViewInit {
+export class AuthorityConfidenceStateDirective implements OnChanges, AfterViewInit, OnDestroy {
 
   /**
    * The metadata value
    */
-  @Input() authorityValue: VocabularyEntry | FormFieldMetadataValueObject | string;
+  @Input() authorityValue: VocabularyEntry | FormFieldMetadataValueObject | MetadataValue | string;
 
   /**
    * A boolean representing if to show html icon if authority value is empty
    */
   @Input() visibleWhenAuthorityEmpty = true;
+
+  /**
+   * A boolean to configure the display of icons instead of default style configuration
+   * When true, the class configured in {@link ConfidenceIconConfig.icon} will be used, by default {@link ConfidenceIconConfig.style} is used
+   */
+  @Input() iconMode = false;
+
+  /**
+   * A boolean representing if to show html icon if authority value is empty
+   */
+  @Input() showTooltip = true;
 
   /**
    * The css class applied before directive changes
@@ -63,6 +79,11 @@ export class AuthorityConfidenceStateDirective implements OnChanges, AfterViewIn
   @Output() whenClickOnConfidenceNotAccepted: EventEmitter<ConfidenceType> = new EventEmitter<ConfidenceType>();
 
   /**
+   * Listener to hover event
+   */
+  private onHoverUnsubscribe: () => void;
+
+  /**
    * Listener to click event
    */
   @HostListener('click') onClick() {
@@ -76,11 +97,26 @@ export class AuthorityConfidenceStateDirective implements OnChanges, AfterViewIn
    *
    * @param {ElementRef} elem
    * @param {Renderer2} renderer
+   * @param {TranslateService} translate
    */
   constructor(
     private elem: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private translate: TranslateService,
   ) {
+    // show the cursor pointer on hover
+    this.elem.nativeElement.classList.add('authority-confidence-clickable');
+  }
+
+  /**
+   * Listener to hover event
+   */
+  onHover() {
+    this.renderer.setAttribute(
+      this.elem.nativeElement,
+      'title',
+      this.translate.instant('authority-confidence.search-label'),
+    );
   }
 
   /**
@@ -93,13 +129,35 @@ export class AuthorityConfidenceStateDirective implements OnChanges, AfterViewIn
       this.previousClass = this.getClassByConfidence(this.getConfidenceByValue(changes.authorityValue.previousValue));
     }
     this.newClass = this.getClassByConfidence(this.getConfidenceByValue(changes.authorityValue.currentValue));
+    const confidenceName = this.getNameByConfidence(this.getConfidenceByValue(changes.authorityValue.currentValue));
 
     if (isNull(this.previousClass)) {
       this.renderer.addClass(this.elem.nativeElement, this.newClass);
+      if (this.iconMode) {
+        this.renderer.setAttribute(this.elem.nativeElement, 'title', this.translate.instant(`confidence.indicator.help-text.${confidenceName}`));
+      }
     } else if (this.previousClass !== this.newClass) {
       this.renderer.removeClass(this.elem.nativeElement, this.previousClass);
       this.renderer.addClass(this.elem.nativeElement, this.newClass);
+      if (this.iconMode) {
+        this.renderer.setAttribute(this.elem.nativeElement, 'title', this.translate.instant(`confidence.indicator.help-text.${confidenceName}`));
+      }
     }
+
+    if (this.showTooltip && this.onHoverUnsubscribe == null) {
+      this.listenOnMouseOver();
+    }
+
+    if (!changes.showTooltip?.firstChange && !!changes.showTooltip?.currentValue) {
+      if (this.onHoverUnsubscribe != null) {
+        this.onHoverUnsubscribe();
+      }
+      this.listenOnMouseOver();
+    }
+  }
+
+  private listenOnMouseOver() {
+    this.onHoverUnsubscribe = this.renderer.listen(this.elem.nativeElement, 'mouseover', () => this.onHover());
   }
 
   /**
@@ -131,6 +189,14 @@ export class AuthorityConfidenceStateDirective implements OnChanges, AfterViewIn
       confidence = value.confidence;
     }
 
+    if (isNotEmpty(value) && value instanceof MetadataValue) {
+      confidence = value.confidence;
+    }
+
+    if (isNotEmpty(value) && Object.values(ConfidenceType).includes(value)) {
+      confidence = value;
+    }
+
     return confidence;
   }
 
@@ -146,12 +212,38 @@ export class AuthorityConfidenceStateDirective implements OnChanges, AfterViewIn
 
     const confidenceIcons: ConfidenceIconConfig[] = environment.submission.icons.authority.confidence;
 
-    const confidenceIndex: number = findIndex(confidenceIcons, {value: confidence});
+    const confidenceIndex: number = findIndex(confidenceIcons, { value: confidence });
 
-    const defaultconfidenceIndex: number = findIndex(confidenceIcons, {value: 'default' as  any});
-    const defaultClass: string = (defaultconfidenceIndex !== -1) ? confidenceIcons[defaultconfidenceIndex].style : '';
+    const defaultconfidenceIndex: number = findIndex(confidenceIcons, { value: 'default' as  any });
 
-    return (confidenceIndex !== -1) ? confidenceIcons[confidenceIndex].style : defaultClass;
+    if (this.iconMode) {
+      const defaultClass: string = (defaultconfidenceIndex !== -1) ? confidenceIcons[defaultconfidenceIndex].icon : '';
+      return (confidenceIndex !== -1) ? confidenceIcons[confidenceIndex].icon : defaultClass;
+    } else {
+      const defaultClass: string = (defaultconfidenceIndex !== -1) ? confidenceIcons[defaultconfidenceIndex].style : '';
+      return (confidenceIndex !== -1) ? confidenceIcons[confidenceIndex].style : defaultClass;
+    }
+  }
+
+  /**
+   * Return the confidence value name
+   *
+   * @param confidence
+   * @returns
+   */
+  private getNameByConfidence(confidence: any): string {
+    const confidenceText = ConfidenceType[confidence];
+    if (isNotEmpty(confidenceText)) {
+      return confidenceText.replace('CF_', '').toLowerCase();
+    } else {
+      return 'unknown';
+    }
+  }
+
+  public ngOnDestroy() {
+    if (this.onHoverUnsubscribe != null) {
+      this.onHoverUnsubscribe();
+    }
   }
 
 }

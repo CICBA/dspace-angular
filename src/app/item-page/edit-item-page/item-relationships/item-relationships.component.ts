@@ -1,39 +1,67 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-
-
 import {
-  map,
-  distinctUntilChanged
-} from 'rxjs/operators';
+  AsyncPipe,
+  NgTemplateOutlet,
+} from '@angular/common';
 import {
-  Observable,
-  BehaviorSubject
-} from 'rxjs';
-import { followLink } from '../../../shared/utils/follow-link-config.model';
-import { AbstractItemUpdateComponent } from '../abstract-item-update/abstract-item-update.component';
-import { ItemDataService } from '../../../core/data/item-data.service';
-import { ObjectUpdatesService } from '../../../core/data/object-updates/object-updates.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { TranslateService } from '@ngx-translate/core';
-import { RelationshipDataService } from '../../../core/data/relationship-data.service';
-import { ObjectCacheService } from '../../../core/cache/object-cache.service';
-import { getFirstSucceededRemoteData, getRemoteDataPayload } from '../../../core/shared/operators';
-import { RequestService } from '../../../core/data/request.service';
-import { RelationshipType } from '../../../core/shared/item-relationships/relationship-type.model';
-import { ItemType } from '../../../core/shared/item-relationships/item-type.model';
-import { EntityTypeDataService } from '../../../core/data/entity-type-data.service';
-import { RelationshipTypeDataService } from '../../../core/data/relationship-type-data.service';
-import { PaginatedList } from '../../../core/data/paginated-list.model';
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
+import { ObjectCacheService } from '@dspace/core/cache/object-cache.service';
+import { EntityTypeDataService } from '@dspace/core/data/entity-type-data.service';
+import { ItemDataService } from '@dspace/core/data/item-data.service';
+import { ObjectUpdatesService } from '@dspace/core/data/object-updates/object-updates.service';
+import { PaginatedList } from '@dspace/core/data/paginated-list.model';
+import { RelationshipDataService } from '@dspace/core/data/relationship-data.service';
+import { RelationshipTypeDataService } from '@dspace/core/data/relationship-type-data.service';
+import { RequestService } from '@dspace/core/data/request.service';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
+import { followLink } from '@dspace/core/shared/follow-link-config.model';
+import { ItemType } from '@dspace/core/shared/item-relationships/item-type.model';
+import { RelationshipType } from '@dspace/core/shared/item-relationships/relationship-type.model';
+import {
+  getFirstSucceededRemoteData,
+  getRemoteDataPayload,
+} from '@dspace/core/shared/operators';
+import { compareArraysUsingIds } from '@dspace/core/utilities/item-relationships-utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditItemRelationshipsService } from './edit-item-relationships.service';
-import { compareArraysUsingIds } from '../../simple/item-types/shared/item-relationships-utils';
+import {
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
+import {
+  distinctUntilChanged,
+  map,
+} from 'rxjs/operators';
+
+import { AlertComponent } from '../../../shared/alert/alert.component';
 import { AlertType } from '../../../shared/alert/alert-type';
+import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
+import { ThemedLoadingComponent } from '../../../shared/loading/themed-loading.component';
+import { AbstractItemUpdateComponent } from '../abstract-item-update/abstract-item-update.component';
+import { EditItemRelationshipsService } from './edit-item-relationships.service';
+import { EditRelationshipListWrapperComponent } from './edit-relationship-list-wrapper/edit-relationship-list-wrapper.component';
 
 @Component({
   selector: 'ds-item-relationships',
   styleUrls: ['./item-relationships.component.scss'],
   templateUrl: './item-relationships.component.html',
+  imports: [
+    AlertComponent,
+    AsyncPipe,
+    BtnDisabledDirective,
+    EditRelationshipListWrapperComponent,
+    NgTemplateOutlet,
+    ThemedLoadingComponent,
+    TranslateModule,
+  ],
 })
 /**
  * Component for displaying an item's relationships edit page
@@ -83,10 +111,9 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent {
 
     const label = this.item.firstMetadataValue('dspace.entity.type');
     if (label !== undefined) {
-      this.relationshipTypes$ = this.relationshipTypeService.searchByEntityType(label, true, true, ...this.getRelationshipTypeFollowLinks())
-      .pipe(
+      this.relationshipTypes$ = this.relationshipTypeService.searchByEntityType(label, true, true, ...this.getRelationshipTypeFollowLinks()).pipe(
         map((relationshipTypes: PaginatedList<RelationshipType>) => relationshipTypes.page),
-        distinctUntilChanged(compareArraysUsingIds())
+        distinctUntilChanged(compareArraysUsingIds()),
       );
 
       this.entityTypeService.getEntityTypeByLabel(label).pipe(
@@ -132,7 +159,7 @@ export class ItemRelationshipsComponent extends AbstractItemUpdateComponent {
   getRelationshipTypeFollowLinks() {
     return [
       followLink('leftType'),
-      followLink('rightType')
+      followLink('rightType'),
     ];
   }
 

@@ -1,21 +1,41 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-
-import { Observable, of as observableOf } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+  AsyncPipe,
+  Location,
+} from '@angular/common';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { SubmissionRestService } from '@dspace/core/submission/submission-rest.service';
+import { SubmissionScopeType } from '@dspace/core/submission/submission-scope-type';
+import { isNotEmpty } from '@dspace/shared/utils/empty.util';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslatePipe } from '@ngx-translate/core';
+import {
+  Observable,
+  of,
+} from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { SubmissionRestService } from '../../../core/submission/submission-rest.service';
+import { BtnDisabledDirective } from '../../../shared/btn-disabled.directive';
+import { BrowserOnlyPipe } from '../../../shared/utils/browser-only.pipe';
 import { SubmissionService } from '../../submission.service';
-import { SubmissionScopeType } from '../../../core/submission/submission-scope-type';
-import { isNotEmpty } from '../../../shared/empty.util';
 
 /**
  * This component represents submission form footer bar.
  */
 @Component({
-  selector: 'ds-submission-form-footer',
+  selector: 'ds-base-submission-form-footer',
   styleUrls: ['./submission-form-footer.component.scss'],
-  templateUrl: './submission-form-footer.component.html'
+  templateUrl: './submission-form-footer.component.html',
+  imports: [
+    AsyncPipe,
+    BrowserOnlyPipe,
+    BtnDisabledDirective,
+    TranslatePipe,
+  ],
 })
 export class SubmissionFormFooterComponent implements OnChanges {
 
@@ -47,7 +67,7 @@ export class SubmissionFormFooterComponent implements OnChanges {
    * A boolean representing if submission form is valid or not
    * @type {Observable<boolean>}
    */
-  public submissionIsInvalid: Observable<boolean> = observableOf(true);
+  public submissionIsInvalid: Observable<boolean> = of(true);
 
   /**
    * A boolean representing if submission form has unsaved modifications
@@ -62,8 +82,8 @@ export class SubmissionFormFooterComponent implements OnChanges {
    * @param {SubmissionService} submissionService
    */
   constructor(private modalService: NgbModal,
-              private restService: SubmissionRestService,
-              private submissionService: SubmissionService) {
+              private submissionService: SubmissionService,
+              private location: Location) {
   }
 
   /**
@@ -72,12 +92,12 @@ export class SubmissionFormFooterComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (isNotEmpty(this.submissionId)) {
       this.submissionIsInvalid = this.submissionService.getSubmissionStatus(this.submissionId).pipe(
-        map((isValid: boolean) => isValid === false)
+        map((isValid: boolean) => isValid === false),
       );
 
       this.processingSaveStatus = this.submissionService.getSubmissionSaveProcessingStatus(this.submissionId);
       this.processingDepositStatus = this.submissionService.getSubmissionDepositProcessingStatus(this.submissionId);
-      this.showDepositAndDiscard = observableOf(this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
+      this.showDepositAndDiscard = of(this.submissionService.getSubmissionScope() === SubmissionScopeType.WorkspaceItem);
       this.hasUnsavedModification = this.submissionService.hasUnsavedModification();
     }
   }
@@ -112,7 +132,25 @@ export class SubmissionFormFooterComponent implements OnChanges {
         if (result === 'ok') {
           this.submissionService.dispatchDiscard(this.submissionId);
         }
-      }
+      },
     );
   }
+
+  /**
+   * Compute the proper label for the save for later button
+   */
+  public saveForLaterLabel(): string {
+    if (this.submissionService.getSubmissionScope() === SubmissionScopeType.EditItem) {
+      return 'submission.general.save-later.edit-item';
+    }
+    return 'submission.general.save-later';
+  }
+
+  /**
+   * When back button is pressed go to previous location
+   */
+  navigateBack(): void {
+    this.location.back();
+  }
+
 }

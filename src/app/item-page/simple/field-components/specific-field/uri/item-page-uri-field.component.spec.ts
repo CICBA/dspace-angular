@@ -1,16 +1,28 @@
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TranslateLoaderMock } from '../../../../../shared/testing/translate-loader.mock';
+import {
+  ChangeDetectionStrategy,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
+import { APP_CONFIG } from '@dspace/config/app-config.interface';
+import { BrowseService } from '@dspace/core/browse/browse.service';
+import { BrowseDefinitionDataService } from '@dspace/core/browse/browse-definition-data.service';
+import { VocabularyService } from '@dspace/core/submission/vocabularies/vocabulary.service';
+import { BrowseDefinitionDataServiceStub } from '@dspace/core/testing/browse-definition-data-service.stub';
+import { BrowseServiceStub } from '@dspace/core/testing/browse-service.stub';
+import { TranslateLoaderMock } from '@dspace/core/testing/translate-loader.mock';
+import {
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
+
+import { environment } from '../../../../../../environments/environment';
+import { MetadataUriValuesComponent } from '../../../../field-components/metadata-uri-values/metadata-uri-values.component';
 import { mockItemWithMetadataFieldsAndValue } from '../item-page-field.component.spec';
 import { ItemPageUriFieldComponent } from './item-page-uri-field.component';
-import { MetadataUriValuesComponent } from '../../../../field-components/metadata-uri-values/metadata-uri-values.component';
-import { environment } from '../../../../../../environments/environment';
-import { APP_CONFIG } from '../../../../../../config/app-config.interface';
-import { BrowseService } from '../../../../../core/browse/browse.service';
-import { BrowseServiceStub } from '../../../../../shared/testing/browse-service.stub';
-import { BrowseDefinitionDataService } from '../../../../../core/browse/browse-definition-data.service';
-import { BrowseDefinitionDataServiceStub } from '../../../../../shared/testing/browse-definition-data-service.stub';
 
 let comp: ItemPageUriFieldComponent;
 let fixture: ComponentFixture<ItemPageUriFieldComponent>;
@@ -18,6 +30,10 @@ let fixture: ComponentFixture<ItemPageUriFieldComponent>;
 const mockField = 'dc.identifier.uri';
 const mockValue = 'test value';
 const mockLabel = 'test label';
+const vocabularyServiceMock = {
+  getPublicVocabularyEntryByID: jasmine.createSpy('getPublicVocabularyEntryByID'),
+};
+
 
 describe('ItemPageUriFieldComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -25,18 +41,18 @@ describe('ItemPageUriFieldComponent', () => {
       imports: [TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
-          useClass: TranslateLoaderMock
-        }
-      })],
+          useClass: TranslateLoaderMock,
+        },
+      }), ItemPageUriFieldComponent, MetadataUriValuesComponent],
       providers: [
         { provide: APP_CONFIG, useValue: environment },
         { provide: BrowseDefinitionDataService, useValue: BrowseDefinitionDataServiceStub },
         { provide: BrowseService, useValue: BrowseServiceStub },
+        { provide: VocabularyService, useValue: vocabularyServiceMock },
       ],
-      declarations: [ItemPageUriFieldComponent, MetadataUriValuesComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).overrideComponent(ItemPageUriFieldComponent, {
-      set: { changeDetection: ChangeDetectionStrategy.Default }
+      set: { changeDetection: ChangeDetectionStrategy.Default },
     }).compileComponents();
   }));
 

@@ -1,9 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import {
-  HttpClientTestingModule,
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import {
   HttpTestingController,
+  provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { APP_CONFIG } from '@dspace/config/app-config.interface';
 
 import { RESTURLCombiner } from '../url-combiner/rest-url-combiner';
 import { BrowserXSRFService } from './browser-xsrf.service';
@@ -12,13 +17,18 @@ describe(`BrowserXSRFService`, () => {
   let service: BrowserXSRFService;
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
-
-  const endpointURL = new RESTURLCombiner('/security/csrf').toString();
+  const envConfig = {  rest: { baseUrl: 'https://rest.com/server' } };
+  const endpointURL = new RESTURLCombiner(envConfig.rest.baseUrl,'/security/csrf').toString();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
-      providers: [ BrowserXSRFService ],
+      imports: [],
+      providers: [
+        BrowserXSRFService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+        { provide: APP_CONFIG, useValue:  envConfig },
+      ],
     });
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
