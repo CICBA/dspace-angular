@@ -8,9 +8,9 @@ import { ComcolPageHeaderComponent } from 'src/app/shared/comcol/comcol-page-hea
 import { ComcolPageLogoComponent } from 'src/app/shared/comcol/comcol-page-logo/comcol-page-logo.component';
 import { BadgeMetadataValuesComponent } from 'src/themes/cicba/app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
 import { ThemedComcolPageContentComponent } from 'src/app/shared/comcol/comcol-page-content/themed-comcol-page-content.component';
-import { ComcolPageBrowseByComponent } from 'src/themes/custom/app/shared/comcol/comcol-page-browse-by/comcol-page-browse-by.component';
-import { CommunityPageSubCommunityListComponent } from 'src/themes/custom/app/community-page/sections/sub-com-col-section/sub-community-list/community-page-sub-community-list.component';
-import { CommunityPageSubCollectionListComponent } from 'src/themes/custom/app/community-page/sections/sub-com-col-section/sub-collection-list/community-page-sub-collection-list.component';
+import { ThemedComcolPageBrowseByComponent } from 'src/app/shared/comcol/comcol-page-browse-by/themed-comcol-page-browse-by.component';
+import { CommunityPageSubCommunityListComponent } from './sub-community-list/community-page-sub-community-list.component';
+import { CommunityPageSubCollectionListComponent } from './sub-collection-list/community-page-sub-collection-list.component';
 import { ErrorComponent } from 'src/app/shared/error/error.component';
 import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
 import { VarDirective } from 'src/app/shared/utils/var.directive';
@@ -31,7 +31,7 @@ import { VarDirective } from 'src/app/shared/utils/var.directive';
     ComcolPageLogoComponent,
     BadgeMetadataValuesComponent,
     ThemedComcolPageContentComponent,
-    ComcolPageBrowseByComponent,
+    ThemedComcolPageBrowseByComponent,
     CommunityPageSubCommunityListComponent,
     CommunityPageSubCollectionListComponent,
     ErrorComponent,

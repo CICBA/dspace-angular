@@ -1,5 +1,4 @@
 import { Context } from '@dspace/core/shared/context.model';
-import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { listableObjectComponent } from '../../../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
@@ -13,7 +12,6 @@ import { DSONameService } from 'src/app/core/breadcrumbs/dso-name.service';
 import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
 import { BadgeMetadataValuesComponent } from 'src/themes/cicba/app/item-page/simple/field-components/badge-metadata-values/badge-metadata-values.component';
 import { ThemedAccessStatusBadgeComponent } from 'src/app/shared/object-collection/shared/badges/access-status-badge/themed-access-status-badge.component';
-import { ThemedBadgesComponent } from 'src/app/shared/object-collection/shared/badges/themed-badges.component';
 import { ThemedTypeBadgeComponent } from 'src/app/shared/object-collection/shared/badges/type-badge/themed-type-badge.component';
 import { TruncatableComponent } from 'src/app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from 'src/app/shared/truncatable/truncatable-part/truncatable-part.component';
@@ -27,11 +25,9 @@ import { MetadataDirective } from 'src/app/shared/metadata.directive';
   styleUrls: ['./item-search-result-list-element.component.scss'],
   templateUrl: './item-search-result-list-element.component.html',
   imports: [
-    NgClass,
     RouterLink,
     BadgeMetadataValuesComponent,
     ThemedAccessStatusBadgeComponent,
-    ThemedBadgesComponent,
     ThemedTypeBadgeComponent,
     TruncatableComponent,
     TruncatablePartComponent,

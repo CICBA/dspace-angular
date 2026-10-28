@@ -38,7 +38,6 @@ import { normalizeLanguageCode } from '../utils/normalize-language-code-utils';
 import { VarDirective } from '../utils/var.directive';
 import { MetadataLinkViewPopoverComponent } from './metadata-link-view-popover/metadata-link-view-popover.component';
 import { MetadataView } from './metadata-view.model';
-import { StickyPopoverDirective } from './sticky-popover.directive';
 
 /**
  * Component for displaying metadata values with authority-controlled links and enhanced entity information.
@@ -70,7 +69,6 @@ import { StickyPopoverDirective } from './sticky-popover.directive';
     NgbTooltipModule,
     NgTemplateOutlet,
     RouterLink,
-    StickyPopoverDirective,
     TranslateModule,
     VarDirective,
   ],

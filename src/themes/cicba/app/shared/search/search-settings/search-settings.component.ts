@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SEARCH_CONFIG_SERVICE } from '../../../../../../app/my-dspace-page/my-dspace-configuration.service';
-import { PageSizeSelectorComponent } from '../../../../../../app/shared/page-size-selector/page-size-selector.component';
 import { SearchConfigurationService } from '../../../../../../app/shared/search/search-configuration.service';
 import { SearchSettingsComponent as BaseComponent } from '../../../../../../app/shared/search/search-settings/search-settings.component';
 import { CicSidebarDropdownComponent } from './cic-sidebar-dropdown.component';
@@ -20,7 +19,6 @@ import { CicSidebarDropdownComponent } from './cic-sidebar-dropdown.component';
   ],
   imports: [
     FormsModule,
-    PageSizeSelectorComponent,
     CicSidebarDropdownComponent,
     TranslateModule,
   ],

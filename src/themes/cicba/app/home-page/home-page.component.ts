@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
@@ -13,7 +12,6 @@ import { LastAccessionedItemsComponent } from './last-accessioned-items/last-acc
     TranslateModule,
     ThemedHomeNewsComponent,
     LastAccessionedItemsComponent,
-    AsyncPipe,
   ]
 })
 export class HomePageComponent extends BaseComponent {
