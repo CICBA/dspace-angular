@@ -7,6 +7,9 @@ networks:
 services:
   dspace-angular:
     container_name: dspace-angular_${COMPOSE_PROJECT_NAME}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.cic
     environment:
       # Public REST URL used by the browser.
       DSPACE_REST_HOST: ${DSPACE_REST_HOST:-localhost}
@@ -19,7 +22,7 @@ services:
     # Replaces upstream's /app/src mount; requires Docker Compose 2.24.4 or newer.
     volumes: !override
       - ../:/app/
-      - node_modules_10:/app/node_modules
+      - node_modules_12:/app/node_modules
 
 volumes:
-  node_modules_10:
+  node_modules_12:

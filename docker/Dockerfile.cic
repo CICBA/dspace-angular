@@ -1,0 +1,27 @@
+# CIC development image for DSpace Angular.
+# Keep this file aligned with the upstream Dockerfile when upgrading DSpace.
+
+FROM docker.io/node:24.22.2-alpine
+
+# npm 12 blocks unreviewed dependency install scripts by default. Start without
+# approvals so the build identifies which scripts, if any, CIC needs to allow.
+RUN npm install --global npm@12.2.1 \
+    && apk --no-cache add python3 make g++
+
+WORKDIR /app
+
+# Install dependencies before copying the source to preserve Docker layer reuse.
+COPY package.json package-lock.json ./
+RUN node --version \
+    && npm --version \
+    && npm ci
+
+COPY . /app/
+
+ENV NODE_OPTIONS="--max_old_space_size=4096"
+ENV NODE_ENV=development
+
+EXPOSE 4000
+
+ENTRYPOINT ["npm", "run", "serve"]
+CMD ["--", "--host", "0.0.0.0", "--poll", "5000"]
