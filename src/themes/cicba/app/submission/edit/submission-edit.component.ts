@@ -15,4 +15,12 @@ import { ThemedSubmissionFormComponent } from '../../../../../app/submission/for
   ],
 })
 export class SubmissionEditComponent extends BaseComponent {
+  /**
+   * CIC Digital allows workflow editors to move items to another collection.
+   * This preserves the institutional behavior introduced in commit 7bdf18f190.
+   */
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.collectionModifiable = true;
+  }
 }
