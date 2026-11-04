@@ -55,11 +55,11 @@
 
     "item.page.dcterms.extent": "Extensão",
 
-    "item.page.dcterms.isPartOf.issue": "Volume da revista/Nome do evento",
+    "item.page.dcterms.isPartOf.issue": "Volume da revista",
 
     "item.page.dcterms.isPartOf.item": "Livro/Relatório",
 
-    "item.page.dcterms.isPartOf.series": "Revista ou evento",
+    "item.page.dcterms.isPartOf.series": "Série",
 
     "item.page.dcterms.language": "Idioma",
 
@@ -67,7 +67,7 @@
 
     "item.page.dcterms.relation": "Recursos relacionados",
 
-    "item.page.dcterms.spatial": "Cobertura Espacial",
+    "item.page.dcterms.spatial": "Cobertura espacial",
 
     "item.page.dcterms.subject": "Palavras-chave",
 
@@ -87,7 +87,7 @@
 
     "item.page.statistics.label.TotalDownloads": "Downloads",
 
-    "item.page.statistics.label.TotalVisits": "Vistas",
+    "item.page.statistics.label.TotalVisits": "Visualizações",
 
     "item.truncatable-part.show-less": "Ver menos",
 
@@ -141,4 +141,67 @@
 
     "workflow.search.results.head": "Submissões na fila de tarefas",
 
+    "item.page.date.issued": "Data de publicação",
+
+    "item.page.cic.lugarDesarrollo": "Local de desenvolvimento",
+
+    "item.page.cic.institucionOrigen": "Centro CIC",
+
+    "item.page.cic.thesis.grantor": "Instituição de titulação",
+
+    "item.page.dcterms.subject.area": "Área temática",
+
+    "item.page.dcterms.title.investigacion": "Título da pesquisa",
+
+    "item.page.dcterms.identifier.url": "Link externo",
+
+    "item.page.dcterms.isPartOf.series.event": "Evento",
+
+    "item.page.dcterms.isPartOf.issue.event": "Nome do evento",
+
+    "search.filters.filter.lugarDesarrollo.head": "Local de desenvolvimento",
+
+    "search.filters.filter.lugarDesarrollo.label": "Buscar por local de desenvolvimento",
+
+    "search.filters.filter.lugarDesarrollo.placeholder": "Local de desenvolvimento",
+
+    "search.filters.applied.f.lugarDesarrollo": "Local de desenvolvimento",
+
+    "search.filters.filter.keyword.head": "Assuntos",
+
+    "search.filters.filter.keyword.label": "Buscar assunto",
+
+    "search.filters.filter.keyword.placeholder": "Assunto",
+
+    "search.filters.applied.f.keyword": "Assunto",
+
+    "info.cic-digital-info.title": "O que é o CIC Digital?",
+
+    "info.cic-digital-info.breadcrumbs": "O que é o CIC Digital?",
+
+    "info.how-to-contribute.title": "Como contribuir com material?",
+
+    "info.how-to-contribute.breadcrumbs": "Como contribuir com material?",
+
+    "info.repository-policy.title": "Políticas do repositório",
+
+    "info.repository-policy.breadcrumbs": "Políticas do repositório",
+
+    "submission.sections.submit.progressbar.describe.step1": "Descrever",
+
+    "submission.sections.submit.progressbar.describe.step2": "Descrever",
+
+    "submission.sections.submit.progressbar.describe.step3": "Licença CC",
+
+    "mydspace.status.archived": "Arquivado",
+
+    "mydspace.status.validation": "Validação",
+
+    "mydspace.status.waiting-for-controller": "Aguardando revisor",
+
+    "mydspace.status.workflow": "Em revisão",
+
+    "mydspace.status.workspace": "Espaço de trabalho",
+
+    "login.form.or-divider": "ou",
 }

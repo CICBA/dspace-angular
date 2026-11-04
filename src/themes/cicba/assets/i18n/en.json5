@@ -23,17 +23,17 @@
 
   "item.page.dcterms.extent": "Extension",
 
-  "item.page.dcterms.isPartOf.issue": "Journal volume/Event name",
+  "item.page.dcterms.isPartOf.issue": "Journal volume",
 
   "item.page.dcterms.isPartOf.item": "Book/Report",
 
-  "item.page.dcterms.isPartOf.series": "Journal or event",
+  "item.page.dcterms.isPartOf.series": "Series",
 
   "item.page.dcterms.language": "Language",
 
   "item.page.dcterms.license.text": "This work is published under license Creative Commons ",
 
-  "item.page.dcterms.relation": "Recursos relacionados",
+  "item.page.dcterms.relation": "Related resources",
 
   "item.page.dcterms.spatial": "Spatial coverage",
 
@@ -93,4 +93,107 @@
 
   "sorting.dcterms.issued.DESC": "Publication date descending",
 
+  "item.page.date.issued": "Publication date",
+
+  "item.page.cic.lugarDesarrollo": "Place of development",
+
+  "item.page.cic.institucionOrigen": "CIC Center",
+
+  "item.page.cic.thesis.grantor": "Degree granting institution",
+
+  "item.page.dcterms.subject.area": "Subject area",
+
+  "item.page.dcterms.title.investigacion": "Research title",
+
+  "item.page.dcterms.identifier.url": "External link",
+
+  "item.page.dcterms.isPartOf.series.event": "Event",
+
+  "item.page.dcterms.isPartOf.issue.event": "Event name",
+
+  "search.filters.filter.lugarDesarrollo.head": "Place of development",
+
+  "search.filters.filter.lugarDesarrollo.label": "Search by place of development",
+
+  "search.filters.filter.lugarDesarrollo.placeholder": "Place of development",
+
+  "search.filters.applied.f.lugarDesarrollo": "Place of development",
+
+  "search.filters.filter.keyword.head": "Subjects",
+
+  "search.filters.filter.keyword.label": "Search subject",
+
+  "search.filters.filter.keyword.placeholder": "Subject",
+
+  "search.filters.applied.f.keyword": "Subject",
+
+  "info.cic-digital-info.title": "What is CIC Digital?",
+
+  "info.cic-digital-info.breadcrumbs": "What is CIC Digital?",
+
+  "info.how-to-contribute.title": "How to contribute?",
+
+  "info.how-to-contribute.breadcrumbs": "How to contribute?",
+
+  "info.repository-policy.title": "Repository policies",
+
+  "info.repository-policy.breadcrumbs": "Repository policies",
+
+  "submission.sections.submit.progressbar.describe.step1": "Describe",
+
+  "submission.sections.submit.progressbar.describe.step2": "Describe",
+
+  "submission.sections.submit.progressbar.describe.step3": "CC License",
+
+  "mydspace.status.archived": "Archived",
+
+  "mydspace.status.validation": "Validation",
+
+  "mydspace.status.waiting-for-controller": "Waiting for reviewer",
+
+  "mydspace.status.workflow": "In workflow",
+
+  "mydspace.status.workspace": "Workspace",
+
+  "login.form.or-divider": "or",
+
+  "communityList.breadcrumbs": "Community List",
+
+  "communityList.tabTitle": "Community List",
+
+  "communityList.title": "Community List",
+
+  "info.feedback.breadcrumbs": "Contact",
+
+  "info.feedback.head": "Contact",
+
+  "info.feedback.title": "Contact",
+
+  "info.feedback.info": "Thank you for sharing your feedback and inquiries about the repository and/or its content. Please remember that general inquiries about CIC should be submitted via https://www.cic.gba.gob.ar/. For inquiries regarding specific materials or research, please contact the corresponding center at https://www.gba.gob.ar/cic/informacion_de_centros. Thank you very much.",
+
+  "info.feedback.email_help": "This address will be used to follow up on your comments.",
+
+  "info.feedback.send": "Send feedback",
+
+  "info.feedback.comments": "Comments:",
+
+  "info.feedback.email-label": "Your email:",
+
+  "info.feedback.create.success": "Your feedback has been received.",
+
+  "info.feedback.error.email.required": "No email address entered",
+
+  "info.feedback.error.message.required": "No feedback entered",
+
+  "info.feedback.page-label": "Page",
+
+  "info.feedback.page_help": "The page related to your feedback",
+
+  "item.truncatable-part.show-less": "Show less",
+
+  "item.truncatable-part.show-more": "Show more",
+
+  "workspace.search.results.head": "Your archived submissions",
+
+  "workflow.search.results.head": "Submissions in workflow queue",
 }
