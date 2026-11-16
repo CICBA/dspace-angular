@@ -106,6 +106,8 @@ export abstract class DsDynamicVocabularyComponent extends DynamicFormControlCom
         initEntry$ = this.vocabularyService.getVocabularyEntryByValue(this.model.value.value, this.model.vocabularyOptions);
       }
       initValue$ = initEntry$.pipe(map((initEntry: VocabularyEntry) => {
+        // SEDICI: Se agregó la validación de que initEntry.value NO sea null
+        // Info: https://trac.prebi.unlp.edu.ar/issues/10437 y https://github.com/CICBA/dspace-angular/pull/17
         if (isNotEmpty(initEntry) && isNotEmpty(initEntry.value)) {
           // Integrate FormFieldMetadataValueObject with retrieved information
           const formField = new FormFieldMetadataValueObject(
