@@ -1,7 +1,7 @@
 <ds-cic-metadata-field-wrapper [inlineLabel]="inlineLabel" [label]="label | translate">
 @for (mdValue of mdValues; track mdValue; let last = $last) {
   @if (authorityUrl) {
-    <a href="{{ mdValue.authority }}" target="_blank" class="dont-break-out">
+    <a [href]="mdValue.authority || mdValue.value" target="_blank" rel="noopener" class="dont-break-out">
       {{mdValue.value}}
       @if (!last) {
         <span [innerHTML]="separator"></span>
